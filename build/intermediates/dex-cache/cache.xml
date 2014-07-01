@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="C:\Users\Paco\AndroidStudioProjects\BeachODC\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-6a108753364d60e2ccf005d4a676333e8e20daa6.jar"
+        jar="C:\Users\Paco\AndroidStudioProjects\BeachODC\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="C:\Users\Paco\AndroidStudioProjects\BeachODC\app\build\intermediates\pre-dexed\debug\classes-b847e70838485075c9c7e1be8e58a079419a5412.jar"
+        jar="C:\Users\Paco\AndroidStudioProjects\BeachODC\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="C:\Users\Paco\AndroidStudioProjects\BeachODC\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-79e42da7c2657068d681cf877be8b4cc06e3cb7a.jar"
+        jar="C:\Program Files (x86)\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+    <item
+        dex="C:\Users\Paco\AndroidStudioProjects\BeachODC\app\build\intermediates\pre-dexed\debug\classes-86656201c196d2b50bcbf4f6b8551238d2e7ad4c.jar"
+        jar="C:\Users\Paco\AndroidStudioProjects\BeachODC\build\intermediates\exploded-aar\BeachODC\facebook\unspecified\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="2128996155ca1f99158dd1c57f3bcbb75bbe0545"/>
+    <item
+        dex="C:\Users\Paco\AndroidStudioProjects\BeachODC\app\build\intermediates\pre-dexed\debug\classes-1a11103c61ea95e1c00b05cac0cf8dc241861d01.jar"
+        jar="C:\Users\Paco\AndroidStudioProjects\BeachODC\build\intermediates\exploded-aar\com.google.android.gms\play-services\4.0.30\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="cebe8e4a3a469c4623addcca1dc571407ff3a08e"/>
+
+</pre-dex-items>

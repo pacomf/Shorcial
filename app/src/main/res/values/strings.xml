@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Beach+</string>
+    <string name="title_activity_inicio">Inicio</string>
+    <string name="title_section_mis_datos">Mis Datos</string>
+    <string name="app_id_facebook">333380730146158</string>
+
+</resources>
