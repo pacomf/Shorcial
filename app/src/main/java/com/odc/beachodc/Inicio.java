@@ -2,6 +2,7 @@ package com.odc.beachodc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -21,6 +22,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.odc.beachodc.utilities.Utilities;
 
 import java.security.MessageDigest;
 import java.util.List;
@@ -72,6 +74,8 @@ public class Inicio extends FragmentActivity {
         transaction.hide(fragments[LOGIN]);
         transaction.commit();
         getActionBar().hide();
+
+        System.out.println("Soy: "+Utilities.getUserNameFacebook(context)+" y tengo como ID: "+ Utilities.getUserIdFacebook(context));
 
     }
 
@@ -160,8 +164,7 @@ public class Inicio extends FragmentActivity {
                         // If the response is successfulHome
                         if (session == Session.getActiveSession()) {
                             if (user != null) {
-                                // Meter DATOS de Usuario en alguna parte PERSISTENTE
-                                // user.getName(), user.getId()
+                                Utilities.storeRegistrationId(context, user.getId(), user.getName());
                             }
                         }
                         if (response.getError() != null) {

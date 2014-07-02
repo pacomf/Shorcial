@@ -1,14 +1,23 @@
 package com.odc.beachodc.utilities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+
+import com.odc.beachodc.Inicio;
 
 /**
  * Created by Paco on 17/01/14.
  */
 public class Utilities {
+
+    public static final String PROPERTY_REG_ID = "registration_idfacebook";
+    public static final String PROPERTY_REG_NAME = "registration_namefacebook";
+    private static final String PROPERTY_APP_VERSION = "appVersion";
 
     public static String getCamelCase(String init){
         if (init==null)
@@ -91,6 +100,96 @@ public class Utilities {
         }else{
             return false;
         }
+    }
+
+    /**
+     * @return Application's version code from the {@code PackageManager}.
+     */
+    private static int getAppVersion(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            // should never happen
+            throw new RuntimeException("Could not get package name: " + e);
+        }
+    }
+
+    /**
+     * @return Application's {@code SharedPreferences}.
+     */
+    static private SharedPreferences getUserPreferences(Context context) {
+        // This sample app persists the registration IDFB in shared preferences, but
+        // how you store the IDFB in your app is up to you.
+        return context.getSharedPreferences(Inicio.class.getSimpleName(), Context.MODE_PRIVATE);
+    }
+
+    /**
+     * Stores IDFB and the app versionCode in the application's
+     * {@code SharedPreferences}.
+     *
+     * @param context application's context.
+     * @param idFB registration ID FACEBOOK
+     * @param nameFB name FACEBOOK Profile
+     */
+    static public void storeRegistrationId(Context context, String idFB, String nameFB) {
+        final SharedPreferences prefs = getUserPreferences(context);
+        int appVersion = getAppVersion(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(PROPERTY_REG_ID, idFB);
+        editor.putString(PROPERTY_REG_NAME, nameFB);
+        editor.putInt(PROPERTY_APP_VERSION, appVersion);
+        editor.commit();
+    }
+
+    /**
+     * Gets the ID on Facebook, if there is one.
+     * <p>
+     * If result is empty, the app needs to register.
+     *
+     * @return registration ID FB, or empty string if there is no existing
+     *         registration ID FB.
+     */
+    static public String getUserIdFacebook(Context context) {
+        final SharedPreferences prefs = getUserPreferences(context);
+        String idFB = prefs.getString(PROPERTY_REG_ID, "");
+        if (idFB.isEmpty()) {
+            return "";
+        }
+        // Check if app was updated; if so, it must clear the registration ID
+        // since the existing regID is not guaranteed to work with the new
+        // app version.
+        int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
+        int currentVersion = getAppVersion(context);
+        if (registeredVersion != currentVersion) {
+            return "";
+        }
+        return idFB;
+    }
+
+    /**
+     * Gets the Name on Facebook, if there is one.
+     * <p>
+     * If result is empty, the app needs to register.
+     *
+     * @return registration Name FB, or empty string if there is no existing
+     *         registration Name FB.
+     */
+    static public String getUserNameFacebook(Context context) {
+        final SharedPreferences prefs = getUserPreferences(context);
+        String nameFB = prefs.getString(PROPERTY_REG_NAME, "");
+        if (nameFB.isEmpty()) {
+            return "";
+        }
+        // Check if app was updated; if so, it must clear the registration ID
+        // since the existing regID is not guaranteed to work with the new
+        // app version.
+        int registeredVersion = prefs.getInt(PROPERTY_APP_VERSION, Integer.MIN_VALUE);
+        int currentVersion = getAppVersion(context);
+        if (registeredVersion != currentVersion) {
+            return "";
+        }
+        return nameFB;
     }
 
 }
