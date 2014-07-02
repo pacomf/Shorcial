@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:padding="15dp">
 
         <TextView
@@ -18,17 +18,17 @@
             android:text="@string/app_name"
             android:textColor="#44cdff"
             android:textStyle="bold"
-            android:textSize="16dp"
+            android:textSize="60dp"
             android:layout_centerHorizontal="true" />
 
-        <com.facebook.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/titulo"
-            android:layout_marginTop="40dp" />
-
     </RelativeLayout>
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="65dp" />
 
 </RelativeLayout>
