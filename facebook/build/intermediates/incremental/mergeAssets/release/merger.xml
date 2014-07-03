@@ -2,10 +2,10 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="C:\Users\Paco\AndroidStudioProjects\BeachODC\facebook\src\main\assets" />
+        <source path="G:\AndroidStudioProjects\playasODC_app\facebook\src\main\assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="C:\Users\Paco\AndroidStudioProjects\BeachODC\facebook\src\release\assets" />
+        <source path="G:\AndroidStudioProjects\playasODC_app\facebook\src\release\assets" />
     </dataSet>
 
 </merger>

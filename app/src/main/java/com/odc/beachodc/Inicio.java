@@ -2,12 +2,17 @@ package com.odc.beachodc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.facebook.Request;
@@ -18,6 +23,8 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.odc.beachodc.utilities.Utilities;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 
@@ -69,6 +76,30 @@ public class Inicio extends FragmentActivity {
         getActionBar().hide();
 
         System.out.println("Soy: "+Utilities.getUserNameFacebook(context)+" y tengo como ID: "+ Utilities.getUserIdFacebook(context));
+
+
+        //código para mostrar tu clave de desarrollador
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo("com.odc.beachodc", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+                byte[] digest = md.digest();
+                StringBuffer sb = new StringBuffer();
+                for (byte b : digest) {
+                    sb.append(String.format("%02X", b & 0xFF));
+                    sb.append(":");
+                }
+                Log.d("KeyHash:", sb.toString());
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
