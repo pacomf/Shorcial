@@ -92,6 +92,7 @@ public class Inicio extends FragmentActivity {
                     sb.append(String.format("%02X", b & 0xFF));
                     sb.append(":");
                 }
+                sb.delete(-1,-1);
                 Log.d("KeyHash:", sb.toString());
             }
         } catch (PackageManager.NameNotFoundException e) {
