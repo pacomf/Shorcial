@@ -9,7 +9,8 @@
         android:background="@drawable/rounded"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:onClick="playas">
 
         <TextView
             android:id="@+id/titulo"

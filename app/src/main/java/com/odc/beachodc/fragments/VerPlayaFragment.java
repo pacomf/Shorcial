@@ -26,7 +26,7 @@ public class VerPlayaFragment extends Fragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_misdatos, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_ver_playa, container, false);
             // Empezar aqui a trabajar con la UI
 
 

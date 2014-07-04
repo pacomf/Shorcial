@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -86,14 +87,7 @@ public class Inicio extends FragmentActivity {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-                byte[] digest = md.digest();
-                StringBuffer sb = new StringBuffer();
-                for (byte b : digest) {
-                    sb.append(String.format("%02X", b & 0xFF));
-                    sb.append(":");
-                }
-                sb.delete(-1,-1);
-                Log.d("KeyHash:", sb.toString());
+
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -203,6 +197,11 @@ public class Inicio extends FragmentActivity {
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
         finish();
+    }
+
+    public void playas(View view) {
+        Intent intent = new Intent(this, Playas.class);
+        startActivity(intent);
     }
 
 }
