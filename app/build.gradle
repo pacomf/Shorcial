@@ -23,6 +23,11 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:20.+'
     compile 'com.google.android.gms:play-services:4.0.30'
+    compile files ('libs/com.mobandme.ada_v2.4.4.jar')
     compile project(':facebook')
+    compile('de.keyboardsurfer.android.widget:crouton:1.8.4@aar') {
+        // exclusion is not neccessary, but generally a good idea.
+        exclude group: 'com.google.android', module: 'support-v4'
+    }
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

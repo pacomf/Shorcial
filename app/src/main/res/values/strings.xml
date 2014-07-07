@@ -5,6 +5,7 @@
     <string name="title_activity_inicio">Inicio</string>
     <string name="title_section_mis_datos">Mis Datos</string>
     <string name="app_id_facebook">333380730146158</string>
+    <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
     <string name="logout">Cerrar Sesión</string>
 
 </resources>

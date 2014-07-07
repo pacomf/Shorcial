@@ -22,6 +22,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.utilities.Utilities;
 
 import java.security.MessageDigest;
@@ -76,12 +77,9 @@ public class Inicio extends FragmentActivity {
         transaction.commit();
         getActionBar().hide();
 
-        System.out.println("Soy: "+Utilities.getUserNameFacebook(context)+" y tengo como ID: "+ Utilities.getUserIdFacebook(context));
-
-
         //código para mostrar tu clave de desarrollador
 
-        try {
+        /*try {
             PackageInfo info = getPackageManager().getPackageInfo("com.odc.beachodc", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
@@ -93,8 +91,9 @@ public class Inicio extends FragmentActivity {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }
+        }*/
 
+        BBDD.initBBDD(this);
 
     }
 

@@ -11,6 +11,8 @@
 # generated files
 bin/
 gen/
+build/
+facebook/
 
 # Local configuration file (sdk path, etc)
 local.properties
