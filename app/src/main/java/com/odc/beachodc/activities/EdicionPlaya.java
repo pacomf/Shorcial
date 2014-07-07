@@ -1,4 +1,4 @@
-package com.odc.beachodc;
+package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -13,16 +13,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-
+import com.odc.beachodc.Logout;
+import com.odc.beachodc.R;
 import com.odc.beachodc.fragments.MisDatosFragment;
-import com.odc.beachodc.fragments.edit.InfoPlayaFragment;
-import com.odc.beachodc.fragments.edit.MapPlayaFragment;
-import com.odc.beachodc.utilities.Utilities;
 
 import java.util.Locale;
 
 
-public class Home extends FragmentActivity implements ActionBar.TabListener {
+public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -35,7 +33,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
-     * The {@link ViewPager} that will host the section contents.
+     * The {@link android.support.v4.view.ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
 
@@ -43,8 +41,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        Utilities.setActionBarCustomize(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -118,7 +114,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
     }
 
     /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -134,9 +130,9 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 case 0:
                     return new MisDatosFragment();
                 case 1:
-                    return new InfoPlayaFragment();
+                    return new MisDatosFragment();
                 case 2:
-                    return new MapPlayaFragment();
+                    return new MisDatosFragment();
             }
             return null;
         }

@@ -60,8 +60,8 @@ public class Playa extends Entity {
     }
 
     public Playa(String idserver, String nombre, Double latitud, Double longitud, Boolean banderaazul, String dificultadacceso,
-                 Double limpieza, String tipoarena, Double valoracion, Boolean rompeolas, Boolean hamacas, Boolean chiringuitos,
-                 Boolean duchas, Boolean socorrista){
+                 Double limpieza, String tipoarena, Double valoracion, Boolean rompeolas, Boolean hamacas, Boolean sombrillas,
+                 Boolean chiringuitos, Boolean duchas, Boolean socorrista){
         this.idserver = idserver;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -73,6 +73,7 @@ public class Playa extends Entity {
         this.valoracion = valoracion;
         this.rompeolas = rompeolas;
         this.hamacas = hamacas;
+        this.sombrillas = sombrillas;
         this.chiringuitos = chiringuitos;
         this.duchas = duchas;
         this.socorrista = socorrista;

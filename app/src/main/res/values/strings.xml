@@ -2,10 +2,47 @@
 <resources>
 
     <string name="app_name">Beach+</string>
-    <string name="title_activity_inicio">Inicio</string>
+    <string name="title_activity_inicio">Beach++</string>
     <string name="title_section_mis_datos">Mis Datos</string>
+
+
     <string name="app_id_facebook">333380730146158</string>
     <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
+    <string name="app_key_play_services">AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs</string>
+
+
+    <string name="title_beach">Nombre de la Playa</string>
+    <string name="title_extras_beach">Características de la Playa</string>
+    <string name="title_beach_placeholder">Introduzca el Nombre de la Playa</string>
+    <string name="title_banderaazul">¿Tiene Bandera Azul La Playa?</string>
+    <string name="title_dificultadacceso">Dificultad de Acceso a la Playa</string>
+    <string name="title_limpieza">Limpieza de la Playa</string>
+    <string name="title_tipodearena">Tipo de Arena</string>
+    <string name="title_rompeolas">¿Tiene Rompeolas la Playa?</string>
+    <string name="title_hamacas">¿Tiene Hamacas la Playa?</string>
+    <string name="title_sombrillas">¿Tiene Sombrillas la Playa?</string>
+    <string name="title_chiringuitos">¿Tiene chiringuitos la Playa?</string>
+    <string name="title_duchas">¿Tiene duchas la Playa?</string>
+    <string name="title_socorrista">¿Tiene socorrista la Playa?</string>
+
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="unknown">No lo sé</string>
+
+    <string name="easy">Fácil</string>
+    <string name="medium">Moderada</string>
+    <string name="hard">Extrema</string>
+
+    <string name="muylimpia">Muy Limpia</string>
+    <string name="limpia">Limpia</string>
+    <string name="sucia">Sucia</string>
+
+    <string name="negra">Negra</string>
+    <string name="blanca">Blanca</string>
+    <string name="rocas">Rocas</string>
+
+    <string name="address_placeholder">Introduzca una Dirección</string>
+
     <string name="logout">Cerrar Sesión</string>
 
 </resources>

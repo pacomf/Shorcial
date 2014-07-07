@@ -1,14 +1,20 @@
 package com.odc.beachodc.utilities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.odc.beachodc.Inicio;
+import com.odc.beachodc.R;
 
 /**
  * Created by Paco on 17/01/14.
@@ -190,6 +196,25 @@ public class Utilities {
             return "";
         }
         return nameFB;
+    }
+
+    static public void setActionBarCustomize(Activity activity){
+        activity.getActionBar().setDisplayShowCustomEnabled(true);
+        activity.getActionBar().setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = LayoutInflater.from(activity);
+        View v = inflator.inflate(R.layout.actionbar_customize, null);
+
+        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/LobsterTwo-Bold.ttf");
+
+        //if you need to customize anything else about the text, do it here.
+        //I'm using a custom TextView with a custom font in my layout xml so all I need to do is set title
+        TextView title = (TextView)v.findViewById(R.id.title);
+        title.setTypeface(tf);
+        title.setText(activity.getTitle());
+
+        //assign the view to the actionbar
+        activity.getActionBar().setCustomView(v);
     }
 
 

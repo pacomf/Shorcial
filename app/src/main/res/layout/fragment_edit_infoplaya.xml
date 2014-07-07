@@ -1,0 +1,561 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/background_fragments">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_beach"
+            android:id="@+id/nombreTV"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nombreET"
+            android:singleLine="true"
+            android:hint="@string/title_beach_placeholder"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/nombreTV"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_extras_beach"
+            android:id="@+id/extrasTV"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_below="@id/nombreET"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            android:layout_below="@id/extrasTV"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp">
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:stretchColumns="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/banderaAzul">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_banderaazul"
+                        android:id="@+id/banderaAzulTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/banderaAzulTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/banderaAzulImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/banderaAzulRG"
+                        android:layout_below="@+id/banderaAzulTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <RadioButton
+                            android:id="@+id/banderaAzul_si"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yes" />
+
+                        <RadioButton
+                            android:id="@+id/banderaAzul_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no" />
+
+                        <RadioButton
+                            android:id="@+id/banderaAzul_nose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/unknown" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/dificultadAcceso">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_dificultadacceso"
+                        android:id="@+id/dificultadAccesoTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/dificultadAccesoTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/dificultadAccesoImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dificultadAccesoRG"
+                        android:layout_below="@+id/dificultadAccesoTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="22dp">
+
+                        <RadioButton
+                            android:id="@+id/dificultadAcceso_extrema"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/hard" />
+
+                        <RadioButton
+                            android:id="@+id/dificultadAcceso_moderada"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/medium" />
+
+                        <RadioButton
+                            android:id="@+id/dificultadAcceso_facil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/easy" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/limpieza">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_limpieza"
+                        android:id="@+id/limpiezaTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/limpiezaTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/limpiezaImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/limpiezaRG"
+                        android:layout_below="@+id/limpiezaTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp">
+
+                        <RadioButton
+                            android:id="@+id/limpieza_mucho"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/muylimpia" />
+
+                        <RadioButton
+                            android:id="@+id/limpieza_normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/limpia" />
+
+                        <RadioButton
+                            android:id="@+id/limpieza_sucia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sucia" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tipoArena">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_tipodearena"
+                        android:id="@+id/tipoArenaTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/tipoArenaTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/tipoArenaImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tipoArenaRG"
+                        android:layout_below="@+id/tipoArenaTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="45dp">
+
+                        <RadioButton
+                            android:id="@+id/tipoArena_negra"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/negra" />
+
+                        <RadioButton
+                            android:id="@+id/tipoArena_blanca"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/blanca" />
+
+                        <RadioButton
+                            android:id="@+id/tipoArena_rocas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rocas" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/rompeolas">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_rompeolas"
+                        android:id="@+id/rompeolasTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/rompeolasTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/rompeolasImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rompeolasRG"
+                        android:layout_below="@+id/rompeolasTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <RadioButton
+                            android:id="@+id/rompeolas_si"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yes" />
+
+                        <RadioButton
+                            android:id="@+id/rompeolas_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no" />
+
+                        <RadioButton
+                            android:id="@+id/rompeolas_nose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/unknown" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/hamacas">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_hamacas"
+                        android:id="@+id/hamacasTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/hamacasTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/hamacasImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/hamacasRG"
+                        android:layout_below="@+id/hamacasTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <RadioButton
+                            android:id="@+id/hamacas_si"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yes" />
+
+                        <RadioButton
+                            android:id="@+id/hamacas_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no" />
+
+                        <RadioButton
+                            android:id="@+id/hamacas_nose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/unknown" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/sombrillas">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_sombrillas"
+                        android:id="@+id/sombrillasTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/sombrillasTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/sombrillasImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sombrillasRG"
+                        android:layout_below="@+id/sombrillasTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <RadioButton
+                            android:id="@+id/sombrillas_si"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yes" />
+
+                        <RadioButton
+                            android:id="@+id/sombrillas_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no" />
+
+                        <RadioButton
+                            android:id="@+id/sombrillas_nose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/unknown" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/duchas">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_duchas"
+                        android:id="@+id/duchasTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/duchasTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/duchasImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/duchasRG"
+                        android:layout_below="@+id/duchasTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <RadioButton
+                            android:id="@+id/duchas_si"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yes" />
+
+                        <RadioButton
+                            android:id="@+id/duchas_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no" />
+
+                        <RadioButton
+                            android:id="@+id/duchas_nose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/unknown" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/socorrista">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_socorrista"
+                        android:id="@+id/socorristaTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/socorristaTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/socorristaImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/socorristaRG"
+                        android:layout_below="@+id/socorristaTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <RadioButton
+                            android:id="@+id/socorrista_si"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yes" />
+
+                        <RadioButton
+                            android:id="@+id/socorrista_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no" />
+
+                        <RadioButton
+                            android:id="@+id/socorrista_nose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/unknown" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
