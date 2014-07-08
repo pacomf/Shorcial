@@ -13,9 +13,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.odc.beachodc.Home;
 import com.odc.beachodc.Logout;
 import com.odc.beachodc.R;
-import com.odc.beachodc.fragments.MisDatosFragment;
+import com.odc.beachodc.db.BBDD;
+import com.odc.beachodc.db.models.Playa;
+import com.odc.beachodc.fragments.edit.InfoPlayaFragment;
+import com.odc.beachodc.fragments.edit.MapPlayaFragment;
+import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.Locale;
 
@@ -73,13 +79,21 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
             actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
         }
 
+        Utilities.setActionBarCustomize(this);
+
+        boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+        if (isNew)
+            ValidacionPlaya.playa = new Playa(true);
+
+        // TODO: Si es modificación de la playa (!isNew), que cargue solo un fragment que se debe crear con solo moficable las CARACTERISTICAS
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.logout, menu);
+        inflater.inflate(R.menu.editar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -92,6 +106,13 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
                 Intent intent = new Intent(this, Logout.class);
                 startActivity(intent);
                 return true;
+            case R.id.menu_editar:
+                if (ValidacionPlaya.validarInfoPlaya(this)){
+                    // TODO: Modo Depuracion, QUITAR EN LA VERSION DEFINITIVA el mostrar la PLAYA
+                    ValidacionPlaya.playa.mostrar();
+
+                    BBDD.guardarPlaya(this, ValidacionPlaya.playa);
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -128,19 +149,17 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
                 case 0:
-                    return new MisDatosFragment();
+                    return new InfoPlayaFragment();
                 case 1:
-                    return new MisDatosFragment();
-                case 2:
-                    return new MisDatosFragment();
+                    return new MapPlayaFragment();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
@@ -148,11 +167,9 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
+                    return getString(R.string.title_section_edit_infoplaya).toUpperCase(l);
                 case 1:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
+                    return getString(R.string.title_section_edit_mapplaya).toUpperCase(l);
             }
             return null;
         }

@@ -2,9 +2,15 @@
 <resources>
 
     <string name="app_name">Beach+</string>
+
     <string name="title_activity_inicio">Beach++</string>
     <string name="title_section_mis_datos">Mis Datos</string>
+    <string name="title_activity_edicion">Editar Playa</string>
+    <string name="title_section_edit_infoplaya">Información</string>
+    <string name="title_section_edit_mapplaya">Localización</string>
 
+    <string name="nuevo">Nueva Playa</string>
+    <string name="save">Guardar</string>
 
     <string name="app_id_facebook">333380730146158</string>
     <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
@@ -44,5 +50,15 @@
     <string name="address_placeholder">Introduzca una Dirección</string>
 
     <string name="logout">Cerrar Sesión</string>
+
+    <string name="esperar">Espere Por Favor</string>
+    <string name="procesando">Procesando...</string>
+
+    <string name="playacreada">La Playa ha sido añadida con ÉXITO</string>
+
+    <string name="error_problemautocompletado">Error en el motor de autocompletado de Direcciones. Introduzca de nuevo la Dirección.</string>
+    <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>
+    <string name="error_nombre">Debe INDICAR un NOMBRE válido</string>
+    <string name="error_bbdd">Hubo un ERROR al GUARDAR en Base de Datos, contacte con el administrador</string>
 
 </resources>

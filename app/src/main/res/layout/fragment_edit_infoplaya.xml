@@ -281,6 +281,61 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
+                    android:id="@+id/chiringuitos">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title_chiringuitos"
+                        android:id="@+id/chiringuitosTV"
+                        android:textSize="16dp"
+                        android:layout_alignParentLeft="true"/>
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_below="@+id/chiringuitosTV"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/com_facebook_place_default_icon"
+                        android:id="@+id/chiringuitosImage"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chiringuitosRG"
+                        android:layout_below="@+id/chiringuitosTV"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp">
+
+                        <RadioButton
+                            android:id="@+id/chiringuitos_si"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/yes" />
+
+                        <RadioButton
+                            android:id="@+id/chiringuitos_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no" />
+
+                        <RadioButton
+                            android:id="@+id/chiringuitos_nose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/unknown" />
+
+                    </RadioGroup>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
                     android:id="@+id/rompeolas">
 
                     <TextView

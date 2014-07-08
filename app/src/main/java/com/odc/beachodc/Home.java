@@ -14,12 +14,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
+import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.fragments.MisDatosFragment;
-import com.odc.beachodc.fragments.edit.InfoPlayaFragment;
-import com.odc.beachodc.fragments.edit.MapPlayaFragment;
 import com.odc.beachodc.utilities.Utilities;
 
 import java.util.Locale;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class Home extends FragmentActivity implements ActionBar.TabListener {
@@ -77,13 +79,20 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
         }
 
+        // Muestra un mensajito si hemos sido redirigidos a este Activity a través de la creación, con éxito, de una Playa
+        if (getIntent().getExtras() != null){
+            Boolean playacreada = getIntent().getExtras().getBoolean("creaplaya");
+            if ((playacreada != null) && (playacreada)){
+                Crouton.makeText(this, getString(R.string.playacreada), Style.CONFIRM).show();
+            }
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.logout, menu);
+        inflater.inflate(R.menu.home, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -95,6 +104,11 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             case R.id.menu_logout:
                 Intent intent = new Intent(this, Logout.class);
                 startActivity(intent);
+                return true;
+            case R.id.menu_nuevo:
+                Intent intentN = new Intent(this, EdicionPlaya.class);
+                intentN.putExtra("nuevo", true);
+                startActivity(intentN);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -134,9 +148,9 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 case 0:
                     return new MisDatosFragment();
                 case 1:
-                    return new InfoPlayaFragment();
+                    return new MisDatosFragment();
                 case 2:
-                    return new MapPlayaFragment();
+                    return new MisDatosFragment();
             }
             return null;
         }
