@@ -16,6 +16,8 @@ import android.view.MenuItem;
 
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.fragments.MisDatosFragment;
+import com.odc.beachodc.fragments.list.PlayasFragment;
+import com.odc.beachodc.fragments.list.PlayasMapFragment;
 import com.odc.beachodc.utilities.Utilities;
 
 import java.util.Locale;
@@ -84,6 +86,11 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             Boolean playacreada = getIntent().getExtras().getBoolean("creaplaya");
             if ((playacreada != null) && (playacreada)){
                 Crouton.makeText(this, getString(R.string.playacreada), Style.CONFIRM).show();
+            } else {
+                Boolean playaeditada = getIntent().getExtras().getBoolean("editaplaya");
+                if ((playaeditada != null) && (playaeditada)){
+                    Crouton.makeText(this, getString(R.string.playaeditada), Style.CONFIRM).show();
+                }
             }
         }
     }
@@ -148,9 +155,9 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 case 0:
                     return new MisDatosFragment();
                 case 1:
-                    return new MisDatosFragment();
+                    return new PlayasFragment();
                 case 2:
-                    return new MisDatosFragment();
+                    return new PlayasMapFragment();
             }
             return null;
         }
@@ -168,9 +175,9 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 case 0:
                     return getString(R.string.title_section_mis_datos).toUpperCase(l);
                 case 1:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
+                    return getString(R.string.title_section_playas_cercanas).toUpperCase(l);
                 case 2:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
+                    return getString(R.string.title_section_mapa_playas).toUpperCase(l);
             }
             return null;
         }

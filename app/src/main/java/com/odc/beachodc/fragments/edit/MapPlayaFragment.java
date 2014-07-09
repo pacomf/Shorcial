@@ -128,8 +128,6 @@ public class MapPlayaFragment extends Fragment {
                             ValidacionPlaya.playa.latitud=lat;
                             ValidacionPlaya.playa.longitud=lng;
 
-                            mapa.clear();
-
                             mapa.addMarker(new MarkerOptions()
                                     .position(new LatLng(lat, lng))
                                     .title(add)
@@ -319,7 +317,6 @@ public class MapPlayaFragment extends Fragment {
                         .title(markerStr)
                         .draggable(true)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-
             }
         }
     }

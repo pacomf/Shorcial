@@ -5,12 +5,15 @@
 
     <string name="title_activity_inicio">Beach++</string>
     <string name="title_section_mis_datos">Mis Datos</string>
+    <string name="title_section_playas_cercanas">Playas Cercanas</string>
+    <string name="title_section_mapa_playas">Mapa</string>
     <string name="title_activity_edicion">Editar Playa</string>
     <string name="title_section_edit_infoplaya">Información</string>
     <string name="title_section_edit_mapplaya">Localización</string>
 
     <string name="nuevo">Nueva Playa</string>
     <string name="save">Guardar</string>
+    <string name="inform">Informar Playa Incorrecta</string>
 
     <string name="app_id_facebook">333380730146158</string>
     <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
@@ -54,7 +57,13 @@
     <string name="esperar">Espere Por Favor</string>
     <string name="procesando">Procesando...</string>
 
+    <string name="question">\?</string>
+
+    <string name="meters">m.</string>
+    <string name="kilometers">km.</string>
+
     <string name="playacreada">La Playa ha sido añadida con ÉXITO</string>
+    <string name="playaeditada">Los Datos de la Playa han sido modificados con ÉXITO</string>
 
     <string name="error_problemautocompletado">Error en el motor de autocompletado de Direcciones. Introduzca de nuevo la Dirección.</string>
     <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>

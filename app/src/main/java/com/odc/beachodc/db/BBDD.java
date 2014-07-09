@@ -36,7 +36,7 @@ public class BBDD {
         return BBDD.appDataContext;
     }
 
-    public static void guardarPlaya(Activity activity, Playa playa){
+    public static void guardarPlaya(Activity activity, Playa playa, boolean nuevo){
         // Enviamos al servidor la info y si responde bien, guardamos en local
         // TODO: Borrar estas lineas cuando se haga bien como se comenta en el TODO de abajo
         try {
@@ -45,7 +45,10 @@ public class BBDD {
             BBDD.getApplicationDataContext(activity).playasDao.add(playa);
             BBDD.getApplicationDataContext(activity).playasDao.save();*/
             Intent intent = new Intent(activity, Home.class);
-            intent.putExtra("creaplaya", true);
+            if (nuevo)
+                intent.putExtra("creaplaya", true);
+            else
+                intent.putExtra("editaplaya", true);
             // Para eliminar el historial de activities visitadas ya que volvemos al HOME y asi el boton ATRAS no tenga ningun comportamiento, se resetee.
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             activity.startActivity(intent);

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="11dp"
+    android:paddingTop="7dp"
+    android:descendantFocusability="blocksDescendants"
+    android:id="@+id/fondoItemPlaya"
+    android:background="@drawable/background_listview_playas_selector">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123456789"
+        android:id="@+id/nombreTV"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:maxLength="20"
+        android:ellipsize="end"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="978 m."
+        android:maxLines="1"
+        android:maxLength="10"
+        android:ellipsize="end"
+        android:id="@+id/distanciaTV"
+        android:textColor="#3e9fc0"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@+id/nombreTV"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-,-"
+        android:id="@+id/valoracionTV"
+        android:textSize="48dp"
+        android:layout_alignBottom="@+id/socorristaImage"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="30dp" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/nombreTV"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/banderaAzulImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/nombreTV"
+        android:layout_toRightOf="@+id/banderaAzulImage"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/dificultadAccesoImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/nombreTV"
+        android:layout_toRightOf="@+id/dificultadAccesoImage"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/limpiezaImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/nombreTV"
+        android:layout_toRightOf="@+id/limpiezaImage"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/tipoArenaImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/nombreTV"
+        android:layout_toRightOf="@+id/tipoArenaImage"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/rompeolasImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/banderaAzulImage"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/hamacasImage" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/banderaAzulImage"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/hamacasImage"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/sombrillasImage" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/banderaAzulImage"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/sombrillasImage"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/chiringuitosImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/banderaAzulImage"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/chiringuitosImage"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/duchasImage" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/banderaAzulImage"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/duchasImage"
+        android:src="@drawable/com_facebook_place_default_icon"
+        android:id="@+id/socorristaImage"/>
+
+
+
+</RelativeLayout>

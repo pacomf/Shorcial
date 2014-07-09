@@ -4,6 +4,8 @@ import com.mobandme.ada.Entity;
 import com.mobandme.ada.annotations.Table;
 import com.mobandme.ada.annotations.TableField;
 
+import java.util.Random;
+
 /**
  * Created by Paco on 07/07/2014.
  */
@@ -71,6 +73,22 @@ public class Playa extends Entity {
             this.chiringuitos = false;
             this.duchas = false;
             this.socorrista = false;
+        } else { // TODO: Quitar esto, es solo para crear un MOCK
+            this.nombre = "Playaza del Carajo";
+            Random random = new Random();
+            this.idserver = String.valueOf(random.nextInt());
+            this.latitud = 28.4824608;
+            this.longitud = -16.320505;
+            this.banderaazul = true;
+            this.dificultadacceso = "facil";
+            this.limpieza = "mucho";
+            this.tipoarena = "rocas";
+            this.rompeolas = true;
+            this.hamacas = false;
+            this.sombrillas = false;
+            this.chiringuitos = true;
+            this.duchas = true;
+            this.socorrista = true;
         }
     }
 

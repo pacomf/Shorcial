@@ -23,6 +23,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.odc.beachodc.db.BBDD;
+import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 
 import java.security.MessageDigest;
@@ -57,6 +58,8 @@ public class Inicio extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Geo.activeGPSLocation(this);
 
         // Ciclo de vida de la sesion de autenticacion de Facebook
         uiHelper = new UiLifecycleHelper(this, callback);

@@ -1,18 +1,30 @@
 package com.odc.beachodc.utilities;
 
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.util.Log;
 
+import com.odc.beachodc.R;
 import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.db.models.Playa;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Comparator;
 
 /**
  * Created by Paco on 07/07/2014.
  */
 public class Geo {
+
+    public static Location myLocation; // Ultima posicion conocida
+
+    public static LocationManager mLocationManager;
 
     //private static final int DEGREE_DISTANCE_AT_EQUATOR = 111329;
     /**
@@ -112,5 +124,68 @@ public class Geo {
             return ret;
         } else
             return new ArrayList<Playa>();
+    }
+
+    private static final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            Geo.myLocation = location;
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
+
+    public static void activeGPSLocation (Context ctx) {
+        Geo.mLocationManager = (LocationManager) ctx.getSystemService(ctx.LOCATION_SERVICE);
+
+        // Cada segundo renovamos la posicion, aunque no nos hayamos movido nada (0 metros)
+        Geo.mLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 1000, 0, mLocationListener);
+        Geo.mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, mLocationListener);
+        Geo.mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, mLocationListener);
+    }
+
+    public static float getDistanceInMetersToMe (Double latitud, Double longitud){
+        if (myLocation != null){
+            Location destiny = new Location ("destino");
+            destiny.setLatitude(latitud);
+            destiny.setLongitude(longitud);
+
+            return Geo.myLocation.distanceTo(destiny);
+        } else {
+            return -1;
         }
     }
+
+    public static String getDistanceToPrint (Context ctx, Double latitud, Double longitud){
+        float distance = Geo.getDistanceInMetersToMe(latitud, longitud);
+
+        if (distance == -1)
+            return ctx.getString(R.string.question)+" "+ctx.getString(R.string.meters);
+        else {
+            if ((distance / 1000) >= 1) { // Formato en km.
+                DecimalFormat df = new DecimalFormat("#.#");
+                return df.format((distance/1000))+" "+ctx.getString(R.string.kilometers);
+            } else { // Formato en m.
+                return ((int) distance)+" "+ctx.getString(R.string.meters);
+            }
+        }
+    }
+
+    public static List<Playa> orderByDistance (List<Playa> playas){
+        Collections.sort(playas, new PlayasDistanceComparator());
+        return playas;
+    }
+}

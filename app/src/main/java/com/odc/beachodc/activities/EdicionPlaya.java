@@ -20,6 +20,7 @@ import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.edit.InfoPlayaFragment;
 import com.odc.beachodc.fragments.edit.MapPlayaFragment;
+import com.odc.beachodc.fragments.edit.OnlyExtrasPlayaFragment;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
@@ -47,6 +48,10 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+        if (isNew)
+            ValidacionPlaya.playa = new Playa(true);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -81,19 +86,17 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
 
         Utilities.setActionBarCustomize(this);
 
-        boolean isNew = getIntent().getExtras().getBoolean("nuevo");
-        if (isNew)
-            ValidacionPlaya.playa = new Playa(true);
-
-        // TODO: Si es modificación de la playa (!isNew), que cargue solo un fragment que se debe crear con solo moficable las CARACTERISTICAS
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.editar, menu);
+        boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+        if (isNew)
+            inflater.inflate(R.menu.editar, menu);
+        else
+            inflater.inflate(R.menu.editar_informar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -110,9 +113,14 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
                 if (ValidacionPlaya.validarInfoPlaya(this)){
                     // TODO: Modo Depuracion, QUITAR EN LA VERSION DEFINITIVA el mostrar la PLAYA
                     ValidacionPlaya.playa.mostrar();
-
-                    BBDD.guardarPlaya(this, ValidacionPlaya.playa);
+                    boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+                    if (isNew)
+                        BBDD.guardarPlaya(this, ValidacionPlaya.playa, true);
+                    else
+                        BBDD.guardarPlaya(this, ValidacionPlaya.playa, false);
                 }
+            case R.id.menu_informar:
+                //TODO: Crear accion para que se envia algo al servidor que informe que el usuario dice que los datos no son validos
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -147,9 +155,13 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
+            boolean isNew = getIntent().getExtras().getBoolean("nuevo");
             switch (position) {
                 case 0:
-                    return new InfoPlayaFragment();
+                    if (isNew)
+                        return new InfoPlayaFragment();
+                    else
+                        return new OnlyExtrasPlayaFragment();
                 case 1:
                     return new MapPlayaFragment();
             }
@@ -159,15 +171,23 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+            if (isNew)
+                return 2;
+            else
+                return 1;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
+            boolean isNew = getIntent().getExtras().getBoolean("nuevo");
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section_edit_infoplaya).toUpperCase(l);
+                    if (isNew)
+                        return getString(R.string.title_section_edit_infoplaya).toUpperCase(l);
+                    else
+                        return ValidacionPlaya.playa.nombre.toUpperCase(l);
                 case 1:
                     return getString(R.string.title_section_edit_mapplaya).toUpperCase(l);
             }
