@@ -229,4 +229,13 @@ public class Utilities {
             return "-";
         }
     }
+
+    public static String formatFechaNotHour (Date date){
+        try {
+            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+            return DATE_FORMAT.format(date);
+        } catch (Exception e){
+            return "-";
+        }
+    }
 }

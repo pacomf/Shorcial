@@ -14,8 +14,11 @@ import android.widget.TextView;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.Geo;
+import com.odc.beachodc.utilities.Utilities;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Paco on 09/07/2014.
@@ -24,10 +27,20 @@ public class PlayasAdapter extends BaseAdapter {
 
     protected Activity activity;
     protected List<Playa> items;
+    protected boolean isCheckins;
+    protected Map<Playa, Date> checkins;
+
+    public PlayasAdapter(Activity activity, List<Playa> items, Map<Playa, Date> checkins) {
+        this.activity = activity;
+        this.items = items;
+        this.isCheckins=true;
+        this.checkins = checkins;
+    }
 
     public PlayasAdapter(Activity activity, List<Playa> items) {
         this.activity = activity;
         this.items = items;
+        this.isCheckins=false;
     }
 
     @Override
@@ -70,24 +83,43 @@ public class PlayasAdapter extends BaseAdapter {
         tf = Typeface.createFromAsset(activity.getAssets(), "fonts/aSongforJennifer.ttf");
 
         TextView valoracionTV = (TextView) vi.findViewById(R.id.valoracionTV);
-        if (playa.valoracion != null) {
-            if (playa.valoracion < 3){
-                valoracionTV.setTextColor(Color.rgb(189,22,13));
-            } else if (playa.valoracion < 4){
-                valoracionTV.setTextColor(Color.rgb(38,130,180));
-            } else if (playa.valoracion < 5){
-                valoracionTV.setTextColor(Color.rgb(0, 121, 0));
-            } if (playa.valoracion == 5){
-                valoracionTV.setTextColor(Color.rgb(238,180,0));
-            }
 
+        if (isCheckins) {
+            valoracionTV.setVisibility(View.GONE);
+            TextView checkinsTV = (TextView) vi.findViewById(R.id.checkinsTV);
+            TextView titleCheckinsTV = (TextView) vi.findViewById(R.id.title_checkins);
+            checkinsTV.setVisibility(View.VISIBLE);
+            titleCheckinsTV.setVisibility(View.VISIBLE);
+            checkinsTV.setTypeface(tf);
+            titleCheckinsTV.setTypeface(tf);
+            // TODO: Calcular el número de checkins que haya hecho el usuario sobre esa playa
+            int totalCheckins = 12;
+            checkinsTV.setText(String.valueOf(totalCheckins));
+
+        } else {
             valoracionTV.setTypeface(tf);
-            valoracionTV.setText(playa.valoracion.toString().replace(".", ","));
+            if (playa.valoracion != null) {
+                if (playa.valoracion < 3) {
+                    valoracionTV.setTextColor(Color.rgb(189, 22, 13));
+                } else if (playa.valoracion < 4) {
+                    valoracionTV.setTextColor(Color.rgb(38, 130, 180));
+                } else if (playa.valoracion < 5) {
+                    valoracionTV.setTextColor(Color.rgb(0, 121, 0));
+                }
+                if (playa.valoracion == 5) {
+                    valoracionTV.setTextColor(Color.rgb(238, 180, 0));
+                }
+                valoracionTV.setText(playa.valoracion.toString().replace(".", ","));
+            }
         }
+
 
         TextView distanciaTV = (TextView) vi.findViewById(R.id.distanciaTV);
         distanciaTV.setTypeface(tf);
-        distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
+        if (isCheckins)
+            distanciaTV.setText(Utilities.formatFechaNotHour(checkins.get(playa)));
+        else
+            distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
 
         ImageView banderaazulIV = (ImageView) vi.findViewById(R.id.banderaAzulImage);
         ImageView dificultadaccesoIV = (ImageView) vi.findViewById(R.id.dificultadAccesoImage);

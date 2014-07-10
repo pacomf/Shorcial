@@ -1,24 +1,103 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@drawable/cover"
+        android:id="@+id/dataUser"
         android:padding="15dp">
+
+        <com.facebook.widget.ProfilePictureView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:preset_size="normal"
+            android:layout_marginTop="15dp"
+            android:id="@+id/profilePicture"
+            android:background="#eeb400"
+            android:padding="2dp"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/profilePicture"
+            android:layout_toRightOf="@+id/profilePicture"
+            android:layout_marginTop="-25dp"
+            android:layout_marginLeft="-25dp"
+            android:id="@+id/gamificationIcon"
+            android:src="@drawable/com_facebook_place_default_icon"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="#44cdff"
+            android:layout_centerHorizontal="true"
+            android:textSize="22dp"
+            android:id="@+id/nombreUserTV"
             android:textStyle="bold"
-            android:textSize="@android:dimen/app_icon_size"
-            android:layout_centerHorizontal="true" />
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:maxLines="1"
+            android:maxLength="25"
+            android:ellipsize="end"  />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="#eeb400"
+        android:layout_below="@+id/dataUser"
+        android:layout_marginTop="-2dp"
+     />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/dataUser"
+        android:background="@drawable/background_last_checkins">
+
+        <ListView
+            android:id="@+id/listaPlayasUltimosCheckin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10sp">
+
+        </ListView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dataUser"
+        android:layout_marginTop="7dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:background="@drawable/background_title_checkins">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="#D95100"
+            android:singleLine="true"
+            android:id="@+id/title_last_checkins"
+            android:text="@string/last_checkins" />
 
     </RelativeLayout>
 

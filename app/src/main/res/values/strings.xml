@@ -18,6 +18,9 @@
     <string name="save">Guardar</string>
     <string name="inform">Informar Playa Incorrecta</string>
 
+    <string name="title_checkins">Checkins</string>
+    <string name="last_checkins">Últimos Checkins</string>
+
     <string name="app_id_facebook">333380730146158</string>
     <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
     <string name="app_key_play_services">AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs</string>
