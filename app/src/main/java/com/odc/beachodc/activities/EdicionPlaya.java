@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.odc.beachodc.Home;
 import com.odc.beachodc.Logout;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.BBDD;
@@ -49,9 +48,12 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        boolean isNew = getIntent().getExtras().getBoolean("nuevo");
-        if (isNew)
-            ValidacionPlaya.playa = new Playa(true);
+        boolean isNew = false;
+        try {
+            isNew = getIntent().getExtras().getBoolean("nuevo");
+            if (isNew)
+                ValidacionPlaya.playa = new Playa(true);
+        } catch (Exception e){}
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -92,7 +94,12 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+        boolean isNew = false;
+        try {
+            isNew = getIntent().getExtras().getBoolean("nuevo");
+        } catch (Exception e){}
+
+
         if (isNew)
             inflater.inflate(R.menu.editar, menu);
         else
@@ -113,14 +120,23 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
                 if (ValidacionPlaya.validarInfoPlaya(this)){
                     // TODO: Modo Depuracion, QUITAR EN LA VERSION DEFINITIVA el mostrar la PLAYA
                     ValidacionPlaya.playa.mostrar();
-                    boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+                    boolean isNew = false;
+                    try {
+                        isNew = getIntent().getExtras().getBoolean("nuevo");
+                    } catch (Exception e){}
+
                     if (isNew)
                         BBDD.guardarPlaya(this, ValidacionPlaya.playa, true);
                     else
                         BBDD.guardarPlaya(this, ValidacionPlaya.playa, false);
                 }
+                return true;
             case R.id.menu_informar:
                 //TODO: Crear accion para que se envia algo al servidor que informe que el usuario dice que los datos no son validos
+                Intent intentV = new Intent(this, ValoracionPlaya.class);
+                startActivity(intentV);
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -155,7 +171,11 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+            boolean isNew = false;
+            try {
+                isNew = getIntent().getExtras().getBoolean("nuevo");
+            } catch (Exception e){}
+
             switch (position) {
                 case 0:
                     if (isNew)
@@ -171,7 +191,11 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
         @Override
         public int getCount() {
             // Show 2 total pages.
-            boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+            boolean isNew = false;
+            try {
+                isNew = getIntent().getExtras().getBoolean("nuevo");
+            } catch (Exception e){}
+
             if (isNew)
                 return 2;
             else
@@ -181,7 +205,10 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
-            boolean isNew = getIntent().getExtras().getBoolean("nuevo");
+            boolean isNew = false;
+            try {
+                isNew = getIntent().getExtras().getBoolean("nuevo");
+            } catch (Exception e){}
             switch (position) {
                 case 0:
                     if (isNew)

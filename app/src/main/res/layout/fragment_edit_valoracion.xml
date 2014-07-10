@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:layout_above="@+id/nuevoComentarioBTN"
+        android:background="@drawable/background_fragments">
+
+        <TextView
+            android:id="@+id/puntuacionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:text="@string/puntuacion"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <RelativeLayout
+            android:id="@+id/puntuacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/puntuacionTitle">
+
+            <ImageView
+                android:id="@+id/v1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:src="@android:drawable/star_off" />
+
+            <ImageView
+                android:id="@+id/v2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/v1"
+                android:src="@android:drawable/star_off" />
+
+            <ImageView
+                android:id="@+id/v3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/v2"
+                android:src="@android:drawable/star_off" />
+
+            <ImageView
+                android:id="@+id/v4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/v3"
+                android:src="@android:drawable/star_off" />
+
+            <ImageView
+                android:id="@+id/v5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/v4"
+                android:src="@android:drawable/star_off" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/comentarioTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/comentario"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/puntuacion"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/comentarioET"
+            android:hint="@string/comment_beach_placeholder"
+            android:layout_alignParentLeft="true"
+            android:maxLength="190"
+            android:layout_below="@+id/comentarioTitle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/nuevoComentarioBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/enviar_comentario"/>
+
+</RelativeLayout>

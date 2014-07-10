@@ -66,6 +66,27 @@
         </activity>
 
         <activity
+            android:name="com.odc.beachodc.activities.ValoracionPlaya"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_valoracion" >
+        </activity>
+
+        <activity
+            android:name=".activities.NuevoMensajeBotellaPlaya"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_mensaje_botella" >
+        </activity>
+
+        <activity
+            android:name=".activities.MensajesBotellasPlaya"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_mensajes_botellas" >
+        </activity>
+
+        <activity
             android:name="com.odc.beachodc.Logout"
             android:configChanges="orientation"
             android:screenOrientation="portrait"

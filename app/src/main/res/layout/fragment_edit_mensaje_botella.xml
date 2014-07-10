@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:layout_above="@+id/nuevoMensajeBTN"
+        android:background="@drawable/background_fragments">
+
+        <TextView
+            android:id="@+id/comentarioTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/mensaje_botella_title"
+            android:gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mensajeET"
+            android:hint="@string/message_bottle_beach_placeholder"
+            android:layout_alignParentLeft="true"
+            android:maxLength="190"
+            android:layout_below="@+id/comentarioTitle"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mensajeET"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentBottom="true"
+            android:text="@string/enviar_mensaje_aleatorio_checkbox"
+            android:id="@+id/mensajeAleatorioCB" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/nuevoMensajeBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/enviar_mensaje"/>
+
+</RelativeLayout>

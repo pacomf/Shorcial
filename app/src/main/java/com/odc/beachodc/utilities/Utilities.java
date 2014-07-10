@@ -16,6 +16,9 @@ import android.widget.TextView;
 import com.odc.beachodc.Inicio;
 import com.odc.beachodc.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Paco on 17/01/14.
  */
@@ -218,5 +221,12 @@ public class Utilities {
     }
 
 
-
+    public static String formatFecha (Date date){
+        try {
+            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            return DATE_FORMAT.format(date);
+        } catch (Exception e){
+            return "-";
+        }
+    }
 }

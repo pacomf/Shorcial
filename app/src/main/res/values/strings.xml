@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Beach+</string>
+    <string name="app_name">Shorcial</string>
 
-    <string name="title_activity_inicio">Beach++</string>
+    <string name="title_activity_inicio">Shorcial</string>
     <string name="title_section_mis_datos">Mis Datos</string>
     <string name="title_section_playas_cercanas">Playas Cercanas</string>
     <string name="title_section_mapa_playas">Mapa</string>
     <string name="title_activity_edicion">Editar Playa</string>
+    <string name="title_activity_valoracion">Valora la Playa</string>
+    <string name="title_activity_mensaje_botella">Mensaje en Botella</string>
+    <string name="title_activity_mensajes_botellas">Mensajes en Botellas</string>
     <string name="title_section_edit_infoplaya">Información</string>
     <string name="title_section_edit_mapplaya">Localización</string>
 
@@ -57,6 +60,15 @@
     <string name="esperar">Espere Por Favor</string>
     <string name="procesando">Procesando...</string>
 
+    <string name="puntuacion">¡Puntúa la Playa!</string>
+    <string name="comentario">¡Comenta la Playa!</string>
+    <string name="enviar_comentario">Enviar Comentario</string>
+    <string name="enviar_mensaje">¡Lanzar Mensaje!</string>
+    <string name="mensaje_botella_title">¡Escribe tu Mensaje!</string>
+    <string name="comment_beach_placeholder">Introduzca un nuevo comentario acerca de la Playa, en 190 caracteres como máximo...</string>
+    <string name="enviar_mensaje_aleatorio_checkbox">Enviar a una Playa Aleatoria</string>
+    <string name="message_bottle_beach_placeholder">Escribe tu mensaje, que nosotros encapsularemos en una botella para que... ¡otra persona lo pueda recibir!</string>
+
     <string name="question">\?</string>
 
     <string name="meters">m.</string>
@@ -69,5 +81,7 @@
     <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>
     <string name="error_nombre">Debe INDICAR un NOMBRE válido</string>
     <string name="error_bbdd">Hubo un ERROR al GUARDAR en Base de Datos, contacte con el administrador</string>
+    <string name="error_valoracion">Debe PUNTUAR la Playa como mínimo</string>
+    <string name="error_mensaje">Debe ESCRIBIR un Mensaje si quiere ENVIARLO</string>
 
 </resources>
