@@ -1,10 +1,12 @@
 package com.odc.beachodc.fragments;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.odc.beachodc.R;
 
@@ -24,6 +26,11 @@ public class LoginFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_login, container, false);
             // Empezar aqui a trabajar con la UI
+
+            TextView nombre = (TextView) rootView.findViewById(R.id.titulo);
+            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/LobsterTwo-Bold.ttf");
+            nombre.setTypeface(tf);
+
             return rootView;
         }
 }
