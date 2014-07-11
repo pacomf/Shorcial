@@ -13,10 +13,18 @@
     <string name="title_activity_mensajes_botellas">Mensajes en Botellas</string>
     <string name="title_section_edit_infoplaya">Información</string>
     <string name="title_section_edit_mapplaya">Localización</string>
+    <string name="title_section_search_beach">Buscar Playa</string>
+    <string name="title_section_results_search_beach">Resultados de Búsqueda</string>
 
     <string name="nuevo">Nueva Playa</string>
     <string name="save">Guardar</string>
     <string name="inform">Informar Playa Incorrecta</string>
+    <string name="search">Buscar</string>
+
+    <string name="title_search_by_name">Buscar por Nombre</string>
+    <string name="title_search_by_name_placeholder">Indique el Nombre de la Playa</string>
+    <string name="title_search_by_address_placeholder">Indique la Calle o Pinche en el Mapa</string>
+    <string name="title_search_by_address">Buscar por Cercanía a una Posición</string>
 
     <string name="title_checkins">Checkins</string>
     <string name="last_checkins">Últimos Checkins</string>
@@ -86,5 +94,8 @@
     <string name="error_bbdd">Hubo un ERROR al GUARDAR en Base de Datos, contacte con el administrador</string>
     <string name="error_valoracion">Debe PUNTUAR la Playa como mínimo</string>
     <string name="error_mensaje">Debe ESCRIBIR un Mensaje si quiere ENVIARLO</string>
+    <string name="error_search_name">Debe ESCRIBIR un Nombre para poder Buscar</string>
+    <string name="error_search_address">Debe INDICAR una Dirección para poder Buscar</string>
+    <string name="error_unknown">Error Desconocido, vuelva a intentarlo o contacte con el Administrador</string>
 
 </resources>

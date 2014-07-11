@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:layout_above="@+id/buscarBTN"
+        android:background="@drawable/background_fragments">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/searchRG"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="15dp">
+
+            <RadioButton
+                android:id="@+id/searchByName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/title_search_by_name" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:id="@+id/nombreET"
+                android:layout_marginLeft="25dp"
+                android:hint="@string/title_search_by_name_placeholder"
+                android:ellipsize="end"/>
+
+            <RadioButton
+                android:id="@+id/searchByAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/title_search_by_address" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/groupSearchByAddress"
+                android:layout_marginTop="10dp"
+                android:visibility="gone">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:id="@+id/addressET"
+                    android:layout_marginLeft="25dp"
+                    android:hint="@string/title_search_by_address_placeholder"
+                    android:ellipsize="end"/>
+
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/addressET"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    class="com.google.android.gms.maps.SupportMapFragment"/>
+
+            </RelativeLayout>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/buscarBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/search"/>
+
+</RelativeLayout>

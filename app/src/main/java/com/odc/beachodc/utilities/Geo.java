@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.db.models.Playa;
@@ -169,6 +170,18 @@ public class Geo {
         }
     }
 
+    public static float getDistanceInMetersTo (Double latitudD, Double longitudD, Double latitudO, Double longitudO){
+        Location destiny = new Location ("destino");
+        destiny.setLatitude(latitudD);
+        destiny.setLongitude(longitudD);
+
+        Location origin = new Location ("origen");
+        origin.setLatitude(latitudO);
+        origin.setLongitude(longitudO);
+
+        return origin.distanceTo(destiny);
+    }
+
     public static String getDistanceToPrint (Context ctx, Double latitud, Double longitud){
         float distance = Geo.getDistanceInMetersToMe(latitud, longitud);
 
@@ -184,8 +197,28 @@ public class Geo {
         }
     }
 
+    public static String getDistanceToPrint (Context ctx, Double latitudO, Double longitudO, Double latitudD, Double longitudD){
+        float distance = Geo.getDistanceInMetersTo(latitudD, longitudD, latitudO, longitudO);
+
+        if (distance == -1)
+            return ctx.getString(R.string.question)+" "+ctx.getString(R.string.meters);
+        else {
+            if ((distance / 1000) >= 1) { // Formato en km.
+                DecimalFormat df = new DecimalFormat("#.#");
+                return df.format((distance/1000))+" "+ctx.getString(R.string.kilometers);
+            } else { // Formato en m.
+                return ((int) distance)+" "+ctx.getString(R.string.meters);
+            }
+        }
+    }
+
     public static List<Playa> orderByDistance (List<Playa> playas){
         Collections.sort(playas, new PlayasDistanceComparator());
+        return playas;
+    }
+
+    public static List<Playa> orderByDistanceTo (List<Playa> playas, LatLng origin){
+        Collections.sort(playas, new PlayasDistanceComparator(false, origin));
         return playas;
     }
 }

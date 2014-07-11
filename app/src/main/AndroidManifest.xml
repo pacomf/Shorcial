@@ -87,6 +87,20 @@
         </activity>
 
         <activity
+            android:name=".activities.BuscarPlaya"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:label="@string/search" >
+        </activity>
+
+        <activity
+            android:name=".activities.ResultadoBusquedaPlaya"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:label="@string/title_section_results_search_beach" >
+        </activity>
+
+        <activity
             android:name="com.odc.beachodc.Logout"
             android:configChanges="orientation"
             android:screenOrientation="portrait"

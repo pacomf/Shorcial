@@ -29,18 +29,31 @@ public class PlayasAdapter extends BaseAdapter {
     protected List<Playa> items;
     protected boolean isCheckins;
     protected Map<Playa, Date> checkins;
+    protected boolean isSearchByLocation;
+    protected Double latitudO, longitudO;
 
     public PlayasAdapter(Activity activity, List<Playa> items, Map<Playa, Date> checkins) {
         this.activity = activity;
         this.items = items;
         this.isCheckins=true;
         this.checkins = checkins;
+        this.isSearchByLocation = false;
+    }
+
+    public PlayasAdapter(Activity activity, List<Playa> items, Double latitudO, Double longitudO) {
+        this.activity = activity;
+        this.items = items;
+        this.isCheckins=false;
+        this.isSearchByLocation = true;
+        this.latitudO = latitudO;
+        this.longitudO = longitudO;
     }
 
     public PlayasAdapter(Activity activity, List<Playa> items) {
         this.activity = activity;
         this.items = items;
         this.isCheckins=false;
+        this.isSearchByLocation = false;
     }
 
     @Override
@@ -118,8 +131,17 @@ public class PlayasAdapter extends BaseAdapter {
         distanciaTV.setTypeface(tf);
         if (isCheckins)
             distanciaTV.setText(Utilities.formatFechaNotHour(checkins.get(playa)));
-        else
-            distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
+        else {
+            try {
+                if (isSearchByLocation) {
+                    distanciaTV.setText(Geo.getDistanceToPrint(activity, this.latitudO, this.longitudO, playa.latitud, playa.longitud));
+                } else {
+                    distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
+                }
+            } catch (Exception e){
+                distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
+            }
+        }
 
         ImageView banderaazulIV = (ImageView) vi.findViewById(R.id.banderaAzulImage);
         ImageView dificultadaccesoIV = (ImageView) vi.findViewById(R.id.dificultadAccesoImage);

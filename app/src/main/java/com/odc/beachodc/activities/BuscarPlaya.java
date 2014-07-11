@@ -1,4 +1,4 @@
-package com.odc.beachodc;
+package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -13,24 +13,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-
-import com.odc.beachodc.activities.BuscarPlaya;
-import com.odc.beachodc.activities.EdicionPlaya;
-import com.odc.beachodc.activities.MensajesBotellasPlaya;
-import com.odc.beachodc.db.models.Playa;
-import com.odc.beachodc.fragments.MisDatosFragment;
-import com.odc.beachodc.fragments.list.PlayasFragment;
-import com.odc.beachodc.fragments.list.PlayasMapFragment;
+import com.odc.beachodc.Logout;
+import com.odc.beachodc.R;
+import com.odc.beachodc.fragments.BuscarPlayaFragment;
+import com.odc.beachodc.fragments.edit.ValoracionPlayaFragment;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.Locale;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
 
-
-public class Home extends FragmentActivity implements ActionBar.TabListener {
+public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -43,7 +36,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
-     * The {@link ViewPager} that will host the section contents.
+     * The {@link android.support.v4.view.ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
 
@@ -51,8 +44,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        Utilities.setActionBarCustomize(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -85,25 +76,17 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
         }
 
-        // Muestra un mensajito si hemos sido redirigidos a este Activity a través de la creación, con éxito, de una Playa
-        if (getIntent().getExtras() != null){
-            Boolean playacreada = getIntent().getExtras().getBoolean("creaplaya");
-            if ((playacreada != null) && (playacreada)){
-                Crouton.makeText(this, getString(R.string.playacreada), Style.CONFIRM).show();
-            } else {
-                Boolean playaeditada = getIntent().getExtras().getBoolean("editaplaya");
-                if ((playaeditada != null) && (playaeditada)){
-                    Crouton.makeText(this, getString(R.string.playaeditada), Style.CONFIRM).show();
-                }
-            }
-        }
+        Utilities.setActionBarCustomize(this);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.home, menu);
+
+        inflater.inflate(R.menu.logout, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -113,22 +96,8 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                //Intent intent = new Intent(this, Logout.class);
-                //startActivity(intent);
-                // TODO: Quitar, es solo para pruebas
-                ValidacionPlaya.playa = new Playa(false);
-                Intent intentx = new Intent(this, MensajesBotellasPlaya.class);
-                startActivity(intentx);
-                return true;
-            case R.id.menu_nuevo:
-                Intent intentN = new Intent(this, EdicionPlaya.class);
-                intentN.putExtra("nuevo", true);
-                startActivity(intentN);
-                return true;
-
-            case R.id.menu_search:
-                Intent intentS = new Intent(this, BuscarPlaya.class);
-                startActivity(intentS);
+                Intent intent = new Intent(this, Logout.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -153,7 +122,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
     }
 
     /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * A {@link android.support.v4.app.FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -167,19 +136,15 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
                 case 0:
-                    return new MisDatosFragment();
-                case 1:
-                    return new PlayasFragment();
-                case 2:
-                    return new PlayasMapFragment();
+                    return new BuscarPlayaFragment();
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 1 total pages.
+            return 1;
         }
 
         @Override
@@ -187,11 +152,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section_playas_cercanas).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section_mapa_playas).toUpperCase(l);
+                    return getString(R.string.title_section_search_beach).toUpperCase(l);
             }
             return null;
         }

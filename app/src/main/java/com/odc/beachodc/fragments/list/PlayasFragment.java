@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.db.models.Playa;
@@ -59,8 +60,24 @@ public class PlayasFragment extends Fragment {
             playas.add(playa4);
             playas.add(playa5);
 
+            Boolean search = false;
 
-            PlayasAdapter playasAdapter = new PlayasAdapter(getActivity(), Geo.orderByDistance(playas));
+            try {
+                search = getActivity().getIntent().getExtras().getBoolean("isSearch");
+            } catch (Exception e){}
+
+            PlayasAdapter playasAdapter;
+            if (search){
+                try {
+                    Double latitud = getActivity().getIntent().getExtras().getDouble("latitud");
+                    Double longitud = getActivity().getIntent().getExtras().getDouble("longitud");
+                    playasAdapter = new PlayasAdapter(getActivity(), Geo.orderByDistanceTo(playas, new LatLng(latitud, longitud)), latitud, longitud);
+                } catch (Exception e){
+                    playasAdapter = new PlayasAdapter(getActivity(), Geo.orderByDistance(playas));
+                }
+            } else {
+                playasAdapter = new PlayasAdapter(getActivity(), Geo.orderByDistance(playas));
+            }
             listView.setAdapter(playasAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
