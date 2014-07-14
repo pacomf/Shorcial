@@ -11,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.odc.beachodc.Playas;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.adapters.PlayasAdapter;
+import com.odc.beachodc.fragments.VerPlayaFragment;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
@@ -84,8 +86,7 @@ public class PlayasFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     // TODO: Redirigir a la pagina de VER PLAYA, ahora se esta redirigiendo a la de Editar
-                    Intent intent = new Intent(getActivity(), EdicionPlaya.class);
-                    intent.putExtra("nuevo", false);
+                    Intent intent = new Intent(getActivity(), Playas.class);
                     Playa item = (Playa) listView.getItemAtPosition(i);
                     ValidacionPlaya.playa = item;
                     startActivity(intent);

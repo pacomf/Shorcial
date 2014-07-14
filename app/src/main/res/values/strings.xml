@@ -15,9 +15,14 @@
     <string name="title_section_edit_mapplaya">Localización</string>
     <string name="title_section_search_beach">Buscar Playa</string>
     <string name="title_section_results_search_beach">Resultados de Búsqueda</string>
+    <string name="title_section_see_beach">Playa</string>
+    <string name="title_section_webcam_beach">Ver en Directo</string>
+    <string name="title_section_opinion_beach">Valoraciones</string>
+    <string name="title_section_descubre_beach">Descubre</string>
 
     <string name="nuevo">Nueva Playa</string>
     <string name="save">Guardar</string>
+    <string name="refresh">Actualizar</string>
     <string name="inform">Informar Playa Incorrecta</string>
     <string name="search">Buscar</string>
 
@@ -31,7 +36,7 @@
 
     <string name="app_id_facebook">333380730146158</string>
     <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
-    <string name="app_key_play_services">AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs</string>
+    <string name="app_key_play_services">AIzaSyA_PYveEBI_o0wGU85y4__BbSIKJLLqinc</string>
 
 
     <string name="title_beach">Nombre de la Playa</string>

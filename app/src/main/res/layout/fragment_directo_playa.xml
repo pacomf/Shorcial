@@ -1,0 +1,83 @@
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/background_fragments">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="11dp"
+            android:paddingTop="7dp"
+            android:descendantFocusability="blocksDescendants"
+            android:layout_weight="2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nombreTV"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:ellipsize="end"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:text="Playaza ..."
+                android:padding="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25º C"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:ellipsize="end"
+                android:id="@+id/temp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textSize="40sp"
+                android:layout_above="@+id/relativeLayout" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/webcamloading"
+                android:layout_below="@+id/nombreTV"
+                android:layout_marginTop="15dp" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/ActualizarBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#ffed6a"
+            android:textStyle="bold"
+            android:background="@drawable/background_boton"
+            android:text="@string/search"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+

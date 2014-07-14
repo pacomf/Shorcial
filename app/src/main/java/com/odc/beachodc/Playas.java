@@ -2,15 +2,28 @@ package com.odc.beachodc;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import com.odc.beachodc.activities.BuscarPlaya;
+import com.odc.beachodc.activities.EdicionPlaya;
+import com.odc.beachodc.activities.MensajesBotellasPlaya;
+import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.MisDatosFragment;
+import com.odc.beachodc.fragments.PlayaDirectoFragment;
 import com.odc.beachodc.fragments.VerPlayaFragment;
+import com.odc.beachodc.fragments.edit.MensajeBotellaPlayaFragment;
+import com.odc.beachodc.fragments.list.MensajesBotellasFragment;
+import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.Locale;
 
@@ -37,6 +50,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Utilities.setActionBarCustomize(this);
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -71,6 +85,33 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
     }
 
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.playas, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // Si se ha clickado en la opcion de cerrar sesión del menu, mostraremos el fragment que nos permitirá cerrar la sesión.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.menu_editar:
+                Intent intent = new Intent(this, EdicionPlaya.class);
+                intent.putExtra("nuevo", false);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         // When the given tab is selected, switch to the corresponding page in
@@ -103,9 +144,11 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                 case 0:
                     return new VerPlayaFragment();
                 case 1:
-                    return new MisDatosFragment();
+                    return new PlayaDirectoFragment();
                 case 2:
                     return new MisDatosFragment();
+                case 3:
+                    return new MensajesBotellasFragment();
             }
             return null;
         }
@@ -113,7 +156,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
@@ -121,11 +164,13 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
+                    return getString(R.string.title_section_see_beach).toUpperCase(l);
                 case 1:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
+                    return getString(R.string.title_section_webcam_beach).toUpperCase(l);
                 case 2:
-                    return getString(R.string.title_section_mis_datos).toUpperCase(l);
+                    return getString(R.string.title_section_opinion_beach).toUpperCase(l);
+                case 3:
+                    return getString(R.string.title_section_descubre_beach).toUpperCase(l);
             }
             return null;
         }

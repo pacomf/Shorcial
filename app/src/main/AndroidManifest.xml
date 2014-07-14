@@ -112,7 +112,7 @@
             android:name="com.odc.beachodc.Playas"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:label="@string/logout" >
+            android:label="@string/title_activity_inicio" >
         </activity>
 
     <!-- KEY MAPS
