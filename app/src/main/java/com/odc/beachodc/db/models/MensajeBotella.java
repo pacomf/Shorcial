@@ -12,8 +12,6 @@ import java.util.Date;
  */
 public class MensajeBotella {
 
-    public String idserver;
-
     public String idfbautor;
 
     public String nombreautor;
@@ -35,7 +33,6 @@ public class MensajeBotella {
 
     public MensajeBotella(Context ctx, boolean porDefecto){
         if (porDefecto){ // TODO: Quitar esto, es solo para crear un MOCK
-            this.idserver = "1111";
             this.idfbautor = Utilities.getUserIdFacebook(ctx);
             this.nombreautor = Utilities.getUserNameFacebook(ctx);
             this.nombreplayadestino = "Mi Playa Preferida";
@@ -46,8 +43,7 @@ public class MensajeBotella {
         }
     }
 
-    public MensajeBotella(String idserver, String idfbautor, String nombreautor, String idserverplayadestino, String idserverplayaorigen, String nombreplayadestino, Date fecha, String mensaje){
-        this.idserver = idserver;
+    public MensajeBotella(String idfbautor, String nombreautor, String idserverplayadestino, String idserverplayaorigen, String nombreplayadestino, Date fecha, String mensaje){
         this.idfbautor = idfbautor;
         this.nombreautor = nombreautor;
         this.idserverplayadestino = idserverplayadestino;
@@ -59,7 +55,6 @@ public class MensajeBotella {
 
     public void mostrar(){
         System.out.println("| *****************************************************");
-        System.out.println("| IdServer: "+ this.idserver);
         System.out.println("| Autor: "+this.nombreautor);
         System.out.println("| Playa Origen: "+this.idserverplayaorigen);
         System.out.println("| Playa Destino: "+this.idserverplayadestino);

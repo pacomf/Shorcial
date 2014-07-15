@@ -118,8 +118,6 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
                 return true;
             case R.id.menu_editar:
                 if (ValidacionPlaya.validarInfoPlaya(this)){
-                    // TODO: Modo Depuracion, QUITAR EN LA VERSION DEFINITIVA el mostrar la PLAYA
-                    ValidacionPlaya.playa.mostrar();
                     boolean isNew = false;
                     try {
                         isNew = getIntent().getExtras().getBoolean("nuevo");

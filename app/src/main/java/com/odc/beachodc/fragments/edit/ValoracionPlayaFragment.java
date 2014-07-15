@@ -1,6 +1,7 @@
 package com.odc.beachodc.fragments.edit;
 
 
+import android.app.Activity;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -18,7 +19,12 @@ import android.widget.ImageView;
 
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
+import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.webservices.Request;
 
+
+import java.util.Date;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -35,10 +41,13 @@ public class ValoracionPlayaFragment extends Fragment {
         EditText comentario;
         Button enviar;
         int valoracion;
+        String idplaya;
+        Activity activity;
 
-        public ValoracionPlayaFragment() {
+        public ValoracionPlayaFragment(Activity activity, String idplaya) {
             // Se ejecuta antes que el onCreateView
-
+            this.idplaya = idplaya;
+            this.activity = activity;
         }
 
         @Override
@@ -71,13 +80,12 @@ public class ValoracionPlayaFragment extends Fragment {
             enviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    enviar.setClickable(false);
                     if (validacionValoracion()){
-                        // TODO: Enviar al servidor y si responde positivamente retornar a la pagina de ver Playa
-                        // TODO: En el Intent mandar un atributo para que cuando llegue al activity encuestion muestre un mensaje con que se ha añadido la valoracion
-                        // Parametros: valoracion y comentario.getText().toString() y new Date()
-                        Intent intent = new Intent(getActivity(), EdicionPlaya.class);
-                        getActivity().startActivity(intent);
-                        getActivity().finish();
+                        Comentario comment = new Comentario(Utilities.getUserIdFacebook(getActivity()), idplaya, comentario.getText().toString(), new Date(), valoracion);
+                        Request.valorarPlaya(activity, comment);
+                    } else {
+                        enviar.setClickable(true);
                     }
                 }
             });

@@ -3,6 +3,9 @@
 
     <string name="app_name">Shorcial</string>
 
+    <string name="server_ip">http://192.168.0.196</string>
+    <string name="server_port">3000</string>
+
     <string name="title_activity_inicio">Shorcial</string>
     <string name="title_section_mis_datos">Mis Datos</string>
     <string name="title_section_playas_cercanas">Playas Cercanas</string>

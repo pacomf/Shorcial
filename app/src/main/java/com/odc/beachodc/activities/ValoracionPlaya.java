@@ -1,6 +1,7 @@
 package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
+    Activity activity;
 
     /**
      * The {@link android.support.v4.view.ViewPager} that will host the section contents.
@@ -79,6 +81,8 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
             // this tab is selected.
             actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
         }
+
+        this.activity = this;
 
         Utilities.setActionBarCustomize(this);
 
@@ -140,7 +144,7 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
                 case 0:
-                    return new ValoracionPlayaFragment();
+                    return new ValoracionPlayaFragment(activity, ValidacionPlaya.playa.idserver);
             }
             return null;
         }

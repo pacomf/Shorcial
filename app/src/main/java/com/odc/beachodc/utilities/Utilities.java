@@ -17,6 +17,7 @@ import com.odc.beachodc.Inicio;
 import com.odc.beachodc.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -237,5 +238,16 @@ public class Utilities {
         } catch (Exception e){
             return "-";
         }
+    }
+
+    public static Date dateStringZTToDate (String zt){
+        Date ret = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        Calendar cal = Calendar.getInstance();
+        try {
+            cal.setTime(sdf.parse(zt));
+            ret = cal.getTime();
+        } catch (Exception e){}
+        return ret;
     }
 }

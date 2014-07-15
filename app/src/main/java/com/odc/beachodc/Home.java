@@ -23,6 +23,7 @@ import com.odc.beachodc.fragments.list.PlayasFragment;
 import com.odc.beachodc.fragments.list.PlayasMapFragment;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
 import java.util.Locale;
 
@@ -97,6 +98,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 }
             }
         }
+
     }
 
     @Override

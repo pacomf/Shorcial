@@ -10,6 +10,7 @@ import com.odc.beachodc.Home;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.dao.AppDataContext;
 import com.odc.beachodc.db.models.Playa;
+import com.odc.beachodc.webservices.Request;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -38,25 +39,11 @@ public class BBDD {
 
     public static void guardarPlaya(Activity activity, Playa playa, boolean nuevo){
         // Enviamos al servidor la info y si responde bien, guardamos en local
-        // TODO: Borrar estas lineas cuando se haga bien como se comenta en el TODO de abajo
-        try {
-            // Descomentar las lineas para que se guarde en Local
-            /*playa.setStatus(Entity.STATUS_NEW);
-            BBDD.getApplicationDataContext(activity).playasDao.add(playa);
-            BBDD.getApplicationDataContext(activity).playasDao.save();*/
-            Intent intent = new Intent(activity, Home.class);
-            if (nuevo)
-                intent.putExtra("creaplaya", true);
-            else
-                intent.putExtra("editaplaya", true);
-            // Para eliminar el historial de activities visitadas ya que volvemos al HOME y asi el boton ATRAS no tenga ningun comportamiento, se resetee.
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            activity.startActivity(intent);
-            activity.finish();
-        } catch (Exception e){
-            Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
-            Log.e("BBDD", "Error almacenando una playa en local: "+e.getMessage());
+        if (nuevo) {
+            Request.editarPlaya(activity, playa, nuevo);
+        } else {
+            Request.editarPlaya(activity, playa, false);
         }
-        // TODO: Enviar al servidor y cuando responda POSITIVAMENTE guardar en Local (como esta hecho justo arriba)
+
     }
 }
