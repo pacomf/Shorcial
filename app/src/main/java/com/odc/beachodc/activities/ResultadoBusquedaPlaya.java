@@ -17,6 +17,7 @@ import com.odc.beachodc.Logout;
 import com.odc.beachodc.R;
 import com.odc.beachodc.fragments.list.PlayasFragment;
 import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.Locale;
 
@@ -133,8 +134,11 @@ public class ResultadoBusquedaPlaya extends FragmentActivity implements ActionBa
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
-                case 0:
-                    return new PlayasFragment();
+                case 0: {
+                    PlayasFragment playasFragment =  new PlayasFragment();
+                    playasFragment.setPlayas(ValidacionPlaya.playas);
+                    return playasFragment;
+                }
             }
             return null;
         }

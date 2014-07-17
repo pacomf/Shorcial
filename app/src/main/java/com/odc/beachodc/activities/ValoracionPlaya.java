@@ -143,8 +143,11 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
-                case 0:
-                    return new ValoracionPlayaFragment(activity, ValidacionPlaya.playa.idserver);
+                case 0: {
+                    ValoracionPlayaFragment fragmentV = new ValoracionPlayaFragment();
+                    fragmentV.setParams(activity, ValidacionPlaya.playa.idserver);
+                    return fragmentV;
+                }
             }
             return null;
         }

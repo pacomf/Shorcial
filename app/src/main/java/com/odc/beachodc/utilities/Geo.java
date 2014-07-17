@@ -221,4 +221,14 @@ public class Geo {
         Collections.sort(playas, new PlayasDistanceComparator(false, origin));
         return playas;
     }
+
+    public static boolean isNearToMe (Double latitud, Double longitud){
+        if (Geo.myLocation != null) {
+            float distance = Geo.getDistanceInMetersTo(latitud, longitud, Geo.myLocation.getLatitude(), Geo.myLocation.getLongitude());
+            if ((distance > -1) && (distance < 501)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

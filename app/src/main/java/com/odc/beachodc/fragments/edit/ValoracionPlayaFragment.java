@@ -44,7 +44,11 @@ public class ValoracionPlayaFragment extends Fragment {
         String idplaya;
         Activity activity;
 
-        public ValoracionPlayaFragment(Activity activity, String idplaya) {
+        public ValoracionPlayaFragment() {
+            // Se ejecuta antes que el onCreateView
+        }
+
+        public void setParams (Activity activity, String idplaya) {
             // Se ejecuta antes que el onCreateView
             this.idplaya = idplaya;
             this.activity = activity;

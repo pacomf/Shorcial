@@ -1,7 +1,10 @@
 package com.odc.beachodc;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,17 +17,27 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.activities.MensajesBotellasPlaya;
+import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.MisDatosFragment;
 import com.odc.beachodc.fragments.list.PlayasFragment;
 import com.odc.beachodc.fragments.list.PlayasMapFragment;
+import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Config;
 import com.odc.beachodc.webservices.Request;
 
+import org.json.JSONArray;
+
+import java.util.Date;
 import java.util.Locale;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -47,11 +60,64 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    PlayasFragment playaFragment;
+    PlayasMapFragment playaMapFragment;
+    MisDatosFragment misDatosFragment;
+    Activity activity;
+
+    ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        activity = this;
+
+        playaFragment = new PlayasFragment();
+        playaMapFragment =  new PlayasMapFragment();
+        misDatosFragment = new MisDatosFragment();
+
+        pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+        pd.setIndeterminate(false);
+        pd.setCancelable(true);
+
+        ValidacionPlaya.cargadaPlayas=false;
+        ValidacionPlaya.cargadosUltimosCheckins=false;
+
+        pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                if (ValidacionPlaya.playas != null) {
+                    playaFragment.setPlayas(ValidacionPlaya.playas);
+                    playaMapFragment.setPlayas(ValidacionPlaya.playas);
+                }
+                if (ValidacionPlaya.playasCheckins != null){
+                    misDatosFragment.setPlayas(ValidacionPlaya.playasCheckins);
+                }
+            }
+        });
+
+        if (Geo.myLocation == null) {
+            // Esperamos 3 segundos para ver si pilla GEOLocalizacion
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        synchronized (this) {
+                            wait(3000);
+                        }
+                    } catch (InterruptedException ex) {
+                    }
+                    Request.getPlayasCercanas(activity, pd);
+                    Request.getUltimosCheckins(activity, pd);
+                }
+            };
+            thread.start();
+        } else {
+            Request.getPlayasCercanas(this, pd);
+            Request.getUltimosCheckins(this, pd);
+        }
 
         Utilities.setActionBarCustomize(this);
 
@@ -169,11 +235,11 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
                 case 0:
-                    return new MisDatosFragment();
+                    return misDatosFragment;
                 case 1:
-                    return new PlayasFragment();
+                    return playaFragment;
                 case 2:
-                    return new PlayasMapFragment();
+                    return playaMapFragment;
             }
             return null;
         }

@@ -2,6 +2,7 @@ package com.odc.beachodc;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,15 +17,19 @@ import android.view.MenuItem;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.activities.MensajesBotellasPlaya;
+import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.MisDatosFragment;
 import com.odc.beachodc.fragments.PlayaDirectoFragment;
 import com.odc.beachodc.fragments.VerPlayaFragment;
 import com.odc.beachodc.fragments.edit.MensajeBotellaPlayaFragment;
 import com.odc.beachodc.fragments.list.MensajesBotellasFragment;
+import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -104,7 +109,11 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                 intent.putExtra("nuevo", false);
                 startActivity(intent);
                 return true;
-
+            case R.id.menu_checkin:
+                ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                pd.setIndeterminate(false);
+                pd.setCancelable(true);
+                Request.nuevoCheckinPlaya(this, new Checkin(ValidacionPlaya.playa.idserver, new Date(), Utilities.getUserIdFacebook(this)), pd);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -156,7 +165,9 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 4;
+            if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
+                return 4;
+            return 3;
         }
 
         @Override

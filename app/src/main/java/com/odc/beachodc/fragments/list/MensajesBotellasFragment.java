@@ -43,19 +43,8 @@ public class MensajesBotellasFragment extends Fragment {
 
             listView = (ListView) rootView.findViewById(R.id.listaMensajesBotellas);
 
-            List<MensajeBotella> mensajes = new ArrayList<MensajeBotella>();
 
-            MensajeBotella mb = new MensajeBotella(getActivity(), true);
-
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-
-
-            MensajesBotellasAdapter mensajesBotellasAdapter = new MensajesBotellasAdapter(getActivity(), mensajes);
+            MensajesBotellasAdapter mensajesBotellasAdapter = new MensajesBotellasAdapter(getActivity(), ValidacionPlaya.mensajesBotella);
             listView.setAdapter(mensajesBotellasAdapter);
 
             return rootView;

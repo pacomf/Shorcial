@@ -4,6 +4,7 @@ import com.mobandme.ada.Entity;
 import com.mobandme.ada.annotations.Table;
 import com.mobandme.ada.annotations.TableField;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -57,6 +58,9 @@ public class Playa extends Entity {
     @TableField(name = "socorrista", datatype = DATATYPE_BOOLEAN)
     public Boolean socorrista;
 
+    @TableField(name = "checkin", datatype = DATATYPE_DATE_BINARY)
+    public Date checkin;
+
     public Playa(){
         super();
     }
@@ -94,7 +98,7 @@ public class Playa extends Entity {
 
     public Playa(String idserver, String nombre, Double latitud, Double longitud, Boolean banderaazul, String dificultadacceso,
                  String limpieza, String tipoarena, Double valoracion, Boolean rompeolas, Boolean hamacas, Boolean sombrillas,
-                 Boolean chiringuitos, Boolean duchas, Boolean socorrista){
+                 Boolean chiringuitos, Boolean duchas, Boolean socorrista, Date checkin){
         this.idserver = idserver;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -110,6 +114,7 @@ public class Playa extends Entity {
         this.chiringuitos = chiringuitos;
         this.duchas = duchas;
         this.socorrista = socorrista;
+        this.checkin = checkin;
     }
 
     public void mostrar(){

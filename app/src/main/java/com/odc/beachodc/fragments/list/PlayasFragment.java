@@ -1,6 +1,7 @@
 package com.odc.beachodc.fragments.list;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.odc.beachodc.adapters.PlayasAdapter;
 import com.odc.beachodc.fragments.VerPlayaFragment;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +33,39 @@ import java.util.List;
 public class PlayasFragment extends Fragment {
 
         ListView listView;
+        ArrayList<Playa> playas;
+        PlayasAdapter playasAdapter;
 
         public PlayasFragment() {
             // Se ejecuta antes que el onCreateView
+            playas = new ArrayList<Playa>();
+        }
 
+        public void setPlayas (ArrayList<Playa> playas){
+            this.playas = playas;
+
+            if (listView != null) {
+                Boolean search = false;
+                try {
+                    search = getActivity().getIntent().getExtras().getBoolean("isSearch");
+                } catch (Exception e) {
+                }
+
+                if (search) {
+                    try {
+                        Double latitud = getActivity().getIntent().getExtras().getDouble("latitud");
+                        Double longitud = getActivity().getIntent().getExtras().getDouble("longitud");
+                        playasAdapter = new PlayasAdapter(getActivity(), Geo.orderByDistanceTo(playas, new LatLng(latitud, longitud)), latitud, longitud);
+                    } catch (Exception e) {
+                        playasAdapter = new PlayasAdapter(getActivity(), Geo.orderByDistance(playas));
+                    }
+                } else {
+                    playasAdapter = new PlayasAdapter(getActivity(), Geo.orderByDistance(playas));
+                }
+
+                listView.setAdapter(playasAdapter);
+                playasAdapter.notifyDataSetChanged();
+            }
         }
 
         @Override
@@ -44,31 +75,12 @@ public class PlayasFragment extends Fragment {
 
             listView = (ListView) rootView.findViewById(R.id.listaPlayas);
 
-            List<Playa> playas = new ArrayList<Playa>();
-
-            Playa playa1 = new Playa(false);
-            Playa playa2 = new Playa(false);
-            Playa playa3 = new Playa(false);
-            Playa playa4 = new Playa(false);
-            Playa playa5 = new Playa(false);
-
-            playas.add(playa1);
-            playa2.latitud+=0.001;
-            playa2.longitud+=0.00001;
-            playas.add(playa2);
-            playas.add(playa3);
-            playa4.latitud+=0.002;
-            playa4.longitud+=0.00002;
-            playas.add(playa4);
-            playas.add(playa5);
-
             Boolean search = false;
 
             try {
                 search = getActivity().getIntent().getExtras().getBoolean("isSearch");
             } catch (Exception e){}
 
-            PlayasAdapter playasAdapter;
             if (search){
                 try {
                     Double latitud = getActivity().getIntent().getExtras().getDouble("latitud");
@@ -89,6 +101,18 @@ public class PlayasFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), Playas.class);
                     Playa item = (Playa) listView.getItemAtPosition(i);
                     ValidacionPlaya.playa = item;
+                    ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                    pd.setIndeterminate(false);
+                    pd.setCancelable(true);
+                    // TODO: Estas dos validaciones de cargadas hay que setearlas bien donde sea conveniente
+                    ValidacionPlaya.cargadaTemperatura=true;
+                    ValidacionPlaya.cargadaImagenWeb=true;
+
+                    Request.getComentariosBotella(getActivity(), item.idserver, pd);
+                    if (Geo.isNearToMe(item.latitud, item.longitud))
+                        Request.getMensajesBotella(getActivity(), item.idserver, pd);
+                    else
+                        ValidacionPlaya.cargadosMensajesPlaya=true;
                     startActivity(intent);
                 }
             });

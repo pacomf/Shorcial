@@ -1,6 +1,7 @@
 package com.odc.beachodc.fragments.edit;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,11 @@ import android.widget.ImageView;
 
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
+import com.odc.beachodc.db.models.MensajeBotella;
+import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.webservices.Request;
+
+import java.util.Date;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -30,10 +36,17 @@ public class MensajeBotellaPlayaFragment extends Fragment {
         EditText mensaje;
         Button enviar;
         CheckBox aleatorio;
+        Activity activity;
+        String idPlaya;
 
         public MensajeBotellaPlayaFragment() {
             // Se ejecuta antes que el onCreateView
+        }
 
+        public void setParams(Activity activity, String idPlaya) {
+            // Se ejecuta antes que el onCreateView
+            this.activity = activity;
+            this.idPlaya = idPlaya;
         }
 
         @Override
@@ -63,12 +76,9 @@ public class MensajeBotellaPlayaFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (validacionMensaje()){
-                        // TODO: Enviar al servidor y si responde positivamente retornar a la pagina de ver Playa
-                        // TODO: En el Intent mandar un atributo para que cuando llegue al activity encuestion muestre un mensaje con que se ha añadido el mensaje en la botella
-                        // Parametros: valoracion, mensaje.getText().toString(), aleatorio.isChecked(), new Date() y nombre e idFB de quien lo lanzó
-                        Intent intent = new Intent(getActivity(), EdicionPlaya.class);
-                        getActivity().startActivity(intent);
-                        getActivity().finish();
+                        // TODO: Para futuro: Parametros: aleatorio.isChecked()
+                        MensajeBotella mensajeB = new MensajeBotella(Utilities.getUserIdFacebook(activity), Utilities.getUserNameFacebook(activity), idPlaya, idPlaya, "", new Date(), mensaje.getText().toString());
+                        Request.mensajeBotellaPlaya(activity, mensajeB);
                     }
                 }
             });

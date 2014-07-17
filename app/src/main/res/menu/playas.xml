@@ -2,7 +2,7 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/menu_actualizar"
+    <item android:id="@+id/menu_checkin"
         android:icon="@drawable/ic_check"
         android:title="@string/refresh"
         android:showAsAction="ifRoom" />

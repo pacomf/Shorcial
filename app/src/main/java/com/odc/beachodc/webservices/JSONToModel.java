@@ -36,8 +36,26 @@ public class JSONToModel {
             Boolean chiringuitos = json.optBoolean("chiringuitos");
             Boolean duchas = json.optBoolean("duchas");
             Boolean socorrista = json.optBoolean("socorrista");
+            String fechaStr = json.optString("checkin");
+            Date fecha = null;
+            try {
+                if (fechaStr != null){
+                    String[] parts = fechaStr.split("Z");
+                    parts = parts[0].split("T");
+                    String[] dias = parts[0].split("-");
+                    String[] horas = parts[1].split(":");
+                    Calendar date = Calendar.getInstance();
+                    date.set(Calendar.YEAR,  Integer.valueOf(dias[0]));
+                    date.set(Calendar.MONTH, Integer.valueOf(dias[1])-1);
+                    date.set(Calendar.DAY_OF_MONTH, Integer.valueOf(dias[2]));
+                    date.set(Calendar.HOUR_OF_DAY, Integer.valueOf(horas[0]));
+                    date.set(Calendar.MINUTE, Integer.valueOf(horas[1]));
+                    date.set(Calendar.SECOND, Double.valueOf(horas[2]).intValue());
+                    fecha = date.getTime();
+                }
+            } catch (Exception e){}
 
-            return new Playa(idserver, nombre, latitud, longitud, banderaazul, dificultadacceso, limpieza, tipoarena, valoracion, rompeolas, hamacas, sombrillas, chiringuitos, duchas, socorrista);
+            return new Playa(idserver, nombre, latitud, longitud, banderaazul, dificultadacceso, limpieza, tipoarena, valoracion, rompeolas, hamacas, sombrillas, chiringuitos, duchas, socorrista, fecha);
         } catch (Exception e){
             return null;
         }

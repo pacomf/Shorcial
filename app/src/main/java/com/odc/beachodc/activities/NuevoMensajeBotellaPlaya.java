@@ -1,6 +1,7 @@
 package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.odc.beachodc.R;
 import com.odc.beachodc.fragments.edit.MensajeBotellaPlayaFragment;
 import com.odc.beachodc.fragments.edit.ValoracionPlayaFragment;
 import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.Locale;
 
@@ -38,6 +40,8 @@ public class NuevoMensajeBotellaPlaya extends FragmentActivity implements Action
      * The {@link android.support.v4.view.ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,8 @@ public class NuevoMensajeBotellaPlaya extends FragmentActivity implements Action
             // this tab is selected.
             actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
         }
+
+        this.activity = this;
 
         Utilities.setActionBarCustomize(this);
 
@@ -134,8 +140,11 @@ public class NuevoMensajeBotellaPlaya extends FragmentActivity implements Action
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
-                case 0:
-                    return new MensajeBotellaPlayaFragment();
+                case 0: {
+                    MensajeBotellaPlayaFragment fragmentM = new MensajeBotellaPlayaFragment();
+                    fragmentM.setParams(activity, ValidacionPlaya.playa.idserver);
+                    return fragmentM;
+                }
             }
             return null;
         }

@@ -40,11 +40,16 @@ public class PlayasMapFragment extends Fragment {
 
         View rootView;
         GoogleMap mapa;
-        List<Playa> playas;
         private Map<Marker, Integer> markersMap;
+        ArrayList<Playa> playas;
 
         public PlayasMapFragment() {
             // Se ejecuta antes que el onCreateView
+            playas = new ArrayList<Playa>();
+        }
+
+        public void setPlayas (ArrayList<Playa> playas){
+            this.playas = playas;
         }
 
         @Override
@@ -65,26 +70,7 @@ public class PlayasMapFragment extends Fragment {
                 mapa.setMyLocationEnabled(true);
             } catch (GooglePlayServicesNotAvailableException e) {}
 
-            playas = new ArrayList<Playa>();
             markersMap = new HashMap();
-
-            Playa playa1 = new Playa(false);
-            Playa playa2 = new Playa(false);
-            Playa playa3 = new Playa(false);
-            Playa playa4 = new Playa(false);
-            Playa playa5 = new Playa(false);
-
-            playas.add(playa1);
-            playa2.latitud+=0.001;
-            playa2.longitud+=0.00001;
-            playas.add(playa2);
-            playas.add(playa3);
-            playa4.latitud+=0.007;
-            playa4.longitud+=0.00007;
-            playa4.nombre="El Bollullo";
-            playa4.dificultadacceso="extrema";
-            playas.add(playa4);
-            playas.add(playa5);
 
             mapa.clear();
 

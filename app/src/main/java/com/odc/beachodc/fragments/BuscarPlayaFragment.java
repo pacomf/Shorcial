@@ -42,6 +42,7 @@ import com.odc.beachodc.activities.ResultadoBusquedaPlaya;
 import com.odc.beachodc.interfaces.IStandardTaskListener;
 import com.odc.beachodc.utilities.placeAutocomplete.DetailsPlaceOne;
 import com.odc.beachodc.utilities.placeAutocomplete.FillPlace;
+import com.odc.beachodc.webservices.Request;
 
 import java.util.List;
 import java.util.Locale;
@@ -112,21 +113,18 @@ public class BuscarPlayaFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (validarBusqueda()){
-                        // TODO: Enviar datos al servidor y esperar respuesta, para mostrarlos en una lista
-                        // TODO: Enviar nombrePlaya o porCercania + direccion.getText (esto ultimo para mostrarlo en la nueva activity)
                         if (busqueda.getCheckedRadioButtonId() == R.id.searchByName){
-                            // TODO: Buscar por nombrePlaya
-                            Intent intentS = new Intent(getActivity(), ResultadoBusquedaPlaya.class);
-                            intentS.putExtra("search", nombrePlaya.getText().toString());
-                            startActivity(intentS);
+                            // Buscar por nombrePlaya
+                            ProgressDialog pdI = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                            pdI.setIndeterminate(false);
+                            pdI.setCancelable(true);
+                            Request.getPlayasByName(getActivity(), nombrePlaya.getText().toString(), pdI);
                         } else if (busqueda.getCheckedRadioButtonId() == R.id.searchByAddress){
-                            // TODO: Buscar porCercania
-                            Intent intentS = new Intent(getActivity(), ResultadoBusquedaPlaya.class);
-                            intentS.putExtra("search", direccion.getText().toString());
-                            intentS.putExtra("isSearch", true);
-                            intentS.putExtra("latitud", porCercania.latitude);
-                            intentS.putExtra("longitud", porCercania.longitude);
-                            startActivity(intentS);
+                            // Buscar porCercania
+                            ProgressDialog pdI = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                            pdI.setIndeterminate(false);
+                            pdI.setCancelable(true);
+                            Request.getPlayasCercanasTo(getActivity(), direccion.getText().toString(), porCercania.latitude, porCercania.longitude, pdI);
                         } else {
                             Crouton.makeText(getActivity(), R.string.error_unknown, Style.ALERT).show();
                         }

@@ -1,22 +1,32 @@
 package com.odc.beachodc.webservices;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.android.volley.*;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.odc.beachodc.R;
+import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
+import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Created by Paco on 15/07/2014.
@@ -108,5 +118,191 @@ public class Request {
 
         // add the request object to the queue to be executed
         Config.addToRequestQueue(activity, req);
+    }
+
+    public static void mensajeBotellaPlaya (final Activity activity, MensajeBotella mensaje) {
+        final String URL = Config.getURLServer(activity)+"/mensajebotellaplaya/"+mensaje.idserverplayaorigen+"/"+mensaje.idfbautor;
+
+        // Post params to be sent to the server
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("fecha", Utilities.formatFecha(mensaje.fecha));
+        params.put("mensaje", mensaje.mensaje);
+
+        JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        com.odc.beachodc.webservices.Response.responseMensajeBotellaPlaya(activity, response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(activity, req);
+    }
+
+    public static void getPlayasCercanas (final Context ctx, final ProgressDialog pd){
+        if (Geo.myLocation != null) {
+            final String URL = Config.getURLServer(ctx) + "/playascercanas/" + Geo.myLocation.getLatitude() + "/" + Geo.myLocation.getLongitude();
+            JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    com.odc.beachodc.webservices.Response.responseGetPlayasCercanas(ctx, response, pd);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                    ValidacionPlaya.cargadaPlayas=true;
+                    if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd.isShowing())) {
+                        pd.dismiss();
+                    }
+                }
+            });
+
+            // add the request object to the queue to be executed
+            Config.addToRequestQueue(ctx, req);
+        } else {
+            ValidacionPlaya.cargadaPlayas=true;
+            if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd.isShowing())) {
+                pd.dismiss();
+            }
+        }
+    }
+
+    public static void getUltimosCheckins (final Context ctx, final ProgressDialog pd){
+        final String URL = Config.getURLServer(ctx)+"/ultimoscheckins/"+Utilities.getUserIdFacebook(ctx);
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
+            @Override
+            public void onResponse(JSONArray response) {
+                com.odc.beachodc.webservices.Response.responseGetUltimosCheckins(ctx, response, pd);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                ValidacionPlaya.cargadosUltimosCheckins=true;
+                if ((ValidacionPlaya.cargadaPlayas) && (pd.isShowing())) {
+                    pd.dismiss();
+                }
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
+    }
+
+    public static void nuevoCheckinPlaya (final Activity activity, Checkin checkin, final ProgressDialog pd) {
+        final String URL = Config.getURLServer(activity)+"/checkin/"+checkin.idfbuser+"/"+checkin.idplayaserver;
+
+        // Post params to be sent to the server
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("fecha", Utilities.formatFecha(checkin.fecha));
+
+        JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        com.odc.beachodc.webservices.Response.responseCheckinPlaya(activity, response, pd);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.e("Error: ", error.getMessage());
+                        pd.dismiss();
+                        Crouton.makeText(activity, R.string.unknown, Style.ALERT).show();
+                    }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(activity, req);
+    }
+
+    public static void getPlayasCercanasTo (final Context ctx, final String direccion, final Double latitud, final Double longitud, final ProgressDialog pd){
+        final String URL = Config.getURLServer(ctx) + "/playascercanas/" + latitud + "/" + longitud;
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                com.odc.beachodc.webservices.Response.responseGetPlayasCercanasTo(ctx, response, pd, direccion, latitud, longitud);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                pd.dismiss();
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
+    }
+
+    public static void getPlayasByName (final Context ctx, final String name, final ProgressDialog pd){
+        final String URL = Config.getURLServer(ctx) + "/playasbyname/" + name;
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                com.odc.beachodc.webservices.Response.responseGetPlayasByName(ctx, response, pd, name);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                pd.dismiss();
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
+    }
+
+    public static void getMensajesBotella (final Context ctx, String idPlaya, final ProgressDialog pd){
+        final String URL = Config.getURLServer(ctx)+"/mensajesplaya/"+idPlaya;
+        ValidacionPlaya.mensajesBotella = new ArrayList<MensajeBotella>();
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
+            @Override
+            public void onResponse(JSONArray response) {
+                com.odc.beachodc.webservices.Response.responseGetMensajesBotella(ctx, response, pd);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                ValidacionPlaya.cargadosMensajesPlaya=true;
+                if (ValidacionPlaya.comprobarCargaPlaya()){
+                    pd.dismiss();
+                }
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
+    }
+
+    public static void getComentariosBotella (final Context ctx, String idPlaya, final ProgressDialog pd){
+        final String URL = Config.getURLServer(ctx)+"/comentariosplaya/"+idPlaya;
+        ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
+            @Override
+            public void onResponse(JSONArray response) {
+                com.odc.beachodc.webservices.Response.responseGetComentariosPlaya(ctx, response, pd);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                ValidacionPlaya.cargadosComentarios=true;
+                if (ValidacionPlaya.comprobarCargaPlaya()){
+                    pd.dismiss();
+                }
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
     }
 }

@@ -95,6 +95,8 @@
 
     <string name="playacreada">La Playa ha sido añadida con ÉXITO</string>
     <string name="playaeditada">Los Datos de la Playa han sido modificados con ÉXITO</string>
+    <string name="checkinexito">¡Has realizado CHECKIN con ÉXITO!</string>
+    <string name="checkinrepetido">¡Ya has realizado CHECKIN en esta PLAYA en el dia de HOY!</string>
 
     <string name="error_problemautocompletado">Error en el motor de autocompletado de Direcciones. Introduzca de nuevo la Dirección.</string>
     <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>

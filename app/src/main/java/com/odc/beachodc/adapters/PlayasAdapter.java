@@ -28,15 +28,14 @@ public class PlayasAdapter extends BaseAdapter {
     protected Activity activity;
     protected List<Playa> items;
     protected boolean isCheckins;
-    protected Map<Playa, Date> checkins;
     protected boolean isSearchByLocation;
     protected Double latitudO, longitudO;
 
-    public PlayasAdapter(Activity activity, List<Playa> items, Map<Playa, Date> checkins) {
+    public PlayasAdapter(Activity activity, List<Playa> items, boolean checkins) {
         this.activity = activity;
         this.items = items;
-        this.isCheckins=true;
-        this.checkins = checkins;
+        if (checkins)
+            this.isCheckins=true;
         this.isSearchByLocation = false;
     }
 
@@ -130,7 +129,7 @@ public class PlayasAdapter extends BaseAdapter {
         TextView distanciaTV = (TextView) vi.findViewById(R.id.distanciaTV);
         distanciaTV.setTypeface(tf);
         if (isCheckins)
-            distanciaTV.setText(Utilities.formatFechaNotHour(checkins.get(playa)));
+            distanciaTV.setText(Utilities.formatFechaNotHour(playa.checkin));
         else {
             try {
                 if (isSearchByLocation) {
