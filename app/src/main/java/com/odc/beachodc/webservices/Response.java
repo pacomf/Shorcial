@@ -19,6 +19,7 @@ import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -286,6 +287,18 @@ public class Response {
         if (ValidacionPlaya.comprobarCargaPlaya()){
             pd.dismiss();
         }
+    }
+
+
+    public static double responseGetTemp(Context ctx, JSONObject response){
+        Double temp = 0.0;
+        try {
+            temp = Double.parseDouble(response.getJSONArray("list").getJSONObject(0).getJSONObject("main").getString("temp"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(temp);
+        return temp;
     }
 
 

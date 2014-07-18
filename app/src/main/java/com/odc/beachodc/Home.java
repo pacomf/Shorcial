@@ -111,12 +111,14 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                     }
                     Request.getPlayasCercanas(activity, pd);
                     Request.getUltimosCheckins(activity, pd);
+                    //Request.getTemp(activity,28.41046, -16.54623);
                 }
             };
             thread.start();
         } else {
             Request.getPlayasCercanas(this, pd);
             Request.getUltimosCheckins(this, pd);
+
         }
 
         Utilities.setActionBarCustomize(this);

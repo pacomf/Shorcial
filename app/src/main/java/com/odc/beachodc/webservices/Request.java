@@ -305,4 +305,29 @@ public class Request {
         // add the request object to the queue to be executed
         Config.addToRequestQueue(ctx, req);
     }
+
+    //Uilizamos openweathermap para tomar temperaturas geolocalizadas
+    public static void getTemp(final Context ctx, double lat, double lon) {
+        final String URL = "http://api.openweathermap.org/data/2.5/find?lat=" + lat + "&lon=" + lon + "&cnt=1";
+
+
+
+        JsonObjectRequest req = new JsonObjectRequest(URL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        com.odc.beachodc.webservices.Response.responseGetTemp(ctx, response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+            }
+        }
+        );
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
+    }
+
 }
