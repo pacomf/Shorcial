@@ -3,9 +3,11 @@ package com.odc.beachodc.webservices;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.android.volley.*;
 import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.odc.beachodc.R;
@@ -21,12 +23,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
+
+import static com.odc.beachodc.utilities.Utilities.*;
 
 /**
  * Created by Paco on 15/07/2014.
@@ -100,7 +105,7 @@ public class Request {
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("valoracion", comentario.valoracion.toString());
-        params.put("fecha", Utilities.formatFecha(comentario.fecha));
+        params.put("fecha", formatFecha(comentario.fecha));
         params.put("comentario", comentario.comentario);
 
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
@@ -125,7 +130,7 @@ public class Request {
 
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("fecha", Utilities.formatFecha(mensaje.fecha));
+        params.put("fecha", formatFecha(mensaje.fecha));
         params.put("mensaje", mensaje.mensaje);
 
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
@@ -175,7 +180,7 @@ public class Request {
     }
 
     public static void getUltimosCheckins (final Context ctx, final ProgressDialog pd){
-        final String URL = Config.getURLServer(ctx)+"/ultimoscheckins/"+Utilities.getUserIdFacebook(ctx);
+        final String URL = Config.getURLServer(ctx)+"/ultimoscheckins/"+ getUserIdFacebook(ctx);
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override
             public void onResponse(JSONArray response) {
@@ -201,7 +206,7 @@ public class Request {
 
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("fecha", Utilities.formatFecha(checkin.fecha));
+        params.put("fecha", formatFecha(checkin.fecha));
 
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
@@ -329,5 +334,6 @@ public class Request {
         // add the request object to the queue to be executed
         Config.addToRequestQueue(ctx, req);
     }
+
 
 }

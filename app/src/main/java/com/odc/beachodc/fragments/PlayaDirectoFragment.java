@@ -13,8 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.ValoracionPlaya;
+import com.odc.beachodc.utilities.BitmapLruCache;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.io.File;
@@ -49,17 +53,11 @@ public class PlayaDirectoFragment extends Fragment {
         // Empezar aqui a trabajar con la UI
 
         if (!ValidacionPlaya.playa.webcamURL.equals("")) {
-            ContextWrapper cw1 = new ContextWrapper(this.getActivity());
-            File dirImages = cw1.getDir("BeachImg", Context.MODE_PRIVATE);
-            File myPath = new File(dirImages, ValidacionPlaya.playa.nombre);
-            try {
-                FileInputStream fis = new FileInputStream(myPath.toString());
-                Bitmap webcamImg = BitmapFactory.decodeStream(fis);
-                ImageView webcam = (ImageView) rootView.findViewById(R.id.webcamView);
-                webcam.setImageBitmap(webcamImg);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            NetworkImageView webcam = (NetworkImageView) rootView.findViewById(R.id.webcamView);
+            ImageLoader.ImageCache imageCache = new BitmapLruCache();
+            ImageLoader imageLoader = new ImageLoader(Volley.newRequestQueue(getActivity()), imageCache);
+            webcam.setImageUrl(ValidacionPlaya.playa.webcamURL,imageLoader);
+
         }
         return rootView;
     }

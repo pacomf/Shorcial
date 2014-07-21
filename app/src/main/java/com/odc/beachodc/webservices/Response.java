@@ -47,7 +47,6 @@ public class Response {
                 playa.setStatus(Entity.STATUS_NEW);
                 BBDD.getApplicationDataContext(ctx).playasDao.add(playa);
                 BBDD.getApplicationDataContext(ctx).playasDao.save();
-                Utilities.guardarImagenWeb(ctx, playa.nombre, playa.webcamURL);
             } catch (Exception e){
                 System.out.println("FALLO RESPONSEGETPLAYA: "+e.getMessage());
                 playa = null;
@@ -174,7 +173,6 @@ public class Response {
         for (int i=0; i<response.length(); i++){
             try {
                 playa = JSONToModel.toPlaya(response.getJSONObject(i));
-                Utilities.guardarImagenWeb(ctx, playa.nombre, playa.webcamURL);
                 ValidacionPlaya.playas.add(playa);
             } catch (Exception e){
                 System.out.println("FALLO RESPONSEGETPLAYA: "+e.getMessage());
@@ -229,7 +227,6 @@ public class Response {
         for (int i=0; i<response.length(); i++){
             try {
                 playa = JSONToModel.toPlaya(response.getJSONObject(i));
-                Utilities.guardarImagenWeb(ctx, playa.nombre, playa.webcamURL);
                 ValidacionPlaya.playas.add(playa);
             } catch (Exception e){
                 System.out.println("FALLO RESPONSEGETPLAYA: "+e.getMessage());
@@ -251,7 +248,6 @@ public class Response {
             try {
                 playa = JSONToModel.toPlaya(response.getJSONObject(i));
                 ValidacionPlaya.playas.add(playa);
-                Utilities.guardarImagenWeb(ctx, playa.nombre, playa.webcamURL);
             } catch (Exception e){
                 System.out.println("FALLO RESPONSEGETPLAYA: "+e.getMessage());
             }

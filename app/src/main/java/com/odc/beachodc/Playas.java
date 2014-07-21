@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.activities.MensajesBotellasPlaya;
@@ -24,11 +26,13 @@ import com.odc.beachodc.fragments.PlayaDirectoFragment;
 import com.odc.beachodc.fragments.VerPlayaFragment;
 import com.odc.beachodc.fragments.edit.MensajeBotellaPlayaFragment;
 import com.odc.beachodc.fragments.list.MensajesBotellasFragment;
+import com.odc.beachodc.utilities.BitmapLruCache;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 import com.odc.beachodc.webservices.Request;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
 

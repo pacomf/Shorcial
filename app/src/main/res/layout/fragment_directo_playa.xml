@@ -52,7 +52,7 @@
                 android:textSize="40sp"
                 android:layout_above="@+id/relativeLayout" />
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/webcamView"
@@ -60,7 +60,8 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/webcamloading"
                 android:layout_below="@+id/nombreTV"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="15dp"
+                android:scaleType="centerCrop"/>
 
         </RelativeLayout>
 
