@@ -61,6 +61,9 @@ public class Playa extends Entity {
     @TableField(name = "checkin", datatype = DATATYPE_DATE_BINARY)
     public Date checkin;
 
+    @TableField(name = "webcamURL", datatype = DATATYPE_STRING)
+    public String webcamURL;
+
     public Playa(){
         super();
     }
@@ -77,6 +80,7 @@ public class Playa extends Entity {
             this.chiringuitos = false;
             this.duchas = false;
             this.socorrista = false;
+            this.webcamURL = "";
         } else { // TODO: Quitar esto, es solo para crear un MOCK
             this.nombre = "Playaza del Carajo";
             Random random = new Random();
@@ -98,7 +102,7 @@ public class Playa extends Entity {
 
     public Playa(String idserver, String nombre, Double latitud, Double longitud, Boolean banderaazul, String dificultadacceso,
                  String limpieza, String tipoarena, Double valoracion, Boolean rompeolas, Boolean hamacas, Boolean sombrillas,
-                 Boolean chiringuitos, Boolean duchas, Boolean socorrista, Date checkin){
+                 Boolean chiringuitos, Boolean duchas, Boolean socorrista, Date checkin, String webcamURL){
         this.idserver = idserver;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -115,6 +119,7 @@ public class Playa extends Entity {
         this.duchas = duchas;
         this.socorrista = socorrista;
         this.checkin = checkin;
+        this.webcamURL = webcamURL;
     }
 
     public void mostrar(){
@@ -132,6 +137,7 @@ public class Playa extends Entity {
         System.out.println("| Chiringuitos: "+this.chiringuitos);
         System.out.println("| Duchas: "+this.duchas);
         System.out.println("| Socorrista: "+this.socorrista);
+        System.out.println("| webcamURL: "+this.webcamURL);
         System.out.println("| *****************************************************");
     }
 
