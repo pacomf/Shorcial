@@ -242,7 +242,7 @@ public class Request {
     }
 
     public static void getPlayasByName (final Context ctx, final String name, final ProgressDialog pd){
-        final String URL = Config.getURLServer(ctx) + "/playasbyname/" + name;
+        final String URL = Config.getURLServer(ctx) + "/playasbyname/" + name.replaceAll(" ", "%20");
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

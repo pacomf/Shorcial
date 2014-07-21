@@ -38,6 +38,7 @@ public class JSONToModel {
             Boolean socorrista = json.optBoolean("socorrista");
             String fechaStr = json.optString("checkin");
             Date fecha = null;
+            String webcamURL = json.optString("webcamURL");
             try {
                 if (fechaStr != null){
                     String[] parts = fechaStr.split("Z");
@@ -55,7 +56,7 @@ public class JSONToModel {
                 }
             } catch (Exception e){}
 
-            return new Playa(idserver, nombre, latitud, longitud, banderaazul, dificultadacceso, limpieza, tipoarena, valoracion, rompeolas, hamacas, sombrillas, chiringuitos, duchas, socorrista, fecha);
+            return new Playa(idserver, nombre, latitud, longitud, banderaazul, dificultadacceso, limpieza, tipoarena, valoracion, rompeolas, hamacas, sombrillas, chiringuitos, duchas, socorrista, fecha, webcamURL);
         } catch (Exception e){
             return null;
         }

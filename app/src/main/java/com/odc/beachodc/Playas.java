@@ -87,6 +87,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
             actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
         }
 
+
     }
 
 
