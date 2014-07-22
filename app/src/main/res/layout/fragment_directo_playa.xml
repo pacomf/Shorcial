@@ -1,84 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal">
-
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/actualizarBTN"
         android:background="@drawable/background_fragments">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:paddingBottom="11dp"
-            android:paddingTop="7dp"
-            android:descendantFocusability="blocksDescendants"
-            android:layout_weight="2"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/nombreTV"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:maxLength="20"
-                android:ellipsize="end"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:text="Playaza ..."
-                android:padding="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="25º C"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:maxLength="20"
-                android:ellipsize="end"
-                android:id="@+id/temp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textSize="40sp"
-                android:layout_above="@+id/relativeLayout" />
-
-            <com.android.volley.toolbox.NetworkImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/webcamView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/webcamloading"
-                android:layout_below="@+id/nombreTV"
-                android:layout_marginTop="15dp"
-                android:scaleType="centerCrop"/>
-
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/ActualizarBTN"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:textColor="#ffed6a"
+            android:id="@+id/nombreTV"
+            android:textSize="24dp"
             android:textStyle="bold"
-            android:background="@drawable/background_boton"
-            android:text="@string/search"/>
+            android:maxLines="1"
+            android:maxLength="25"
+            android:ellipsize="end"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-    </LinearLayout>
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cargandoTV"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:maxLength="25"
+            android:ellipsize="end"
+            android:text="@string/procesando"
+            android:layout_centerInParent="true" />
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/webcamView"
+            android:layout_margin="15dp"
+            android:paddingBottom="15dp"
+            android:layout_below="@+id/nombreTV"
+            android:scaleType="centerCrop"/>
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/actualizarBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/update_image"/>
+
+</RelativeLayout>
 
 

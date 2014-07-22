@@ -16,6 +16,7 @@ import com.odc.beachodc.adapters.ComentariosAdapter;
 import com.odc.beachodc.adapters.MensajesBotellasAdapter;
 import com.odc.beachodc.db.models.Comentario;
 import com.odc.beachodc.db.models.MensajeBotella;
+import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class ValoracionesFragment extends Fragment {
                 }
             });
 
-            ComentariosAdapter comentariosAdapter = new ComentariosAdapter(getActivity(), ValidacionPlaya.comentariosPlaya);
+            ComentariosAdapter comentariosAdapter = new ComentariosAdapter(getActivity(), Utilities.orderByDateComentario(ValidacionPlaya.comentariosPlaya));
             listView.setAdapter(comentariosAdapter);
 
             return rootView;

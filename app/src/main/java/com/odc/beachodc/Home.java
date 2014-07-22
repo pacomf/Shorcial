@@ -23,12 +23,10 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
-import com.odc.beachodc.activities.MensajesBotellasPlaya;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.MisDatosFragment;
 import com.odc.beachodc.fragments.list.PlayasFragment;
-import com.odc.beachodc.fragments.list.PlayasMapFragment;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
@@ -61,7 +59,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
      */
     ViewPager mViewPager;
     PlayasFragment playaFragment;
-    PlayasMapFragment playaMapFragment;
     MisDatosFragment misDatosFragment;
     Activity activity;
 
@@ -75,12 +72,11 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         activity = this;
 
         playaFragment = new PlayasFragment();
-        playaMapFragment =  new PlayasMapFragment();
         misDatosFragment = new MisDatosFragment();
 
         pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
         pd.setIndeterminate(false);
-        pd.setCancelable(true);
+        pd.setCancelable(false);
 
         ValidacionPlaya.cargadaPlayas=false;
         ValidacionPlaya.cargadosUltimosCheckins=false;
@@ -90,7 +86,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             public void onDismiss(DialogInterface dialogInterface) {
                 if (ValidacionPlaya.playas != null) {
                     playaFragment.setPlayas(ValidacionPlaya.playas);
-                    playaMapFragment.setPlayas(ValidacionPlaya.playas);
                 }
                 if (ValidacionPlaya.playasCheckins != null){
                     misDatosFragment.setPlayas(ValidacionPlaya.playasCheckins);
@@ -182,12 +177,8 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                //Intent intent = new Intent(this, Logout.class);
-                //startActivity(intent);
-                // TODO: Quitar, es solo para pruebas
-                ValidacionPlaya.playa = new Playa(false);
-                Intent intentx = new Intent(this, MensajesBotellasPlaya.class);
-                startActivity(intentx);
+                Intent intent = new Intent(this, Logout.class);
+                startActivity(intent);
                 return true;
             case R.id.menu_nuevo:
                 Intent intentN = new Intent(this, EdicionPlaya.class);
@@ -239,8 +230,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                     return misDatosFragment;
                 case 1:
                     return playaFragment;
-                case 2:
-                    return playaMapFragment;
             }
             return null;
         }
@@ -248,7 +237,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -259,8 +248,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                     return getString(R.string.title_section_mis_datos).toUpperCase(l);
                 case 1:
                     return getString(R.string.title_section_playas_cercanas).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section_mapa_playas).toUpperCase(l);
             }
             return null;
         }

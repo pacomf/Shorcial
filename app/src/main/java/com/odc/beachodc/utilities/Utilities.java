@@ -1,6 +1,7 @@
 package com.odc.beachodc.utilities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
@@ -14,10 +15,18 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.odc.beachodc.Inicio;
 import com.odc.beachodc.R;
+import com.odc.beachodc.db.models.Checkin;
+import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.db.models.MensajeBotella;
+import com.odc.beachodc.db.models.Playa;
+import com.odc.beachodc.webservices.Request;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +36,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Created by Paco on 17/01/14.
@@ -264,5 +278,57 @@ public class Utilities {
         if (temp == null)
             return "-";
         return temp.intValue()+" "+ctx.getString(R.string.grados_centigrados);
+    }
+
+    public static boolean validarBusqueda(RadioGroup busqueda, EditText nombrePlaya, Activity activity, LatLng porCercania){
+        if (busqueda.getCheckedRadioButtonId() == R.id.searchByName){
+            if (!nombrePlaya.getText().toString().equals("")) {
+                return true;
+            } else {
+                Crouton.makeText(activity, R.string.error_search_name, Style.ALERT).show();
+            }
+        } else if (busqueda.getCheckedRadioButtonId() == R.id.searchByAddress){
+            if (porCercania != null){
+                return true;
+            } else {
+                Crouton.makeText(activity, R.string.error_search_address, Style.ALERT).show();
+            }
+        }
+        return false;
+    }
+
+    public static void buscarPlaya (RadioGroup busqueda, EditText nombrePlaya, Activity activity, LatLng porCercania, EditText direccion){
+        if (Utilities.validarBusqueda(busqueda, nombrePlaya, activity, porCercania)){
+            if (busqueda.getCheckedRadioButtonId() == R.id.searchByName){
+                // Buscar por nombrePlaya
+                ProgressDialog pdI = ProgressDialog.show(activity, activity.getResources().getText(R.string.esperar), activity.getResources().getText(R.string.esperar));
+                pdI.setIndeterminate(false);
+                pdI.setCancelable(true);
+                Request.getPlayasByName(activity, nombrePlaya.getText().toString(), pdI);
+            } else if (busqueda.getCheckedRadioButtonId() == R.id.searchByAddress){
+                // Buscar porCercania
+                ProgressDialog pdI = ProgressDialog.show(activity, activity.getResources().getText(R.string.esperar), activity.getResources().getText(R.string.esperar));
+                pdI.setIndeterminate(false);
+                pdI.setCancelable(true);
+                Request.getPlayasCercanasTo(activity, direccion.getText().toString(), porCercania.latitude, porCercania.longitude, pdI);
+            } else {
+                Crouton.makeText(activity, R.string.error_unknown, Style.ALERT).show();
+            }
+        }
+    }
+
+    public static List<Comentario> orderByDateComentario (List<Comentario> comentarios){
+        Collections.sort(comentarios, new ComentariosFechaComparator());
+        return comentarios;
+    }
+
+    public static List<MensajeBotella> orderByDateMensajeBotella (List<MensajeBotella> mensajesBotella){
+        Collections.sort(mensajesBotella, new MensajesBotellaFechaComparator());
+        return mensajesBotella;
+    }
+
+    public static List<Playa> orderByDateCheckins (List<Playa> checkins){
+        Collections.sort(checkins, new CheckinFechaComparator());
+        return checkins;
     }
 }

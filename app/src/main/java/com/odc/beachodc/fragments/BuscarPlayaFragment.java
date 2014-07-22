@@ -1,6 +1,7 @@
 package com.odc.beachodc.fragments;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +41,7 @@ import com.odc.beachodc.R;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.ResultadoBusquedaPlaya;
 import com.odc.beachodc.interfaces.IStandardTaskListener;
+import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.placeAutocomplete.DetailsPlaceOne;
 import com.odc.beachodc.utilities.placeAutocomplete.FillPlace;
 import com.odc.beachodc.webservices.Request;
@@ -58,16 +60,16 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class BuscarPlayaFragment extends Fragment {
 
         View rootView;
-        RadioGroup busqueda;
-        EditText nombrePlaya;
-        AutoCompleteTextView direccion;
+        public RadioGroup busqueda;
+        public EditText nombrePlaya;
+        public AutoCompleteTextView direccion;
         private DetailsPlaceOne geoLugar;
         private FillPlace buscarLugar;
         private Thread thread;
         private ProgressDialog pd;
         GoogleMap mapa;
         Location myLocation;
-        LatLng porCercania;
+        public LatLng porCercania;
         Button buscarBTN;
         RelativeLayout groupAddress;
 
@@ -112,23 +114,7 @@ public class BuscarPlayaFragment extends Fragment {
             buscarBTN.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (validarBusqueda()){
-                        if (busqueda.getCheckedRadioButtonId() == R.id.searchByName){
-                            // Buscar por nombrePlaya
-                            ProgressDialog pdI = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                            pdI.setIndeterminate(false);
-                            pdI.setCancelable(true);
-                            Request.getPlayasByName(getActivity(), nombrePlaya.getText().toString(), pdI);
-                        } else if (busqueda.getCheckedRadioButtonId() == R.id.searchByAddress){
-                            // Buscar porCercania
-                            ProgressDialog pdI = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                            pdI.setIndeterminate(false);
-                            pdI.setCancelable(true);
-                            Request.getPlayasCercanasTo(getActivity(), direccion.getText().toString(), porCercania.latitude, porCercania.longitude, pdI);
-                        } else {
-                            Crouton.makeText(getActivity(), R.string.error_unknown, Style.ALERT).show();
-                        }
-                    }
+                    Utilities.buscarPlaya (busqueda, nombrePlaya, getActivity(), porCercania, direccion);
                 }
             });
 
@@ -385,23 +371,6 @@ public class BuscarPlayaFragment extends Fragment {
                 Toast.makeText(getActivity(), R.string.error_problemautocompletado, Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    public boolean validarBusqueda(){
-        if (busqueda.getCheckedRadioButtonId() == R.id.searchByName){
-            if (!nombrePlaya.getText().toString().equals("")) {
-                return true;
-            } else {
-                Crouton.makeText(getActivity(), R.string.error_search_name, Style.ALERT).show();
-            }
-        } else if (busqueda.getCheckedRadioButtonId() == R.id.searchByAddress){
-            if (porCercania != null){
-                return true;
-            } else {
-                Crouton.makeText(getActivity(), R.string.error_search_address, Style.ALERT).show();
-            }
-        }
-        return false;
     }
 
     public void ocultarBusquedaNombre (boolean ocultar){

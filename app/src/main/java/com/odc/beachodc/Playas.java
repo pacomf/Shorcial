@@ -18,7 +18,6 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
-import com.odc.beachodc.activities.MensajesBotellasPlaya;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.MisDatosFragment;
@@ -94,6 +93,19 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
             actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
         }
 
+        // Muestra un mensajito si hemos sido redirigidos a este Activity a través de la creación, con éxito, de una Playa
+        if (getIntent().getExtras() != null){
+            Boolean mensajebotellacreado = getIntent().getExtras().getBoolean("nuevomensajebotella");
+            if ((mensajebotellacreado != null) && (mensajebotellacreado)){
+                Crouton.makeText(this, getString(R.string.nuevomensajebotella), Style.CONFIRM).show();
+            } else {
+                Boolean nuevavaloracion = getIntent().getExtras().getBoolean("nuevavaloracion");
+                if ((nuevavaloracion != null) && (nuevavaloracion)) {
+                    Crouton.makeText(this, getString(R.string.nuevavaloracion), Style.CONFIRM).show();
+                }
+            }
+        }
+
 
     }
 
@@ -161,39 +173,65 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            switch (position) {
-                case 0:
-                    return new VerPlayaFragment();
-                case 1:
-                    return new PlayaDirectoFragment();
-                case 2:
-                    return new ValoracionesFragment();
-                case 3:
-                    return new MensajesBotellasFragment();
+            if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals(""))) {
+                switch (position) {
+                    case 0:
+                        return new VerPlayaFragment();
+                    case 1:
+                        return new PlayaDirectoFragment();
+                    case 2:
+                        return new ValoracionesFragment();
+                    case 3:
+                        return new MensajesBotellasFragment();
+                }
+            } else {
+                switch (position) {
+                    case 0:
+                        return new VerPlayaFragment();
+                    case 1:
+                        return new ValoracionesFragment();
+                    case 2:
+                        return new MensajesBotellasFragment();
+                }
             }
+
             return null;
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
+            int restar = 1;
+            if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals("")))
+                restar = 0;
             if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
-                return 4;
-            return 3;
+                return (4-restar);
+            return (3-restar);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_section_see_beach).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section_webcam_beach).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section_opinion_beach).toUpperCase(l);
-                case 3:
-                    return getString(R.string.title_section_descubre_beach).toUpperCase(l);
+            if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals(""))) {
+                switch (position) {
+                    case 0:
+                        return getString(R.string.title_section_see_beach).toUpperCase(l);
+                    case 1:
+                        return getString(R.string.title_section_webcam_beach).toUpperCase(l);
+                    case 2:
+                        return getString(R.string.title_section_opinion_beach).toUpperCase(l);
+                    case 3:
+                        return getString(R.string.title_section_descubre_beach).toUpperCase(l);
+                }
+            } else {
+                switch (position) {
+                    case 0:
+                        return getString(R.string.title_section_see_beach).toUpperCase(l);
+                    case 1:
+                        return getString(R.string.title_section_opinion_beach).toUpperCase(l);
+                    case 2:
+                        return getString(R.string.title_section_descubre_beach).toUpperCase(l);
+                }
             }
             return null;
         }

@@ -40,10 +40,14 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
      */
     ViewPager mViewPager;
 
+    BuscarPlayaFragment buscarPlayaFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        buscarPlayaFragment = new BuscarPlayaFragment();
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -85,7 +89,7 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
 
-        inflater.inflate(R.menu.logout, menu);
+        inflater.inflate(R.menu.search, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -99,7 +103,8 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
                 Intent intent = new Intent(this, Logout.class);
                 startActivity(intent);
                 return true;
-
+            case R.id.menu_search:
+                Utilities.buscarPlaya (buscarPlayaFragment.busqueda, buscarPlayaFragment.nombrePlaya, this, buscarPlayaFragment.porCercania, buscarPlayaFragment.direccion);
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -136,7 +141,7 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
                 case 0:
-                    return new BuscarPlayaFragment();
+                    return buscarPlayaFragment;
             }
             return null;
         }

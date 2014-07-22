@@ -201,9 +201,4 @@ public class Inicio extends FragmentActivity {
         finish();
     }
 
-    public void playas(View view) {
-        Intent intent = new Intent(this, Playas.class);
-        startActivity(intent);
-    }
-
 }

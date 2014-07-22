@@ -28,6 +28,7 @@
     <string name="refresh">Actualizar</string>
     <string name="inform">Informar Playa Incorrecta</string>
     <string name="search">Buscar</string>
+    <string name="update_image">Actualizar Imagen</string>
     <string name="nueva_valoracion">Nueva Valoración</string>
 
     <string name="grados_centigrados">ºC</string>
@@ -94,6 +95,10 @@
     <string name="comment_beach_placeholder">Introduzca un nuevo comentario acerca de la Playa, en 190 caracteres como máximo...</string>
     <string name="enviar_mensaje_aleatorio_checkbox">Enviar a una Playa Aleatoria</string>
     <string name="message_bottle_beach_placeholder">Escribe tu mensaje, que nosotros encapsularemos en una botella para que... ¡otra persona lo pueda recibir!</string>
+    <string name="touch_reload">¡Toca para Recargar!</string>
+    <string name="ver_mapa">Ver en Mapa</string>
+    <string name="ver_lista">Ver en Lista</string>
+
 
     <string name="question">\?</string>
 
@@ -105,6 +110,10 @@
     <string name="checkinexito">¡Has realizado CHECKIN con ÉXITO!</string>
     <string name="checkinrepetido">¡Ya has realizado CHECKIN en esta PLAYA en el dia de HOY!</string>
     <string name="nocheckin">¡Debes estar en la PLAYA para hacer CHECKIN!</string>
+    <string name="nuevomensajebotella">¡El MENSAJE ha sido LANZADO al MAR en la BOTELLA!</string>
+    <string name="nuevavaloracion">¡Has COMENTADO correctamente la PLAYA!</string>
+
+    <string name="no_playas">NO hay playas a menos de 20 km.</string>
 
     <string name="error_problemautocompletado">Error en el motor de autocompletado de Direcciones. Introduzca de nuevo la Dirección.</string>
     <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>

@@ -1,6 +1,8 @@
 package com.odc.beachodc.utilities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Comentario;
@@ -29,8 +31,9 @@ public class ValidacionPlaya {
 
     public static boolean cargadosMensajesPlaya;
     public static boolean cargadosComentarios;
-    public static boolean cargadaImagenWeb;
     public static boolean cargadaTemperatura;
+
+    public static boolean lanzadaVerPlaya;
 
     public static boolean validarInfoPlaya(Activity activity){
         if ((ValidacionPlaya.playa.longitud == null) || (ValidacionPlaya.playa.latitud == null)){
@@ -44,8 +47,12 @@ public class ValidacionPlaya {
         return true;
     }
 
-    public static boolean comprobarCargaPlaya (){
-        if ((ValidacionPlaya.cargadosMensajesPlaya) && (ValidacionPlaya.cargadosComentarios) && (ValidacionPlaya.cargadaImagenWeb) && (ValidacionPlaya.cargadaTemperatura)){
+    public static boolean comprobarCargaPlaya (Context ctx, Intent intent){
+        if ((ValidacionPlaya.cargadosMensajesPlaya) && (ValidacionPlaya.cargadosComentarios) && (ValidacionPlaya.cargadaTemperatura)){
+            if (!ValidacionPlaya.lanzadaVerPlaya){
+                ValidacionPlaya.lanzadaVerPlaya = true;
+                ctx.startActivity(intent);
+            }
             return true;
         }
         return false;

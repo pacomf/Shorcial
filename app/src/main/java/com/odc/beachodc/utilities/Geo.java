@@ -10,6 +10,8 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.BBDD;
+import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
 
 import java.text.DecimalFormat;

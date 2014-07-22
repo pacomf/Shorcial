@@ -16,6 +16,7 @@ import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -89,29 +90,31 @@ public class PlayasAdapter extends BaseAdapter {
         nombreTV.setTypeface(tf);
         nombreTV.setText(playa.nombre);
 
-        // TODO: Eliminar esta linea para version definitiva
-        playa.valoracion=5d;
-
         tf = Typeface.createFromAsset(activity.getAssets(), "fonts/aSongforJennifer.ttf");
 
         TextView valoracionTV = (TextView) vi.findViewById(R.id.valoracionTV);
 
         if (isCheckins) {
             valoracionTV.setVisibility(View.GONE);
-            TextView checkinsTV = (TextView) vi.findViewById(R.id.checkinsTV);
-            TextView titleCheckinsTV = (TextView) vi.findViewById(R.id.title_checkins);
-            checkinsTV.setVisibility(View.VISIBLE);
-            titleCheckinsTV.setVisibility(View.VISIBLE);
-            checkinsTV.setTypeface(tf);
-            titleCheckinsTV.setTypeface(tf);
+            //TextView titleCheckinsTV = (TextView) vi.findViewById(R.id.title_checkins);
+            //titleCheckinsTV.setVisibility(View.VISIBLE);
+            //titleCheckinsTV.setTypeface(tf);
             // TODO: Calcular el número de checkins que haya hecho el usuario sobre esa playa
-            int totalCheckins = 12;
-            checkinsTV.setText(String.valueOf(totalCheckins));
+            //TextView checkinsTV = (TextView) vi.findViewById(R.id.checkinsTV);
+            //checkinsTV.setVisibility(View.VISIBLE);
+            //checkinsTV.setTypeface(tf);
+            //int totalCheckins = 12;
+            //checkinsTV.setText(String.valueOf(totalCheckins));
 
         } else {
             valoracionTV.setTypeface(tf);
             if (playa.valoracion != null) {
-                if (playa.valoracion < 3) {
+                DecimalFormat df = new DecimalFormat("#.#");
+                valoracionTV.setText(df.format(playa.valoracion).replace(".", ","));
+                if (playa.valoracion == 0){
+                    valoracionTV.setText("-.-");
+                    valoracionTV.setTextColor(Color.rgb(238, 180, 0));
+                }else if (playa.valoracion < 3) {
                     valoracionTV.setTextColor(Color.rgb(189, 22, 13));
                 } else if (playa.valoracion < 4) {
                     valoracionTV.setTextColor(Color.rgb(38, 130, 180));
@@ -121,7 +124,7 @@ public class PlayasAdapter extends BaseAdapter {
                 if (playa.valoracion == 5) {
                     valoracionTV.setTextColor(Color.rgb(238, 180, 0));
                 }
-                valoracionTV.setText(playa.valoracion.toString().replace(".", ","));
+
             }
         }
 

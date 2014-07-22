@@ -41,6 +41,7 @@ public class MisDatosFragment extends Fragment {
         ListView listView;
         ArrayList<Playa> playas;
         PlayasAdapter playasAdapter;
+        View rootView;
 
         public MisDatosFragment() {
             // Se ejecuta antes que el onCreateView
@@ -49,14 +50,16 @@ public class MisDatosFragment extends Fragment {
 
         public void setPlayas(ArrayList<Playa> playas){
             this.playas = playas;
-            playasAdapter = new PlayasAdapter(getActivity(), playas, true);
-            listView.setAdapter(playasAdapter);
-            playasAdapter.notifyDataSetChanged();
+            if (listView != null) {
+                playasAdapter = new PlayasAdapter(getActivity(), Utilities.orderByDateCheckins(playas), true);
+                listView.setAdapter(playasAdapter);
+                playasAdapter.notifyDataSetChanged();
+            }
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_misdatos, container, false);
+            rootView = inflater.inflate(R.layout.fragment_misdatos, container, false);
             // Empezar aqui a trabajar con la UI
 
             ProfilePictureView foto = (ProfilePictureView) rootView.findViewById(R.id.profilePicture);
@@ -74,7 +77,7 @@ public class MisDatosFragment extends Fragment {
 
             listView = (ListView) rootView.findViewById(R.id.listaPlayasUltimosCheckin);
 
-            PlayasAdapter playasAdapter = new PlayasAdapter(getActivity(), playas, true);
+            PlayasAdapter playasAdapter = new PlayasAdapter(getActivity(), Utilities.orderByDateCheckins(playas), true);
             listView.setAdapter(playasAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,19 +86,18 @@ public class MisDatosFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), Playas.class);
                     Playa item = (Playa) listView.getItemAtPosition(i);
                     ValidacionPlaya.playa = item;
+                    ValidacionPlaya.lanzadaVerPlaya = false;
                     ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
                     pd.setIndeterminate(false);
                     pd.setCancelable(true);
-                    // TODO: Estas dos validaciones de cargadas hay que setearlas bien donde sea conveniente
-                    Request.getTemp(getActivity(), item.latitud, item.longitud, pd);
-                    ValidacionPlaya.cargadaImagenWeb=true;
 
-                    Request.getComentariosPlaya(getActivity(), item.idserver, pd);
+                    Request.getTemp(getActivity(), item.latitud, item.longitud, pd, intent);
+
+                    Request.getComentariosPlaya(getActivity(), item.idserver, pd, intent);
                     if (Geo.isNearToMe(item.latitud, item.longitud))
-                        Request.getMensajesBotella(getActivity(), item.idserver, pd);
+                        Request.getMensajesBotella(getActivity(), item.idserver, pd, intent);
                     else
                         ValidacionPlaya.cargadosMensajesPlaya=true;
-                    startActivity(intent);
                 }
             });
 

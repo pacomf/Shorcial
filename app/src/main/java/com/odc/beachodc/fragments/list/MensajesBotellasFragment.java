@@ -8,15 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
+import com.facebook.android.Util;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
+import com.odc.beachodc.activities.NuevoMensajeBotellaPlaya;
 import com.odc.beachodc.adapters.MensajesBotellasAdapter;
 import com.odc.beachodc.adapters.PlayasAdapter;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.Geo;
+import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.ArrayList;
@@ -30,6 +34,7 @@ import java.util.List;
 public class MensajesBotellasFragment extends Fragment {
 
         ListView listView;
+        Button lanzarMensaje;
 
         public MensajesBotellasFragment() {
             // Se ejecuta antes que el onCreateView
@@ -44,8 +49,17 @@ public class MensajesBotellasFragment extends Fragment {
             listView = (ListView) rootView.findViewById(R.id.listaMensajesBotellas);
 
 
-            MensajesBotellasAdapter mensajesBotellasAdapter = new MensajesBotellasAdapter(getActivity(), ValidacionPlaya.mensajesBotella);
+            MensajesBotellasAdapter mensajesBotellasAdapter = new MensajesBotellasAdapter(getActivity(), Utilities.orderByDateMensajeBotella(ValidacionPlaya.mensajesBotella));
             listView.setAdapter(mensajesBotellasAdapter);
+
+            lanzarMensaje = (Button) rootView.findViewById(R.id.nuevoMensajeBTN);
+            lanzarMensaje.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intentM = new Intent(getActivity(), NuevoMensajeBotellaPlaya.class);
+                    startActivity(intentM);
+                }
+            });
 
             return rootView;
         }

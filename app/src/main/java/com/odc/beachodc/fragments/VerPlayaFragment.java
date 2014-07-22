@@ -75,7 +75,6 @@ public class VerPlayaFragment extends Fragment {
 
             TextView tempTV = (TextView) rootView.findViewById(R.id.temp);
             tempTV.setTypeface(tf);
-            tempTV.setTextColor(Color.rgb(0, 121, 0));
             tempTV.setText(Utilities.getTemperatureC(getActivity(), ValidacionPlaya.temperatura));
 
             ImageView banderaazulIV = (ImageView) rootView.findViewById(R.id.banderaAzulImage);
@@ -179,35 +178,35 @@ public class VerPlayaFragment extends Fragment {
 
     public void setValoracion(int valoracion){
         if (valoracion == 1){
-            v1.setImageResource(android.R.drawable.star_on);
+            v1.setImageResource(R.drawable.star_on);
             v2.setImageResource(android.R.drawable.star_off);
             v3.setImageResource(android.R.drawable.star_off);
             v4.setImageResource(android.R.drawable.star_off);
             v5.setImageResource(android.R.drawable.star_off);
         } else if (valoracion == 2){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
+            v1.setImageResource(R.drawable.star_on);
+            v2.setImageResource(R.drawable.star_on);
             v3.setImageResource(android.R.drawable.star_off);
             v4.setImageResource(android.R.drawable.star_off);
             v5.setImageResource(android.R.drawable.star_off);
         } else if (valoracion == 3){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
+            v1.setImageResource(R.drawable.star_on);
+            v2.setImageResource(R.drawable.star_on);
+            v3.setImageResource(R.drawable.star_on);
             v4.setImageResource(android.R.drawable.star_off);
             v5.setImageResource(android.R.drawable.star_off);
         } else if (valoracion == 4){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_on);
+            v1.setImageResource(R.drawable.star_on);
+            v2.setImageResource(R.drawable.star_on);
+            v3.setImageResource(R.drawable.star_on);
+            v4.setImageResource(R.drawable.star_on);
             v5.setImageResource(android.R.drawable.star_off);
         } else if (valoracion == 5){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_on);
-            v5.setImageResource(android.R.drawable.star_on);
+            v1.setImageResource(R.drawable.star_on);
+            v2.setImageResource(R.drawable.star_on);
+            v3.setImageResource(R.drawable.star_on);
+            v4.setImageResource(R.drawable.star_on);
+            v5.setImageResource(R.drawable.star_on);
         }
     }
 

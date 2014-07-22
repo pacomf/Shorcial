@@ -78,7 +78,7 @@ public class Response {
 
     public static void responseEditarPlaya(Activity activity, JSONObject response){
         try {
-            Playa playa = JSONToModel.toPlaya(response);
+            // Playa playa = JSONToModel.toPlaya(response);
 
             // TODO: Para futuras versiones cuando haya cache local
             /*try {
@@ -94,7 +94,7 @@ public class Response {
             BBDD.getApplicationDataContext(activity).playasDao.add(playa);
             BBDD.getApplicationDataContext(activity).playasDao.save();*/
 
-            if ((playa.idserver != null) && (!playa.idserver.equals(""))) {
+            if ((response.optString("res") != null) && (response.optString("res").equals("ok"))) {
 
                 Intent intent = new Intent(activity, Home.class);
                 intent.putExtra("editaplaya", true);
@@ -108,12 +108,12 @@ public class Response {
             }
         } catch (Exception e) {
             Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
-            System.out.println("FALLO RESPONSENUEVAPLAYA: "+e.getMessage());
+            System.out.println("FALLO RESPONSEEDITARPLAYA: "+e.getMessage());
             return;
         }
     }
 
-    public static void responseValorarPlaya(Activity activity, JSONObject response){
+    public static void responseValorarPlaya(Activity activity, JSONObject response, Comentario comentario){
         try {
             Playa playa = JSONToModel.toPlaya(response);
 
@@ -135,8 +135,9 @@ public class Response {
 
                 Intent intent = new Intent(activity, Playas.class);
                 ValidacionPlaya.playa = playa;
-                //TODO: Enviar algun boolean en la activity para que aparezca un mensajito como que la valoracion se ha realizado correctamente
-
+                ValidacionPlaya.comentariosPlaya.add(comentario);
+                intent.putExtra("nuevavaloracion", true);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 activity.startActivity(intent);
                 activity.finish();
             } else {
@@ -149,12 +150,14 @@ public class Response {
         }
     }
 
-    public static void responseMensajeBotellaPlaya(Activity activity, JSONObject response){
+    public static void responseMensajeBotellaPlaya(Activity activity, JSONObject response, MensajeBotella mb){
         try {
             if ((response.optString("res") != null) && (response.optString("res").equals("ok"))) {
                 Intent intent = new Intent(activity, Playas.class);
                 //TODO: Enviar algun boolean en la activity para que aparezca un mensajito como que el mensaje se ha lanzado correctamente
-
+                ValidacionPlaya.mensajesBotella.add(mb);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("nuevomensajebotella", true);
                 activity.startActivity(intent);
                 activity.finish();
             } else {
@@ -258,7 +261,7 @@ public class Response {
         ctx.startActivity(intentS);
     }
 
-    public static void responseGetMensajesBotella(Context ctx, JSONArray response, ProgressDialog pd){
+    public static void responseGetMensajesBotella(Context ctx, JSONArray response, ProgressDialog pd, Intent intent){
         MensajeBotella mensaje;
         for (int i=0; i<response.length(); i++){
             try {
@@ -269,12 +272,12 @@ public class Response {
             }
         }
         ValidacionPlaya.cargadosMensajesPlaya=true;
-        if (ValidacionPlaya.comprobarCargaPlaya()){
+        if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
             pd.dismiss();
         }
     }
 
-    public static void responseGetComentariosPlaya(Context ctx, JSONArray response, ProgressDialog pd){
+    public static void responseGetComentariosPlaya(Context ctx, JSONArray response, ProgressDialog pd, Intent intent){
         Comentario comentario;
         for (int i=0; i<response.length(); i++){
             try {
@@ -285,23 +288,25 @@ public class Response {
             }
         }
         ValidacionPlaya.cargadosComentarios=true;
-        if (ValidacionPlaya.comprobarCargaPlaya()){
+        if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
             pd.dismiss();
         }
     }
 
 
-    public static void responseGetTemp(Context ctx, JSONObject response, ProgressDialog pd){
+    public static void responseGetTemp(Context ctx, JSONObject response, ProgressDialog pd, Intent intent){
         Double temp;
 
         try {
             temp = Double.parseDouble(response.getJSONArray("list").getJSONObject(0).getJSONObject("main").getString("temp"));
+            // Convertir de Kelvin a Celsius
+            temp = temp - 273.15;
             ValidacionPlaya.temperatura = temp;
         } catch (JSONException e) {
             e.printStackTrace();
         }
         ValidacionPlaya.cargadaTemperatura=true;
-        if (ValidacionPlaya.comprobarCargaPlaya()){
+        if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
             pd.dismiss();
         }
     }

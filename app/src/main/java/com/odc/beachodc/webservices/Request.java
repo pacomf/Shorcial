@@ -3,6 +3,7 @@ package com.odc.beachodc.webservices;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 
 import com.android.volley.*;
@@ -79,6 +80,8 @@ public class Request {
         params.put("chiringuitos", playa.chiringuitos.toString());
         params.put("duchas", playa.duchas.toString());
         params.put("socorrista", playa.socorrista.toString());
+        // TODO: En un futuro que los usuarios puedan añadir CAMs
+        params.put("webcamURL", "");
 
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
@@ -100,7 +103,7 @@ public class Request {
         Config.addToRequestQueue(activity, req);
     }
 
-    public static void valorarPlaya (final Activity activity, Comentario comentario) {
+    public static void valorarPlaya (final Activity activity, final Comentario comentario) {
         final String URL = Config.getURLServer(activity)+"/valoracionplaya/"+comentario.idplaya+"/"+comentario.idfbautor;
 
         // Post params to be sent to the server
@@ -114,7 +117,7 @@ public class Request {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                      com.odc.beachodc.webservices.Response.responseValorarPlaya(activity, response);
+                      com.odc.beachodc.webservices.Response.responseValorarPlaya(activity, response, comentario);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -127,19 +130,20 @@ public class Request {
         Config.addToRequestQueue(activity, req);
     }
 
-    public static void mensajeBotellaPlaya (final Activity activity, MensajeBotella mensaje) {
+    public static void mensajeBotellaPlaya (final Activity activity, final MensajeBotella mensaje) {
         final String URL = Config.getURLServer(activity)+"/mensajebotellaplaya/"+mensaje.idserverplayaorigen+"/"+mensaje.idfbautor;
 
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("fecha", formatFecha(mensaje.fecha));
         params.put("mensaje", mensaje.mensaje);
+        params.put("nombreAutor", mensaje.nombreautor);
 
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        com.odc.beachodc.webservices.Response.responseMensajeBotellaPlaya(activity, response);
+                        com.odc.beachodc.webservices.Response.responseMensajeBotellaPlaya(activity, response, mensaje);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -154,7 +158,6 @@ public class Request {
 
     public static void getPlayasCercanas (final Context ctx, final ProgressDialog pd){
         if (Geo.myLocation != null) {
-            System.out.println("Hola: "+Geo.myLocation.getLatitude()+"|"+Geo.myLocation.getLongitude());
             final String URL = Config.getURLServer(ctx) + "/playascercanas/" + Geo.myLocation.getLatitude() + "/" + Geo.myLocation.getLongitude();
             JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
                 @Override
@@ -268,20 +271,20 @@ public class Request {
         Config.addToRequestQueue(ctx, req);
     }
 
-    public static void getMensajesBotella (final Context ctx, String idPlaya, final ProgressDialog pd){
+    public static void getMensajesBotella (final Context ctx, String idPlaya, final ProgressDialog pd, final Intent intent){
         final String URL = Config.getURLServer(ctx)+"/mensajesplaya/"+idPlaya;
         ValidacionPlaya.mensajesBotella = new ArrayList<MensajeBotella>();
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override
             public void onResponse(JSONArray response) {
-                com.odc.beachodc.webservices.Response.responseGetMensajesBotella(ctx, response, pd);
+                com.odc.beachodc.webservices.Response.responseGetMensajesBotella(ctx, response, pd, intent);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
                 ValidacionPlaya.cargadosMensajesPlaya=true;
-                if (ValidacionPlaya.comprobarCargaPlaya()){
+                if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
                     pd.dismiss();
                 }
             }
@@ -291,20 +294,20 @@ public class Request {
         Config.addToRequestQueue(ctx, req);
     }
 
-    public static void getComentariosPlaya (final Context ctx, String idPlaya, final ProgressDialog pd){
+    public static void getComentariosPlaya (final Context ctx, String idPlaya, final ProgressDialog pd, final Intent intent){
         final String URL = Config.getURLServer(ctx)+"/comentariosplaya/"+idPlaya;
         ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override
             public void onResponse(JSONArray response) {
-                com.odc.beachodc.webservices.Response.responseGetComentariosPlaya(ctx, response, pd);
+                com.odc.beachodc.webservices.Response.responseGetComentariosPlaya(ctx, response, pd, intent);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
                 ValidacionPlaya.cargadosComentarios=true;
-                if (ValidacionPlaya.comprobarCargaPlaya()){
+                if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
                     pd.dismiss();
                 }
             }
@@ -315,21 +318,20 @@ public class Request {
     }
 
     //Uilizamos openweathermap para tomar temperaturas geolocalizadas
-    public static void getTemp(final Context ctx, double lat, double lon, final ProgressDialog pd) {
+    public static void getTemp(final Context ctx, double lat, double lon, final ProgressDialog pd, final Intent intent) {
         final String URL = "http://api.openweathermap.org/data/2.5/find?lat=" + lat + "&lon=" + lon + "&cnt=1";
-        System.out.println("Hola");
         JsonObjectRequest req = new JsonObjectRequest(URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        com.odc.beachodc.webservices.Response.responseGetTemp(ctx, response, pd);
+                        com.odc.beachodc.webservices.Response.responseGetTemp(ctx, response, pd, intent);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
                 ValidacionPlaya.cargadaTemperatura=true;
-                if (ValidacionPlaya.comprobarCargaPlaya()){
+                if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
                     pd.dismiss();
                 }
             }

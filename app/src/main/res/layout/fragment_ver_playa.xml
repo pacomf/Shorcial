@@ -5,8 +5,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:background="@drawable/background_fragments">
 
 
@@ -23,20 +25,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/nombreTV"
-                android:textSize="20dp"
+                android:textSize="24dp"
                 android:textStyle="bold"
+                android:layout_marginTop="8dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"
-                android:padding="10dp" />
+                android:layout_alignParentTop="true" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/nombreTV"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="11dp"
                 android:id="@+id/starsRL">
 
                 <ImageView
@@ -88,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_below="@+id/nombreTV"
+                android:textColor="#eeb400"
                 android:maxLines="1"
                 android:maxLength="20"
                 android:ellipsize="end"
@@ -200,7 +203,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dataRL"
-            android:layout_margin="15dp">
+            android:layout_margin="15dp"
+            android:paddingBottom="15dp">
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map"
