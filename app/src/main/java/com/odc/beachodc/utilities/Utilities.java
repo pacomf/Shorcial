@@ -260,4 +260,9 @@ public class Utilities {
         return ret;
     }
 
+    public static String getTemperatureC (Context ctx, Double temp){
+        if (temp == null)
+            return "-";
+        return temp.intValue()+" "+ctx.getString(R.string.grados_centigrados);
+    }
 }

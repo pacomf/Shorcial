@@ -86,7 +86,7 @@ public class ValoracionPlayaFragment extends Fragment {
                 public void onClick(View view) {
                     enviar.setClickable(false);
                     if (validacionValoracion()){
-                        Comentario comment = new Comentario(Utilities.getUserIdFacebook(getActivity()), idplaya, comentario.getText().toString(), new Date(), valoracion);
+                        Comentario comment = new Comentario(Utilities.getUserIdFacebook(getActivity()), idplaya, comentario.getText().toString(), Utilities.getUserNameFacebook(getActivity()), new Date(), valoracion);
                         Request.valorarPlaya(activity, comment);
                     } else {
                         enviar.setClickable(true);

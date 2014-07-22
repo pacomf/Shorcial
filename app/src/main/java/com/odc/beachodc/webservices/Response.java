@@ -291,15 +291,19 @@ public class Response {
     }
 
 
-    public static double responseGetTemp(Context ctx, JSONObject response){
-        Double temp = 0.0;
+    public static void responseGetTemp(Context ctx, JSONObject response, ProgressDialog pd){
+        Double temp;
+
         try {
             temp = Double.parseDouble(response.getJSONArray("list").getJSONObject(0).getJSONObject("main").getString("temp"));
+            ValidacionPlaya.temperatura = temp;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(temp);
-        return temp;
+        ValidacionPlaya.cargadaTemperatura=true;
+        if (ValidacionPlaya.comprobarCargaPlaya()){
+            pd.dismiss();
+        }
     }
 
 

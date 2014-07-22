@@ -1,18 +1,25 @@
 package com.odc.beachodc.fragments.list;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.odc.beachodc.R;
+import com.odc.beachodc.activities.ValoracionPlaya;
+import com.odc.beachodc.adapters.ComentariosAdapter;
 import com.odc.beachodc.adapters.MensajesBotellasAdapter;
+import com.odc.beachodc.db.models.Comentario;
 import com.odc.beachodc.db.models.MensajeBotella;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,25 +38,22 @@ public class ValoracionesFragment extends Fragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_list_mensajes_botellas, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_list_valoraciones, container, false);
             // Empezar aqui a trabajar con la UI
 
-            listView = (ListView) rootView.findViewById(R.id.listaMensajesBotellas);
+            listView = (ListView) rootView.findViewById(R.id.listaValoraciones);
 
-            List<MensajeBotella> mensajes = new ArrayList<MensajeBotella>();
+            Button nuevaValoracion = (Button) rootView.findViewById(R.id.nuevaValoracionBTN);
+            nuevaValoracion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intentV = new Intent(getActivity(), ValoracionPlaya.class);
+                    startActivity(intentV);
+                }
+            });
 
-            MensajeBotella mb = new MensajeBotella(getActivity(), true);
-
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-            mensajes.add(mb);
-
-
-            MensajesBotellasAdapter mensajesBotellasAdapter = new MensajesBotellasAdapter(getActivity(), mensajes);
-            listView.setAdapter(mensajesBotellasAdapter);
+            ComentariosAdapter comentariosAdapter = new ComentariosAdapter(getActivity(), ValidacionPlaya.comentariosPlaya);
+            listView.setAdapter(comentariosAdapter);
 
             return rootView;
         }

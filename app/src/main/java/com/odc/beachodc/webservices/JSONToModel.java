@@ -99,6 +99,7 @@ public class JSONToModel {
             String comentario = json.optString("comentario");
             Integer valoracion = json.optInt("valoracion");
             String fechaStr = json.optString("fecha");
+            String nombreUsuarioStr = json.optString("nombreusuario");
             Date fecha = null;
             try {
                 if (fechaStr != null){
@@ -118,7 +119,7 @@ public class JSONToModel {
             } catch (Exception e){}
 
 
-            return new Comentario(idusuario, idplaya, comentario, fecha, valoracion);
+            return new Comentario(idusuario, idplaya, comentario, nombreUsuarioStr, fecha, valoracion);
         } catch (Exception e){
             return null;
         }

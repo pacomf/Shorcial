@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.facebook.android.Util;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Comentario;
@@ -105,7 +106,8 @@ public class Request {
         // Post params to be sent to the server
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("valoracion", comentario.valoracion.toString());
-        params.put("fecha", formatFecha(comentario.fecha));
+        params.put("nombreautor", Utilities.getUserNameFacebook(activity));
+        params.put("fecha", Utilities.formatFecha(comentario.fecha));
         params.put("comentario", comentario.comentario);
 
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
@@ -152,6 +154,7 @@ public class Request {
 
     public static void getPlayasCercanas (final Context ctx, final ProgressDialog pd){
         if (Geo.myLocation != null) {
+            System.out.println("Hola: "+Geo.myLocation.getLatitude()+"|"+Geo.myLocation.getLongitude());
             final String URL = Config.getURLServer(ctx) + "/playascercanas/" + Geo.myLocation.getLatitude() + "/" + Geo.myLocation.getLongitude();
             JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
                 @Override
@@ -288,7 +291,7 @@ public class Request {
         Config.addToRequestQueue(ctx, req);
     }
 
-    public static void getComentariosBotella (final Context ctx, String idPlaya, final ProgressDialog pd){
+    public static void getComentariosPlaya (final Context ctx, String idPlaya, final ProgressDialog pd){
         final String URL = Config.getURLServer(ctx)+"/comentariosplaya/"+idPlaya;
         ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
@@ -312,21 +315,23 @@ public class Request {
     }
 
     //Uilizamos openweathermap para tomar temperaturas geolocalizadas
-    public static void getTemp(final Context ctx, double lat, double lon) {
+    public static void getTemp(final Context ctx, double lat, double lon, final ProgressDialog pd) {
         final String URL = "http://api.openweathermap.org/data/2.5/find?lat=" + lat + "&lon=" + lon + "&cnt=1";
-
-
-
+        System.out.println("Hola");
         JsonObjectRequest req = new JsonObjectRequest(URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        com.odc.beachodc.webservices.Response.responseGetTemp(ctx, response);
+                        com.odc.beachodc.webservices.Response.responseGetTemp(ctx, response, pd);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
+                ValidacionPlaya.cargadaTemperatura=true;
+                if (ValidacionPlaya.comprobarCargaPlaya()){
+                    pd.dismiss();
+                }
             }
         }
         );

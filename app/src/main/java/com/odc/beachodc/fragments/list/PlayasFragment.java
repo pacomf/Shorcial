@@ -105,10 +105,10 @@ public class PlayasFragment extends Fragment {
                     pd.setIndeterminate(false);
                     pd.setCancelable(true);
                     // TODO: Estas dos validaciones de cargadas hay que setearlas bien donde sea conveniente
-                    ValidacionPlaya.cargadaTemperatura=true;
+                    Request.getTemp(getActivity(), item.latitud, item.longitud, pd);
                     ValidacionPlaya.cargadaImagenWeb=true;
 
-                    Request.getComentariosBotella(getActivity(), item.idserver, pd);
+                    Request.getComentariosPlaya(getActivity(), item.idserver, pd);
                     if (Geo.isNearToMe(item.latitud, item.longitud))
                         Request.getMensajesBotella(getActivity(), item.idserver, pd);
                     else

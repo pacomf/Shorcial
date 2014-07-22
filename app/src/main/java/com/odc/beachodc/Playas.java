@@ -26,7 +26,7 @@ import com.odc.beachodc.fragments.PlayaDirectoFragment;
 import com.odc.beachodc.fragments.VerPlayaFragment;
 import com.odc.beachodc.fragments.edit.MensajeBotellaPlayaFragment;
 import com.odc.beachodc.fragments.list.MensajesBotellasFragment;
-import com.odc.beachodc.utilities.BitmapLruCache;
+import com.odc.beachodc.fragments.list.ValoracionesFragment;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
@@ -35,6 +35,9 @@ import com.odc.beachodc.webservices.Request;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class Playas extends FragmentActivity implements ActionBar.TabListener {
@@ -115,10 +118,14 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                 startActivity(intent);
                 return true;
             case R.id.menu_checkin:
-                ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                pd.setIndeterminate(false);
-                pd.setCancelable(true);
-                Request.nuevoCheckinPlaya(this, new Checkin(ValidacionPlaya.playa.idserver, new Date(), Utilities.getUserIdFacebook(this)), pd);
+                if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud)) {
+                    ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                    pd.setIndeterminate(false);
+                    pd.setCancelable(true);
+                    Request.nuevoCheckinPlaya(this, new Checkin(ValidacionPlaya.playa.idserver, new Date(), Utilities.getUserIdFacebook(this)), pd);
+                } else {
+                    Crouton.makeText(this, R.string.nocheckin, Style.ALERT).show();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -160,7 +167,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                 case 1:
                     return new PlayaDirectoFragment();
                 case 2:
-                    return new MisDatosFragment();
+                    return new ValoracionesFragment();
                 case 3:
                     return new MensajesBotellasFragment();
             }

@@ -105,13 +105,12 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 public void run() {
                     try {
                         synchronized (this) {
-                            wait(3000);
+                            wait(4000);
                         }
                     } catch (InterruptedException ex) {
                     }
                     Request.getPlayasCercanas(activity, pd);
                     Request.getUltimosCheckins(activity, pd);
-                    //Request.getTemp(activity,28.41046, -16.54623);
                 }
             };
             thread.start();

@@ -131,9 +131,7 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
                 return true;
             case R.id.menu_informar:
                 //TODO: Crear accion para que se envia algo al servidor que informe que el usuario dice que los datos no son validos
-                Intent intentV = new Intent(this, ValoracionPlaya.class);
-                startActivity(intentV);
-                finish();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

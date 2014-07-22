@@ -14,6 +14,8 @@ public class Comentario {
 
     public String idfbautor;
 
+    public String nombreautor;
+
     public String idplaya;
 
     public String comentario;
@@ -27,10 +29,11 @@ public class Comentario {
         super();
     }
 
-    public Comentario(String idfbautor, String idplaya, String comentario, Date fecha, Integer valoracion){
+    public Comentario(String idfbautor, String idplaya, String comentario, String nombreautor, Date fecha, Integer valoracion){
         this.idfbautor = idfbautor;
         this.fecha = fecha;
         this.idplaya = idplaya;
+        this.nombreautor = nombreautor;
         this.comentario = comentario;
         this.valoracion = valoracion;
     }

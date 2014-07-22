@@ -18,6 +18,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class ValidacionPlaya {
 
     public static Playa playa;
+    public static Double temperatura;
     public static ArrayList<Playa> playas;
     public static ArrayList<Playa> playasCheckins;
     public static ArrayList<MensajeBotella> mensajesBotella;

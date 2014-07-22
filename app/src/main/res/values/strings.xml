@@ -3,7 +3,7 @@
 
     <string name="app_name">Shorcial</string>
 
-    <string name="server_ip">http://192.168.1.34</string>
+    <string name="server_ip">http://192.168.0.196</string>
     <string name="server_port">3000</string>
 
     <string name="title_activity_inicio">Shorcial</string>
@@ -28,6 +28,9 @@
     <string name="refresh">Actualizar</string>
     <string name="inform">Informar Playa Incorrecta</string>
     <string name="search">Buscar</string>
+    <string name="nueva_valoracion">Nueva Valoración</string>
+
+    <string name="grados_centigrados">ºC</string>
 
     <string name="title_search_by_name">Buscar por Nombre</string>
     <string name="title_search_by_name_placeholder">Indique el Nombre de la Playa</string>
@@ -39,7 +42,11 @@
 
     <string name="app_id_facebook">333380730146158</string>
     <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
-    <string name="app_key_play_services">AIzaSyA_PYveEBI_o0wGU85y4__BbSIKJLLqinc</string>
+
+    <!-- IVAN: AIzaSyA_PYveEBI_o0wGU85y4__BbSIKJLLqinc
+         PACO: AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs
+     -->
+    <string name="app_key_play_services">AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs</string>
 
 
     <string name="title_beach">Nombre de la Playa</string>
@@ -97,6 +104,7 @@
     <string name="playaeditada">Los Datos de la Playa han sido modificados con ÉXITO</string>
     <string name="checkinexito">¡Has realizado CHECKIN con ÉXITO!</string>
     <string name="checkinrepetido">¡Ya has realizado CHECKIN en esta PLAYA en el dia de HOY!</string>
+    <string name="nocheckin">¡Debes estar en la PLAYA para hacer CHECKIN!</string>
 
     <string name="error_problemautocompletado">Error en el motor de autocompletado de Direcciones. Introduzca de nuevo la Dirección.</string>
     <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>

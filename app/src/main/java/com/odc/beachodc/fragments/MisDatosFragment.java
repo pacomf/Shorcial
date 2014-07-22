@@ -1,6 +1,7 @@
 package com.odc.beachodc.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,10 +80,21 @@ public class MisDatosFragment extends Fragment {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    // TODO: Redirigir a la pagina de VER PLAYA, ahora se esta redirigiendo a la de Editar
                     Intent intent = new Intent(getActivity(), Playas.class);
                     Playa item = (Playa) listView.getItemAtPosition(i);
                     ValidacionPlaya.playa = item;
+                    ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                    pd.setIndeterminate(false);
+                    pd.setCancelable(true);
+                    // TODO: Estas dos validaciones de cargadas hay que setearlas bien donde sea conveniente
+                    Request.getTemp(getActivity(), item.latitud, item.longitud, pd);
+                    ValidacionPlaya.cargadaImagenWeb=true;
+
+                    Request.getComentariosPlaya(getActivity(), item.idserver, pd);
+                    if (Geo.isNearToMe(item.latitud, item.longitud))
+                        Request.getMensajesBotella(getActivity(), item.idserver, pd);
+                    else
+                        ValidacionPlaya.cargadosMensajesPlaya=true;
                     startActivity(intent);
                 }
             });
