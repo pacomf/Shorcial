@@ -20,6 +20,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.odc.beachodc.Inicio;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Checkin;
@@ -51,6 +57,18 @@ public class Utilities {
     public static final String PROPERTY_REG_ID = "registration_idfacebook";
     public static final String PROPERTY_REG_NAME = "registration_namefacebook";
     private static final String PROPERTY_APP_VERSION = "appVersion";
+    public static DisplayImageOptions options;
+
+    public static void setOptionsImageLoader (){
+        Utilities.options = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.drawable.com_facebook_place_default_icon)
+                .showImageOnFail(R.drawable.com_facebook_place_default_icon)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .displayer(new RoundedBitmapDisplayer(20))
+                .build();
+    }
 
     public static String getCamelCase(String init){
         if (init==null)
@@ -330,5 +348,27 @@ public class Utilities {
     public static List<Playa> orderByDateCheckins (List<Playa> checkins){
         Collections.sort(checkins, new CheckinFechaComparator());
         return checkins;
+    }
+
+    public static String getURIDrawable (int drawable){
+        return "drawable://" + drawable;
+    }
+
+    public static void initImageLoader(Context context) {
+        // This configuration tuning is custom. You can tune every option, you may tune some of them,
+        // or you can create default configuration by
+        //  ImageLoaderConfiguration.createDefault(this);
+        // method.
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .diskCacheSize(50 * 1024 * 1024) // 50 Mb
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .build();
+        // Initialize ImageLoader with configuration.
+        ImageLoader.getInstance().init(config);
+
+        Utilities.setOptionsImageLoader();
     }
 }

@@ -23,6 +23,7 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:20.+'
     compile 'com.google.android.gms:play-services:4.0.30'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.2'
     compile files ('libs/com.mobandme.ada_v2.4.4.jar')
     compile files ('libs/volley.jar')
     compile project(':facebook')

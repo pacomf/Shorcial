@@ -26,7 +26,7 @@ public class JSONToModel {
 			String[] loc = geo.split(",");
 			Double latitud = Double.valueOf(loc[1]);
 			Double longitud = Double.valueOf(loc[0]);
-            Boolean banderaazul = json.optBoolean("baderaAzul");
+            Boolean banderaazul = json.optBoolean("banderaAzul");
             String dificultadacceso = json.optString("dificultadAcceso");
             String limpieza = json.optString("limpieza");
             String tipoarena = json.optString("tipoArena");
@@ -100,7 +100,7 @@ public class JSONToModel {
             String comentario = json.optString("comentario");
             Integer valoracion = json.optInt("valoracion");
             String fechaStr = json.optString("fecha");
-            String nombreUsuarioStr = json.optString("nombreusuario");
+            String nombreUsuarioStr = json.optString("nombreUsuario");
             Date fecha = null;
             try {
                 if (fechaStr != null){

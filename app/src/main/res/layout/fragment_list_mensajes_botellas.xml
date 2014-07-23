@@ -11,6 +11,37 @@
         android:layout_above="@+id/nuevoMensajeBTN"
         android:background="@drawable/background_title_checkins">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/nomensajes"
+            android:visibility="gone"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_blue_dark"
+                android:id="@+id/no_mensajes"
+                android:textAlignment="center"
+                android:text="@string/no_mensajes" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/no_mensajes"
+                android:layout_marginTop="35dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_blue_dark"
+                android:text="@string/primer_mensaje" />
+
+        </RelativeLayout>
+
         <ListView
             android:id="@+id/listaMensajesBotellas"
             android:layout_width="match_parent"
@@ -23,6 +54,15 @@
             android:dividerHeight="10sp">
 
         </ListView>
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/icon_bottle"
+            android:layout_marginLeft="-20dp"
+            android:layout_marginBottom="-8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"/>
 
     </RelativeLayout>
 

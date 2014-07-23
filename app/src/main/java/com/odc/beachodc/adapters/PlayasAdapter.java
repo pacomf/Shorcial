@@ -2,8 +2,14 @@ package com.odc.beachodc.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +17,23 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Playa;
+import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 
+import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,12 +48,18 @@ public class PlayasAdapter extends BaseAdapter {
     protected boolean isSearchByLocation;
     protected Double latitudO, longitudO;
 
+    ViewHolder viewHolder;
+    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+    protected ImageLoader imageLoader = ImageLoader.getInstance();
+
+
     public PlayasAdapter(Activity activity, List<Playa> items, boolean checkins) {
         this.activity = activity;
         this.items = items;
         if (checkins)
             this.isCheckins=true;
         this.isSearchByLocation = false;
+        viewHolder = new ViewHolder();
     }
 
     public PlayasAdapter(Activity activity, List<Playa> items, Double latitudO, Double longitudO) {
@@ -47,6 +69,7 @@ public class PlayasAdapter extends BaseAdapter {
         this.isSearchByLocation = true;
         this.latitudO = latitudO;
         this.longitudO = longitudO;
+        viewHolder = new ViewHolder();
     }
 
     public PlayasAdapter(Activity activity, List<Playa> items) {
@@ -54,6 +77,7 @@ public class PlayasAdapter extends BaseAdapter {
         this.items = items;
         this.isCheckins=false;
         this.isSearchByLocation = false;
+        viewHolder = new ViewHolder();
     }
 
     @Override
@@ -76,8 +100,25 @@ public class PlayasAdapter extends BaseAdapter {
         View vi=convertView;
 
         if(convertView == null) {
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             vi = inflater.inflate(R.layout.item_playa_list, null);
+            viewHolder.banderaazulIV = (ImageView) vi.findViewById(R.id.banderaAzulImage);
+            viewHolder.dificultadaccesoIV = (ImageView) vi.findViewById(R.id.dificultadAccesoImage);
+            viewHolder.limpiezaIV = (ImageView) vi.findViewById(R.id.limpiezaImage);
+            viewHolder.tipoarenaIV = (ImageView) vi.findViewById(R.id.tipoArenaImage);
+            viewHolder.rompeolasIV = (ImageView) vi.findViewById(R.id.rompeolasImage);
+            viewHolder.hamacasIV = (ImageView) vi.findViewById(R.id.hamacasImage);
+            viewHolder.sombrillasIV = (ImageView) vi.findViewById(R.id.sombrillasImage);
+            viewHolder.duchasIV = (ImageView) vi.findViewById(R.id.duchasImage);
+            viewHolder.chiringuitosIV = (ImageView) vi.findViewById(R.id.chiringuitosImage);
+            viewHolder.socorristaIV = (ImageView) vi.findViewById(R.id.socorristaImage);
+            viewHolder.distanciaTV = (TextView) vi.findViewById(R.id.distanciaTV);
+            viewHolder.nombreTV = (TextView) vi.findViewById(R.id.nombreTV);
+            viewHolder.valoracionTV = (TextView) vi.findViewById(R.id.valoracionTV);
+            vi.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) vi.getTag();
         }
 
         Playa playa = items.get(position);
@@ -86,16 +127,13 @@ public class PlayasAdapter extends BaseAdapter {
 
         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/aSongforJenniferBold.ttf");
 
-        TextView nombreTV = (TextView) vi.findViewById(R.id.nombreTV);
-        nombreTV.setTypeface(tf);
-        nombreTV.setText(playa.nombre);
+        viewHolder.nombreTV.setTypeface(tf);
+        viewHolder.nombreTV.setText(playa.nombre);
 
         tf = Typeface.createFromAsset(activity.getAssets(), "fonts/aSongforJennifer.ttf");
 
-        TextView valoracionTV = (TextView) vi.findViewById(R.id.valoracionTV);
-
         if (isCheckins) {
-            valoracionTV.setVisibility(View.GONE);
+            viewHolder.valoracionTV.setVisibility(View.GONE);
             //TextView titleCheckinsTV = (TextView) vi.findViewById(R.id.title_checkins);
             //titleCheckinsTV.setVisibility(View.VISIBLE);
             //titleCheckinsTV.setTypeface(tf);
@@ -107,133 +145,144 @@ public class PlayasAdapter extends BaseAdapter {
             //checkinsTV.setText(String.valueOf(totalCheckins));
 
         } else {
-            valoracionTV.setTypeface(tf);
+            viewHolder.valoracionTV.setTypeface(tf);
             if (playa.valoracion != null) {
                 DecimalFormat df = new DecimalFormat("#.#");
-                valoracionTV.setText(df.format(playa.valoracion).replace(".", ","));
+                viewHolder.valoracionTV.setText(df.format(playa.valoracion).replace(".", ","));
                 if (playa.valoracion == 0){
-                    valoracionTV.setText("-.-");
-                    valoracionTV.setTextColor(Color.rgb(238, 180, 0));
+                    viewHolder.valoracionTV.setText("-.-");
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(238, 180, 0));
                 }else if (playa.valoracion < 3) {
-                    valoracionTV.setTextColor(Color.rgb(189, 22, 13));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(189, 22, 13));
                 } else if (playa.valoracion < 4) {
-                    valoracionTV.setTextColor(Color.rgb(38, 130, 180));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(38, 130, 180));
                 } else if (playa.valoracion < 5) {
-                    valoracionTV.setTextColor(Color.rgb(0, 121, 0));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(0, 121, 0));
                 }
                 if (playa.valoracion == 5) {
-                    valoracionTV.setTextColor(Color.rgb(238, 180, 0));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(238, 180, 0));
                 }
 
             }
         }
 
 
-        TextView distanciaTV = (TextView) vi.findViewById(R.id.distanciaTV);
-        distanciaTV.setTypeface(tf);
+        viewHolder.distanciaTV.setTypeface(tf);
         if (isCheckins)
-            distanciaTV.setText(Utilities.formatFechaNotHour(playa.checkin));
+            viewHolder.distanciaTV.setText(Utilities.formatFechaNotHour(playa.checkin));
         else {
             try {
                 if (isSearchByLocation) {
-                    distanciaTV.setText(Geo.getDistanceToPrint(activity, this.latitudO, this.longitudO, playa.latitud, playa.longitud));
+                    viewHolder.distanciaTV.setText(Geo.getDistanceToPrint(activity, this.latitudO, this.longitudO, playa.latitud, playa.longitud));
                 } else {
-                    distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
+                    viewHolder.distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
                 }
             } catch (Exception e){
-                distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
+                viewHolder.distanciaTV.setText(Geo.getDistanceToPrint(activity, playa.latitud, playa.longitud));
             }
         }
 
-        ImageView banderaazulIV = (ImageView) vi.findViewById(R.id.banderaAzulImage);
-        ImageView dificultadaccesoIV = (ImageView) vi.findViewById(R.id.dificultadAccesoImage);
-        ImageView limpiezaIV = (ImageView) vi.findViewById(R.id.limpiezaImage);
-        ImageView tipoarenaIV = (ImageView) vi.findViewById(R.id.tipoArenaImage);
-        ImageView rompeolasIV = (ImageView) vi.findViewById(R.id.rompeolasImage);
-        ImageView hamacasIV = (ImageView) vi.findViewById(R.id.hamacasImage);
-        ImageView sombrillasIV = (ImageView) vi.findViewById(R.id.sombrillasImage);
-        ImageView duchasIV = (ImageView) vi.findViewById(R.id.duchasImage);
-        ImageView chiringuitosIV = (ImageView) vi.findViewById(R.id.chiringuitosImage);
-        ImageView socorristaIV = (ImageView) vi.findViewById(R.id.socorristaImage);
-
-        setIconsExtraInfo(playa, banderaazulIV, dificultadaccesoIV, limpiezaIV, tipoarenaIV, rompeolasIV, hamacasIV, sombrillasIV, duchasIV, chiringuitosIV, socorristaIV);
+        setIconsExtraInfo(playa);
 
         return vi;
     }
 
-    private void setIconsExtraInfo (Playa playa, ImageView banderaazul, ImageView dificultadacceso, ImageView limpieza, ImageView tipoarena, ImageView rompeolas,
-                                    ImageView hamacas, ImageView sombrillas, ImageView duchas, ImageView chiringuitos, ImageView socorrista){
+    private void setIconsExtraInfo (Playa playa){
 
-        if ((playa.banderaazul != null) && (playa.banderaazul))
-            banderaazul.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
-        else
-            banderaazul.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+        if ((playa.banderaazul != null) && (playa.banderaazul)) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_si), viewHolder.banderaazulIV, Utilities.options, animateFirstListener);
+        } else {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_no), viewHolder.banderaazulIV, Utilities.options, animateFirstListener);
+        }
 
         if (playa.dificultadacceso != null){
             if (playa.dificultadacceso.equals("media")){
-                dificultadacceso.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_media), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
             } else if (playa.dificultadacceso.equals("extrema")){
-                dificultadacceso.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_picture_blank_square));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_alta), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
             } else {
-                dificultadacceso.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
             }
         } else {
-            dificultadacceso.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
         }
 
         if (playa.limpieza != null){
             if (playa.limpieza.equals("sucia")){
-                limpieza.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_sucia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
             } else if (playa.limpieza.equals("mucho")){
-                limpieza.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_picture_blank_square));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_limpia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
             } else {
-                limpieza.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
             }
         } else {
-            limpieza.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
         }
 
         if (playa.tipoarena != null){
             if (playa.tipoarena.equals("blanca")){
-                tipoarena.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_blanca), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
             } else if (playa.tipoarena.equals("rocas")){
-                tipoarena.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_picture_blank_square));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_rocas), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
             } else {
-                tipoarena.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
             }
         } else {
-            tipoarena.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
         }
 
-        if ((playa.rompeolas != null) && (playa.rompeolas))
-            rompeolas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
-        else
-            rompeolas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+        if ((playa.rompeolas != null) && (playa.rompeolas)) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_si), viewHolder.rompeolasIV, Utilities.options, animateFirstListener);
+        } else {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_no), viewHolder.rompeolasIV, Utilities.options, animateFirstListener);
+        }
 
-        if ((playa.hamacas != null) && (playa.hamacas))
-            hamacas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
-        else
-            hamacas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+        if ((playa.hamacas != null) && (playa.hamacas)) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_si), viewHolder.hamacasIV, Utilities.options, animateFirstListener);
+        } else {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_no), viewHolder.hamacasIV, Utilities.options, animateFirstListener);
+        }
 
-        if ((playa.sombrillas != null) && (playa.sombrillas))
-            sombrillas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
-        else
-            sombrillas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+        if ((playa.sombrillas != null) && (playa.sombrillas)) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_si), viewHolder.sombrillasIV, Utilities.options, animateFirstListener);
+        } else {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_no), viewHolder.sombrillasIV, Utilities.options, animateFirstListener);
+        }
 
-        if ((playa.chiringuitos != null) && (playa.chiringuitos))
-            chiringuitos.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
-        else
-            chiringuitos.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+        if ((playa.chiringuitos != null) && (playa.chiringuitos)) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_si), viewHolder.chiringuitosIV, Utilities.options, animateFirstListener);
+        } else {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_no), viewHolder.chiringuitosIV, Utilities.options, animateFirstListener);
+        }
 
-        if ((playa.duchas != null) && (playa.duchas))
-            duchas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
-        else
-            duchas.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+        if ((playa.duchas != null) && (playa.duchas)) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_si), viewHolder.duchasIV, Utilities.options, animateFirstListener);
+        } else {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_no), viewHolder.duchasIV, Utilities.options, animateFirstListener);
+        }
 
-        if ((playa.socorrista != null) && (playa.socorrista))
-            socorrista.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_profile_default_icon));
-        else
-            socorrista.setImageDrawable(activity.getResources().getDrawable(R.drawable.com_facebook_place_default_icon));
+        if ((playa.socorrista != null) && (playa.socorrista)) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_si), viewHolder.socorristaIV, Utilities.options, animateFirstListener);
+        } else {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), viewHolder.socorristaIV, Utilities.options, animateFirstListener);
+        }
     }
 
+    static class ViewHolder {
+        ImageView banderaazulIV;
+        ImageView dificultadaccesoIV;
+        ImageView limpiezaIV;
+        ImageView tipoarenaIV;
+        ImageView rompeolasIV;
+        ImageView hamacasIV;
+        ImageView sombrillasIV;
+        ImageView duchasIV;
+        ImageView chiringuitosIV;
+        ImageView socorristaIV;
+        TextView nombreTV;
+        TextView distanciaTV;
+        TextView valoracionTV;
+
+
+    }
 }

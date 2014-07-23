@@ -2,6 +2,7 @@ package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,8 +23,12 @@ import com.odc.beachodc.fragments.edit.MapPlayaFragment;
 import com.odc.beachodc.fragments.edit.OnlyExtrasPlayaFragment;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
 import java.util.Locale;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListener {
@@ -113,25 +118,41 @@ public class EdicionPlaya extends FragmentActivity implements ActionBar.TabListe
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                Intent intent = new Intent(this, Logout.class);
-                startActivity(intent);
-                return true;
-            case R.id.menu_editar:
-                if (ValidacionPlaya.validarInfoPlaya(this)){
-                    boolean isNew = false;
-                    try {
-                        isNew = getIntent().getExtras().getBoolean("nuevo");
-                    } catch (Exception e){}
-
-                    if (isNew)
-                        BBDD.guardarPlaya(this, ValidacionPlaya.playa, true);
-                    else
-                        BBDD.guardarPlaya(this, ValidacionPlaya.playa, false);
+                if (Utilities.haveInternet(this)) {
+                    Intent intent = new Intent(this, Logout.class);
+                    startActivity(intent);
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
                 }
                 return true;
-            case R.id.menu_informar:
-                //TODO: Crear accion para que se envia algo al servidor que informe que el usuario dice que los datos no son validos
 
+            case R.id.menu_editar:
+                if (Utilities.haveInternet(this)) {
+                    if (ValidacionPlaya.validarInfoPlaya(this)){
+                        boolean isNew = false;
+                        try {
+                            isNew = getIntent().getExtras().getBoolean("nuevo");
+                        } catch (Exception e){}
+
+                        if (isNew)
+                            BBDD.guardarPlaya(this, ValidacionPlaya.playa, true);
+                        else
+                            BBDD.guardarPlaya(this, ValidacionPlaya.playa, false);
+                    }
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                }
+
+                return true;
+            case R.id.menu_informar:
+                if (Utilities.haveInternet(this)) {
+                    ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                    pd.setIndeterminate(false);
+                    pd.setCancelable(false);
+                    Request.peticionBorrarPlaya(this, ValidacionPlaya.playa, pd);
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

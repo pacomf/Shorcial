@@ -103,6 +103,30 @@ public class Request {
         Config.addToRequestQueue(activity, req);
     }
 
+    public static void peticionBorrarPlaya (final Activity activity, final Playa playa, final ProgressDialog pd) {
+        final String URL = Config.getURLServer(activity)+"/borrarplaya/"+playa.idserver;
+
+        // Post params to be sent to the server
+        HashMap<String, String> params = new HashMap<String, String>();
+
+        JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        com.odc.beachodc.webservices.Response.responsePeticionBorradoPlaya(activity, response, pd);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                pd.dismiss();
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(activity, req);
+    }
+
     public static void valorarPlaya (final Activity activity, final Comentario comentario) {
         final String URL = Config.getURLServer(activity)+"/valoracionplaya/"+comentario.idplaya+"/"+comentario.idfbautor;
 
@@ -138,6 +162,7 @@ public class Request {
         params.put("fecha", formatFecha(mensaje.fecha));
         params.put("mensaje", mensaje.mensaje);
         params.put("nombreAutor", mensaje.nombreautor);
+        params.put("nombrePlaya", mensaje.nombreplayadestino);
 
         JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
                 new Response.Listener<JSONObject>() {

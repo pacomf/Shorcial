@@ -22,6 +22,10 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
@@ -97,7 +101,6 @@ public class Inicio extends FragmentActivity {
         }*/
 
         BBDD.initBBDD(this);
-
     }
 
     @Override

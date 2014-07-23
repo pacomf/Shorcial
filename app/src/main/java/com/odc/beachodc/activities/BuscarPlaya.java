@@ -22,6 +22,9 @@ import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.Locale;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 
 public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListener {
 
@@ -104,7 +107,11 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
                 startActivity(intent);
                 return true;
             case R.id.menu_search:
-                Utilities.buscarPlaya (buscarPlayaFragment.busqueda, buscarPlayaFragment.nombrePlaya, this, buscarPlayaFragment.porCercania, buscarPlayaFragment.direccion);
+                if (Utilities.haveInternet(this)) {
+                    Utilities.buscarPlaya(buscarPlayaFragment.busqueda, buscarPlayaFragment.nombrePlaya, this, buscarPlayaFragment.porCercania, buscarPlayaFragment.direccion);
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

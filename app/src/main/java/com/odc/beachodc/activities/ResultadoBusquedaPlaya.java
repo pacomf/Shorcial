@@ -136,7 +136,7 @@ public class ResultadoBusquedaPlaya extends FragmentActivity implements ActionBa
             switch (position) {
                 case 0: {
                     PlayasFragment playasFragment =  new PlayasFragment();
-                    playasFragment.setPlayas(ValidacionPlaya.playas);
+                    playasFragment.setPlayas(ValidacionPlaya.playas, true);
                     return playasFragment;
                 }
             }

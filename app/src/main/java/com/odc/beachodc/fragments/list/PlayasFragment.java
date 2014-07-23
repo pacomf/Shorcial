@@ -34,6 +34,7 @@ import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.adapters.PlayasAdapter;
 import com.odc.beachodc.fragments.VerPlayaFragment;
 import com.odc.beachodc.utilities.Geo;
+import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 import com.odc.beachodc.webservices.Request;
 
@@ -62,11 +63,18 @@ public class PlayasFragment extends Fragment {
         private Map<Marker, Integer> markersMap;
         RelativeLayout layoutMapa;
         TextView noplayas;
+        boolean isSearch;
 
         public PlayasFragment() {
             // Se ejecuta antes que el onCreateView
             playas = new ArrayList<Playa>();
             fragment = this;
+            isSearch = false;
+        }
+
+        public void setPlayas (ArrayList<Playa> playas, boolean isSearch){
+            this.isSearch = isSearch;
+            setPlayas(playas);
         }
 
         public void setPlayas (ArrayList<Playa> playas){
@@ -74,20 +82,26 @@ public class PlayasFragment extends Fragment {
 
             if ((playas == null) || (playas.size() == 0)){
                 if (noplayas != null){
+                    if (isSearch)
+                        noplayas.setText(getString(R.string.no_busqueda));
+                    else
+                        noplayas.setText(getString(R.string.no_playas));
+
                     noplayas.setVisibility(View.VISIBLE);
                 }
             } else {
-                noplayas.setVisibility(View.GONE);
+                if (noplayas != null)
+                    noplayas.setVisibility(View.GONE);
             }
 
             if (listView != null) {
-                Boolean search = false;
+                Boolean searchNear = false;
                 try {
-                    search = getActivity().getIntent().getExtras().getBoolean("isSearch");
+                    searchNear = getActivity().getIntent().getExtras().getBoolean("isSearchNear");
                 } catch (Exception e) {
                 }
 
-                if (search) {
+                if (searchNear) {
                     try {
                         Double latitud = getActivity().getIntent().getExtras().getDouble("latitud");
                         Double longitud = getActivity().getIntent().getExtras().getDouble("longitud");
@@ -121,13 +135,27 @@ public class PlayasFragment extends Fragment {
 
             noplayas = (TextView) rootView.findViewById(R.id.noplayas);
 
-            Boolean search = false;
+            if ((playas == null) || (playas.size() == 0)){
+                if (noplayas != null){
+                    if (isSearch)
+                        noplayas.setText(getString(R.string.no_busqueda));
+                    else
+                        noplayas.setText(getString(R.string.no_playas));
+
+                    noplayas.setVisibility(View.VISIBLE);
+                }
+            } else {
+                if (noplayas != null)
+                    noplayas.setVisibility(View.GONE);
+            }
+
+            Boolean searchNear = false;
 
             try {
-                search = getActivity().getIntent().getExtras().getBoolean("isSearch");
+                searchNear = getActivity().getIntent().getExtras().getBoolean("isSearchNear");
             } catch (Exception e){}
 
-            if (search){
+            if (searchNear){
                 try {
                     Double latitud = getActivity().getIntent().getExtras().getDouble("latitud");
                     Double longitud = getActivity().getIntent().getExtras().getDouble("longitud");
@@ -164,28 +192,37 @@ public class PlayasFragment extends Fragment {
 
             recargar = (Button) rootView.findViewById(R.id.recargarBTN);
 
-            recargar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ValidacionPlaya.cargadosUltimosCheckins = true;
-                    ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                    pd.setIndeterminate(false);
-                    pd.setCancelable(false);
-                    pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialogInterface) {
-                            if (ValidacionPlaya.playas != null) {
-                                setPlayas(ValidacionPlaya.playas);
-                                playasAdapter.notifyDataSetChanged();
-                            }
-                            if (layoutMapa.getVisibility() == View.VISIBLE) {
-                                setPlayasMapas();
-                            }
+            if (isSearch)
+                recargar.setVisibility(View.GONE);
+            else {
+                recargar.setVisibility(View.VISIBLE);
+                recargar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (Utilities.haveInternet(getActivity())) {
+                            ValidacionPlaya.cargadosUltimosCheckins = true;
+                            ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                            pd.setIndeterminate(false);
+                            pd.setCancelable(false);
+                            pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    if (ValidacionPlaya.playas != null) {
+                                        setPlayas(ValidacionPlaya.playas);
+                                        playasAdapter.notifyDataSetChanged();
+                                    }
+                                    if (layoutMapa.getVisibility() == View.VISIBLE) {
+                                        setPlayasMapas();
+                                    }
+                                }
+                            });
+                            Request.getPlayasCercanas(getActivity(), pd);
+                        } else {
+                            Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
                         }
-                    });
-                    Request.getPlayasCercanas(getActivity(), pd);
-                }
-            });
+                    }
+                });
+            }
 
             try {
                 MapsInitializer.initialize(getActivity());
@@ -207,28 +244,42 @@ public class PlayasFragment extends Fragment {
                         otraVista.setText(getString(R.string.ver_mapa));
                     } else {
                         if ((playas == null) || (playas.size() == 0)){
-                            ValidacionPlaya.cargadosUltimosCheckins = true;
-                            ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                            pd.setIndeterminate(false);
-                            pd.setCancelable(false);
-                            pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                @Override
-                                public void onDismiss(DialogInterface dialogInterface) {
-                                    if (ValidacionPlaya.playas != null) {
-                                        if (ValidacionPlaya.playas.size() == 0){
-                                            noplayas.setVisibility(View.VISIBLE);
-                                            Crouton.makeText(getActivity(), getString(R.string.no_playas), Style.ALERT).show();
-                                        } else {
-                                            setPlayas(ValidacionPlaya.playas);
-                                            playasAdapter.notifyDataSetChanged();
-                                            otraVista.setText(getString(R.string.ver_lista));
-                                            setPlayasMapas();
-                                            layoutMapa.setVisibility(View.VISIBLE);
+                            if (isSearch){
+                                Crouton.makeText(getActivity(), getString(R.string.no_busqueda), Style.ALERT).show();
+                            } else {
+                                if (Utilities.haveInternet(getActivity())) {
+                                    ValidacionPlaya.cargadosUltimosCheckins = true;
+                                    ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                                    pd.setIndeterminate(false);
+                                    pd.setCancelable(false);
+                                    pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialogInterface) {
+                                            if (ValidacionPlaya.playas != null) {
+                                                if (ValidacionPlaya.playas.size() == 0) {
+                                                    noplayas.setVisibility(View.VISIBLE);
+                                                    Crouton.makeText(getActivity(), getString(R.string.no_playas), Style.ALERT).show();
+                                                } else {
+                                                    setPlayas(ValidacionPlaya.playas);
+                                                    playasAdapter.notifyDataSetChanged();
+                                                    otraVista.setText(getString(R.string.ver_lista));
+                                                    setPlayasMapas();
+                                                    layoutMapa.setVisibility(View.VISIBLE);
+                                                }
+                                            }
                                         }
-                                    }
+                                    });
+                                    Request.getPlayasCercanas(getActivity(), pd);
+                                } else {
+                                    Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
                                 }
-                            });
-                            Request.getPlayasCercanas(getActivity(), pd);
+                            }
+                        } else {
+                            setPlayas(ValidacionPlaya.playas);
+                            playasAdapter.notifyDataSetChanged();
+                            otraVista.setText(getString(R.string.ver_lista));
+                            setPlayasMapas();
+                            layoutMapa.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -261,20 +312,24 @@ public class PlayasFragment extends Fragment {
                 public void onInfoWindowClick(Marker marcador) {
                     Integer posicion = markersMap.get(marcador);
                     if (posicion != null){
-                        Intent intent = new Intent(getActivity(), Playas.class);
-                        ValidacionPlaya.playa = playas.get(posicion);
-                        ValidacionPlaya.lanzadaVerPlaya = false;
-                        ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                        pd.setIndeterminate(false);
-                        pd.setCancelable(true);
+                        if (Utilities.haveInternet(getActivity())) {
+                            Intent intent = new Intent(getActivity(), Playas.class);
+                            ValidacionPlaya.playa = playas.get(posicion);
+                            ValidacionPlaya.lanzadaVerPlaya = false;
+                            ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                            pd.setIndeterminate(false);
+                            pd.setCancelable(true);
 
-                        Request.getTemp(getActivity(), ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud, pd, intent);
+                            Request.getTemp(getActivity(), ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud, pd, intent);
 
-                        Request.getComentariosPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, intent);
-                        if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
-                            Request.getMensajesBotella(getActivity(), ValidacionPlaya.playa.idserver, pd, intent);
-                        else
-                            ValidacionPlaya.cargadosMensajesPlaya=true;
+                            Request.getComentariosPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, intent);
+                            if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
+                                Request.getMensajesBotella(getActivity(), ValidacionPlaya.playa.idserver, pd, intent);
+                            else
+                                ValidacionPlaya.cargadosMensajesPlaya=true;
+                        } else {
+                            Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        }
                     }
                 }
             });

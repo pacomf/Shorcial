@@ -9,7 +9,39 @@
         android:layout_margin="15dp"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/nuevaValoracionBTN"
-        android:background="@drawable/background_title_checkins">
+        android:background="@drawable/background_title_checkins"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/novaloraciones"
+            android:textAlignment="center"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_blue_dark"
+                android:id="@+id/nocomentarios"
+                android:textAlignment="center"
+                android:text="@string/no_comentarios"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nocomentarios"
+                android:layout_marginTop="35dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textAlignment="center"
+                android:text="@string/primer_comentario" />
+
+        </RelativeLayout>
 
         <ListView
             android:id="@+id/listaValoraciones"

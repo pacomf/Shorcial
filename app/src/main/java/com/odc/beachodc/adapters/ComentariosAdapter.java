@@ -24,7 +24,7 @@ public class ComentariosAdapter extends BaseAdapter {
 
     protected Activity activity;
     protected List<Comentario> items;
-    ImageView v1, v2, v3, v4, v5;
+    ViewHolder viewHolder;
 
     public ComentariosAdapter(Activity activity, List<Comentario> items) {
         this.activity = activity;
@@ -51,31 +51,35 @@ public class ComentariosAdapter extends BaseAdapter {
         View vi = convertView;
 
         if (convertView == null) {
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             vi = inflater.inflate(R.layout.item_valoraciones_list, null);
+            viewHolder.v1 = (ImageView) vi.findViewById(R.id.v1);
+            viewHolder.v2 = (ImageView) vi.findViewById(R.id.v2);
+            viewHolder.v3 = (ImageView) vi.findViewById(R.id.v3);
+            viewHolder.v4 = (ImageView) vi.findViewById(R.id.v4);
+            viewHolder.v5 = (ImageView) vi.findViewById(R.id.v5);
+            viewHolder.profilePictureView = (ProfilePictureView) vi.findViewById(R.id.fotoAutorImage);
+            viewHolder.nombreautor = (TextView) vi.findViewById(R.id.nombreAutorTV);
+            viewHolder.fecha = (TextView) vi.findViewById(R.id.fechaTV);
+            viewHolder.mensaje = (TextView) vi.findViewById(R.id.valoracionTV);
+            vi.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) vi.getTag();
         }
 
         // Trabajar con la UI, que es 'vi'
 
         Comentario comentario = items.get(position);
 
-        TextView nombreautor = (TextView) vi.findViewById(R.id.nombreAutorTV);
-        TextView fecha = (TextView) vi.findViewById(R.id.fechaTV);
-        TextView mensaje = (TextView) vi.findViewById(R.id.valoracionTV);
+        viewHolder.nombreautor.setText(comentario.nombreautor);
+        viewHolder.fecha.setText(Utilities.formatFechaNotHour(comentario.fecha));
+        viewHolder.mensaje.setText(comentario.comentario);
 
-        nombreautor.setText(comentario.nombreautor);
-        fecha.setText(Utilities.formatFechaNotHour(comentario.fecha));
-        mensaje.setText(comentario.comentario);
-
-        ProfilePictureView profilePictureView = (ProfilePictureView) vi.findViewById(R.id.fotoAutorImage);
-        profilePictureView.setCropped(true);
-        profilePictureView.setProfileId(comentario.idfbautor);
-
-        v1 = (ImageView) vi.findViewById(R.id.v1);
-        v2 = (ImageView) vi.findViewById(R.id.v2);
-        v3 = (ImageView) vi.findViewById(R.id.v3);
-        v4 = (ImageView) vi.findViewById(R.id.v4);
-        v5 = (ImageView) vi.findViewById(R.id.v5);
+        try {
+            viewHolder.profilePictureView.setCropped(true);
+            viewHolder.profilePictureView.setProfileId(comentario.idfbautor);
+        } catch (Exception e){}
 
         setValoracion(comentario.valoracion);
 
@@ -84,36 +88,44 @@ public class ComentariosAdapter extends BaseAdapter {
 
     public void setValoracion(int valoracion){
         if (valoracion == 1){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_off);
-            v3.setImageResource(android.R.drawable.star_off);
-            v4.setImageResource(android.R.drawable.star_off);
-            v5.setImageResource(android.R.drawable.star_off);
+            viewHolder.v1.setImageResource(R.drawable.star_on);
+            viewHolder.v2.setImageResource(R.drawable.star_off);
+            viewHolder.v3.setImageResource(R.drawable.star_off);
+            viewHolder.v4.setImageResource(R.drawable.star_off);
+            viewHolder.v5.setImageResource(R.drawable.star_off);
         } else if (valoracion == 2){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_off);
-            v4.setImageResource(android.R.drawable.star_off);
-            v5.setImageResource(android.R.drawable.star_off);
+            viewHolder.v1.setImageResource(R.drawable.star_on);
+            viewHolder.v2.setImageResource(R.drawable.star_on);
+            viewHolder.v3.setImageResource(R.drawable.star_off);
+            viewHolder.v4.setImageResource(R.drawable.star_off);
+            viewHolder.v5.setImageResource(R.drawable.star_off);
         } else if (valoracion == 3){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_off);
-            v5.setImageResource(android.R.drawable.star_off);
+            viewHolder.v1.setImageResource(R.drawable.star_on);
+            viewHolder.v2.setImageResource(R.drawable.star_on);
+            viewHolder.v3.setImageResource(R.drawable.star_on);
+            viewHolder.v4.setImageResource(R.drawable.star_off);
+            viewHolder.v5.setImageResource(R.drawable.star_off);
         } else if (valoracion == 4){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_on);
-            v5.setImageResource(android.R.drawable.star_off);
+            viewHolder.v1.setImageResource(R.drawable.star_on);
+            viewHolder.v2.setImageResource(R.drawable.star_on);
+            viewHolder.v3.setImageResource(R.drawable.star_on);
+            viewHolder.v4.setImageResource(R.drawable.star_on);
+            viewHolder.v5.setImageResource(R.drawable.star_off);
         } else if (valoracion == 5){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_on);
-            v5.setImageResource(android.R.drawable.star_on);
+            viewHolder.v1.setImageResource(R.drawable.star_on);
+            viewHolder.v2.setImageResource(R.drawable.star_on);
+            viewHolder.v3.setImageResource(R.drawable.star_on);
+            viewHolder.v4.setImageResource(R.drawable.star_on);
+            viewHolder.v5.setImageResource(R.drawable.star_on);
         }
+    }
+
+    static class ViewHolder {
+        ImageView v1, v2, v3, v4, v5;
+        ProfilePictureView profilePictureView;
+        TextView nombreautor;
+        TextView fecha;
+        TextView mensaje;
     }
 
 }

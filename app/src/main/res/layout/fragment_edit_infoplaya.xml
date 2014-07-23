@@ -78,7 +78,6 @@
                         android:layout_below="@+id/banderaAzulTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/banderaAzulImage"/>
 
                     <RadioGroup
@@ -133,7 +132,6 @@
                         android:layout_below="@+id/dificultadAccesoTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/dificultadAccesoImage"/>
 
                     <RadioGroup
@@ -188,7 +186,6 @@
                         android:layout_below="@+id/limpiezaTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/limpiezaImage"/>
 
                     <RadioGroup
@@ -243,7 +240,6 @@
                         android:layout_below="@+id/tipoArenaTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/tipoArenaImage"/>
 
                     <RadioGroup
@@ -298,7 +294,6 @@
                         android:layout_below="@+id/chiringuitosTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/chiringuitosImage"/>
 
                     <RadioGroup
@@ -353,7 +348,6 @@
                         android:layout_below="@+id/rompeolasTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/rompeolasImage"/>
 
                     <RadioGroup
@@ -408,7 +402,6 @@
                         android:layout_below="@+id/hamacasTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/hamacasImage"/>
 
                     <RadioGroup
@@ -463,7 +456,6 @@
                         android:layout_below="@+id/sombrillasTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/sombrillasImage"/>
 
                     <RadioGroup
@@ -518,7 +510,6 @@
                         android:layout_below="@+id/duchasTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/duchasImage"/>
 
                     <RadioGroup
@@ -573,7 +564,6 @@
                         android:layout_below="@+id/socorristaTV"
                         android:layout_centerVertical="true"
                         android:layout_marginTop="10dp"
-                        android:src="@drawable/com_facebook_place_default_icon"
                         android:id="@+id/socorristaImage"/>
 
                     <RadioGroup

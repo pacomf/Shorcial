@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.ValoracionPlaya;
@@ -22,6 +24,9 @@ import com.odc.beachodc.utilities.ValidacionPlaya;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 /**
@@ -48,13 +53,24 @@ public class ValoracionesFragment extends Fragment {
             nuevaValoracion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intentV = new Intent(getActivity(), ValoracionPlaya.class);
-                    startActivity(intentV);
+                    if (Utilities.haveInternet(getActivity())) {
+                        Intent intentV = new Intent(getActivity(), ValoracionPlaya.class);
+                        startActivity(intentV);
+                    } else {
+                        Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                    }
                 }
             });
 
-            ComentariosAdapter comentariosAdapter = new ComentariosAdapter(getActivity(), Utilities.orderByDateComentario(ValidacionPlaya.comentariosPlaya));
-            listView.setAdapter(comentariosAdapter);
+            RelativeLayout novaloraciones = (RelativeLayout) rootView.findViewById(R.id.novaloraciones);
+
+            if ((ValidacionPlaya.comentariosPlaya == null) || (ValidacionPlaya.comentariosPlaya.size() == 0)){
+               novaloraciones.setVisibility(View.VISIBLE);
+            } else{
+                ComentariosAdapter comentariosAdapter = new ComentariosAdapter(getActivity(), Utilities.orderByDateComentario(ValidacionPlaya.comentariosPlaya));
+                listView.setAdapter(comentariosAdapter);
+                novaloraciones.setVisibility(View.GONE);
+            }
 
             return rootView;
         }

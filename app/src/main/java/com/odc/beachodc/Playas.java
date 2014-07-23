@@ -55,11 +55,20 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
      * The {@link android.support.v4.view.ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    boolean hayWebCam, isNear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals(""))) {
+            hayWebCam = true;
+        }
+
+        if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud)) {
+            isNear = true;
+        }
 
         Utilities.setActionBarCustomize(this);
         // Set up the action bar.
@@ -102,6 +111,11 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                 Boolean nuevavaloracion = getIntent().getExtras().getBoolean("nuevavaloracion");
                 if ((nuevavaloracion != null) && (nuevavaloracion)) {
                     Crouton.makeText(this, getString(R.string.nuevavaloracion), Style.CONFIRM).show();
+                } else {
+                    Boolean peticionBorrado = getIntent().getExtras().getBoolean("peticionborrado");
+                    if ((peticionBorrado != null) && (peticionBorrado)) {
+                        Crouton.makeText(this, getString(R.string.peticionborrado), Style.CONFIRM).show();
+                    }
                 }
             }
         }
@@ -125,18 +139,26 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_editar:
-                Intent intent = new Intent(this, EdicionPlaya.class);
-                intent.putExtra("nuevo", false);
-                startActivity(intent);
+                if (Utilities.haveInternet(this)) {
+                    Intent intent = new Intent(this, EdicionPlaya.class);
+                    intent.putExtra("nuevo", false);
+                    startActivity(intent);
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                }
                 return true;
             case R.id.menu_checkin:
-                if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud)) {
-                    ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                    pd.setIndeterminate(false);
-                    pd.setCancelable(true);
-                    Request.nuevoCheckinPlaya(this, new Checkin(ValidacionPlaya.playa.idserver, new Date(), Utilities.getUserIdFacebook(this)), pd);
+                if (Utilities.haveInternet(this)) {
+                    if (isNear) {
+                        ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                        pd.setIndeterminate(false);
+                        pd.setCancelable(true);
+                        Request.nuevoCheckinPlaya(this, new Checkin(ValidacionPlaya.playa.idserver, new Date(), Utilities.getUserIdFacebook(this)), pd);
+                    } else {
+                        Crouton.makeText(this, R.string.nocheckin, Style.ALERT).show();
+                    }
                 } else {
-                    Crouton.makeText(this, R.string.nocheckin, Style.ALERT).show();
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
                 }
             default:
                 return super.onOptionsItemSelected(item);
@@ -173,7 +195,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals(""))) {
+            if ((hayWebCam) && (isNear)){
                 switch (position) {
                     case 0:
                         return new VerPlayaFragment();
@@ -184,7 +206,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                     case 3:
                         return new MensajesBotellasFragment();
                 }
-            } else {
+            } else if (isNear) {
                 switch (position) {
                     case 0:
                         return new VerPlayaFragment();
@@ -192,6 +214,22 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                         return new ValoracionesFragment();
                     case 2:
                         return new MensajesBotellasFragment();
+                }
+            } else if (hayWebCam) {
+                switch (position) {
+                    case 0:
+                        return new VerPlayaFragment();
+                    case 1:
+                        return new PlayaDirectoFragment();
+                    case 2:
+                        return new ValoracionesFragment();
+                }
+            } else {
+                switch (position) {
+                    case 0:
+                        return new VerPlayaFragment();
+                    case 1:
+                        return new ValoracionesFragment();
                 }
             }
 
@@ -201,18 +239,17 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            int restar = 1;
-            if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals("")))
-                restar = 0;
-            if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
-                return (4-restar);
-            return (3-restar);
+            if ((hayWebCam) && (isNear))
+                return 4;
+            else if ((hayWebCam) || (isNear))
+                return 3;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
-            if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals(""))) {
+            if ((hayWebCam) && (isNear)){
                 switch (position) {
                     case 0:
                         return getString(R.string.title_section_see_beach).toUpperCase(l);
@@ -223,7 +260,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                     case 3:
                         return getString(R.string.title_section_descubre_beach).toUpperCase(l);
                 }
-            } else {
+            } else if (isNear) {
                 switch (position) {
                     case 0:
                         return getString(R.string.title_section_see_beach).toUpperCase(l);
@@ -231,6 +268,22 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                         return getString(R.string.title_section_opinion_beach).toUpperCase(l);
                     case 2:
                         return getString(R.string.title_section_descubre_beach).toUpperCase(l);
+                }
+            } else if (hayWebCam) {
+                switch (position) {
+                    case 0:
+                        return getString(R.string.title_section_see_beach).toUpperCase(l);
+                    case 1:
+                        return getString(R.string.title_section_webcam_beach).toUpperCase(l);
+                    case 2:
+                        return getString(R.string.title_section_opinion_beach).toUpperCase(l);
+                }
+            } else {
+                switch (position) {
+                    case 0:
+                        return getString(R.string.title_section_see_beach).toUpperCase(l);
+                    case 1:
+                        return getString(R.string.title_section_opinion_beach).toUpperCase(l);
                 }
             }
             return null;

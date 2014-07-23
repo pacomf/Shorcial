@@ -41,6 +41,10 @@
     <string name="title_checkins">Checkins</string>
     <string name="last_checkins">Últimos Checkins</string>
 
+    <string name="mostrar_ruta">¿Cómo llegar a la Playa?</string>
+
+    <string name="no_internet">No se ha detectado CONEXIÓN a INTERNET, o la que hay es MUY DÉBIL.</string>
+
     <string name="app_id_facebook">333380730146158</string>
     <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
 
@@ -113,7 +117,20 @@
     <string name="nuevomensajebotella">¡El MENSAJE ha sido LANZADO al MAR en la BOTELLA!</string>
     <string name="nuevavaloracion">¡Has COMENTADO correctamente la PLAYA!</string>
 
+    <string name="peticionborrado">¡Se ha informado CORRECTAMENTE de que consideras la Playa como NO VÁLIDA!</string>
+
+    <string name="no_checkins">NO has realizado CHECKINS</string>
+    <string name="primer_checkin">¡Explora una playa y haz CHECKIN en ella!</string>
+
     <string name="no_playas">NO hay playas a menos de 20 km.</string>
+
+    <string name="no_busqueda">NO hay playas con los CRITERIOS de BUSQUEDA introducidos</string>
+
+    <string name="no_comentarios">Aún NO existen VALORACIONES</string>
+    <string name="primer_comentario">¡Sé el primero en VALORAR!</string>
+    <string name="no_mensajes">Aún NADIE ha LANZADO Mensajes en Botellas</string>
+    <string name="primer_mensaje">¡Sé el primero en ESCRIBIR uno!</string>
+    <string name="no_gps">No se ha detectado posición GPS, actívelo y vuelva a intentarlo</string>
 
     <string name="error_problemautocompletado">Error en el motor de autocompletado de Direcciones. Introduzca de nuevo la Dirección.</string>
     <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>
@@ -124,5 +141,38 @@
     <string name="error_search_name">Debe ESCRIBIR un Nombre para poder Buscar</string>
     <string name="error_search_address">Debe INDICAR una Dirección para poder Buscar</string>
     <string name="error_unknown">Error Desconocido, vuelva a intentarlo o contacte con el Administrador</string>
+
+    <string name="info_banderaazul_si">La Playa cuenta con BANDERA AZUL</string>
+    <string name="info_banderaazul_no">La Playa NO cuenta con BANDERA AZUL</string>
+
+    <string name="info_acceso_extremo">La DIFICULTAD DE ACCESO a la Playa es EXTREMA</string>
+    <string name="info_acceso_medio">La DIFICULTAD DE ACCESO a la Playa es MODERADA</string>
+    <string name="info_acceso_facil">La DIFICULTAD DE ACCESO a la Playa es SENCILLA</string>
+
+    <string name="info_limpieza_alta">la Playa está LIMPIA</string>
+    <string name="info_limpieza_media">la Playa está un POCO SUCIA</string>
+    <string name="info_limpieza_baja">la Playa está SUCIA</string>
+
+    <string name="info_arena_negra">La Playa es de ARENA NEGRA</string>
+    <string name="info_arena_blanca">La Playa es de ARENA BLANCA</string>
+    <string name="info_arena_roca">La Playa es de PIEDRAS o ROCAS</string>
+
+    <string name="info_hamacas_si">La Playa cuenta con HAMACAS</string>
+    <string name="info_hamacas_no">La Playa NO cuenta con HAMACAS</string>
+
+    <string name="info_chiringuitos_si">La Playa cuenta con CHIRINGUITOS</string>
+    <string name="info_chiringuitos_no">La Playa NO cuenta con CHIRINGUITOS</string>
+
+    <string name="info_duchas_si">La Playa cuenta con DUCHAS</string>
+    <string name="info_duchas_no">La Playa NO cuenta con DUCHAS</string>
+
+    <string name="info_rompeolas_si">La Playa cuenta con ROMPEOLAS</string>
+    <string name="info_rompeolas_no">La Playa NO cuenta con ROMPEOLAS</string>
+
+    <string name="info_sombrillas_si">La Playa cuenta con SOMBRILLAS</string>
+    <string name="info_sombrillas_no">La Playa NO cuenta con SOMBRILLAS</string>
+
+    <string name="info_socorrista_si">La Playa cuenta con SOCORRISTA</string>
+    <string name="info_socorrista_no">La Playa NO cuenta con SOCORRISTA</string>
 
 </resources>

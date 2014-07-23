@@ -23,6 +23,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
+import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.MisDatosFragment;
@@ -69,6 +70,11 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        if (Geo.mLocationManager == null)
+            Geo.activeGPSLocation(this);
+
+        Utilities.initImageLoader(this);
+
         activity = this;
 
         playaFragment = new PlayasFragment();
@@ -93,26 +99,29 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
             }
         });
 
-        if (Geo.myLocation == null) {
-            // Esperamos 3 segundos para ver si pilla GEOLocalizacion
-            Thread thread = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        synchronized (this) {
-                            wait(4000);
+        if (Utilities.haveInternet(this)) {
+            if (Geo.myLocation == null) {
+                // Esperamos 3 segundos para ver si pilla GEOLocalizacion
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            synchronized (this) {
+                                wait(4000);
+                            }
+                        } catch (InterruptedException ex) {
                         }
-                    } catch (InterruptedException ex) {
+                        Request.getPlayasCercanas(activity, pd);
+                        Request.getUltimosCheckins(activity, pd);
                     }
-                    Request.getPlayasCercanas(activity, pd);
-                    Request.getUltimosCheckins(activity, pd);
-                }
-            };
-            thread.start();
+                };
+                thread.start();
+            } else {
+                Request.getPlayasCercanas(this, pd);
+                Request.getUltimosCheckins(this, pd);
+            }
         } else {
-            Request.getPlayasCercanas(this, pd);
-            Request.getUltimosCheckins(this, pd);
-
+            Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
         }
 
         Utilities.setActionBarCustomize(this);
@@ -177,18 +186,31 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                Intent intent = new Intent(this, Logout.class);
-                startActivity(intent);
+                if (Utilities.haveInternet(this)) {
+                    Intent intent = new Intent(this, Logout.class);
+                    startActivity(intent);
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                }
                 return true;
+
             case R.id.menu_nuevo:
-                Intent intentN = new Intent(this, EdicionPlaya.class);
-                intentN.putExtra("nuevo", true);
-                startActivity(intentN);
+                if (Utilities.haveInternet(this)) {
+                    Intent intentN = new Intent(this, EdicionPlaya.class);
+                    intentN.putExtra("nuevo", true);
+                    startActivity(intentN);
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                }
                 return true;
 
             case R.id.menu_search:
-                Intent intentS = new Intent(this, BuscarPlaya.class);
-                startActivity(intentS);
+                if (Utilities.haveInternet(this)) {
+                    Intent intentS = new Intent(this, BuscarPlaya.class);
+                    startActivity(intentS);
+                } else {
+                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                }
                 return true;
 
             default:

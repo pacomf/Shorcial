@@ -18,6 +18,7 @@ import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 import com.odc.beachodc.webservices.Request;
 
 import java.util.Date;
@@ -76,9 +77,13 @@ public class MensajeBotellaPlayaFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (validacionMensaje()){
-                        // TODO: Para futuro: Parametros: aleatorio.isChecked()
-                        MensajeBotella mensajeB = new MensajeBotella(Utilities.getUserIdFacebook(activity), Utilities.getUserNameFacebook(activity), idPlaya, idPlaya, "", new Date(), mensaje.getText().toString());
-                        Request.mensajeBotellaPlaya(activity, mensajeB);
+                        if (Utilities.haveInternet(getActivity())) {
+                            // TODO: Para futuro: Parametros: aleatorio.isChecked()
+                            MensajeBotella mensajeB = new MensajeBotella(Utilities.getUserIdFacebook(activity), Utilities.getUserNameFacebook(activity), idPlaya, idPlaya, ValidacionPlaya.playa.nombre, new Date(), mensaje.getText().toString());
+                            Request.mensajeBotellaPlaya(activity, mensajeB);
+                        } else {
+                            Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        }
                     }
                 }
             });

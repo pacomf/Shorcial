@@ -85,10 +85,16 @@ public class ValoracionPlayaFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     enviar.setClickable(false);
-                    if (validacionValoracion()){
-                        Comentario comment = new Comentario(Utilities.getUserIdFacebook(getActivity()), idplaya, comentario.getText().toString(), Utilities.getUserNameFacebook(getActivity()), new Date(), valoracion);
-                        Request.valorarPlaya(activity, comment);
+                    if (Utilities.haveInternet(getActivity())) {
+                        if (validacionValoracion()){
+                            Comentario comment = new Comentario(Utilities.getUserIdFacebook(getActivity()), idplaya, comentario.getText().toString(), Utilities.getUserNameFacebook(getActivity()), new Date(), valoracion);
+                            Request.valorarPlaya(activity, comment);
+                            enviar.setClickable(true);
+                        } else {
+                            enviar.setClickable(true);
+                        }
                     } else {
+                        Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
                         enviar.setClickable(true);
                     }
                 }

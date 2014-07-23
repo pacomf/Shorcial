@@ -28,9 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:id="@+id/noplayas"
+            android:layout_margin="15dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"
             android:text="@string/no_playas"
             android:layout_centerInParent="true" />
 

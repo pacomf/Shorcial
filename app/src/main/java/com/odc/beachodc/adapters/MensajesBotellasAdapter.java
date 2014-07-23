@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.MensajeBotella;
 
+import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
 import com.odc.beachodc.utilities.Utilities;
 
 import java.util.List;
@@ -25,6 +29,7 @@ public class MensajesBotellasAdapter extends BaseAdapter {
 
     protected Activity activity;
     protected List<MensajeBotella> items;
+    ViewHolder viewHolder;
 
     public MensajesBotellasAdapter(Activity activity, List<MensajeBotella> items) {
         this.activity = activity;
@@ -51,33 +56,41 @@ public class MensajesBotellasAdapter extends BaseAdapter {
         View vi = convertView;
 
         if (convertView == null) {
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             vi = inflater.inflate(R.layout.item_mensajes_botellas_list, null);
+            viewHolder.nombreautor = (TextView) vi.findViewById(R.id.nombreAutorTV);
+            viewHolder.fecha = (TextView) vi.findViewById(R.id.fechaTV);
+            viewHolder.mensaje = (TextView) vi.findViewById(R.id.mensajeBotellaTV);
+            viewHolder.origen = (TextView) vi.findViewById(R.id.playaOrigenTV);
+            viewHolder.profilePictureView = (ProfilePictureView) vi.findViewById(R.id.fotoAutorImage);
+            vi.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) vi.getTag();
         }
 
         // Trabajar con la UI, que es 'vi'
 
         MensajeBotella mensajeBotella = items.get(position);
 
-        TextView nombreautor = (TextView) vi.findViewById(R.id.nombreAutorTV);
-        TextView fecha = (TextView) vi.findViewById(R.id.fechaTV);
-        TextView mensaje = (TextView) vi.findViewById(R.id.mensajeBotellaTV);
-        TextView origen = (TextView) vi.findViewById(R.id.playaOrigenTV);
+        viewHolder.nombreautor.setText(mensajeBotella.nombreautor);
+        viewHolder.fecha.setText(Utilities.formatFecha(mensajeBotella.fecha));
+        viewHolder.mensaje.setText(mensajeBotella.mensaje);
 
-        nombreautor.setText(mensajeBotella.nombreautor);
-        fecha.setText(Utilities.formatFecha(mensajeBotella.fecha));
-        mensaje.setText(mensajeBotella.mensaje);
-        if (mensajeBotella.idserverplayadestino != mensajeBotella.idserverplayaorigen){
-            origen.setText(mensajeBotella.nombreplayadestino);
-        } else {
-            origen.setVisibility(View.GONE);
-        }
+        viewHolder.origen.setText(mensajeBotella.nombreplayadestino);
 
-        ProfilePictureView profilePictureView = (ProfilePictureView) vi.findViewById(R.id.fotoAutorImage);
-        profilePictureView.setCropped(true);
-        profilePictureView.setProfileId(mensajeBotella.idfbautor);
+        viewHolder.profilePictureView.setCropped(true);
+        viewHolder.profilePictureView.setProfileId(mensajeBotella.idfbautor);
 
         return vi;
+    }
+
+    static class ViewHolder {
+        TextView nombreautor;
+        TextView fecha;
+        TextView mensaje;
+        TextView origen;
+        ProfilePictureView profilePictureView;
     }
 
 }

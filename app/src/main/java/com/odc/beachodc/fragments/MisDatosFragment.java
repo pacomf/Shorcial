@@ -2,16 +2,21 @@ package com.odc.beachodc.fragments;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.widget.ProfilePictureView;
@@ -31,6 +36,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 
 /**
  * Created by Paco on 7/01/14.
@@ -42,6 +50,7 @@ public class MisDatosFragment extends Fragment {
         ArrayList<Playa> playas;
         PlayasAdapter playasAdapter;
         View rootView;
+        RelativeLayout noCheckins;
 
         public MisDatosFragment() {
             // Se ejecuta antes que el onCreateView
@@ -50,10 +59,17 @@ public class MisDatosFragment extends Fragment {
 
         public void setPlayas(ArrayList<Playa> playas){
             this.playas = playas;
-            if (listView != null) {
+            if (this.listView != null) {
                 playasAdapter = new PlayasAdapter(getActivity(), Utilities.orderByDateCheckins(playas), true);
-                listView.setAdapter(playasAdapter);
+                this.listView.setAdapter(playasAdapter);
                 playasAdapter.notifyDataSetChanged();
+            }
+            if (noCheckins != null){
+                if ((playas == null) || (playas.size() == 0)){
+                    noCheckins.setVisibility(View.VISIBLE);
+                } else {
+                    noCheckins.setVisibility(View.GONE);
+                }
             }
         }
 
@@ -66,6 +82,8 @@ public class MisDatosFragment extends Fragment {
             TextView nombre = (TextView) rootView.findViewById(R.id.nombreUserTV);
             TextView titleCheckins = (TextView) rootView.findViewById(R.id.title_last_checkins);
 
+            noCheckins = (RelativeLayout) rootView.findViewById(R.id.nocheckins);
+
             try {
                 foto.setCropped(true);
                 foto.setProfileId(Utilities.getUserIdFacebook(getActivity()));
@@ -77,7 +95,13 @@ public class MisDatosFragment extends Fragment {
 
             listView = (ListView) rootView.findViewById(R.id.listaPlayasUltimosCheckin);
 
-            PlayasAdapter playasAdapter = new PlayasAdapter(getActivity(), Utilities.orderByDateCheckins(playas), true);
+            playasAdapter = new PlayasAdapter(getActivity(), Utilities.orderByDateCheckins(playas), true);
+            if ((playas == null) || (playas.size() == 0)){
+                noCheckins.setVisibility(View.VISIBLE);
+            } else {
+                noCheckins.setVisibility(View.GONE);
+            }
+
             listView.setAdapter(playasAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -98,6 +122,32 @@ public class MisDatosFragment extends Fragment {
                         Request.getMensajesBotella(getActivity(), item.idserver, pd, intent);
                     else
                         ValidacionPlaya.cargadosMensajesPlaya=true;
+                }
+            });
+
+            ImageView recargar = (ImageView) rootView.findViewById(R.id.recargarIV);
+
+            recargar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Utilities.haveInternet(getActivity())) {
+                        ValidacionPlaya.cargadaPlayas= true;
+                        ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                        pd.setIndeterminate(false);
+                        pd.setCancelable(false);
+                        pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialogInterface) {
+                                if (ValidacionPlaya.playasCheckins != null) {
+                                    setPlayas(ValidacionPlaya.playasCheckins);
+                                    playasAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+                        Request.getUltimosCheckins(getActivity(), pd);
+                    } else {
+                        Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                    }
                 }
             });
 

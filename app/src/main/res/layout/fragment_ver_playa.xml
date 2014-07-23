@@ -6,9 +6,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_margin="15dp"
+        android:layout_above="@+id/irPlayaBTN"
         android:background="@drawable/background_fragments">
 
 
@@ -46,7 +45,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
-                    android:src="@android:drawable/star_off" />
+                    android:src="@drawable/star_off" />
 
                 <ImageView
                     android:id="@+id/v2"
@@ -55,7 +54,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v1"
-                    android:src="@android:drawable/star_off" />
+                    android:src="@drawable/star_off" />
 
                 <ImageView
                     android:id="@+id/v3"
@@ -64,7 +63,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v2"
-                    android:src="@android:drawable/star_off" />
+                    android:src="@drawable/star_off" />
 
                 <ImageView
                     android:id="@+id/v4"
@@ -73,7 +72,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v3"
-                    android:src="@android:drawable/star_off" />
+                    android:src="@drawable/star_off" />
 
                 <ImageView
                     android:id="@+id/v5"
@@ -82,7 +81,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v4"
-                    android:src="@android:drawable/star_off" />
+                    android:src="@drawable/star_off" />
             </RelativeLayout>
 
             <TextView
@@ -110,13 +109,11 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/banderaAzulImage"/>
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/dificultadAccesoImage"
                     android:layout_toRightOf="@+id/banderaAzulImage"
                     android:layout_marginLeft="10dp"/>
@@ -124,7 +121,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/limpiezaImage"
                     android:layout_toRightOf="@+id/dificultadAccesoImage"
                     android:layout_marginLeft="10dp"/>
@@ -132,7 +128,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/tipoArenaImage"
                     android:layout_toRightOf="@+id/limpiezaImage"
                     android:layout_marginLeft="10dp"/>
@@ -140,7 +135,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/rompeolasImage"
                     android:layout_toRightOf="@+id/tipoArenaImage"
                     android:layout_marginLeft="10dp"/>
@@ -148,7 +142,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/hamacasImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -157,7 +150,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/sombrillasImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -167,7 +159,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/chiringuitosImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -177,7 +168,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/duchasImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -187,7 +177,6 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/com_facebook_place_default_icon"
                     android:id="@+id/socorristaImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -203,7 +192,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dataRL"
-            android:layout_margin="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/rlMap"
             android:paddingBottom="15dp">
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -215,5 +207,18 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/irPlayaBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/mostrar_ruta"/>
 
 </RelativeLayout>

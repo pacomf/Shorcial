@@ -113,6 +113,26 @@ public class Response {
         }
     }
 
+    public static void responsePeticionBorradoPlaya (Activity activity, JSONObject response, ProgressDialog pd){
+        try {
+            if ((response.optString("res") != null) && (response.optString("res").equals("ok"))) {
+                Intent intent = new Intent(activity, Playas.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("peticionborrado", true);
+                pd.dismiss();
+                activity.startActivity(intent);
+                activity.finish();
+            } else {
+                Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
+            }
+        } catch (Exception e) {
+            Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
+            System.out.println("FALLO RESPONSEEDITARPLAYA: "+e.getMessage());
+            pd.dismiss();
+            return;
+        }
+    }
+
     public static void responseValorarPlaya(Activity activity, JSONObject response, Comentario comentario){
         try {
             Playa playa = JSONToModel.toPlaya(response);
@@ -135,6 +155,8 @@ public class Response {
 
                 Intent intent = new Intent(activity, Playas.class);
                 ValidacionPlaya.playa = playa;
+                if (ValidacionPlaya.comentariosPlaya == null)
+                    ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
                 ValidacionPlaya.comentariosPlaya.add(comentario);
                 intent.putExtra("nuevavaloracion", true);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -154,7 +176,8 @@ public class Response {
         try {
             if ((response.optString("res") != null) && (response.optString("res").equals("ok"))) {
                 Intent intent = new Intent(activity, Playas.class);
-                //TODO: Enviar algun boolean en la activity para que aparezca un mensajito como que el mensaje se ha lanzado correctamente
+                if (ValidacionPlaya.mensajesBotella == null)
+                    ValidacionPlaya.mensajesBotella = new ArrayList<MensajeBotella>();
                 ValidacionPlaya.mensajesBotella.add(mb);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("nuevomensajebotella", true);
@@ -237,7 +260,7 @@ public class Response {
         }
         Intent intentS = new Intent(ctx, ResultadoBusquedaPlaya.class);
         intentS.putExtra("search", direccion);
-        intentS.putExtra("isSearch", true);
+        intentS.putExtra("isSearchNear", true);
         intentS.putExtra("latitud", latitud);
         intentS.putExtra("longitud", longitud);
         pd.dismiss();
