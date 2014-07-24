@@ -132,7 +132,7 @@ public class MapPlayaFragment extends Fragment {
                                     .position(new LatLng(lat, lng))
                                     .title(add)
                                     .draggable(true)
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
 
                         } catch (Exception e) {}
                     }
@@ -166,7 +166,7 @@ public class MapPlayaFragment extends Fragment {
                                 .position(new LatLng(point.latitude, point.longitude))
                                 .title(add)
                                 .draggable(true)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
                     } catch (Exception e) {
                     }
 
@@ -199,7 +199,7 @@ public class MapPlayaFragment extends Fragment {
                                 .position(new LatLng(newPosition.latitude, newPosition.longitude))
                                 .title(add)
                                 .draggable(true)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
 
                         direccion.setText(add);
 
@@ -316,7 +316,7 @@ public class MapPlayaFragment extends Fragment {
                         .position(new LatLng(lat, lng))
                         .title(markerStr)
                         .draggable(true)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
             }
         }
     }

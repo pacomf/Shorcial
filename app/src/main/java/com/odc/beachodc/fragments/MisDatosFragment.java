@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,13 +20,22 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.rebound.BaseSpringSystem;
+import com.facebook.rebound.SimpleSpringListener;
+import com.facebook.rebound.Spring;
+import com.facebook.rebound.SpringSystem;
+import com.facebook.rebound.SpringUtil;
 import com.facebook.widget.ProfilePictureView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.odc.beachodc.Playas;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.adapters.PlayasAdapter;
 import com.odc.beachodc.db.models.Playa;
+import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
 import com.odc.beachodc.utilities.Geo;
+import com.odc.beachodc.utilities.IconosVerPlayaEffect;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 import com.odc.beachodc.webservices.Request;
@@ -52,9 +62,16 @@ public class MisDatosFragment extends Fragment {
         View rootView;
         RelativeLayout noCheckins;
 
+        private final BaseSpringSystem mSpringSystem = SpringSystem.create();
+        private final ExampleSpringListener mSpringListener = new ExampleSpringListener();
+        private Spring mScaleSpring;
+
         public MisDatosFragment() {
             // Se ejecuta antes que el onCreateView
             playas = new ArrayList<Playa>();
+            mScaleSpring = mSpringSystem.createSpring();
+            mScaleSpring.getSpringConfig().tension = 200;
+            mScaleSpring.getSpringConfig().friction = 4;
         }
 
         public void setPlayas(ArrayList<Playa> playas){
@@ -151,7 +168,58 @@ public class MisDatosFragment extends Fragment {
                 }
             });
 
+            ImageView gamification = (ImageView) rootView.findViewById(R.id.gamificationIcon);
+
+            mSpringListener.setImagen(gamification);
+
+            gamification.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            mScaleSpring.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            mScaleSpring.setEndValue(0);
+                            break;
+                    }
+                    return true;
+                }
+            });
+
+
             return rootView;
         }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mScaleSpring.addListener(mSpringListener);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mScaleSpring.removeListener(mSpringListener);
+    }
+
+    public class ExampleSpringListener extends SimpleSpringListener {
+
+        ImageView imagen;
+
+        public void setImagen(ImageView imagen) {
+            this.imagen = imagen;
+        }
+
+        @Override
+        public void onSpringUpdate(Spring spring) {
+            float mappedValue = (float) SpringUtil.mapValueFromRangeToRange(spring.getCurrentValue(), 0, 1, 1, 0.5);
+            imagen.setScaleX(mappedValue);
+            imagen.setScaleY(mappedValue);
+
+        }
+    }
 
 }

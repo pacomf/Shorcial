@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:textColor="#ffed6a"
         android:layout_marginLeft="10dp"
-        android:textSize="26dp"
+        android:textSize="26sp"
         android:maxLines="1"
         android:ellipsize="end"
         android:text="" />

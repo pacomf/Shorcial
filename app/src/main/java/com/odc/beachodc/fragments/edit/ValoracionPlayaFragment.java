@@ -17,9 +17,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.webservices.Request;
 
@@ -43,6 +46,8 @@ public class ValoracionPlayaFragment extends Fragment {
         int valoracion;
         String idplaya;
         Activity activity;
+        protected ImageLoader imageLoader = ImageLoader.getInstance();
+        private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
         public ValoracionPlayaFragment() {
             // Se ejecuta antes que el onCreateView
@@ -105,6 +110,12 @@ public class ValoracionPlayaFragment extends Fragment {
 
     public void initValoracion(){
 
+        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v1, Utilities.options, animateFirstListener);
+        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, Utilities.options, animateFirstListener);
+        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
+        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
+        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+
         v1.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -154,35 +165,35 @@ public class ValoracionPlayaFragment extends Fragment {
 
     public void setValoracion(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco){
         if (uno){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_off);
-            v3.setImageResource(android.R.drawable.star_off);
-            v4.setImageResource(android.R.drawable.star_off);
-            v5.setImageResource(android.R.drawable.star_off);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
         } else if (dos){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_off);
-            v4.setImageResource(android.R.drawable.star_off);
-            v5.setImageResource(android.R.drawable.star_off);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
         } else if (tres){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_off);
-            v5.setImageResource(android.R.drawable.star_off);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
         } else if (cuatro){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_on);
-            v5.setImageResource(android.R.drawable.star_off);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
         } else if (cinco){
-            v1.setImageResource(android.R.drawable.star_on);
-            v2.setImageResource(android.R.drawable.star_on);
-            v3.setImageResource(android.R.drawable.star_on);
-            v4.setImageResource(android.R.drawable.star_on);
-            v5.setImageResource(android.R.drawable.star_on);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, Utilities.options, animateFirstListener);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v5, Utilities.options, animateFirstListener);
         }
     }
 

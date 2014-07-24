@@ -17,28 +17,27 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:id="@+id/novaloraciones"
-            android:textAlignment="center"
             android:layout_margin="20dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/holo_blue_dark"
                 android:id="@+id/nocomentarios"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="@string/no_comentarios"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/nocomentarios"
                 android:layout_marginTop="35dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/holo_blue_dark"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:text="@string/primer_comentario" />
 
         </RelativeLayout>

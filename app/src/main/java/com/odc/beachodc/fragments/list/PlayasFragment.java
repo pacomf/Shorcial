@@ -299,7 +299,7 @@ public class PlayasFragment extends Fragment {
                     Marker marcador = mapa.addMarker(new MarkerOptions()
                             .position(new LatLng(playa.latitud, playa.longitud))
                             .title(playa.nombre)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
                     markersMap.put(marcador, Integer.valueOf(i));
                 }
 

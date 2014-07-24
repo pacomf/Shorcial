@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.InflateException;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +17,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.rebound.BaseSpringSystem;
+import com.facebook.rebound.SimpleSpringListener;
+import com.facebook.rebound.Spring;
+import com.facebook.rebound.SpringSystem;
+import com.facebook.rebound.SpringUtil;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +37,7 @@ import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
 import com.odc.beachodc.utilities.Geo;
+import com.odc.beachodc.utilities.IconosVerPlayaEffect;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
@@ -60,6 +67,7 @@ public class VerPlayaFragment extends Fragment {
         ImageView chiringuitosIV;
         ImageView socorristaIV;
 
+
         public VerPlayaFragment() {
             // Se ejecuta antes que el onCreateView
 
@@ -77,13 +85,15 @@ public class VerPlayaFragment extends Fragment {
                 rootView = inflater.inflate(R.layout.fragment_ver_playa, container, false);
             } catch (InflateException e) {}
 
+            IconosVerPlayaEffect.initConfig();
+
             try {
                 MapsInitializer.initialize(getActivity());
                 mapa = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
                 mapa.setMyLocationEnabled(true);
                 mapa.addMarker(new MarkerOptions()
                         .position(new LatLng(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud), 15.0f);
                 mapa.moveCamera(cameraUpdate);
             } catch (GooglePlayServicesNotAvailableException e) {}
@@ -111,8 +121,6 @@ public class VerPlayaFragment extends Fragment {
             chiringuitosIV = (ImageView) rootView.findViewById(R.id.chiringuitosImage);
             socorristaIV = (ImageView) rootView.findViewById(R.id.socorristaImage);
 
-            setIconsExtraInfo(ValidacionPlaya.playa);
-
             v1 = (ImageView) rootView.findViewById(R.id.v1);
             v2 = (ImageView) rootView.findViewById(R.id.v2);
             v3 = (ImageView) rootView.findViewById(R.id.v3);
@@ -120,6 +128,8 @@ public class VerPlayaFragment extends Fragment {
             v5 = (ImageView) rootView.findViewById(R.id.v5);
 
             setValoracion(ValidacionPlaya.playa.valoracion.intValue());
+
+            setIconsExtraInfo(ValidacionPlaya.playa);
 
             Button irPlaya = (Button) rootView.findViewById(R.id.irPlayaBTN);
 
@@ -140,21 +150,42 @@ public class VerPlayaFragment extends Fragment {
                 }
             });
 
-            banderaazulIV.setOnClickListener(new View.OnClickListener() {
+            IconosVerPlayaEffect.setImages(banderaazulIV, dificultadaccesoIV, limpiezaIV, tipoarenaIV, rompeolasIV, hamacasIV, sombrillasIV, chiringuitosIV, duchasIV, socorristaIV);
+
+            banderaazulIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringBA.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringBA.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if ((ValidacionPlaya.playa.banderaazul != null) && (ValidacionPlaya.playa.banderaazul)) {
                         Crouton.makeText(getActivity(), getString(R.string.info_banderaazul_si), Style.INFO).show();
                     } else {
                         Crouton.makeText(getActivity(), getString(R.string.info_banderaazul_no), Style.INFO).show();
                     }
+                    return true;
                 }
             });
 
-            dificultadaccesoIV.setOnClickListener(new View.OnClickListener() {
+            dificultadaccesoIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringDA.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringDA.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if (ValidacionPlaya.playa.dificultadacceso != null) {
                         if (ValidacionPlaya.playa.dificultadacceso.equals("media")) {
@@ -165,14 +196,23 @@ public class VerPlayaFragment extends Fragment {
                             Crouton.makeText(getActivity(), getString(R.string.info_acceso_facil), Style.INFO).show();
                         }
                     }
+                    return true;
                 }
             });
 
-            limpiezaIV.setOnClickListener(new View.OnClickListener() {
+            limpiezaIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringL.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringL.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
-                    System.out.println("Pl: "+ValidacionPlaya.playa.limpieza);
                     if (ValidacionPlaya.playa.limpieza != null) {
                         if (ValidacionPlaya.playa.limpieza.equals("sucia")) {
                             Crouton.makeText(getActivity(), getString(R.string.info_limpieza_baja), Style.INFO).show();
@@ -182,94 +222,167 @@ public class VerPlayaFragment extends Fragment {
                             Crouton.makeText(getActivity(), getString(R.string.info_limpieza_media), Style.INFO).show();
                         }
                     }
+                    return true;
                 }
             });
 
-            tipoarenaIV.setOnClickListener(new View.OnClickListener() {
+            tipoarenaIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringTA.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringTA.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
-                    if (ValidacionPlaya.playa.tipoarena != null){
-                        if (ValidacionPlaya.playa.tipoarena.equals("blanca")){
+                    if (ValidacionPlaya.playa.tipoarena != null) {
+                        if (ValidacionPlaya.playa.tipoarena.equals("blanca")) {
                             Crouton.makeText(getActivity(), getString(R.string.info_arena_blanca), Style.INFO).show();
-                        } else if (ValidacionPlaya.playa.tipoarena.equals("rocas")){
+                        } else if (ValidacionPlaya.playa.tipoarena.equals("rocas")) {
                             Crouton.makeText(getActivity(), getString(R.string.info_arena_roca), Style.INFO).show();
                         } else {
                             Crouton.makeText(getActivity(), getString(R.string.info_arena_negra), Style.INFO).show();
                         }
                     }
+                    return true;
                 }
             });
 
-            rompeolasIV.setOnClickListener(new View.OnClickListener() {
+            rompeolasIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringR.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringR.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if ((ValidacionPlaya.playa.rompeolas != null) && (ValidacionPlaya.playa.rompeolas)) {
                         Crouton.makeText(getActivity(), getString(R.string.info_rompeolas_si), Style.INFO).show();
                     } else {
                         Crouton.makeText(getActivity(), getString(R.string.info_rompeolas_no), Style.INFO).show();
                     }
+                    return true;
                 }
             });
 
-            hamacasIV.setOnClickListener(new View.OnClickListener() {
+            hamacasIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringH.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringH.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if ((ValidacionPlaya.playa.hamacas != null) && (ValidacionPlaya.playa.hamacas)) {
                         Crouton.makeText(getActivity(), getString(R.string.info_hamacas_si), Style.INFO).show();
                     } else {
                         Crouton.makeText(getActivity(), getString(R.string.info_hamacas_no), Style.INFO).show();
                     }
+                    return true;
                 }
             });
 
-            sombrillasIV.setOnClickListener(new View.OnClickListener() {
+            sombrillasIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringS.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringS.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if ((ValidacionPlaya.playa.sombrillas != null) && (ValidacionPlaya.playa.sombrillas)) {
                         Crouton.makeText(getActivity(), getString(R.string.info_sombrillas_si), Style.INFO).show();
                     } else {
                         Crouton.makeText(getActivity(), getString(R.string.info_sombrillas_no), Style.INFO).show();
                     }
+                    return true;
                 }
             });
 
-            duchasIV.setOnClickListener(new View.OnClickListener() {
+            duchasIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringD.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringD.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if ((ValidacionPlaya.playa.duchas != null) && (ValidacionPlaya.playa.duchas)) {
                         Crouton.makeText(getActivity(), getString(R.string.info_duchas_si), Style.INFO).show();
                     } else {
                         Crouton.makeText(getActivity(), getString(R.string.info_duchas_no), Style.INFO).show();
                     }
+                    return true;
                 }
             });
 
-            chiringuitosIV.setOnClickListener(new View.OnClickListener() {
+            chiringuitosIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringC.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringC.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if ((ValidacionPlaya.playa.chiringuitos != null) && (ValidacionPlaya.playa.chiringuitos)) {
                         Crouton.makeText(getActivity(), getString(R.string.info_chiringuitos_si), Style.INFO).show();
                     } else {
                         Crouton.makeText(getActivity(), getString(R.string.info_chiringuitos_no), Style.INFO).show();
                     }
+                    return true;
                 }
             });
 
-            socorristaIV.setOnClickListener(new View.OnClickListener() {
+            socorristaIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringSO.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringSO.setEndValue(0);
+                            break;
+                    }
                     Crouton.cancelAllCroutons();
                     if ((ValidacionPlaya.playa.socorrista != null) && (ValidacionPlaya.playa.socorrista)) {
                         Crouton.makeText(getActivity(), getString(R.string.info_socorrista_si), Style.INFO).show();
                     } else {
                         Crouton.makeText(getActivity(), getString(R.string.info_socorrista_no), Style.INFO).show();
                     }
+                    return true;
                 }
             });
 
@@ -390,5 +503,21 @@ public class VerPlayaFragment extends Fragment {
             imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v5, Utilities.options, animateFirstListener);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        IconosVerPlayaEffect.addListeners();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        IconosVerPlayaEffect.removeListeners();
+    }
+
+
+
+
 
 }

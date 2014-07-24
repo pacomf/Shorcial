@@ -101,7 +101,7 @@ public class OnlyExtrasPlayaFragment extends Fragment {
                 mapa = ((SupportMapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
                 mapa.addMarker(new MarkerOptions()
                         .position(new LatLng(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud), 15.0f);
                 mapa.moveCamera(cameraUpdate);
             } catch (GooglePlayServicesNotAvailableException e) {}

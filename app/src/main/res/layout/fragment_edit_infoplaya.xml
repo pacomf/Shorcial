@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title_beach"
             android:id="@+id/nombreTV"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title_extras_beach"
             android:id="@+id/extrasTV"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_below="@id/nombreET"
             android:layout_alignParentLeft="true"
@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_banderaazul"
                         android:id="@+id/banderaAzulTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_dificultadacceso"
                         android:id="@+id/dificultadAccesoTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -176,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_limpieza"
                         android:id="@+id/limpiezaTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -230,7 +230,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_tipodearena"
                         android:id="@+id/tipoArenaTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_chiringuitos"
                         android:id="@+id/chiringuitosTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -338,7 +338,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_rompeolas"
                         android:id="@+id/rompeolasTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -392,7 +392,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_hamacas"
                         android:id="@+id/hamacasTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -446,7 +446,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_sombrillas"
                         android:id="@+id/sombrillasTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -500,7 +500,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_duchas"
                         android:id="@+id/duchasTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView
@@ -554,7 +554,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/title_socorrista"
                         android:id="@+id/socorristaTV"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_alignParentLeft="true"/>
 
                     <ImageView

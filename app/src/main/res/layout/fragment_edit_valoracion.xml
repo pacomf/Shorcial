@@ -32,8 +32,7 @@
                 android:id="@+id/v1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:src="@android:drawable/star_off" />
+                android:layout_marginTop="10dp" />
 
             <ImageView
                 android:id="@+id/v2"
@@ -41,8 +40,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/v1"
-                android:src="@android:drawable/star_off" />
+                android:layout_toRightOf="@+id/v1" />
 
             <ImageView
                 android:id="@+id/v3"
@@ -50,8 +48,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/v2"
-                android:src="@android:drawable/star_off" />
+                android:layout_toRightOf="@+id/v2" />
 
             <ImageView
                 android:id="@+id/v4"
@@ -59,8 +56,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/v3"
-                android:src="@android:drawable/star_off" />
+                android:layout_toRightOf="@+id/v3" />
 
             <ImageView
                 android:id="@+id/v5"
@@ -68,8 +64,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/v4"
-                android:src="@android:drawable/star_off" />
+                android:layout_toRightOf="@+id/v4" />
 
         </RelativeLayout>
 

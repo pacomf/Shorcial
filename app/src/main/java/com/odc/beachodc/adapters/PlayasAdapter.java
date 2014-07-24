@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -28,6 +30,7 @@ import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
@@ -116,6 +119,8 @@ public class PlayasAdapter extends BaseAdapter {
             viewHolder.distanciaTV = (TextView) vi.findViewById(R.id.distanciaTV);
             viewHolder.nombreTV = (TextView) vi.findViewById(R.id.nombreTV);
             viewHolder.valoracionTV = (TextView) vi.findViewById(R.id.valoracionTV);
+            viewHolder.webcam = (ImageView) vi.findViewById(R.id.webcam_icon);
+            viewHolder.checkin = (ImageView) vi.findViewById(R.id.checkin_icon);
             vi.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) vi.getTag();
@@ -130,10 +135,26 @@ public class PlayasAdapter extends BaseAdapter {
         viewHolder.nombreTV.setTypeface(tf);
         viewHolder.nombreTV.setText(playa.nombre);
 
+        if ((playa.webcamURL != null) && (!playa.webcamURL.equals(""))) {
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.webcam), viewHolder.webcam, Utilities.options, animateFirstListener);
+            viewHolder.webcam.setVisibility(View.VISIBLE);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.RIGHT_OF, R.id.webcam_icon);
+            lp.setMargins(5, 5, 0, 0);
+            viewHolder.nombreTV.setLayoutParams(lp);
+        } else{
+            viewHolder.webcam.setVisibility(View.GONE);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(15, 5, 0, 0);
+            viewHolder.nombreTV.setLayoutParams(lp);
+        }
+
         tf = Typeface.createFromAsset(activity.getAssets(), "fonts/aSongforJennifer.ttf");
 
         if (isCheckins) {
             viewHolder.valoracionTV.setVisibility(View.GONE);
+            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.checkin), viewHolder.checkin, Utilities.options, animateFirstListener);
+            viewHolder.checkin.setVisibility(View.VISIBLE);
             //TextView titleCheckinsTV = (TextView) vi.findViewById(R.id.title_checkins);
             //titleCheckinsTV.setVisibility(View.VISIBLE);
             //titleCheckinsTV.setTypeface(tf);
@@ -145,12 +166,13 @@ public class PlayasAdapter extends BaseAdapter {
             //checkinsTV.setText(String.valueOf(totalCheckins));
 
         } else {
+            viewHolder.checkin.setVisibility(View.GONE);
             viewHolder.valoracionTV.setTypeface(tf);
             if (playa.valoracion != null) {
                 DecimalFormat df = new DecimalFormat("#.#");
                 viewHolder.valoracionTV.setText(df.format(playa.valoracion).replace(".", ","));
                 if (playa.valoracion == 0){
-                    viewHolder.valoracionTV.setText("-.-");
+                    viewHolder.valoracionTV.setText("-,-");
                     viewHolder.valoracionTV.setTextColor(Color.rgb(238, 180, 0));
                 }else if (playa.valoracion < 3) {
                     viewHolder.valoracionTV.setTextColor(Color.rgb(189, 22, 13));
@@ -282,7 +304,7 @@ public class PlayasAdapter extends BaseAdapter {
         TextView nombreTV;
         TextView distanciaTV;
         TextView valoracionTV;
-
-
+        ImageView webcam;
+        ImageView checkin;
     }
 }

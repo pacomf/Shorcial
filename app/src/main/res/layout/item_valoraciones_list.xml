@@ -67,7 +67,7 @@
         android:ellipsize="end"
         android:id="@+id/fechaTV"
         android:textColor="#5786ce"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_below="@+id/starsRL"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp" />
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nombreAutorTV"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:maxLines="1"
         android:ellipsize="end"
@@ -98,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/valoracionTV"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_below="@+id/nombreAutorTV"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp" />

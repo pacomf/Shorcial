@@ -3,7 +3,7 @@
 
     <string name="app_name">Shorcial</string>
 
-    <string name="server_ip">http://192.168.0.196</string>
+    <string name="server_ip">http://10.213.3.136</string>
     <string name="server_port">3000</string>
 
     <string name="title_activity_inicio">Shorcial</string>

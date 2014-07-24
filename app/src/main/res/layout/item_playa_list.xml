@@ -11,17 +11,27 @@
     android:id="@+id/fondoItemPlaya"
     android:background="@drawable/background_listview_playas_selector">
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="-6dp"
+        android:visibility="gone"
+        android:id="@+id/webcam_icon"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nombreTV"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:maxLines="1"
-        android:maxLength="20"
+        android:maxLength="18"
         android:ellipsize="end"
+        android:layout_marginTop="5dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@+id/webcam_icon"
         android:layout_marginLeft="10dp" />
 
     <TextView
@@ -32,7 +42,7 @@
         android:ellipsize="end"
         android:id="@+id/distanciaTV"
         android:textColor="#3e9fc0"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:layout_alignBaseline="@+id/nombreTV"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
@@ -41,9 +51,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-,-"
         android:id="@+id/valoracionTV"
-        android:textSize="48dp"
+        android:textSize="48sp"
         android:layout_alignBottom="@+id/socorristaImage"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp"
@@ -56,7 +65,7 @@
         android:id="@+id/title_checkins"
         android:visibility="gone"
         android:textColor="#D95100"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_alignBottom="@+id/socorristaImage"
         android:layout_alignParentRight="true"
         android:layout_marginRight="25dp" />
@@ -64,14 +73,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18"
         android:visibility="gone"
         android:textColor="#D95100"
         android:id="@+id/checkinsTV"
-        android:textSize="38dp"
+        android:textSize="38sp"
         android:layout_above="@+id/title_checkins"
         android:layout_alignParentRight="true"
         android:layout_marginRight="35dp" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:visibility="gone"
+        android:layout_alignBottom="@+id/socorristaImage"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/checkin_icon"/>
 
     <ImageView
         android:layout_width="30dp"
@@ -79,7 +97,6 @@
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/nombreTV"
         android:layout_marginTop="10dp"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/banderaAzulImage"/>
 
     <ImageView
@@ -89,7 +106,6 @@
         android:layout_below="@+id/nombreTV"
         android:layout_toRightOf="@+id/banderaAzulImage"
         android:layout_marginTop="10dp"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/dificultadAccesoImage"/>
 
     <ImageView
@@ -99,7 +115,6 @@
         android:layout_below="@+id/nombreTV"
         android:layout_toRightOf="@+id/dificultadAccesoImage"
         android:layout_marginTop="10dp"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/limpiezaImage"/>
 
     <ImageView
@@ -109,7 +124,6 @@
         android:layout_below="@+id/nombreTV"
         android:layout_toRightOf="@+id/limpiezaImage"
         android:layout_marginTop="10dp"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/tipoArenaImage"/>
 
     <ImageView
@@ -119,7 +133,6 @@
         android:layout_below="@+id/nombreTV"
         android:layout_toRightOf="@+id/tipoArenaImage"
         android:layout_marginTop="10dp"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/rompeolasImage"/>
 
     <ImageView
@@ -128,7 +141,6 @@
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/banderaAzulImage"
         android:layout_marginTop="10dp"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/hamacasImage" />
 
     <ImageView
@@ -138,7 +150,6 @@
         android:layout_below="@+id/banderaAzulImage"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/hamacasImage"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/sombrillasImage" />
 
     <ImageView
@@ -148,7 +159,6 @@
         android:layout_below="@+id/banderaAzulImage"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/sombrillasImage"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/chiringuitosImage"/>
 
     <ImageView
@@ -158,7 +168,6 @@
         android:layout_below="@+id/banderaAzulImage"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/chiringuitosImage"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/duchasImage" />
 
     <ImageView
@@ -168,7 +177,6 @@
         android:layout_below="@+id/banderaAzulImage"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/duchasImage"
-        android:src="@drawable/com_facebook_place_default_icon"
         android:id="@+id/socorristaImage"/>
 
 

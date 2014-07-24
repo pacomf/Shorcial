@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="#eeb400"
-            android:textSize="60dp"
+            android:textSize="60sp"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>

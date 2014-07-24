@@ -179,7 +179,7 @@ public class BuscarPlayaFragment extends Fragment {
                                 .position(new LatLng(lat, lng))
                                 .title(add)
                                 .draggable(true)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.aqui)));
 
                     } catch (Exception e) {}
                 }
@@ -212,7 +212,7 @@ public class BuscarPlayaFragment extends Fragment {
                             .position(new LatLng(point.latitude, point.longitude))
                             .title(add)
                             .draggable(true)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.aqui)));
                 } catch (Exception e) {
                 }
 
@@ -245,7 +245,7 @@ public class BuscarPlayaFragment extends Fragment {
                             .position(new LatLng(newPosition.latitude, newPosition.longitude))
                             .title(add)
                             .draggable(true)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.aqui)));
 
                     direccion.setText(add);
 
@@ -360,7 +360,7 @@ public class BuscarPlayaFragment extends Fragment {
                         .position(new LatLng(lat, lng))
                         .title(markerStr)
                         .draggable(true)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.aqui)));
             }
         }
     }
