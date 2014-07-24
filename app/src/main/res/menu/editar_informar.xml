@@ -3,7 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/menu_informar"
-        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/inform"
         android:showAsAction="ifRoom" />
 

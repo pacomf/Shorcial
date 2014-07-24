@@ -1,5 +1,6 @@
 package com.odc.beachodc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -34,10 +35,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 
 public class Inicio extends FragmentActivity {
 
     Context context;
+    Activity activity;
 
     // Variables usadas para representar los fragments de Login y futuras otras pantallas de inicio.
     private static final int LOGIN = 0;
@@ -64,6 +69,8 @@ public class Inicio extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         Geo.activeGPSLocation(this);
+
+        activity = this;
 
         // Ciclo de vida de la sesion de autenticacion de Facebook
         uiHelper = new UiLifecycleHelper(this, callback);
@@ -187,21 +194,24 @@ public class Inicio extends FragmentActivity {
                     public void onCompleted(GraphUser user, Response response) {
                         // If the response is successfulHome
                         if (session == Session.getActiveSession()) {
+                            // Empezar aqui a trabajar con la UI
                             if (user != null) {
                                 Utilities.storeRegistrationId(context, user.getId(), user.getName());
+                                Intent intent = new Intent(activity, Home.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Crouton.makeText(activity, getString(R.string.error_unknown), Style.ALERT).show();
                             }
                         }
                         if (response.getError() != null) {
                             // Handle errors, will do so later.
+                            Crouton.makeText(activity, getString(R.string.error_unknown), Style.ALERT).show();
                         }
                     }
                 });
         request.executeAsync();
-        // Empezar aqui a trabajar con la UI
-
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-        finish();
     }
 
 }

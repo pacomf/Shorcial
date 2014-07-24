@@ -95,7 +95,7 @@ public class MisDatosFragment extends Fragment {
             rootView = inflater.inflate(R.layout.fragment_misdatos, container, false);
             // Empezar aqui a trabajar con la UI
 
-            ProfilePictureView foto = (ProfilePictureView) rootView.findViewById(R.id.profilePicture);
+            final ProfilePictureView foto = (ProfilePictureView) rootView.findViewById(R.id.profilePicture);
             TextView nombre = (TextView) rootView.findViewById(R.id.nombreUserTV);
             TextView titleCheckins = (TextView) rootView.findViewById(R.id.title_last_checkins);
 
@@ -188,7 +188,6 @@ public class MisDatosFragment extends Fragment {
                     return true;
                 }
             });
-
 
             return rootView;
         }

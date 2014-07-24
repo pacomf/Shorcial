@@ -14,9 +14,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.odc.beachodc.Home;
 import com.odc.beachodc.Logout;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.BBDD;
+import com.odc.beachodc.db.models.Comentario;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.edit.InfoPlayaFragment;
 import com.odc.beachodc.fragments.edit.MapPlayaFragment;
@@ -24,8 +26,13 @@ import com.odc.beachodc.fragments.edit.OnlyExtrasPlayaFragment;
 import com.odc.beachodc.fragments.edit.ValoracionPlayaFragment;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
+import java.util.Date;
 import java.util.Locale;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 
 public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabListener {
@@ -40,6 +47,7 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
     Activity activity;
+    ValoracionPlayaFragment fragmentV;
 
     /**
      * The {@link android.support.v4.view.ViewPager} that will host the section contents.
@@ -49,11 +57,15 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //opening transition animations
+        overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+
         setContentView(R.layout.activity_home);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -93,7 +105,7 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
 
-        inflater.inflate(R.menu.logout, menu);
+        inflater.inflate(R.menu.editar, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -107,7 +119,27 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
                 Intent intent = new Intent(this, Logout.class);
                 startActivity(intent);
                 return true;
-
+            case R.id.menu_editar:
+                try {
+                    if (Utilities.haveInternet(this)) {
+                        if (fragmentV.validacionValoracion()){
+                            Comentario comment = new Comentario(Utilities.getUserIdFacebook(this), fragmentV.idplaya, fragmentV.comentario.getText().toString(), Utilities.getUserNameFacebook(this), new Date(), fragmentV.valoracion);
+                            Request.valorarPlaya(activity, comment);
+                        }
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
+                } catch (Exception e){
+                    Crouton.makeText(this, R.string.error_unknown, Style.ALERT).show();
+                }
+                return true;
+            case android.R.id.home:
+                Intent intentH = new Intent(this, Home.class);
+                // Para eliminar el historial de activities visitadas ya que volvemos al HOME y asi el boton ATRAS no tenga ningun comportamiento, se resetee.
+                intentH.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intentH);
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -144,7 +176,7 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
                 case 0: {
-                    ValoracionPlayaFragment fragmentV = new ValoracionPlayaFragment();
+                    fragmentV = new ValoracionPlayaFragment();
                     fragmentV.setParams(activity, ValidacionPlaya.playa.idserver);
                     return fragmentV;
                 }
@@ -167,6 +199,13 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
             }
             return null;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //closing transition animations
+        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
     }
 
 }

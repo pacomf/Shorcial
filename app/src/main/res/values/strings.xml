@@ -3,7 +3,7 @@
 
     <string name="app_name">Shorcial</string>
 
-    <string name="server_ip">http://10.213.3.136</string>
+    <string name="server_ip">http://192.168.0.196</string>
     <string name="server_port">3000</string>
 
     <string name="title_activity_inicio">Shorcial</string>
@@ -18,7 +18,7 @@
     <string name="title_section_edit_mapplaya">Localización</string>
     <string name="title_section_search_beach">Buscar Playa</string>
     <string name="title_section_results_search_beach">Resultados de Búsqueda</string>
-    <string name="title_section_see_beach">Playa</string>
+    <string name="title_section_see_beach">Info</string>
     <string name="title_section_webcam_beach">Ver en Directo</string>
     <string name="title_section_opinion_beach">Valoraciones</string>
     <string name="title_section_descubre_beach">Descubre</string>

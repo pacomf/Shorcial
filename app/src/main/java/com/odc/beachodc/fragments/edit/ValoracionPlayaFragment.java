@@ -41,10 +41,10 @@ public class ValoracionPlayaFragment extends Fragment {
 
         View rootView;
         ImageView v1, v2, v3, v4, v5;
-        EditText comentario;
+        public EditText comentario;
         Button enviar;
-        int valoracion;
-        String idplaya;
+        public int valoracion;
+        public String idplaya;
         Activity activity;
         protected ImageLoader imageLoader = ImageLoader.getInstance();
         private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();

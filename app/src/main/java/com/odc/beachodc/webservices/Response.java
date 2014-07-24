@@ -117,7 +117,6 @@ public class Response {
         try {
             if ((response.optString("res") != null) && (response.optString("res").equals("ok"))) {
                 Intent intent = new Intent(activity, Playas.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("peticionborrado", true);
                 pd.dismiss();
                 activity.startActivity(intent);
@@ -159,7 +158,6 @@ public class Response {
                     ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
                 ValidacionPlaya.comentariosPlaya.add(comentario);
                 intent.putExtra("nuevavaloracion", true);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 activity.startActivity(intent);
                 activity.finish();
             } else {
@@ -179,7 +177,7 @@ public class Response {
                 if (ValidacionPlaya.mensajesBotella == null)
                     ValidacionPlaya.mensajesBotella = new ArrayList<MensajeBotella>();
                 ValidacionPlaya.mensajesBotella.add(mb);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                 intent.putExtra("nuevomensajebotella", true);
                 activity.startActivity(intent);
                 activity.finish();
@@ -206,7 +204,9 @@ public class Response {
         }
         ValidacionPlaya.cargadaPlayas=true;
         if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd.isShowing())) {
-            pd.dismiss();
+            try {
+                pd.dismiss();
+            } catch (Exception e){}
         }
     }
 
@@ -223,7 +223,9 @@ public class Response {
         }
         ValidacionPlaya.cargadosUltimosCheckins=true;
         if ((ValidacionPlaya.cargadaPlayas) && (pd.isShowing())) {
-            pd.dismiss();
+            try {
+                pd.dismiss();
+            } catch (Exception e){}
         }
     }
 

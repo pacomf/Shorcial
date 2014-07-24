@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.odc.beachodc.Home;
 import com.odc.beachodc.Logout;
 import com.odc.beachodc.R;
 import com.odc.beachodc.fragments.BuscarPlayaFragment;
@@ -48,6 +49,9 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //opening transition animations
+        overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
+
         setContentView(R.layout.activity_home);
 
         buscarPlayaFragment = new BuscarPlayaFragment();
@@ -55,6 +59,7 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -112,6 +117,13 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
                 } else {
                     Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
                 }
+                return true;
+            case android.R.id.home:
+                Intent intentH = new Intent(this, Home.class);
+                // Para eliminar el historial de activities visitadas ya que volvemos al HOME y asi el boton ATRAS no tenga ningun comportamiento, se resetee.
+                intentH.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intentH);
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -168,6 +180,13 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
             }
             return null;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //closing transition animations
+        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
     }
 
 }
