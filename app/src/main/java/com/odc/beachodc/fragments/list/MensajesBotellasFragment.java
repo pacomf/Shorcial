@@ -45,7 +45,6 @@ public class MensajesBotellasFragment extends Fragment {
         ListView listView;
         Button lanzarMensaje;
         private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
-        protected ImageLoader imageLoader = ImageLoader.getInstance();
 
         public MensajesBotellasFragment() {
             // Se ejecuta antes que el onCreateView
@@ -71,7 +70,7 @@ public class MensajesBotellasFragment extends Fragment {
 
             ImageView icon_bottle = (ImageView) rootView.findViewById(R.id.icon_bottle);
 
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.botella), icon_bottle, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.botella), icon_bottle, animateFirstListener);
 
             lanzarMensaje = (Button) rootView.findViewById(R.id.nuevoMensajeBTN);
             lanzarMensaje.setOnClickListener(new View.OnClickListener() {

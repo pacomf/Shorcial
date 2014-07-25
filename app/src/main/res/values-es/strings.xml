@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shorcial</string>
+
+    <string name="server_ip">http://ec2-54-72-133-37.eu-west-1.compute.amazonaws.com</string>
+    <string name="server_port">1479</string>
+
+    <string name="title_activity_inicio">Shorcial</string>
+    <string name="title_section_mis_datos">Mis Datos</string>
+    <string name="title_section_playas_cercanas">Playas Cercanas</string>
+    <string name="title_section_mapa_playas">Mapa</string>
+    <string name="title_activity_edicion">Editar Playa</string>
+    <string name="title_activity_valoracion">Valora la Playa</string>
+    <string name="title_activity_mensaje_botella">Mensaje en Botella</string>
+    <string name="title_activity_mensajes_botellas">Mensajes en Botellas</string>
+    <string name="title_section_edit_infoplaya">Información</string>
+    <string name="title_section_edit_mapplaya">Localización</string>
+    <string name="title_section_search_beach">Buscar Playa</string>
+    <string name="title_section_results_search_beach">Resultados de Búsqueda</string>
+    <string name="title_section_see_beach">Info</string>
+    <string name="title_section_webcam_beach">Ver en Directo</string>
+    <string name="title_section_opinion_beach">Valoraciones</string>
+    <string name="title_section_descubre_beach">Descubre</string>
+
+    <string name="nuevo">Nueva Playa</string>
+    <string name="save">Guardar</string>
+    <string name="refresh">Actualizar</string>
+    <string name="inform">Informar Playa Incorrecta</string>
+    <string name="search">Buscar</string>
+    <string name="update_image">Actualizar Imagen</string>
+    <string name="nueva_valoracion">Nueva Valoración</string>
+
+    <string name="grados_centigrados">ºC</string>
+
+    <string name="title_search_by_name">Buscar por Nombre</string>
+    <string name="title_search_by_name_placeholder">Indique el Nombre de la Playa</string>
+    <string name="title_search_by_address_placeholder">Indique la Calle o Pinche en el Mapa</string>
+    <string name="title_search_by_address">Buscar por Cercanía a una Posición</string>
+
+    <string name="title_checkins">Checkins</string>
+    <string name="last_checkins">Últimos Checkins</string>
+
+    <string name="mostrar_ruta">¿Cómo llegar a la Playa?</string>
+
+    <string name="no_internet">No se ha detectado CONEXIÓN a INTERNET, o la que hay es MUY DÉBIL.</string>
+
+    <string name="app_id_facebook">333380730146158</string>
+    <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
+
+    <!-- IVAN: AIzaSyA_PYveEBI_o0wGU85y4__BbSIKJLLqinc
+         PACO: AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs
+     -->
+    <string name="app_key_play_services">AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs</string>
+
+
+    <string name="title_beach">Nombre de la Playa</string>
+    <string name="title_extras_beach">Características de la Playa</string>
+    <string name="title_beach_placeholder">Introduzca el Nombre de la Playa</string>
+    <string name="title_banderaazul">¿Tiene Bandera Azul La Playa?</string>
+    <string name="title_dificultadacceso">Dificultad de Acceso a la Playa</string>
+    <string name="title_limpieza">Limpieza de la Playa</string>
+    <string name="title_tipodearena">Tipo de Arena</string>
+    <string name="title_rompeolas">¿Tiene Rompeolas la Playa?</string>
+    <string name="title_hamacas">¿Tiene Hamacas la Playa?</string>
+    <string name="title_sombrillas">¿Tiene Sombrillas la Playa?</string>
+    <string name="title_chiringuitos">¿Tiene chiringuitos la Playa?</string>
+    <string name="title_duchas">¿Tiene duchas la Playa?</string>
+    <string name="title_socorrista">¿Tiene socorrista la Playa?</string>
+
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="unknown">No lo sé</string>
+
+    <string name="easy">Fácil</string>
+    <string name="medium">Moderada</string>
+    <string name="hard">Extrema</string>
+
+    <string name="muylimpia">Muy Limpia</string>
+    <string name="limpia">Limpia</string>
+    <string name="sucia">Sucia</string>
+
+    <string name="negra">Negra</string>
+    <string name="blanca">Blanca</string>
+    <string name="rocas">Rocas</string>
+
+    <string name="address_placeholder">Introduzca una Dirección</string>
+
+    <string name="logout">Cerrar Sesión</string>
+
+    <string name="esperar">Espere Por Favor</string>
+    <string name="procesando">Procesando...</string>
+
+    <string name="puntuacion">¡Puntúa la Playa!</string>
+    <string name="comentario">¡Comenta la Playa!</string>
+    <string name="enviar_comentario">Enviar Comentario</string>
+    <string name="enviar_mensaje">¡Lanzar Mensaje!</string>
+    <string name="mensaje_botella_title">¡Escribe tu Mensaje!</string>
+    <string name="comment_beach_placeholder">Introduzca un nuevo comentario acerca de la Playa, en 190 caracteres como máximo...</string>
+    <string name="enviar_mensaje_aleatorio_checkbox">Enviar a una Playa Aleatoria</string>
+    <string name="message_bottle_beach_placeholder">Escribe tu mensaje, que nosotros encapsularemos en una botella para que... ¡otra persona lo pueda recibir!</string>
+    <string name="touch_reload">¡Toca para Recargar!</string>
+    <string name="ver_mapa">Ver en Mapa</string>
+    <string name="ver_lista">Ver en Lista</string>
+
+
+    <string name="question">\?</string>
+
+    <string name="meters">m.</string>
+    <string name="kilometers">km.</string>
+
+    <string name="playacreada">La Playa ha sido añadida con ÉXITO</string>
+    <string name="playaeditada">Los Datos de la Playa han sido modificados con ÉXITO</string>
+    <string name="checkinexito">¡Has realizado CHECKIN con ÉXITO!</string>
+    <string name="checkinrepetido">¡Ya has realizado CHECKIN en esta PLAYA en el dia de HOY!</string>
+    <string name="nocheckin">¡Debes estar en la PLAYA para hacer CHECKIN!</string>
+    <string name="nuevomensajebotella">¡El MENSAJE ha sido LANZADO al MAR en la BOTELLA!</string>
+    <string name="nuevavaloracion">¡Has COMENTADO correctamente la PLAYA!</string>
+
+    <string name="peticionborrado">¡Se ha informado CORRECTAMENTE de que consideras la Playa como NO VÁLIDA!</string>
+
+    <string name="no_checkins">NO has realizado CHECKINS</string>
+    <string name="primer_checkin">¡Explora una playa y haz CHECKIN en ella!</string>
+
+    <string name="no_playas">NO hay playas a menos de 20 km.</string>
+
+    <string name="no_busqueda">NO hay playas con los CRITERIOS de BÚSQUEDA introducidos</string>
+
+    <string name="no_comentarios">Aún NO existen VALORACIONES</string>
+    <string name="primer_comentario">¡Sé el primero en VALORAR!</string>
+    <string name="no_mensajes">Aún NADIE ha LANZADO Mensajes en Botellas</string>
+    <string name="primer_mensaje">¡Sé el primero en ESCRIBIR uno!</string>
+    <string name="no_gps">No se ha detectado posición GPS, actívelo y vuelva a intentarlo</string>
+
+    <string name="error_problemautocompletado">Error en la DIRECCIÓN, Introduzca otra vez la DIRECCIÓN.</string>
+    <string name="error_localizacion">Debe INDICAR una LOCALIZACIÓN válida</string>
+    <string name="error_nombre">Debe INDICAR un NOMBRE válido</string>
+    <string name="error_bbdd">Hubo un ERROR al GUARDAR en Base de Datos, contacte con el administrador</string>
+    <string name="error_valoracion">Debe PUNTUAR la Playa como mínimo</string>
+    <string name="error_mensaje">Debe ESCRIBIR un Mensaje si quiere ENVIARLO</string>
+    <string name="error_search_name">Debe ESCRIBIR un Nombre para poder Buscar</string>
+    <string name="error_search_address">Debe INDICAR una Dirección para poder Buscar</string>
+    <string name="error_unknown">Error Desconocido, vuelva a intentarlo o contacte con el Administrador</string>
+
+    <string name="info_banderaazul_si">La Playa cuenta con BANDERA AZUL</string>
+    <string name="info_banderaazul_no">La Playa NO cuenta con BANDERA AZUL</string>
+
+    <string name="info_acceso_extremo">La DIFICULTAD DE ACCESO a la Playa es EXTREMA</string>
+    <string name="info_acceso_medio">La DIFICULTAD DE ACCESO a la Playa es MODERADA</string>
+    <string name="info_acceso_facil">La DIFICULTAD DE ACCESO a la Playa es SENCILLA</string>
+
+    <string name="info_limpieza_alta">La Playa está MUY LIMPIA</string>
+    <string name="info_limpieza_media">La Playa está LIMPIA</string>
+    <string name="info_limpieza_baja">La Playa está SUCIA</string>
+
+    <string name="info_arena_negra">La Playa es de ARENA NEGRA</string>
+    <string name="info_arena_blanca">La Playa es de ARENA BLANCA</string>
+    <string name="info_arena_roca">La Playa es de PIEDRAS o ROCAS</string>
+
+    <string name="info_hamacas_si">La Playa cuenta con HAMACAS</string>
+    <string name="info_hamacas_no">La Playa NO cuenta con HAMACAS</string>
+
+    <string name="info_chiringuitos_si">La Playa cuenta con CHIRINGUITOS</string>
+    <string name="info_chiringuitos_no">La Playa NO cuenta con CHIRINGUITOS</string>
+
+    <string name="info_duchas_si">La Playa cuenta con DUCHAS</string>
+    <string name="info_duchas_no">La Playa NO cuenta con DUCHAS</string>
+
+    <string name="info_rompeolas_si">La Playa cuenta con ROMPEOLAS</string>
+    <string name="info_rompeolas_no">La Playa NO cuenta con ROMPEOLAS</string>
+
+    <string name="info_sombrillas_si">La Playa cuenta con SOMBRILLAS</string>
+    <string name="info_sombrillas_no">La Playa NO cuenta con SOMBRILLAS</string>
+
+    <string name="info_socorrista_si">La Playa cuenta con SOCORRISTA</string>
+    <string name="info_socorrista_no">La Playa NO cuenta con SOCORRISTA</string>
+
+
+
+    <string name="existe_playa">Ya EXISTE una PLAYA en las misma LOCALIZACIÓN</string>
+    <string name="procesando_espere">Procesando... Espere por favor...</string>
+
+</resources>

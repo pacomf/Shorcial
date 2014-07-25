@@ -307,6 +307,15 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         super.onPause();
         //closing transition animations
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
     }
 
 }

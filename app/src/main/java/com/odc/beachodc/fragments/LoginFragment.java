@@ -27,10 +27,6 @@ public class LoginFragment extends Fragment {
             View rootView = inflater.inflate(R.layout.fragment_login, container, false);
             // Empezar aqui a trabajar con la UI
 
-            TextView nombre = (TextView) rootView.findViewById(R.id.titulo);
-            Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/LobsterTwo-Bold.ttf");
-            nombre.setTypeface(tf);
-
             return rootView;
         }
 }

@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
 
 
 import com.android.volley.Response;
@@ -67,7 +68,10 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.Theme_Style_beach);
+        Utilities.setActionBarCustomize(this);
         super.onCreate(savedInstanceState);
+
         //opening transition animations
         overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
 
@@ -75,8 +79,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
 
         if (Geo.mLocationManager == null)
             Geo.activeGPSLocation(this);
-
-        Utilities.initImageLoader(this);
 
         activity = this;
 
@@ -126,8 +128,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         } else {
             Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
         }
-
-        Utilities.setActionBarCustomize(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -283,6 +283,21 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         super.onPause();
         //closing transition animations
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
+        System.gc();
+        Runtime.getRuntime().gc();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (pd != null) {
+            pd.dismiss();
+            pd = null;
+        }
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
+
+
 
 }

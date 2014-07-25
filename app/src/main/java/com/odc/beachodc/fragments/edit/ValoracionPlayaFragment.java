@@ -46,7 +46,6 @@ public class ValoracionPlayaFragment extends Fragment {
         public int valoracion;
         public String idplaya;
         Activity activity;
-        protected ImageLoader imageLoader = ImageLoader.getInstance();
         private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
         public ValoracionPlayaFragment() {
@@ -110,11 +109,11 @@ public class ValoracionPlayaFragment extends Fragment {
 
     public void initValoracion(){
 
-        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v1, Utilities.options, animateFirstListener);
-        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, Utilities.options, animateFirstListener);
-        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
-        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
-        imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v1, animateFirstListener);
+        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, animateFirstListener);
+        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, animateFirstListener);
+        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, animateFirstListener);
+        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
 
         v1.setOnClickListener(new View.OnClickListener() {
 
@@ -165,35 +164,35 @@ public class ValoracionPlayaFragment extends Fragment {
 
     public void setValoracion(boolean uno, boolean dos, boolean tres, boolean cuatro, boolean cinco){
         if (uno){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (dos){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (tres){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (cuatro){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (cinco){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v5, animateFirstListener);
         }
     }
 

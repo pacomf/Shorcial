@@ -66,9 +66,13 @@ public class Inicio extends FragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        //opening transition animations
+        overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
         super.onCreate(savedInstanceState);
 
         Geo.activeGPSLocation(this);
+
+        Utilities.setImageLoader(this);
 
         activity = this;
 
@@ -89,7 +93,6 @@ public class Inicio extends FragmentActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.hide(fragments[LOGIN]);
         transaction.commit();
-        getActionBar().hide();
 
         //código para mostrar tu clave de desarrollador
 
@@ -122,6 +125,8 @@ public class Inicio extends FragmentActivity {
         super.onPause();
         uiHelper.onPause();
         isResumed = false;
+        System.gc();
+        Runtime.getRuntime().gc();
     }
 
     @Override
@@ -134,6 +139,8 @@ public class Inicio extends FragmentActivity {
     public void onDestroy() {
         super.onDestroy();
         uiHelper.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
     }
 
     @Override

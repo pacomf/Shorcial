@@ -56,19 +56,27 @@ public class Response {
 
     public static void responseNuevaPlaya(Activity activity, JSONObject response){
         try {
-            Playa playa = JSONToModel.toPlaya(response);
+            if ((response.optString("res") != null) && (response.optString("res").equals("error"))) {
+                Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
+                return;
+            } else if ((response.optString("res") != null) && (response.optString("res").equals("existe"))) {
+                Crouton.makeText(activity, R.string.existe_playa, Style.ALERT).show();
+                return;
+            } else {
+                Playa playa = JSONToModel.toPlaya(response);
 
-            playa.setStatus(Entity.STATUS_NEW);
-            BBDD.getApplicationDataContext(activity).playasDao.add(playa);
-            BBDD.getApplicationDataContext(activity).playasDao.save();
+                playa.setStatus(Entity.STATUS_NEW);
+                BBDD.getApplicationDataContext(activity).playasDao.add(playa);
+                BBDD.getApplicationDataContext(activity).playasDao.save();
 
-            Intent intent = new Intent(activity, Home.class);
-            intent.putExtra("creaplaya", true);
+                Intent intent = new Intent(activity, Home.class);
+                intent.putExtra("creaplaya", true);
 
-            // Para eliminar el historial de activities visitadas ya que volvemos al HOME y asi el boton ATRAS no tenga ningun comportamiento, se resetee.
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            activity.startActivity(intent);
-            activity.finish();
+                // Para eliminar el historial de activities visitadas ya que volvemos al HOME y asi el boton ATRAS no tenga ningun comportamiento, se resetee.
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                activity.startActivity(intent);
+                activity.finish();
+            }
         } catch (Exception e) {
             Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
             System.out.println("FALLO RESPONSENUEVAPLAYA: "+e.getMessage());
@@ -203,7 +211,7 @@ public class Response {
             }
         }
         ValidacionPlaya.cargadaPlayas=true;
-        if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd.isShowing())) {
+        if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd != null) && (pd.isShowing())) {
             try {
                 pd.dismiss();
             } catch (Exception e){}
@@ -222,7 +230,7 @@ public class Response {
             }
         }
         ValidacionPlaya.cargadosUltimosCheckins=true;
-        if ((ValidacionPlaya.cargadaPlayas) && (pd.isShowing())) {
+        if ((ValidacionPlaya.cargadaPlayas) && (pd != null) && (pd.isShowing())) {
             try {
                 pd.dismiss();
             } catch (Exception e){}

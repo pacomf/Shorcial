@@ -26,12 +26,15 @@
         android:id="@+id/nombreTV"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:maxLines="1"
-        android:maxLength="18"
+        android:lines="1"
+        android:scrollHorizontally="true"
         android:ellipsize="end"
+        android:singleLine="true"
         android:layout_marginTop="5dp"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/distanciaTV"
         android:layout_toRightOf="@+id/webcam_icon"
+        android:layout_marginRight="5dp"
         android:layout_marginLeft="10dp" />
 
     <TextView

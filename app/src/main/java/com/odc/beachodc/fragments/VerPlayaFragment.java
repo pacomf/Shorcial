@@ -31,7 +31,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Playa;
@@ -55,7 +54,6 @@ public class VerPlayaFragment extends Fragment {
         GoogleMap mapa;
         ImageView v1, v2, v3, v4, v5;
         private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
-        protected ImageLoader imageLoader = ImageLoader.getInstance();
         ImageView banderaazulIV;
         ImageView dificultadaccesoIV;
         ImageView limpiezaIV;
@@ -83,7 +81,10 @@ public class VerPlayaFragment extends Fragment {
             }
             try {
                 rootView = inflater.inflate(R.layout.fragment_ver_playa, container, false);
-            } catch (InflateException e) {}
+            } catch (Exception e) {
+                System.out.println("M: "+e.getMessage());
+                e.printStackTrace();
+            }
 
             IconosVerPlayaEffect.initConfig();
 
@@ -96,7 +97,7 @@ public class VerPlayaFragment extends Fragment {
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)));
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud), 15.0f);
                 mapa.moveCamera(cameraUpdate);
-            } catch (GooglePlayServicesNotAvailableException e) {}
+            } catch (Exception e) {}
 
             // Empezar aqui a trabajar con la UI
 
@@ -392,115 +393,115 @@ public class VerPlayaFragment extends Fragment {
     private void setIconsExtraInfo (Playa playa){
 
         if ((playa.banderaazul != null) && (playa.banderaazul)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_si), banderaazulIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_si), banderaazulIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_no), banderaazulIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_no), banderaazulIV, animateFirstListener);
         }
 
         if (playa.dificultadacceso != null){
             if (playa.dificultadacceso.equals("media")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_media), dificultadaccesoIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_media), dificultadaccesoIV, animateFirstListener);
             } else if (playa.dificultadacceso.equals("extrema")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_alta), dificultadaccesoIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_alta), dificultadaccesoIV, animateFirstListener);
             } else {
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), dificultadaccesoIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), dificultadaccesoIV, animateFirstListener);
             }
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), dificultadaccesoIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), dificultadaccesoIV, animateFirstListener);
         }
 
         if (playa.limpieza != null){
             if (playa.limpieza.equals("sucia")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_sucia), limpiezaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_sucia), limpiezaIV, animateFirstListener);
             } else if (playa.limpieza.equals("mucho")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_limpia), limpiezaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_limpia), limpiezaIV, animateFirstListener);
             } else {
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), limpiezaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), limpiezaIV, animateFirstListener);
             }
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), limpiezaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), limpiezaIV, animateFirstListener);
         }
 
         if (playa.tipoarena != null){
             if (playa.tipoarena.equals("blanca")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_blanca), tipoarenaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_blanca), tipoarenaIV, animateFirstListener);
             } else if (playa.tipoarena.equals("rocas")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_rocas), tipoarenaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_rocas), tipoarenaIV, animateFirstListener);
             } else {
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), tipoarenaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), tipoarenaIV, animateFirstListener);
             }
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), tipoarenaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), tipoarenaIV, animateFirstListener);
         }
 
         if ((playa.rompeolas != null) && (playa.rompeolas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_si), rompeolasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_si), rompeolasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_no), rompeolasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_no), rompeolasIV, animateFirstListener);
         }
 
         if ((playa.hamacas != null) && (playa.hamacas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_si), hamacasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_si), hamacasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_no), hamacasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_no), hamacasIV, animateFirstListener);
         }
 
         if ((playa.sombrillas != null) && (playa.sombrillas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_si), sombrillasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_si), sombrillasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_no), sombrillasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_no), sombrillasIV, animateFirstListener);
         }
 
         if ((playa.chiringuitos != null) && (playa.chiringuitos)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_si), chiringuitosIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_si), chiringuitosIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_no), chiringuitosIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_no), chiringuitosIV, animateFirstListener);
         }
 
         if ((playa.duchas != null) && (playa.duchas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_si), duchasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_si), duchasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_no), duchasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_no), duchasIV, animateFirstListener);
         }
 
         if ((playa.socorrista != null) && (playa.socorrista)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_si), socorristaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_si), socorristaIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), socorristaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), socorristaIV, animateFirstListener);
         }
     }
 
     public void setValoracion(int valoracion){
         if (valoracion == 1){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (valoracion == 2){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (valoracion == 3){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (valoracion == 4){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), v5, animateFirstListener);
         } else if (valoracion == 5){
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, Utilities.options, animateFirstListener);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v5, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), v5, animateFirstListener);
         }
     }
 
@@ -514,6 +515,17 @@ public class VerPlayaFragment extends Fragment {
     public void onPause() {
         super.onPause();
         IconosVerPlayaEffect.removeListeners();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        SupportMapFragment f = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map);
+        if (f != null) {
+            try {
+                getFragmentManager().beginTransaction().remove(f).commit();
+            } catch(Exception e){}
+        }
     }
 
 

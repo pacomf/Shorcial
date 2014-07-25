@@ -1,14 +1,10 @@
 package com.odc.beachodc.fragments;
 
 
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
 import android.support.v4.app.FragmentTransaction;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -18,17 +14,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.Volley;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.odc.beachodc.R;
-import com.odc.beachodc.activities.ValoracionPlaya;
-import com.odc.beachodc.utilities.BitmapLruCache;
+
+import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
+
+import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 
 /**
@@ -40,8 +36,9 @@ public class PlayaDirectoFragment extends Fragment {
     View rootView;
     Button recargarImagen;
     TextView nombrePlaya;
-    NetworkImageView webcam;
+    ImageView webcam;
     Fragment fragment;
+    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
     public PlayaDirectoFragment() {
         // Se ejecuta antes que el onCreateView
@@ -61,15 +58,12 @@ public class PlayaDirectoFragment extends Fragment {
 
         // Empezar aqui a trabajar con la UI
 
-        webcam = (NetworkImageView) rootView.findViewById(R.id.webcamView);
+        webcam = (ImageView) rootView.findViewById(R.id.webcamView);
 
         if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals(""))) {
             try {
-                ImageLoader.ImageCache imageCache = new BitmapLruCache();
-                ImageLoader imageLoader = new ImageLoader(Volley.newRequestQueue(getActivity()), imageCache);
-                webcam.setErrorImageResId(R.drawable.webcamloading);
-                webcam.setImageUrl(ValidacionPlaya.playa.webcamURL, imageLoader);
-            } catch (Exception e){}
+                Utilities.imageLoader.displayImage(ValidacionPlaya.playa.webcamURL, webcam);
+            } catch (Throwable ex) {}
         }
 
         recargarImagen = (Button) rootView.findViewById(R.id.actualizarBTN);
@@ -84,11 +78,8 @@ public class PlayaDirectoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    FragmentTransaction fragTransaction = getFragmentManager().beginTransaction();
-                    fragTransaction.detach(fragment);
-                    fragTransaction.attach(fragment);
-                    fragTransaction.commit();
-                } catch (Exception e){}
+                    Utilities.imageLoader.displayImage(ValidacionPlaya.playa.webcamURL, webcam);
+                } catch (Throwable ex) {}
             }
         });
 

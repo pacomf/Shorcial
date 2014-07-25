@@ -19,12 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
@@ -53,7 +49,6 @@ public class PlayasAdapter extends BaseAdapter {
 
     ViewHolder viewHolder;
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
-    protected ImageLoader imageLoader = ImageLoader.getInstance();
 
 
     public PlayasAdapter(Activity activity, List<Playa> items, boolean checkins) {
@@ -136,16 +131,19 @@ public class PlayasAdapter extends BaseAdapter {
         viewHolder.nombreTV.setText(playa.nombre);
 
         if ((playa.webcamURL != null) && (!playa.webcamURL.equals(""))) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.webcam), viewHolder.webcam, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.webcam), viewHolder.webcam, animateFirstListener);
             viewHolder.webcam.setVisibility(View.VISIBLE);
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             lp.addRule(RelativeLayout.RIGHT_OF, R.id.webcam_icon);
-            lp.setMargins(5, 5, 0, 0);
+            lp.addRule(RelativeLayout.LEFT_OF, R.id.distanciaTV);
+            lp.setMargins(5, 5, 5, 0);
             viewHolder.nombreTV.setLayoutParams(lp);
         } else{
             viewHolder.webcam.setVisibility(View.GONE);
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(15, 5, 0, 0);
+            lp.addRule(RelativeLayout.LEFT_OF, R.id.distanciaTV);
+            lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            lp.setMargins(15, 5, 5, 0);
             viewHolder.nombreTV.setLayoutParams(lp);
         }
 
@@ -153,7 +151,7 @@ public class PlayasAdapter extends BaseAdapter {
 
         if (isCheckins) {
             viewHolder.valoracionTV.setVisibility(View.GONE);
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.checkin), viewHolder.checkin, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.checkin), viewHolder.checkin, animateFirstListener);
             viewHolder.checkin.setVisibility(View.VISIBLE);
             //TextView titleCheckinsTV = (TextView) vi.findViewById(R.id.title_checkins);
             //titleCheckinsTV.setVisibility(View.VISIBLE);
@@ -188,7 +186,6 @@ public class PlayasAdapter extends BaseAdapter {
             }
         }
 
-
         viewHolder.distanciaTV.setTypeface(tf);
         if (isCheckins)
             viewHolder.distanciaTV.setText(Utilities.formatFechaNotHour(playa.checkin));
@@ -212,81 +209,81 @@ public class PlayasAdapter extends BaseAdapter {
     private void setIconsExtraInfo (Playa playa){
 
         if ((playa.banderaazul != null) && (playa.banderaazul)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_si), viewHolder.banderaazulIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_si), viewHolder.banderaazulIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_no), viewHolder.banderaazulIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.bandera_azul_no), viewHolder.banderaazulIV, animateFirstListener);
         }
 
         if (playa.dificultadacceso != null){
             if (playa.dificultadacceso.equals("media")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_media), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_media), viewHolder.dificultadaccesoIV, animateFirstListener);
             } else if (playa.dificultadacceso.equals("extrema")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_alta), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_alta), viewHolder.dificultadaccesoIV, animateFirstListener);
             } else {
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), viewHolder.dificultadaccesoIV, animateFirstListener);
             }
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), viewHolder.dificultadaccesoIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.dificultad_baja), viewHolder.dificultadaccesoIV, animateFirstListener);
         }
 
         if (playa.limpieza != null){
             if (playa.limpieza.equals("sucia")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_sucia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_sucia), viewHolder.limpiezaIV, animateFirstListener);
             } else if (playa.limpieza.equals("mucho")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_limpia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_limpia), viewHolder.limpiezaIV, animateFirstListener);
             } else {
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), viewHolder.limpiezaIV, animateFirstListener);
             }
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), viewHolder.limpiezaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.playa_medio_sucia), viewHolder.limpiezaIV, animateFirstListener);
         }
 
         if (playa.tipoarena != null){
             if (playa.tipoarena.equals("blanca")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_blanca), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_blanca), viewHolder.tipoarenaIV, animateFirstListener);
             } else if (playa.tipoarena.equals("rocas")){
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_rocas), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_rocas), viewHolder.tipoarenaIV, animateFirstListener);
             } else {
-                imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), viewHolder.tipoarenaIV, animateFirstListener);
             }
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), viewHolder.tipoarenaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.arena_negra), viewHolder.tipoarenaIV, animateFirstListener);
         }
 
         if ((playa.rompeolas != null) && (playa.rompeolas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_si), viewHolder.rompeolasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_si), viewHolder.rompeolasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_no), viewHolder.rompeolasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.rompeolas_no), viewHolder.rompeolasIV, animateFirstListener);
         }
 
         if ((playa.hamacas != null) && (playa.hamacas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_si), viewHolder.hamacasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_si), viewHolder.hamacasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_no), viewHolder.hamacasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.hamacas_no), viewHolder.hamacasIV, animateFirstListener);
         }
 
         if ((playa.sombrillas != null) && (playa.sombrillas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_si), viewHolder.sombrillasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_si), viewHolder.sombrillasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_no), viewHolder.sombrillasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.sombrillas_no), viewHolder.sombrillasIV, animateFirstListener);
         }
 
         if ((playa.chiringuitos != null) && (playa.chiringuitos)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_si), viewHolder.chiringuitosIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_si), viewHolder.chiringuitosIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_no), viewHolder.chiringuitosIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.chiringuito_no), viewHolder.chiringuitosIV, animateFirstListener);
         }
 
         if ((playa.duchas != null) && (playa.duchas)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_si), viewHolder.duchasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_si), viewHolder.duchasIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_no), viewHolder.duchasIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.duchas_no), viewHolder.duchasIV, animateFirstListener);
         }
 
         if ((playa.socorrista != null) && (playa.socorrista)) {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_si), viewHolder.socorristaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_si), viewHolder.socorristaIV, animateFirstListener);
         } else {
-            imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), viewHolder.socorristaIV, Utilities.options, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), viewHolder.socorristaIV, animateFirstListener);
         }
     }
 

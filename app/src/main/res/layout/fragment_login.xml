@@ -3,34 +3,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:paddingLeft="20dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp">
-
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="#eeb400"
-            android:textSize="60sp"
-            android:layout_centerHorizontal="true" />
-
-    </RelativeLayout>
-
     <com.facebook.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="65dp" />
+        android:layout_marginBottom="85dp" />
 
 </RelativeLayout>

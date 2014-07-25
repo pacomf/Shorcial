@@ -206,6 +206,15 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
         super.onPause();
         //closing transition animations
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
     }
 
 }

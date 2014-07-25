@@ -20,10 +20,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.odc.beachodc.Inicio;
@@ -58,16 +61,38 @@ public class Utilities {
     public static final String PROPERTY_REG_NAME = "registration_namefacebook";
     private static final String PROPERTY_APP_VERSION = "appVersion";
     public static DisplayImageOptions options;
+    public static ImageLoader imageLoader;
+
+
+
+    public static void setImageLoader(Context ctx){
+        Utilities.setOptionsImageLoader();
+        ImageLoader.getInstance().init(Utilities.getImageLoaderConfiguration(ctx));
+        Utilities.imageLoader = ImageLoader.getInstance();
+    }
 
     public static void setOptionsImageLoader (){
         Utilities.options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.drawable.com_facebook_place_default_icon)
-                .showImageOnFail(R.drawable.com_facebook_place_default_icon)
-                .cacheInMemory(true)
+                .showImageForEmptyUri(R.drawable.error_cargar_webcam)
+                .showImageOnFail(R.drawable.error_cargar_webcam)
                 .cacheOnDisk(true)
-                .considerExifParams(true)
-                .displayer(new RoundedBitmapDisplayer(20))
+                .cacheInMemory(false)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
+    }
+
+    public static ImageLoaderConfiguration getImageLoaderConfiguration(Context ctx){
+        File cacheDir = new File(ctx.getCacheDir(), "imgcachedir");
+        if (!cacheDir.exists())
+            cacheDir.mkdir();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(ctx)
+                .threadPoolSize(1)
+                .diskCache(new UnlimitedDiscCache(cacheDir))
+                .diskCacheExtraOptions(480, 320, null)
+                .defaultDisplayImageOptions(Utilities.options)
+                .build();
+        return config;
     }
 
     public static String getCamelCase(String init){
@@ -354,21 +379,4 @@ public class Utilities {
         return "drawable://" + drawable;
     }
 
-    public static void initImageLoader(Context context) {
-        // This configuration tuning is custom. You can tune every option, you may tune some of them,
-        // or you can create default configuration by
-        //  ImageLoaderConfiguration.createDefault(this);
-        // method.
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-                .threadPriority(Thread.NORM_PRIORITY - 2)
-                .denyCacheImageMultipleSizesInMemory()
-                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
-                .diskCacheSize(50 * 1024 * 1024) // 50 Mb
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .build();
-        // Initialize ImageLoader with configuration.
-        ImageLoader.getInstance().init(config);
-
-        Utilities.setOptionsImageLoader();
-    }
 }
