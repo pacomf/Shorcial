@@ -1,4 +1,4 @@
-Shorcial
+Shorcial (App Android)
 =========
 
 <a href="http://shorcial.wordpress.com/">
@@ -23,7 +23,7 @@ La idea de Shorcial surge con el fin de presentar una herramienta útil para el 
 
 Con esta aplicación lo que queremos es ofrecer una herramienta útil que nos ayude a encontrar nuestra playa ideal en cada momento.
 
-El nombre de Shorcial, es un juego de las palabras Inglesas [**Sho**]re + So[**cial**] ("Costa + Social"), queriendo dejar claro el aspecto **Social** de conocer las Costas de todo el mundo.
+El nombre de Shorcial, es un juego de las palabras Inglesas [**Sho**]re + So[**cial**] \("Costa + Social"), queriendo dejar claro el aspecto **Social** de conocer las Costas de todo el mundo.
 
 
 ## Funcionalidades ##
