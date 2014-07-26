@@ -141,17 +141,17 @@ Este proyecto ha sido desarrollado, en conjunto, por:
 	<td> <b>Perfil de LinkedIn</b> </td>
   </tr>
   <tr style="background-color: #FFFFFF;">
-    <td> <img width="64"src="http://shorcial.files.wordpress.com/2014/07/paco.jpg?w=139&h=197"/> </td>
+    <td> <img width="64"src="https://shorcial.files.wordpress.com/2014/07/google_glass_paco.png"/> </td>
     <td> Paco Martín Fernández </td>
 	<td> <a href="es.linkedin.com/in/fmartinfdez/">Ver Pérfil</a> </td>
   </tr>
   <tr style="background-color: #FFFFFF;">
-    <td> <img width="64"src="http://shorcial.files.wordpress.com/2014/07/dsc07622.jpg?w=199&h=212"/> </td>
+    <td> <img width="64"src="http://shorcial.files.wordpress.com/2014/07/google_glass_ivan.png?w=600&h=600"/> </td>
     <td> Iván Santos González </td>
 	<td> <a href="es.linkedin.com/pub/iván-santos-gonzález/3b/924/69">Ver Pérfil</a> </td>
   </tr>
   <tr style="background-color: #FFFFFF;">
-    <td> <img width="64"src="http://shorcial.files.wordpress.com/2014/07/ale.png?w=187&h=196"/> </td>
+    <td> <img width="64"src="http://shorcial.files.wordpress.com/2014/07/google_glass_ale.png?w=600&h=600"/> </td>
     <td> Alexandra Rivero García </td>
 	<td> <a href="es.linkedin.com/pub/alexandra-rivero/3b/a05/839">Ver Pérfil</a> </td>
   </tr>
