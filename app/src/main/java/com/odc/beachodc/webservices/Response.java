@@ -86,21 +86,6 @@ public class Response {
 
     public static void responseEditarPlaya(Activity activity, JSONObject response){
         try {
-            // Playa playa = JSONToModel.toPlaya(response);
-
-            // TODO: Para futuras versiones cuando haya cache local
-            /*try {
-                Playa aActualizar = BBDD.getApplicationDataContext(activity).playasDao.search(false, "idserver = ?", new String[]{playa.idserver}, null, null, null, null, null).get(0);
-                aActualizar.setStatus(Entity.STATUS_DELETED);
-                BBDD.getApplicationDataContext(activity).playasDao.remove(aActualizar);
-                BBDD.getApplicationDataContext(activity).playasDao.save(aActualizar);
-            } catch (Exception e){
-                return;
-            }
-
-            playa.setStatus(Entity.STATUS_NEW);
-            BBDD.getApplicationDataContext(activity).playasDao.add(playa);
-            BBDD.getApplicationDataContext(activity).playasDao.save();*/
 
             if ((response.optString("res") != null) && (response.optString("res").equals("ok"))) {
 
@@ -140,45 +125,44 @@ public class Response {
         }
     }
 
-    public static void responseValorarPlaya(Activity activity, JSONObject response, Comentario comentario){
+    public static void responseValorarPlaya(Activity activity, JSONObject response, Comentario comentario, ProgressDialog pd){
         try {
-            Playa playa = JSONToModel.toPlaya(response);
-
-            // TODO: Para futuras versiones cuando haya cache local
-            /* try {
-                Playa aActualizar = BBDD.getApplicationDataContext(activity).playasDao.search(false, "idserver = ?", new String[]{playa.idserver}, null, null, null, null, null).get(0);
-                aActualizar.setStatus(Entity.STATUS_DELETED);
-                BBDD.getApplicationDataContext(activity).playasDao.remove(aActualizar);
-                BBDD.getApplicationDataContext(activity).playasDao.save(aActualizar);
-            } catch (Exception e){
-                return;
-            }
-
-            playa.setStatus(Entity.STATUS_NEW);
-            BBDD.getApplicationDataContext(activity).playasDao.add(playa);
-            BBDD.getApplicationDataContext(activity).playasDao.save();*/
-
-            if (playa != null) {
-
-                Intent intent = new Intent(activity, Playas.class);
-                ValidacionPlaya.playa = playa;
-                if (ValidacionPlaya.comentariosPlaya == null)
-                    ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
-                ValidacionPlaya.comentariosPlaya.add(comentario);
-                intent.putExtra("nuevavaloracion", true);
-                activity.startActivity(intent);
-                activity.finish();
-            } else {
+            if ((response.optString("res") != null) && (response.optString("res").equals("error"))) {
+                pd.dismiss();
                 Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
+                return;
+            } else if ((response.optString("res") != null) && (response.optString("res").equals("existe"))) {
+                pd.dismiss();
+                Crouton.makeText(activity, R.string.valoracionrepetida, Style.ALERT).show();
+                return;
+            } else {
+                Playa playa = JSONToModel.toPlaya(response);
+
+                if (playa != null) {
+
+                    Intent intent = new Intent(activity, Playas.class);
+                    ValidacionPlaya.playa = playa;
+                    if (ValidacionPlaya.comentariosPlaya == null)
+                        ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
+                    ValidacionPlaya.comentariosPlaya.add(comentario);
+                    intent.putExtra("nuevavaloracion", true);
+                    pd.dismiss();
+                    activity.startActivity(intent);
+                    activity.finish();
+                } else {
+                    pd.dismiss();
+                    Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
+                }
             }
         } catch (Exception e) {
+            pd.dismiss();
             Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
             System.out.println("FALLO RESPONSENUEVAPLAYA: "+e.getMessage());
             return;
         }
     }
 
-    public static void responseMensajeBotellaPlaya(Activity activity, JSONObject response, MensajeBotella mb){
+    public static void responseMensajeBotellaPlaya(Activity activity, JSONObject response, MensajeBotella mb, ProgressDialog pd){
         try {
             if ((response.optString("res") != null) && (response.optString("res").equals("ok"))) {
                 Intent intent = new Intent(activity, Playas.class);
@@ -187,12 +171,15 @@ public class Response {
                 ValidacionPlaya.mensajesBotella.add(mb);
 
                 intent.putExtra("nuevomensajebotella", true);
+                pd.dismiss();
                 activity.startActivity(intent);
                 activity.finish();
             } else {
+                pd.dismiss();
                 Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
             }
         } catch (Exception e) {
+            pd.dismiss();
             Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
             System.out.println("FALLO RESPONSENUEVAPLAYA: "+e.getMessage());
             return;

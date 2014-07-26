@@ -112,7 +112,8 @@
     <string name="playacreada">The Beach has been added SUCCESSFULLY</string>
     <string name="playaeditada">The Beach Data have been modified SUCCESSFULLY</string>
     <string name="checkinexito">You have CHECKED IN SUCCESSFULLY!</string>
-    <string name="checkinrepetido">You have already CHEKED IN in this BEACH todady!</string>
+    <string name="checkinrepetido">You have already CHEKED IN in this BEACH today!</string>
+    <string name="valoracionrepetida">You have already COMMENTED in this BEACH todady!</string>
     <string name="nocheckin">You have to be in the BEACH to CHECK IN!</string>
     <string name="nuevomensajebotella">The MESSAGE was thrown into the SEA in a BOTTLE!</string>
     <string name="nuevavaloracion">You commented BEACH SUCCESSFULLY!</string>

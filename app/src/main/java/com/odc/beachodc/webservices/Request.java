@@ -127,7 +127,7 @@ public class Request {
         Config.addToRequestQueue(activity, req);
     }
 
-    public static void valorarPlaya (final Activity activity, final Comentario comentario) {
+    public static void valorarPlaya (final Activity activity, final Comentario comentario, final ProgressDialog pd) {
         final String URL = Config.getURLServer(activity)+"/valoracionplaya/"+comentario.idplaya+"/"+comentario.idfbautor;
 
         // Post params to be sent to the server
@@ -141,11 +141,12 @@ public class Request {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                      com.odc.beachodc.webservices.Response.responseValorarPlaya(activity, response, comentario);
+                      com.odc.beachodc.webservices.Response.responseValorarPlaya(activity, response, comentario, pd);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pd.dismiss();
                 VolleyLog.e("Error: ", error.getMessage());
             }
         });
@@ -154,7 +155,7 @@ public class Request {
         Config.addToRequestQueue(activity, req);
     }
 
-    public static void mensajeBotellaPlaya (final Activity activity, final MensajeBotella mensaje) {
+    public static void mensajeBotellaPlaya (final Activity activity, final MensajeBotella mensaje, final ProgressDialog pd) {
         final String URL = Config.getURLServer(activity)+"/mensajebotellaplaya/"+mensaje.idserverplayaorigen+"/"+mensaje.idfbautor;
 
         // Post params to be sent to the server
@@ -168,11 +169,12 @@ public class Request {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        com.odc.beachodc.webservices.Response.responseMensajeBotellaPlaya(activity, response, mensaje);
+                        com.odc.beachodc.webservices.Response.responseMensajeBotellaPlaya(activity, response, mensaje, pd);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pd.dismiss();
                 VolleyLog.e("Error: ", error.getMessage());
             }
         });

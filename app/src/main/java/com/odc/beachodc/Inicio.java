@@ -125,6 +125,7 @@ public class Inicio extends FragmentActivity {
         super.onPause();
         uiHelper.onPause();
         isResumed = false;
+        overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
         System.gc();
         Runtime.getRuntime().gc();
     }

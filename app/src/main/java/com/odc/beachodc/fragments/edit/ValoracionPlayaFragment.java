@@ -2,6 +2,7 @@ package com.odc.beachodc.fragments.edit;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class ValoracionPlayaFragment extends Fragment {
         public String idplaya;
         Activity activity;
         private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+        ProgressDialog pd;
 
         public ValoracionPlayaFragment() {
             // Se ejecuta antes que el onCreateView
@@ -88,16 +90,21 @@ public class ValoracionPlayaFragment extends Fragment {
             enviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                    pd.setIndeterminate(false);
+                    pd.setCancelable(false);
                     enviar.setClickable(false);
                     if (Utilities.haveInternet(getActivity())) {
                         if (validacionValoracion()){
                             Comentario comment = new Comentario(Utilities.getUserIdFacebook(getActivity()), idplaya, comentario.getText().toString(), Utilities.getUserNameFacebook(getActivity()), new Date(), valoracion);
-                            Request.valorarPlaya(activity, comment);
+                            Request.valorarPlaya(activity, comment, pd);
                             enviar.setClickable(true);
                         } else {
+                            pd.dismiss();
                             enviar.setClickable(true);
                         }
                     } else {
+                        pd.dismiss();
                         Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
                         enviar.setClickable(true);
                     }

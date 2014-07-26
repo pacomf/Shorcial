@@ -3,6 +3,7 @@ package com.odc.beachodc.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -97,7 +98,6 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
         this.activity = this;
 
         Utilities.setActionBarCustomize(this);
-
     }
 
     @Override
@@ -120,16 +120,21 @@ public class ValoracionPlaya extends FragmentActivity implements ActionBar.TabLi
                 startActivity(intent);
                 return true;
             case R.id.menu_editar:
+                ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                pd.setIndeterminate(false);
+                pd.setCancelable(false);
                 try {
                     if (Utilities.haveInternet(this)) {
                         if (fragmentV.validacionValoracion()){
                             Comentario comment = new Comentario(Utilities.getUserIdFacebook(this), fragmentV.idplaya, fragmentV.comentario.getText().toString(), Utilities.getUserNameFacebook(this), new Date(), fragmentV.valoracion);
-                            Request.valorarPlaya(activity, comment);
+                            Request.valorarPlaya(activity, comment, pd);
                         }
                     } else {
+                        pd.dismiss();
                         Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
                     }
                 } catch (Exception e){
+                    pd.dismiss();
                     Crouton.makeText(this, R.string.error_unknown, Style.ALERT).show();
                 }
                 return true;

@@ -179,5 +179,6 @@
 
     <string name="existe_playa">Ya EXISTE una PLAYA en las misma LOCALIZACIÓN</string>
     <string name="procesando_espere">Procesando... Espere por favor...</string>
+    <string name="valoracionrepetida">¡Ya has realizado una VALORACIÓN en esta PLAYA en el dia de HOY!</string>
 
 </resources>

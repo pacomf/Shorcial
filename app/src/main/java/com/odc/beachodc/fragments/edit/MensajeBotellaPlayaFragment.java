@@ -2,6 +2,7 @@ package com.odc.beachodc.fragments.edit;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -76,14 +77,24 @@ public class MensajeBotellaPlayaFragment extends Fragment {
             enviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    enviar.setClickable(false);
+                    ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                    pd.setIndeterminate(false);
+                    pd.setCancelable(false);
                     if (validacionMensaje()){
                         if (Utilities.haveInternet(getActivity())) {
                             // TODO: Para futuro: Parametros: aleatorio.isChecked()
                             MensajeBotella mensajeB = new MensajeBotella(Utilities.getUserIdFacebook(activity), Utilities.getUserNameFacebook(activity), idPlaya, idPlaya, ValidacionPlaya.playa.nombre, new Date(), mensaje.getText().toString());
-                            Request.mensajeBotellaPlaya(activity, mensajeB);
+                            Request.mensajeBotellaPlaya(activity, mensajeB, pd);
+                            enviar.setClickable(true);
                         } else {
+                            pd.dismiss();
                             Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                            enviar.setClickable(true);
                         }
+                    } else {
+                        pd.dismiss();
+                        enviar.setClickable(true);
                     }
                 }
             });
