@@ -15,6 +15,14 @@ Shorcial (App Android)
   </p>
 </a>
 
+## [**Descarga desde Google Play**](https://play.google.com/store/apps/details?id=com.odc.beachodc) ##
+
+<a href="https://play.google.com/store/apps/details?id=com.odc.beachodc">
+  <p align="center">
+    <img alt="Descargar Shorcial" src="http://www.eleconomista.es/CanalPDA/files/logo_google_play.jpg" height="200" width="180" />
+  </p>
+</a>
+
 ## La idea... ##
 
 Partiendo de la base que consideramos al Turismo como el mayor motor económico de las Islas Canarias, queríamos aportar nuestro **granito de arena** y poder ofrecer a nuestros turistas una herramienta sencilla, bonita y útil para que pudieran encontrar y compartir las Playas de Nuestras Islas (Pero hemos elaborado una herramienta totalmente extrapolable y con una capacidad de escalabilidad tremenda).
