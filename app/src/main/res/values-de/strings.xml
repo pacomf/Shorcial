@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shorcial</string>
+
+    <string name="server_ip">http://ec2-54-72-133-37.eu-west-1.compute.amazonaws.com</string>
+    <string name="server_port">1479</string>
+
+    <string name="title_activity_inicio">Shorcial</string>
+    <string name="title_section_mis_datos">Meine Daten</string>
+    <string name="title_section_playas_cercanas">Strände in der Nähe</string>
+    <string name="title_section_mapa_playas">Karte</string>
+    <string name="title_activity_edicion">Strand ändern</string>
+    <string name="title_activity_valoracion">Beurteilen Sie den Strand</string>
+    <string name="title_activity_mensaje_botella">Flaschenpost</string>
+    <string name="title_activity_mensajes_botellas">Flaschenpost</string>
+    <string name="title_section_edit_infoplaya">Information</string>
+    <string name="title_section_edit_mapplaya">Standort</string>
+    <string name="title_section_search_beach">Strand suchen</string>
+    <string name="title_section_results_search_beach">Suchergebnisse</string>
+    <string name="title_section_see_beach">Info</string>
+    <string name="title_section_webcam_beach">Live ansehen</string>
+    <string name="title_section_opinion_beach">Beurteilungen</string>
+    <string name="title_section_descubre_beach">Entdecken Sie</string>
+
+    <string name="nuevo">Neuer Strand</string>
+    <string name="save">Speichern</string>
+    <string name="refresh">Neu laden</string>
+    <string name="inform">Falschen Strand melden</string>
+    <string name="search">Suchen</string>
+    <string name="update_image">Bild neu laden</string>
+    <string name="nueva_valoracion">Neue Beurteilung</string>
+
+    <string name="grados_centigrados">ºC</string>
+
+    <string name="title_search_by_name">Nach Namen suchen</string>
+    <string name="title_search_by_name_placeholder">Geben Sie bitte den Strandnamen ein</string>
+    <string name="title_search_by_address_placeholder">Geben Sie die Strasse ein oder klicken Sie auf der Karte</string>
+    <string name="title_search_by_address">Nach Nähe zum Standort suchen</string>
+
+    <string name="title_checkins">Check-ins</string>
+    <string name="last_checkins">Letzte Check-ins</string>
+
+    <string name="mostrar_ruta">Wie kommt man an den Strand?</string>
+
+    <string name="no_internet">Keine Internetverbindung gefunden oder sie ist zu schwach</string>
+
+    <string name="app_id_facebook">333380730146158</string>
+    <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
+
+    <!-- IVAN: AIzaSyA_PYveEBI_o0wGU85y4__BbSIKJLLqinc
+         PACO: AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs
+     -->
+    <string name="app_key_play_services">AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs</string>
+
+
+    <string name="title_beach">Strandname</string>
+    <string name="title_extras_beach">Strandeigenschaften</string>
+    <string name="title_beach_placeholder">Geben Sie den Namen vom Strand ein</string>
+    <string name="title_banderaazul">Hat der Strand blaue Flagge?</string>
+    <string name="title_dificultadacceso">Schwierigkeitsgrad den Strand zu erreichen</string>
+    <string name="title_limpieza">Sauberkeit vom Strand</string>
+    <string name="title_tipodearena">Sandtyp</string>
+    <string name="title_rompeolas">Hat der Strand Wellenbrecher?</string>
+    <string name="title_hamacas">Hat der Strand Liegestühle?</string>
+    <string name="title_sombrillas">Hat der Strand Sonnenschirme?</string>
+    <string name="title_chiringuitos">Gibt es Strandkneipen?</string>
+    <string name="title_duchas">Hat der Strand Duschen?</string>
+    <string name="title_socorrista">Hat der Strand Rettungsschwimmer?</string>
+
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="unknown">Ich weiss es nicht</string>
+
+    <string name="easy">Leicht</string>
+    <string name="medium">Bescheiden</string>
+    <string name="hard">Extrem</string>
+
+    <string name="muylimpia">Sehr sauber</string>
+    <string name="limpia">Sauber</string>
+    <string name="sucia">Schmutzig</string>
+
+    <string name="negra">Schwarz</string>
+    <string name="blanca">Weiss</string>
+    <string name="rocas">Felsen</string>
+
+    <string name="address_placeholder">Geben Sie eine Adresse ein</string>
+
+    <string name="logout">Logout</string>
+
+    <string name="esperar">Warten Sie bitte</string>
+    <string name="procesando">In Bearbeitung...</string>
+
+    <string name="puntuacion">Bewerten Sie den Strand!</string>
+    <string name="comentario">Beurteilen Sie den Strand!</string>
+    <string name="enviar_comentario">Beurteilung senden</string>
+    <string name="enviar_mensaje">Verschick dein Kommentar!</string>
+    <string name="mensaje_botella_title">Schreib dein Kommentar!</string>
+    <string name="comment_beach_placeholder">Geben Sie ein neuen Kommentar über den Strand ein, 190 Zeichen maximal...</string>
+    <string name="enviar_mensaje_aleatorio_checkbox">Senden zu einem Zufalls-Strand</string>
+    <string name="message_bottle_beach_placeholder">Schreibt deine Nachricht, wir werden Sie in eine Flasche tun, damit... jemand anderes sie lesen kann!</string>
+    <string name="touch_reload">Klicken Sie hier um neu zu laden! </string>
+    <string name="ver_mapa">In der Karte sehen</string>
+    <string name="ver_lista">In der Liste sehen</string>
+
+
+    <string name="question">\?</string>
+
+    <string name="meters">m.</string>
+    <string name="kilometers">km.</string>
+
+    <string name="playacreada">Der Strand würde erfolgreich hinzugefügt</string>
+    <string name="playaeditada">Die Stranddaten würden erfolgreich geändert</string>
+    <string name="checkinexito">Check-in ist erfolgreich verlaufen</string>
+    <string name="checkinrepetido">Sie haben schon ihren Check-in in diesem Strand gemacht für HEUTE!</string>
+    <string name="nocheckin">Sie müssen im Strand sein, um den Check-in zu machen!</string>
+    <string name="nuevomensajebotella">Die Nachricht wurde in der Flasche ins Meer geschmissen!</string>
+    <string name="nuevavaloracion">Sie haben den Kommentar korrekt abgegeben!</string>
+
+    <string name="peticionborrado">Es wurde informiert, dass Sie diesem Strand als NICHT GÜLTIG eingestuft haben!</string>
+
+    <string name="no_checkins">Sie haben keine Check-ins gemacht</string>
+    <string name="primer_checkin">Entdecken Sie ein Strand und machen Sie dort ihren check-in!</string>
+
+    <string name="no_playas">Es gibt keinen Strand näher als 20 km.</string>
+
+    <string name="no_busqueda">Es gibt keinen Strand, der unter diese Suchkriterien passt</string>
+
+    <string name="no_comentarios">Es gibt noch keine Bewertungen</string>
+    <string name="primer_comentario">Seien Sie der erste der bewertet!</string>
+    <string name="no_mensajes">Noch hat keiner eine Flaschenpost verschickt</string>
+    <string name="primer_mensaje">Seien Sie der Erste der eine schreibt!</string>
+    <string name="no_gps">Es wurde keine GPS-position gefunden, aktivieren und dann nochmal versuchen</string>
+
+    <string name="error_problemautocompletado">Fehler bei der Adresse. Geben Sie wieder die Adresse ein.</string>
+    <string name="error_localizacion">Sie müssen einen gültigen Ort eingeben</string>
+    <string name="error_nombre">Sie mussen einen gültigen Namen eingeben</string>
+    <string name="error_bbdd">Es ist ein Fehler beim speichern aufgetreten. Kontaktieren Sie den Administrator</string>
+    <string name="error_valoracion">Sie sollten den Strand mindestens BEWERTEN</string>
+    <string name="error_mensaje">Sie sollten eine Nachricht schreiben, um sie senden zu können</string>
+    <string name="error_search_name">Sie mussen ein Namen schreiben, um suchen zu können</string>
+    <string name="error_search_address">Sie mussen eine Adresse eingeben, um suchen zu können</string>
+    <string name="error_unknown">Unbekannter Fehler, versuchen sie es erneut oder kontaktieren Sie den Administrator.</string>
+
+    <string name="info_banderaazul_si">Der Strand hat eine blaue Flagge</string>
+    <string name="info_banderaazul_no">Der Strand hat keine blaue Flagge</string>
+
+    <string name="info_acceso_extremo">Es ist sehr schwierig zum Strand zu kommen</string>
+    <string name="info_acceso_medio">Es ist nicht allzu einfach zum Strand zu kommen</string>
+    <string name="info_acceso_facil">Es ist leicht zum Strand zu kommen</string>
+
+    <string name="info_limpieza_alta">Der Strand ist sauber</string>
+    <string name="info_limpieza_media">Der Strand ist ein bisschen schmutzig</string>
+    <string name="info_limpieza_baja">Der Strand ist schmutzig</string>
+
+    <string name="info_arena_negra">Der Strand hat dunklen Sand</string>
+    <string name="info_arena_blanca">Der Strand hat hellen Sand </string>
+    <string name="info_arena_roca">Der Strand besteht aus Felsen und Steinen</string>
+
+    <string name="info_hamacas_si">Der Strand hat Liegestühle</string>
+    <string name="info_hamacas_no">Der Strand hat KEINE LIEGESTÜHLE</string>
+
+    <string name="info_chiringuitos_si">Es gibt Strandkneipen</string>
+    <string name="info_chiringuitos_no">Es gibt keine Strandkneipen</string>
+
+    <string name="info_duchas_si">Der Strand hat Duschen</string>
+    <string name="info_duchas_no">Der Strand hat keine Duschen</string>
+
+    <string name="info_rompeolas_si">Der Strand hat Wellenbrecher</string>
+    <string name="info_rompeolas_no">Der Strand hat keine Wellenbrecher</string>
+
+    <string name="info_sombrillas_si">Der Strand hat Sonnenschirme</string>
+    <string name="info_sombrillas_no">Der Strand hat keine Sonnenschirme</string>
+
+    <string name="info_socorrista_si">Es gibt Rettungsschwimmer</string>
+    <string name="info_socorrista_no">Es gibt keinen Rettungsschwimmer</string>
+
+
+
+    <string name="existe_playa">Es gibt einen Strand in der gleichen Lage.</string>
+    <string name="procesando_espere">In Bearbeitung... Warten Sie bitter...</string>
+    <string name="valoracionrepetida">Sie haben schon ihren Beurteilung in diesem Strand gemacht für HEUTE!</string>
+
+</resources>
