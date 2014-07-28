@@ -39,9 +39,10 @@ El nombre de Shorcial, es un juego de las palabras Inglesas [**Sho**]re + So[**c
 0. **Multilenguaje**
   - **Inglés**
   - **Español**
-  - Alemán (En desarrollo...)
+  - **Alemán**
   - Ruso (Próximamente)
   - Francés (Próximamente)
+  - Portugués (Proximamente)
   - Italiano (Próximamente)
   - Chino (Próximamente)
   - Japonés (Próximamante)
