@@ -88,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:text="23ºC"
                 android:layout_below="@+id/nombreTV"
                 android:textColor="#eeb400"
                 android:maxLines="1"
@@ -98,10 +99,20 @@
                 android:layout_alignParentRight="true"
                 android:textSize="40sp" />
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/nombreTV"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                android:id="@+id/iconWeather"/>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/temp"
+                android:layout_below="@+id/starsRL"
                 android:layout_marginTop="15dp"
                 android:id="@+id/relativeLayout">
 

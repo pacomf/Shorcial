@@ -26,6 +26,8 @@ public class ValidacionPlaya {
     public static ArrayList<MensajeBotella> mensajesBotella;
     public static ArrayList<Comentario> comentariosPlaya;
 
+    public static String iconWeather;
+
     public static boolean cargadaPlayas;
     public static boolean cargadosUltimosCheckins;
 

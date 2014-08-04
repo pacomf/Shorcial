@@ -325,6 +325,13 @@ public class Response {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        try{
+            ValidacionPlaya.iconWeather = response.getJSONArray("list").getJSONObject(0).getJSONArray("weather").getJSONObject(0).getString("icon");
+        } catch (Exception e){
+            ValidacionPlaya.iconWeather = null;
+        }
+
         ValidacionPlaya.cargadaTemperatura=true;
         if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
             pd.dismiss();

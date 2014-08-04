@@ -64,9 +64,11 @@ public class VerPlayaFragment extends Fragment {
         ImageView duchasIV;
         ImageView chiringuitosIV;
         ImageView socorristaIV;
+        ImageView iconWeather;
+        TextView tempTV;
 
 
-        public VerPlayaFragment() {
+    public VerPlayaFragment() {
             // Se ejecuta antes que el onCreateView
 
         }
@@ -107,9 +109,29 @@ public class VerPlayaFragment extends Fragment {
             nombreTV.setTypeface(tf);
             nombreTV.setText(ValidacionPlaya.playa.nombre);
 
-            TextView tempTV = (TextView) rootView.findViewById(R.id.temp);
+            tempTV = (TextView) rootView.findViewById(R.id.temp);
             tempTV.setTypeface(tf);
             tempTV.setText(Utilities.getTemperatureC(getActivity(), ValidacionPlaya.temperatura));
+
+            iconWeather = (ImageView) rootView.findViewById(R.id.iconWeather);
+
+            Utilities.imageLoader.displayImage(Utilities.getURIIconWeather(ValidacionPlaya.iconWeather), iconWeather, animateFirstListener);
+
+            tempTV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tempTV.setVisibility(View.GONE);
+                    iconWeather.setVisibility(View.VISIBLE);
+                }
+            });
+
+            iconWeather.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    iconWeather.setVisibility(View.GONE);
+                    tempTV.setVisibility(View.VISIBLE);
+                }
+            });
 
             banderaazulIV = (ImageView) rootView.findViewById(R.id.banderaAzulImage);
             dificultadaccesoIV = (ImageView) rootView.findViewById(R.id.dificultadAccesoImage);

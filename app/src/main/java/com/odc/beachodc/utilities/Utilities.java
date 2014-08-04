@@ -379,4 +379,8 @@ public class Utilities {
         return "drawable://" + drawable;
     }
 
+    public static String getURIIconWeather (String icon){
+        return "http://openweathermap.org/img/w/"+icon+".png";
+    }
+
 }
