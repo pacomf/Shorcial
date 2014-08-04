@@ -29,11 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cargandoTV"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:maxLines="1"
-            android:maxLength="25"
-
+            android:gravity="center"
+            android:textColor="@android:color/holo_blue_dark"
             android:ellipsize="end"
             android:text="@string/procesando_espere"
             android:layout_centerInParent="true" />
