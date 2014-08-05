@@ -153,14 +153,26 @@ public class Inicio extends FragmentActivity {
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
-        Session session = Session.getActiveSession();
 
-        // Cada vez que la app se ponga en primer plano, comprobaremos si nuestra sesión de FB aun sigue vigente, para entrar directamente. Si ha caducado o hemos hecho logout, mostramos el fragment de Login.
-        if (session != null && session.isOpened()) {
-            goToHome(session);
-        }  else {
-            // otherwise present the splash screen and ask the user to login, unless the user explicitly skipped.
-            showFragment(LOGIN, false);
+        if (Utilities.haveInternet(this)) {
+            Session session = Session.getActiveSession();
+
+            // Cada vez que la app se ponga en primer plano, comprobaremos si nuestra sesión de FB aun sigue vigente, para entrar directamente. Si ha caducado o hemos hecho logout, mostramos el fragment de Login.
+            if (session != null && session.isOpened()) {
+                goToHome(session);
+            } else {
+                // otherwise present the splash screen and ask the user to login, unless the user explicitly skipped.
+                showFragment(LOGIN, false);
+            }
+        } else {
+            if ((Utilities.getUserIdFacebook(this) != null) && (!Utilities.getUserIdFacebook(this).equals(""))) {
+                Intent intent = new Intent(activity, Home.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else {
+                Crouton.makeText(activity, getString(R.string.no_internet), Style.ALERT).show();
+            }
         }
     }
 

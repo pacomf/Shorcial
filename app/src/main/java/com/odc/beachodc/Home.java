@@ -126,6 +126,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 Request.getUltimosCheckins(this, pd);
             }
         } else {
+            pd.dismiss();
             Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
         }
 
