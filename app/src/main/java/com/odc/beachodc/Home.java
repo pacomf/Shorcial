@@ -34,6 +34,7 @@ import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 import com.odc.beachodc.webservices.Config;
 import com.odc.beachodc.webservices.Request;
+import com.odc.beachodc.webservices.image.UploadToImgurTask;
 
 import org.json.JSONArray;
 

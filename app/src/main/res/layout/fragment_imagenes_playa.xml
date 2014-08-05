@@ -1,0 +1,88 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/background_fragments"
+        android:id="@+id/relativeLayout1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nombreTV"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/relativeLayout1"
+        android:layout_marginTop="20dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/slider"
+        android:background="@drawable/background_fragments"
+        android:id="@+id/relativeLayout2">
+
+        <com.facebook.widget.ProfilePictureView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/com_facebook_profile_default_icon"
+            app:preset_size="small"
+            android:id="@+id/fotoAutorImage"
+            android:layout_above="@+id/comentarioTV"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nombreAutorTV"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_toRightOf="@+id/fotoAutorImage"
+            android:layout_above="@+id/comentarioTV"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/comentarioTV"
+            android:lines="3"
+            android:scrollbars="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginLeft="15dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+

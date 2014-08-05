@@ -4,19 +4,16 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.mobandme.ada.Entity;
-import com.mobandme.ada.exceptions.AdaFrameworkException;
 import com.odc.beachodc.Home;
-import com.odc.beachodc.Playas;
+import com.odc.beachodc.activities.Playas;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.ResultadoBusquedaPlaya;
 import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.db.models.Comentario;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
-import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import org.json.JSONArray;

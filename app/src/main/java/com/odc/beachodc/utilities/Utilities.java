@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.webservices.Request;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

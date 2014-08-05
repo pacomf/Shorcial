@@ -1,4 +1,4 @@
-package com.odc.beachodc;
+package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -16,10 +16,13 @@ import android.view.MenuItem;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.odc.beachodc.Home;
+import com.odc.beachodc.R;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Playa;
+import com.odc.beachodc.fragments.ImagenesPlayaFragment;
 import com.odc.beachodc.fragments.MisDatosFragment;
 import com.odc.beachodc.fragments.PlayaDirectoFragment;
 import com.odc.beachodc.fragments.VerPlayaFragment;
@@ -61,6 +64,15 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //opening transition animations
+
+        if (ValidacionPlaya.playa == null){
+            Intent intent = new Intent(this, Home.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
 
         setContentView(R.layout.activity_home);
@@ -216,6 +228,8 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                     case 2:
                         return new ValoracionesFragment();
                     case 3:
+                        return new ImagenesPlayaFragment();
+                    case 4:
                         return new MensajesBotellasFragment();
                 }
             } else if (isNear) {
@@ -225,6 +239,8 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                     case 1:
                         return new ValoracionesFragment();
                     case 2:
+                        return new ImagenesPlayaFragment();
+                    case 3:
                         return new MensajesBotellasFragment();
                 }
             } else if (hayWebCam) {
@@ -235,6 +251,8 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                         return new PlayaDirectoFragment();
                     case 2:
                         return new ValoracionesFragment();
+                    case 3:
+                        return new ImagenesPlayaFragment();
                 }
             } else {
                 switch (position) {
@@ -242,6 +260,8 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                         return new VerPlayaFragment();
                     case 1:
                         return new ValoracionesFragment();
+                    case 2:
+                        return new ImagenesPlayaFragment();
                 }
             }
 
@@ -252,10 +272,10 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         public int getCount() {
             // Show 3 total pages.
             if ((hayWebCam) && (isNear))
-                return 4;
+                return 5;
             else if ((hayWebCam) || (isNear))
-                return 3;
-            return 2;
+                return 4;
+            return 3;
         }
 
         @Override
@@ -270,15 +290,20 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                     case 2:
                         return getString(R.string.title_section_opinion_beach).toUpperCase(l);
                     case 3:
+                        return getString(R.string.title_section_images_beach).toUpperCase(l);
+                    case 4:
                         return getString(R.string.title_section_descubre_beach).toUpperCase(l);
+
                 }
             } else if (isNear) {
                 switch (position) {
                     case 0:
                         return getString(R.string.title_section_see_beach).toUpperCase(l);
-                    case 1:
-                        return getString(R.string.title_section_opinion_beach).toUpperCase(l);
                     case 2:
+                        return getString(R.string.title_section_opinion_beach).toUpperCase(l);
+                    case 3:
+                        return getString(R.string.title_section_images_beach).toUpperCase(l);
+                    case 4:
                         return getString(R.string.title_section_descubre_beach).toUpperCase(l);
                 }
             } else if (hayWebCam) {
@@ -289,6 +314,8 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                         return getString(R.string.title_section_webcam_beach).toUpperCase(l);
                     case 2:
                         return getString(R.string.title_section_opinion_beach).toUpperCase(l);
+                    case 3:
+                        return getString(R.string.title_section_images_beach).toUpperCase(l);
                 }
             } else {
                 switch (position) {
@@ -296,6 +323,8 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                         return getString(R.string.title_section_see_beach).toUpperCase(l);
                     case 1:
                         return getString(R.string.title_section_opinion_beach).toUpperCase(l);
+                    case 2:
+                        return getString(R.string.title_section_images_beach).toUpperCase(l);
                 }
             }
             return null;
@@ -317,5 +346,6 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         System.gc();
         Runtime.getRuntime().gc();
     }
+
 
 }

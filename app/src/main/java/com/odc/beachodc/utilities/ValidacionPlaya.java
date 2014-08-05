@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.db.models.Imagen;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
 
@@ -25,6 +26,7 @@ public class ValidacionPlaya {
     public static ArrayList<Playa> playasCheckins;
     public static ArrayList<MensajeBotella> mensajesBotella;
     public static ArrayList<Comentario> comentariosPlaya;
+    public static ArrayList<Imagen> imagenes;
 
     public static String iconWeather;
 

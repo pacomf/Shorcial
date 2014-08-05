@@ -2,6 +2,7 @@ package com.odc.beachodc.webservices;
 
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.db.models.Imagen;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
 
@@ -155,6 +156,39 @@ public class JSONToModel {
 
 
             return new MensajeBotella(idusuario, nombreusuario, idplayadestino, idplayaorigen, nombreplayadestino, fecha, mensaje);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    public static Imagen toImagen (JSONObject json){
+        try {
+            String idplaya = json.optString("idPlaya");
+            String idusuario = json.optString("idUsuario");
+            String comentario = json.optString("comentario");
+            String link = json.optString("link");
+            String fechaStr = json.optString("fecha");
+            String nombreUsuarioStr = json.optString("nombreUsuario");
+            Date fecha = null;
+            try {
+                if (fechaStr != null){
+                    String[] parts = fechaStr.split("Z");
+                    parts = parts[0].split("T");
+                    String[] dias = parts[0].split("-");
+                    String[] horas = parts[1].split(":");
+                    Calendar date = Calendar.getInstance();
+                    date.set(Calendar.YEAR,  Integer.valueOf(dias[0]));
+                    date.set(Calendar.MONTH, Integer.valueOf(dias[1])-1);
+                    date.set(Calendar.DAY_OF_MONTH, Integer.valueOf(dias[2]));
+                    date.set(Calendar.HOUR_OF_DAY, Integer.valueOf(horas[0]));
+                    date.set(Calendar.MINUTE, Integer.valueOf(horas[1]));
+                    date.set(Calendar.SECOND, Double.valueOf(horas[2]).intValue());
+                    fecha = date.getTime();
+                }
+            } catch (Exception e){}
+
+
+            return new Imagen(idusuario, idplaya, comentario, nombreUsuarioStr, fecha, link);
         } catch (Exception e){
             return null;
         }
