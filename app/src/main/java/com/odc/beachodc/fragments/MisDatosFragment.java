@@ -124,6 +124,9 @@ public class MisDatosFragment extends Fragment {
                     Request.getTemp(getActivity(), item.latitud, item.longitud, pd, intent);
 
                     Request.getComentariosPlaya(getActivity(), item.idserver, pd, intent);
+
+                    Request.getImagenesPlaya(getActivity(), item.idserver, pd, intent);
+
                     if (Geo.isNearToMe(item.latitud, item.longitud))
                         Request.getMensajesBotella(getActivity(), item.idserver, pd, intent);
                     else

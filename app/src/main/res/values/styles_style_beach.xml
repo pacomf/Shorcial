@@ -30,7 +30,6 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_style_beach</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Style_beach</item>
         
-        
     </style>
 
     <style name="ActionBar.Solid.Style_beach" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">

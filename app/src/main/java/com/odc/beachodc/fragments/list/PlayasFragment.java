@@ -179,6 +179,9 @@ public class PlayasFragment extends Fragment {
                     Request.getTemp(getActivity(), item.latitud, item.longitud, pd, intent);
 
                     Request.getComentariosPlaya(getActivity(), item.idserver, pd, intent);
+
+                    Request.getImagenesPlaya(getActivity(), item.idserver, pd, intent);
+
                     if (Geo.isNearToMe(item.latitud, item.longitud))
                         Request.getMensajesBotella(getActivity(), item.idserver, pd, intent);
                     else
@@ -319,6 +322,9 @@ public class PlayasFragment extends Fragment {
                             Request.getTemp(getActivity(), ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud, pd, intent);
 
                             Request.getComentariosPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, intent);
+
+                            Request.getImagenesPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, intent);
+
                             if (Geo.isNearToMe(ValidacionPlaya.playa.latitud, ValidacionPlaya.playa.longitud))
                                 Request.getMensajesBotella(getActivity(), ValidacionPlaya.playa.idserver, pd, intent);
                             else

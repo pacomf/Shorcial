@@ -184,5 +184,14 @@
     <string name="procesando_espere">Processing... Wait Please...</string>
 
     <string name="title_section_images_beach">Photos</string>
+    <string name="title_choose_image">Select an Option</string>
+    <string name="description_choose_image">Where do you want to select the image?</string>
+    <string name="choose_gallery">Gallery</string>
+    <string name="choose_camera">Take a Picture</string>
+    <string name="upload_ok">You have UPLOADED THE PICTURE SUCCESSFULLY!</string>
+    <string name="upload_photo">Add New Picture!</string>
+    <string name="update_pictures">Reload Pictures</string>
+
+    <string name="no_photos">Be the first to ADD A PICTURE!</string>
 
 </resources>

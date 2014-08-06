@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.odc.beachodc.Home;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.BuscarPlaya;
@@ -59,6 +60,7 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
      */
     ViewPager mViewPager;
     boolean hayWebCam, isNear;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

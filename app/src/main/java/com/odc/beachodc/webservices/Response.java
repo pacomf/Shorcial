@@ -12,6 +12,7 @@ import com.odc.beachodc.R;
 import com.odc.beachodc.activities.ResultadoBusquedaPlaya;
 import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.db.models.Imagen;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.ValidacionPlaya;
@@ -294,6 +295,22 @@ public class Response {
         }
     }
 
+    public static void responseGetImagenesPlaya(Context ctx, JSONArray response, ProgressDialog pd, Intent intent){
+        Imagen imagen;
+        for (int i=0; i<response.length(); i++){
+            try {
+                imagen = JSONToModel.toImagen(response.getJSONObject(i));
+                ValidacionPlaya.imagenes.add(imagen);
+            } catch (Exception e){
+                System.out.println("FALLO RESPONSEGETIMAGENES: "+e.getMessage());
+            }
+        }
+        ValidacionPlaya.cargadaImagenes=true;
+        if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
+            pd.dismiss();
+        }
+    }
+
     public static void responseGetComentariosPlaya(Context ctx, JSONArray response, ProgressDialog pd, Intent intent){
         Comentario comentario;
         for (int i=0; i<response.length(); i++){
@@ -332,6 +349,26 @@ public class Response {
         ValidacionPlaya.cargadaTemperatura=true;
         if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
             pd.dismiss();
+        }
+    }
+
+    public static void responseNuevaImagenPlaya(Activity activity, JSONObject response, ProgressDialog pd, Imagen imagen){
+        try {
+            if ((response.optString("res") != null) && (response.optString("res").equals("ok"))){
+                if (ValidacionPlaya.imagenes == null)
+                    ValidacionPlaya.imagenes = new ArrayList<Imagen>();
+                ValidacionPlaya.imagenes.add(imagen);
+                pd.dismiss();
+                Crouton.makeText(activity, R.string.upload_ok, Style.CONFIRM).show();
+            } else {
+                pd.dismiss();
+                Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
+            }
+        } catch (Exception e) {
+            Crouton.makeText(activity, R.string.error_bbdd, Style.ALERT).show();
+            System.out.println("FALLO RESPONSENUEVAPLAYA: "+e.getMessage());
+            pd.dismiss();
+            return;
         }
     }
 

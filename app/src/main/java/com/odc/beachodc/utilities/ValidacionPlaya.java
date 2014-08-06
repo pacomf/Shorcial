@@ -36,6 +36,7 @@ public class ValidacionPlaya {
     public static boolean cargadosMensajesPlaya;
     public static boolean cargadosComentarios;
     public static boolean cargadaTemperatura;
+    public static boolean cargadaImagenes;
 
     public static boolean lanzadaVerPlaya;
 
@@ -52,7 +53,7 @@ public class ValidacionPlaya {
     }
 
     public static boolean comprobarCargaPlaya (Context ctx, Intent intent){
-        if ((ValidacionPlaya.cargadosMensajesPlaya) && (ValidacionPlaya.cargadosComentarios) && (ValidacionPlaya.cargadaTemperatura)){
+        if ((ValidacionPlaya.cargadosMensajesPlaya) && (ValidacionPlaya.cargadosComentarios) && (ValidacionPlaya.cargadaTemperatura) && (ValidacionPlaya.cargadaImagenes)){
             if (!ValidacionPlaya.lanzadaVerPlaya){
                 ValidacionPlaya.lanzadaVerPlaya = true;
                 ctx.startActivity(intent);

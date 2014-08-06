@@ -15,13 +15,12 @@ public class DescriptionAnimationSlider implements BaseAnimationInterface {
 
     private SliderLayout mSlider;
     ProfilePictureView foto;
-    TextView nombre, comentario;
+    TextView nombre;
 
-    public void setParams(SliderLayout mSlider, ProfilePictureView foto, TextView nombre, TextView comentario){
+    public void setParams(SliderLayout mSlider, ProfilePictureView foto, TextView nombre){
         this.mSlider = mSlider;
         this.foto = foto;
         this.nombre = nombre;
-        this.comentario = comentario;
     }
 
     @Override
@@ -45,7 +44,6 @@ public class DescriptionAnimationSlider implements BaseAnimationInterface {
         try {
             foto.setProfileId(mSlider.getCurrentSlider().getBundle().get("idfb").toString());
             nombre.setText(mSlider.getCurrentSlider().getBundle().get("nombrefb").toString());
-            comentario.setText(mSlider.getCurrentSlider().getBundle().get("comentario").toString());
         } catch (Exception e){
 
         }

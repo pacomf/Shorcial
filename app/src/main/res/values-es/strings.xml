@@ -175,10 +175,19 @@
     <string name="info_socorrista_si">La Playa cuenta con SOCORRISTA</string>
     <string name="info_socorrista_no">La Playa NO cuenta con SOCORRISTA</string>
 
-
-
     <string name="existe_playa">Ya EXISTE una PLAYA en las misma LOCALIZACIÓN</string>
     <string name="procesando_espere">Procesando... Espere por favor...</string>
     <string name="valoracionrepetida">¡Ya has realizado una VALORACIÓN en esta PLAYA en el dia de HOY!</string>
+
+    <string name="title_section_images_beach">Fotos</string>
+    <string name="title_choose_image">Elige una opción</string>
+    <string name="description_choose_image">¿De dónde quieres seleccionar la Imagen?</string>
+    <string name="choose_gallery">Galería</string>
+    <string name="choose_camera">Hacer Foto</string>
+    <string name="upload_ok">¡Has añadido la IMAGEN CORRECTAMENTE!</string>
+    <string name="upload_photo">¡Añade una nueva Foto!</string>
+    <string name="update_pictures">Recargar Imágenes</string>
+
+    <string name="no_photos">¡Sé el PRIMERO en añadir una FOTO!</string>
 
 </resources>

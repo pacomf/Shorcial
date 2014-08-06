@@ -8,7 +8,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.odc.beachodc.R;
+import com.odc.beachodc.db.models.Imagen;
 import com.odc.beachodc.utilities.Image;
+import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -21,6 +25,8 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+
+import java.util.Date;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
@@ -44,8 +50,6 @@ public class UploadToImgurTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         final String upload_to = "https://api.imgur.com/3/image";
 
-        System.out.println("Entrando....");
-
         HttpClient httpClient = new DefaultHttpClient();
         HttpContext localContext = new BasicHttpContext();
         HttpPost httpPost = new HttpPost(upload_to);
@@ -67,8 +71,6 @@ public class UploadToImgurTask extends AsyncTask<String, Void, String> {
 
             final JSONObject json = new JSONObject(response_string);
 
-            Log.d("JSON", json.toString()); //for my own understanding
-
             return json.getJSONObject("data").optString("link");
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,9 +81,9 @@ public class UploadToImgurTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         // Mandar link (Result) al servidor
-        System.out.println("LLLLLL: "+result);
         if (result != null){
-
+            Imagen imagen = new Imagen(Utilities.getUserIdFacebook(ctx), ValidacionPlaya.playa.idserver, "", Utilities.getUserNameFacebook(ctx), new Date(), result);
+            Request.nuevaImagenPlaya(ctx, imagen, pd);
         } else {
             if ((pd != null) && (pd.isShowing()))
                 pd.dismiss();

@@ -15,6 +15,7 @@ import com.facebook.android.Util;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Comentario;
+import com.odc.beachodc.db.models.Imagen;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.Geo;
@@ -28,6 +29,7 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -196,7 +198,7 @@ public class Request {
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.e("Error: ", error.getMessage());
                     ValidacionPlaya.cargadaPlayas=true;
-                    if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd.isShowing())) {
+                    if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd != null) && (pd.isShowing())) {
                         pd.dismiss();
                     }
                 }
@@ -206,7 +208,7 @@ public class Request {
             Config.addToRequestQueue(ctx, req);
         } else {
             ValidacionPlaya.cargadaPlayas=true;
-            if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd.isShowing())) {
+            if ((ValidacionPlaya.cargadosUltimosCheckins) && (pd != null) && (pd.isShowing())) {
                 pd.dismiss();
             }
         }
@@ -224,7 +226,7 @@ public class Request {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
                 ValidacionPlaya.cargadosUltimosCheckins=true;
-                if ((ValidacionPlaya.cargadaPlayas) && (pd.isShowing())) {
+                if ((ValidacionPlaya.cargadaPlayas) && (pd != null) && (pd.isShowing())) {
                     pd.dismiss();
                 }
             }
@@ -252,7 +254,7 @@ public class Request {
                     public void onErrorResponse(VolleyError error) {
                         VolleyLog.e("Error: ", error.getMessage());
                         pd.dismiss();
-                        Crouton.makeText(activity, R.string.unknown, Style.ALERT).show();
+                        Crouton.makeText(activity, R.string.error_unknown, Style.ALERT).show();
                     }
         });
 
@@ -321,6 +323,29 @@ public class Request {
         Config.addToRequestQueue(ctx, req);
     }
 
+    public static void getImagenesPlaya (final Context ctx, String idPlaya, final ProgressDialog pd, final Intent intent){
+        final String URL = Config.getURLServer(ctx)+"/imagenesplaya/"+idPlaya;
+        ValidacionPlaya.imagenes = new ArrayList<Imagen>();
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
+            @Override
+            public void onResponse(JSONArray response) {
+                com.odc.beachodc.webservices.Response.responseGetImagenesPlaya(ctx, response, pd, intent);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                ValidacionPlaya.cargadaImagenes=true;
+                if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
+                    pd.dismiss();
+                }
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
+    }
+
     public static void getComentariosPlaya (final Context ctx, String idPlaya, final ProgressDialog pd, final Intent intent){
         final String URL = Config.getURLServer(ctx)+"/comentariosplaya/"+idPlaya;
         ValidacionPlaya.comentariosPlaya = new ArrayList<Comentario>();
@@ -367,6 +392,35 @@ public class Request {
 
         // add the request object to the queue to be executed
         Config.addToRequestQueue(ctx, req);
+    }
+
+    public static void nuevaImagenPlaya (final Activity activity, final Imagen imagen, final ProgressDialog pd) {
+        final String URL = Config.getURLServer(activity)+"/nuevaimagen/"+imagen.idplaya+"/"+imagen.idfbautor;
+
+        // Post params to be sent to the server
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("nombreAutor", imagen.nombreautor);
+        params.put("comentario", imagen.comentario);
+        params.put("link", imagen.link);
+        params.put("fecha", formatFecha(imagen.fecha));
+
+        JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        com.odc.beachodc.webservices.Response.responseNuevaImagenPlaya(activity, response, pd, imagen);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                pd.dismiss();
+                Crouton.makeText(activity, R.string.error_unknown, Style.ALERT).show();
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(activity, req);
     }
 
 
