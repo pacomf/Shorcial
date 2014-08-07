@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shorcial</string>
+
+    <string name="server_ip">http://ec2-54-72-133-37.eu-west-1.compute.amazonaws.com</string>
+    <string name="server_port">1479</string>
+
+    <string name="clientid_imgur">e29cd388bb8b764</string>
+    <string name="clientsecret_imgur">4e46a425b115cae945d7f0f5d3944660599d764c</string>
+
+    <string name="title_activity_inicio">Shorcial</string>
+    <string name="title_section_mis_datos">Mes Données</string>
+    <string name="title_section_playas_cercanas">Plages Proches</string>
+    <string name="title_section_mapa_playas">Carte</string>
+    <string name="title_activity_edicion">Éditer Plage</string>
+    <string name="title_activity_valoracion">Évaluez la Plage</string>
+    <string name="title_activity_mensaje_botella">Message en Bouteille</string>
+    <string name="title_activity_mensajes_botellas">Messages en Bouteille </string>
+    <string name="title_section_edit_infoplaya">Information</string>
+    <string name="title_section_edit_mapplaya">Localisation</string>
+    <string name="title_section_search_beach">Chercher Plage</string>
+    <string name="title_section_results_search_beach">Résultats de la Recherche</string>
+    <string name="title_section_see_beach">Info</string>
+    <string name="title_section_webcam_beach">Voir en Directe</string>
+    <string name="title_section_opinion_beach">Évaluations</string>
+    <string name="title_section_descubre_beach">Découvrez</string>
+
+    <string name="nuevo">Plage Nouvelle</string>
+    <string name="save">Guarder</string>
+    <string name="refresh">Actualiser</string>
+    <string name="inform">Informer Plage Incorrecte</string>
+    <string name="search">Rechercher</string>
+    <string name="update_image">Actualiser image</string>
+    <string name="nueva_valoracion">Nouvelle Évaluation</string>
+
+    <string name="grados_centigrados">ºC</string>
+
+    <string name="title_search_by_name">Rechercher par Noit</string>
+    <string name="title_search_by_name_placeholder">Indiquez le Nom de la Plage</string>
+    <string name="title_search_by_address_placeholder">Indiquez la Rue ou Clique Sur la Carte</string>
+    <string name="title_search_by_address">Rechercher par Rapprochement d'une Position</string>
+
+    <string name="title_checkins">Checkins</string>
+    <string name="last_checkins">Derniers Checkins</string>
+
+    <string name="mostrar_ruta">Comment arriver à la plage</string>
+
+    <string name="no_internet">On n'a pas détecté de CONNECTION À INTERNET ou celle disponible est très faible</string>
+
+    <string name="app_id_facebook">333380730146158</string>
+    <string name="app_key_google_apis_web">AIzaSyClBprsTLkbUoiFhHUtSLHpWt0GHc5vGF0</string>
+
+    <!-- IVAN: AIzaSyA_PYveEBI_o0wGU85y4__BbSIKJLLqinc
+         PACO: AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs
+     -->
+    <string name="app_key_play_services">AIzaSyBBgC6pax3qlZDpHOqV1BArBgCLpN85TZs</string>
+
+
+    <string name="title_beach">Nom de la Plage</string>
+    <string name="title_extras_beach">Caractéristiques de la Plage</string>
+    <string name="title_beach_placeholder">Introduisez le Nom de la Plage</string>
+    <string name="title_banderaazul">La Plage A-t'elle le Drapeau Bleu?</string>
+    <string name="title_dificultadacceso">Difficulté d'accès à la Plage</string>
+    <string name="title_limpieza">Propreté de la Plage</string>
+    <string name="title_tipodearena">Type de sable</string>
+    <string name="title_rompeolas">La Plage a-t'elle un Brise-lames?</string>
+    <string name="title_hamacas">La Plage a-t'elle des Chaises-longues?</string>
+    <string name="title_sombrillas">La Plage a-t'elle des Parasols?</string>
+    <string name="title_chiringuitos">La Plage a-t'elle des Tronques de Plage?</string>
+    <string name="title_duchas">La Plage a-t'elle des duches?</string>
+    <string name="title_socorrista">La Plage a-t'elle un Surveillant de Plage?</string>
+
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="unknown">On ne sait pas</string>
+
+    <string name="easy">Facile</string>
+    <string name="medium">Moderée</string>
+    <string name="hard">Extrême</string>
+
+    <string name="muylimpia">Très Propre</string>
+    <string name="limpia">Propre</string>
+    <string name="sucia">Sale</string>
+
+    <string name="negra">Noir</string>
+    <string name="blanca">Blanc</string>
+    <string name="rocas">Des Rochers</string>
+
+    <string name="address_placeholder">Introduisez une adresse</string>
+
+    <string name="logout">Abandonner la session</string>
+
+    <string name="esperar">Amendez s'il vous plaît ...</string>
+    <string name="procesando">En procès ...</string>
+
+    <string name="puntuacion">Évaluez la Plage!</string>
+    <string name="comentario">Commentez la Plage!</string>
+    <string name="enviar_comentario">Envoyer commentaire</string>
+    <string name="enviar_mensaje">Lancer un message!</string>
+    <string name="mensaje_botella_title">Écrivez votre message!</string>
+    <string name="comment_beach_placeholder">Indroduisez un nouveau commentaire à propos de la plage en 190 caratères maximum ... </string>
+    <string name="enviar_mensaje_aleatorio_checkbox">Envoyer vers une plage aléatoire</string>
+    <string name="message_bottle_beach_placeholder">Écrivez votre message que nous capturerons dans une bouteille por qu'une autre personne puisse le récevoir</string>
+    <string name="touch_reload">Cliquez pour recharger</string>
+    <string name="ver_mapa">Voir sur la Carte</string>
+    <string name="ver_lista">Voir sur la Liste</string>
+
+
+    <string name="question">\?</string>
+
+    <string name="meters">m.</string>
+    <string name="kilometers">km.</string>
+
+    <string name="playacreada">La Plage a été incorporé avec SUCCÈS</string>
+    <string name="playaeditada">Les Données de la plage ont été incorporées</string>
+    <string name="checkinexito">Vous avez réalisé CHECKIN avec SUCCÈS!</string>
+    <string name="checkinrepetido">Vous avez réalisé CHECKIN sur cette plage aujoud'hui!</string>
+    <string name="valoracionrepetida">Vous avez réalisé COMMENTÉS sur cette plage aujoud'hui!</string>
+    <string name="nocheckin">Vous devez être sur la plage pour faire CHECKIN!</string>
+    <string name="nuevomensajebotella">Le MESSAGE a été lancé à la MER en BOUTEILLE!</string>
+    <string name="nuevavaloracion">Vous avez COMMENTÉ CORRECTEMENT la plage!</string>
+
+    <string name="peticionborrado">On a informé CORRECTEMENT que vous considérez la plage comme étant non valable!</string>
+
+    <string name="no_checkins">Vous n'avez pas réalisé aucun CHECKIN</string>
+    <string name="primer_checkin">Explorez une plage et faires CHECKIN sur elle</string>
+
+    <string name="no_playas">Il n'y a pas de plage à moins de 20km</string>
+
+    <string name="no_busqueda">Il n'y a pas de la plage répondant aux critères de recherche introduits</string>
+
+    <string name="no_comentarios">Il n'y a pas d'évaluations!</string>
+    <string name="primer_comentario">Vous êtes le premier à ÈVALUER!</string>
+    <string name="no_mensajes">Personne encore n'a LANCÉ de messages en BOUTEILLE</string>
+    <string name="existe_playa">Il y a déjà una plage sur cette localisation!</string>
+
+    <string name="primer_mensaje">Vous êtes le premier à en écrire un!</string>
+    <string name="no_gps">On n'a pas détecté de position GPS, Activez-le el essayez de nouveau!</string>
+
+    <string name="error_problemautocompletado"> ERREUR dans l'andresse, introduisez de nouveau l'adresse</string>
+    <string name="error_localizacion">Vous devez indiquer une LOCALISATION VALABLE</string>
+    <string name="error_nombre">Vous devez indiquer une NOM VALABLE</string>
+    <string name="error_bbdd">Il y a eu une ERREUR en guardant dans la base de données, contactez avec l'administrateur.</string>
+    <string name="error_valoracion">Vous devez évaluer minimum la plage</string>
+    <string name="error_mensaje">Vous devez écrire un MESSAGE si vous voulez l'envoyer</string>
+    <string name="error_search_name">Vous devez indiquer une ADRESSE pour pouvoir éffectuer une RECHERCHE</string>
+    <string name="error_search_address">Vous devez écrire un NOM pour pouvoir éffectuer une RECHERCHE</string>
+    <string name="error_unknown">ERREUR UNCONNUE, recommencez ou contactez l'admionistrateur</string>
+
+    <string name="info_banderaazul_si">La plage posède un DRAPEAU BLEU</string>
+    <string name="info_banderaazul_no">La plage posède pas de DRAPEAU BLEU</string>
+
+    <string name="info_acceso_extremo">La DIFFICULTÉ D'ACCÈS à la plage est EXTRÊME</string>
+    <string name="info_acceso_medio">La DIFFICULTÉ D'ACCÈS à la plage est MODÉRÉE</string>
+    <string name="info_acceso_facil">La DIFFICULTÉ D'ACCÈS à la plage est FACILE</string>
+
+    <string name="info_limpieza_alta">La plage est TRÈS PROPRE</string>
+    <string name="info_limpieza_media">La plage est PROPRE</string>
+    <string name="info_limpieza_baja">La plage est SALE</string>
+
+    <string name="info_arena_negra">La plage est de SABLE NOIR</string>
+    <string name="info_arena_blanca">La plage est de SABLE BLANC</string>
+    <string name="info_arena_roca">La plage est de CAILLOUX OU ROCHERS</string>
+
+    <string name="info_hamacas_si">La plage dispose de CHAISES LONGUES DE PLAGE</string>
+    <string name="info_hamacas_no">La plage NE dispose PAS de CHAISES LONGUES DE PLAGE</string>
+
+    <string name="info_chiringuitos_si">La plage dispose de TRONQUETS DE PLAGE</string>
+    <string name="info_chiringuitos_no">La plage NE dispose PAS de TRONQUETS DE PLAGE</string>
+
+    <string name="info_duchas_si">La plage dispose de DUCHES</string>
+    <string name="info_duchas_no">La plage NE dispose PAS de DUCHES</string>
+
+    <string name="info_rompeolas_si">La plage dispose de BRISE-LAMES</string>
+    <string name="info_rompeolas_no">La plage NE dispose PAS de BRISE-LAMES</string>
+
+    <string name="info_sombrillas_si">La plage dispose de PARASOLS</string>
+    <string name="info_sombrillas_no">La plage NE dispose PAS de PARASOLS</string>
+
+    <string name="info_socorrista_si">La plage dispose de SURVEILLANT DE PLAGE</string>
+    <string name="info_socorrista_no">La plage NE dispose PAS de SURVEILLANT DE PLAGE</string>
+
+    <string name="procesando_espere">En cours de procès... attendez s'il vous plaît...</string>
+
+    <string name="title_section_images_beach">Photos</string>
+    <string name="title_choose_image">Choisissez une option</string>
+    <string name="description_choose_image">Où voulez-vous de sélectionner l'image?</string>
+    <string name="choose_gallery">Galerie</string>
+    <string name="choose_camera">Prendre une photo</string>
+    <string name="upload_ok">Vous avez téléchargé LA PHOTO AVEC SUCCÈS!</string>
+    <string name="upload_photo">Ajouter une nouvelle image!</string>
+    <string name="update_pictures">Recharger Photos</string>
+
+    <string name="no_photos">Vous êtes le premier à ajouter une photo!</string>
+
+</resources>
