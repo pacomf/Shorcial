@@ -194,4 +194,7 @@
 
     <string name="no_photos">Be the first to ADD A PICTURE!</string>
 
+    <string name="no_gps_title">GPS is disabled in your device. Would you like to enable it?</string>
+    <string name="go_to_gps">Go to Enable GPS</string>
+
 </resources>

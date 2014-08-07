@@ -102,6 +102,9 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                 if (ValidacionPlaya.playasCheckins != null){
                     misDatosFragment.setPlayas(ValidacionPlaya.playasCheckins);
                 }
+                if (Geo.myLocation == null){
+                    Geo.checkGPSandAlert(activity);
+                }
             }
         });
 
@@ -116,9 +119,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                                 wait(4000);
                             }
                         } catch (InterruptedException ex) {
-                        }
-                        if (Geo.myLocation == null){
-                            Crouton.makeText(activity, getString(R.string.no_gps), Style.ALERT).show();
                         }
                         Request.getPlayasCercanas(activity, pd);
                         Request.getUltimosCheckins(activity, pd);

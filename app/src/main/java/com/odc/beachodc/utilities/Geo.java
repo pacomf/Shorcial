@@ -1,6 +1,10 @@
 package com.odc.beachodc.utilities;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -31,6 +35,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Comparator;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 /**
  * Created by Paco on 07/07/2014.
@@ -244,6 +251,25 @@ public class Geo {
             }
         }
         return false;
+    }
+
+    public static void checkGPSandAlert (final Context ctx){
+        if (!((LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ctx);
+            alertDialogBuilder
+                    .setMessage(ctx.getString(R.string.no_gps_title))
+                    .setCancelable(true)
+                    .setPositiveButton(ctx.getString(R.string.go_to_gps),
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    ctx.startActivity(callGPSSettingIntent);
+                                }
+                            });
+
+            AlertDialog alert = alertDialogBuilder.create();
+            alert.show();
+        }
     }
 
 

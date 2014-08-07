@@ -6,6 +6,9 @@
     <string name="server_ip">http://ec2-54-72-133-37.eu-west-1.compute.amazonaws.com</string>
     <string name="server_port">1479</string>
 
+    <string name="clientid_imgur">e29cd388bb8b764</string>
+    <string name="clientsecret_imgur">4e46a425b115cae945d7f0f5d3944660599d764c</string>
+
     <string name="title_activity_inicio">Shorcial</string>
     <string name="title_section_mis_datos">Mis Datos</string>
     <string name="title_section_playas_cercanas">Playas Cercanas</string>
@@ -189,5 +192,8 @@
     <string name="update_pictures">Recargar Imágenes</string>
 
     <string name="no_photos">¡Sé el PRIMERO en añadir una FOTO!</string>
+
+    <string name="no_gps_title">El GPS está deshabilitado. ¿Desea habilitarlo?</string>
+    <string name="go_to_gps">Ir a Habilitar GPS</string>
 
 </resources>
