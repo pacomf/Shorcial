@@ -182,8 +182,16 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
 
                         if (bitmap == null) {
                             Crouton.makeText(getActivity(), getString(R.string.error_unknown), Style.ALERT).show();
+                            pd.dismiss();
                             return;
                         }
+
+                        pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialogInterface) {
+                                updateImages();
+                            }
+                        });
 
                         Image.enviarImagen(getActivity(), bitmap, pd);
 

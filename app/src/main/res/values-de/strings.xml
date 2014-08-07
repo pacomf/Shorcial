@@ -175,10 +175,19 @@
     <string name="info_socorrista_si">Es gibt Rettungsschwimmer</string>
     <string name="info_socorrista_no">Es gibt keinen Rettungsschwimmer</string>
 
-
-
     <string name="existe_playa">Es gibt einen Strand in der gleichen Lage.</string>
     <string name="procesando_espere">In Bearbeitung... Warten Sie bitter...</string>
     <string name="valoracionrepetida">Sie haben schon ihren Beurteilung in diesem Strand gemacht für HEUTE!</string>
+
+    <string name="title_section_images_beach">Fotos</string>
+    <string name="title_choose_image">Wählen Sie eine Option</string>
+    <string name="description_choose_image">Wo sehen Sie das Bild auswählen?</string>
+    <string name="choose_gallery">Galerie</string>
+    <string name="choose_camera">Nehmen Sie ein Bild</string>
+    <string name="upload_ok">Sie haben erfolgreich Fotografie!</string>
+    <string name="upload_photo">Ein neues Bild hinzufügen!</string>
+    <string name="update_pictures">Seite neu laden Bilder</string>
+
+    <string name="no_photos">Seien Sie der erste der nehmen sie ein bild!</string>
 
 </resources>

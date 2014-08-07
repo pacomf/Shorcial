@@ -117,6 +117,9 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                             }
                         } catch (InterruptedException ex) {
                         }
+                        if (Geo.myLocation == null){
+                            Crouton.makeText(activity, getString(R.string.no_gps), Style.ALERT).show();
+                        }
                         Request.getPlayasCercanas(activity, pd);
                         Request.getUltimosCheckins(activity, pd);
                     }

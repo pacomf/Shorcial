@@ -199,23 +199,29 @@ public class PlayasFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         if (Utilities.haveInternet(getActivity())) {
-                            ValidacionPlaya.cargadosUltimosCheckins = true;
-                            ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                            pd.setIndeterminate(false);
-                            pd.setCancelable(false);
-                            pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                @Override
-                                public void onDismiss(DialogInterface dialogInterface) {
-                                    if (ValidacionPlaya.playas != null) {
-                                        setPlayas(ValidacionPlaya.playas);
-                                        playasAdapter.notifyDataSetChanged();
+                            if (Geo.myLocation == null){
+                                Crouton.cancelAllCroutons();
+                                Crouton.makeText(getActivity(), getString(R.string.no_gps), Style.ALERT).show();
+                                return;
+                            } else {
+                                ValidacionPlaya.cargadosUltimosCheckins = true;
+                                ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                                pd.setIndeterminate(false);
+                                pd.setCancelable(false);
+                                pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialogInterface) {
+                                        if (ValidacionPlaya.playas != null) {
+                                            setPlayas(ValidacionPlaya.playas);
+                                            playasAdapter.notifyDataSetChanged();
+                                        }
+                                        if (layoutMapa.getVisibility() == View.VISIBLE) {
+                                            setPlayasMapas();
+                                        }
                                     }
-                                    if (layoutMapa.getVisibility() == View.VISIBLE) {
-                                        setPlayasMapas();
-                                    }
-                                }
-                            });
-                            Request.getPlayasCercanas(getActivity(), pd);
+                                });
+                                Request.getPlayasCercanas(getActivity(), pd);
+                            }
                         } else {
                             Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
                         }
@@ -285,6 +291,11 @@ public class PlayasFragment extends Fragment {
             });
 
             setPlayasMapas();
+
+            if (Geo.myLocation == null){
+                Crouton.cancelAllCroutons();
+                Crouton.makeText(getActivity(), getString(R.string.no_gps), Style.ALERT).show();
+            }
 
             return rootView;
         }
