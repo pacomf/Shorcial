@@ -10,7 +10,11 @@ import android.support.v4.app.FragmentTransaction;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
+
+import java.util.ArrayList;
 
 public class Logout extends FragmentActivity {
 
@@ -110,6 +114,7 @@ public class Logout extends FragmentActivity {
         Intent intent = new Intent(this, Inicio.class);
         // Para borrar el historial del botón atrás y no permitir hacer nada en eso boton ya que nos hemos deslogueado
         Utilities.storeRegistrationId(this, "", "");
+        ValidacionPlaya.playasCheckins = new ArrayList<Playa>();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

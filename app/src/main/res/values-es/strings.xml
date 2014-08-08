@@ -196,4 +196,11 @@
     <string name="no_gps_title">El GPS está deshabilitado. ¿Desea habilitarlo?</string>
     <string name="go_to_gps">Ir a Habilitar GPS</string>
 
+    <string name="access_no_login"><u>Entrar como Anónimo</u></string>
+    <string name="need_login">NECESITAS estar Logueado para realizar esta acción</string>
+    <string name="anonymous">Anónimo</string>
+    <string name="no_login">NO estás Logueado</string>
+    <string name="login">Ir a Loguearse</string>
+    <string name="cancel">Cancelar</string>
+
 </resources>

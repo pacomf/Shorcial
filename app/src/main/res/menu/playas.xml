@@ -9,8 +9,8 @@
 
     <item android:id="@+id/menu_editar"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/save"
-        android:showAsAction="ifRoom" />
+        android:title="@string/title_activity_edicion"
+        android:showAsAction="never" />
 
     <item android:id="@+id/menu_logout"
         android:title="@string/logout"

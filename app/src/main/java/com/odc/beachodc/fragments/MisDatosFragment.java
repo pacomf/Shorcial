@@ -91,12 +91,16 @@ public class MisDatosFragment extends Fragment {
             noCheckins = (RelativeLayout) rootView.findViewById(R.id.nocheckins);
 
             try {
-                foto.setCropped(true);
-                foto.setProfileId(Utilities.getUserIdFacebook(getActivity()));
                 Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/aSongforJenniferBold.ttf");
                 nombre.setTypeface(tf);
                 titleCheckins.setTypeface(tf);
-                nombre.setText(Utilities.getUserNameFacebook(getActivity()));
+                foto.setCropped(true);
+                if (!Utilities.isAnonymous(getActivity())) {
+                    foto.setProfileId(Utilities.getUserIdFacebook(getActivity()));
+                    nombre.setText(Utilities.getUserNameFacebook(getActivity()));
+                } else {
+                    nombre.setText(getString(R.string.anonymous));
+                }
             } catch (Exception e){}
 
             listView = (ListView) rootView.findViewById(R.id.listaPlayasUltimosCheckin);
@@ -139,23 +143,27 @@ public class MisDatosFragment extends Fragment {
             recargar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (Utilities.haveInternet(getActivity())) {
-                        ValidacionPlaya.cargadaPlayas= true;
-                        ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                        pd.setIndeterminate(false);
-                        pd.setCancelable(false);
-                        pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialogInterface) {
-                                if (ValidacionPlaya.playasCheckins != null) {
-                                    setPlayas(ValidacionPlaya.playasCheckins);
-                                    playasAdapter.notifyDataSetChanged();
-                                }
-                            }
-                        });
-                        Request.getUltimosCheckins(getActivity(), pd);
+                    if (Utilities.isAnonymous(getActivity())){
+                        Utilities.goToLoginAsking(getActivity());
                     } else {
-                        Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        if (Utilities.haveInternet(getActivity())) {
+                            ValidacionPlaya.cargadaPlayas = true;
+                            ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                            pd.setIndeterminate(false);
+                            pd.setCancelable(false);
+                            pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialogInterface) {
+                                    if (ValidacionPlaya.playasCheckins != null) {
+                                        setPlayas(ValidacionPlaya.playasCheckins);
+                                        playasAdapter.notifyDataSetChanged();
+                                    }
+                                }
+                            });
+                            Request.getUltimosCheckins(getActivity(), pd);
+                        } else {
+                            Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        }
                     }
                 }
             });

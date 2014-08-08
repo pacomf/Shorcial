@@ -92,26 +92,30 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
         uploadBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Utilities.haveInternet(getActivity())) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-                    builder.setMessage(getString(R.string.description_choose_image))
-                            .setTitle(getString(R.string.title_choose_image))
-                            .setPositiveButton(getString(R.string.choose_gallery), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    chooseImage();
-                                    dialog.cancel();
-                                }
-                            })
-                            .setNegativeButton(getString(R.string.choose_camera), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    takePicture();
-                                    dialog.cancel();
-                                }
-                            });
-                    builder.show();
+                if (Utilities.isAnonymous(getActivity())){
+                    Utilities.goToLoginAsking(getActivity());
                 } else {
-                    Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                    if (Utilities.haveInternet(getActivity())) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                        builder.setMessage(getString(R.string.description_choose_image))
+                                .setTitle(getString(R.string.title_choose_image))
+                                .setPositiveButton(getString(R.string.choose_gallery), new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        chooseImage();
+                                        dialog.cancel();
+                                    }
+                                })
+                                .setNegativeButton(getString(R.string.choose_camera), new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        takePicture();
+                                        dialog.cancel();
+                                    }
+                                });
+                        builder.show();
+                    } else {
+                        Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                    }
                 }
             }
         });

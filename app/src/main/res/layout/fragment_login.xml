@@ -11,4 +11,16 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="85dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_button_anonymous"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:textStyle="italic"
+        android:textColor="@drawable/text_color"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/access_no_login"/>
+
 </RelativeLayout>

@@ -196,4 +196,11 @@
     <string name="no_gps_title">GPS wird in Ihrem Gerät deaktiviert. Möchten Sie es aktivieren?</string>
     <string name="go_to_gps">Zum GPS aktivieren</string>
 
+    <string name="access_no_login"><u>Melden Sie sich als Anonymer</u></string>
+    <string name="need_login">Sie müssen sich einloggen, um diese Aktion durchzuführen</string>
+    <string name="anonymous">Anonymer</string>
+    <string name="no_login">Sie sind nicht angemeldet</string>
+    <string name="login">Zum einloggen</string>
+    <string name="cancel">Stornieren</string>
+
 </resources>

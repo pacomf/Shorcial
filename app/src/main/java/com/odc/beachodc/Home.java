@@ -121,13 +121,28 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
                         } catch (InterruptedException ex) {
                         }
                         Request.getPlayasCercanas(activity, pd);
-                        Request.getUltimosCheckins(activity, pd);
+                        if (!Utilities.isAnonymous(activity)){
+                            Request.getUltimosCheckins(activity, pd);
+                        } else {
+                            ValidacionPlaya.cargadosUltimosCheckins=true;
+                            if ((ValidacionPlaya.cargadaPlayas) && (pd != null) && (pd.isShowing())) {
+                                pd.dismiss();
+                            }
+                        }
+
                     }
                 };
                 thread.start();
             } else {
                 Request.getPlayasCercanas(this, pd);
-                Request.getUltimosCheckins(this, pd);
+                if (!Utilities.isAnonymous(this)){
+                    Request.getUltimosCheckins(this, pd);
+                } else {
+                    ValidacionPlaya.cargadosUltimosCheckins=true;
+                    if ((ValidacionPlaya.cargadaPlayas) && (pd != null) && (pd.isShowing())) {
+                        pd.dismiss();
+                    }
+                }
             }
         } else {
             pd.dismiss();
@@ -194,21 +209,29 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                if (Utilities.haveInternet(this)) {
-                    Intent intent = new Intent(this, Logout.class);
-                    startActivity(intent);
+                if (Utilities.isAnonymous(this)) {
+                    Crouton.makeText(activity, activity.getString(R.string.need_login), Style.ALERT).show();
                 } else {
-                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    if (Utilities.haveInternet(this)) {
+                        Intent intent = new Intent(this, Logout.class);
+                        startActivity(intent);
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
                 }
                 return true;
 
             case R.id.menu_nuevo:
-                if (Utilities.haveInternet(this)) {
-                    Intent intentN = new Intent(this, EdicionPlaya.class);
-                    intentN.putExtra("nuevo", true);
-                    startActivity(intentN);
+                if (Utilities.isAnonymous(this)){
+                    Utilities.goToLoginAsking(this);
                 } else {
-                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    if (Utilities.haveInternet(this)) {
+                        Intent intentN = new Intent(this, EdicionPlaya.class);
+                        intentN.putExtra("nuevo", true);
+                        startActivity(intentN);
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
                 }
                 return true;
 

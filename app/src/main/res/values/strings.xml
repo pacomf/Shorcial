@@ -197,4 +197,11 @@
     <string name="no_gps_title">GPS is disabled in your device. Would you like to enable it?</string>
     <string name="go_to_gps">Go to Enable GPS</string>
 
+    <string name="access_no_login"><u>Login as Anonymous</u></string>
+    <string name="need_login">You NEED to Log In to perform that action</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="no_login">You are NOT Logged</string>
+    <string name="login">Go to Log In</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

@@ -53,11 +53,15 @@ public class ValoracionesFragment extends Fragment {
             nuevaValoracion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (Utilities.haveInternet(getActivity())) {
-                        Intent intentV = new Intent(getActivity(), ValoracionPlaya.class);
-                        startActivity(intentV);
+                    if (Utilities.isAnonymous(getActivity())){
+                        Utilities.goToLoginAsking(getActivity());
                     } else {
-                        Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        if (Utilities.haveInternet(getActivity())) {
+                            Intent intentV = new Intent(getActivity(), ValoracionPlaya.class);
+                            startActivity(intentV);
+                        } else {
+                            Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        }
                     }
                 }
             });

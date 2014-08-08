@@ -1,9 +1,12 @@
 package com.odc.beachodc.utilities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -30,6 +33,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.odc.beachodc.Home;
 import com.odc.beachodc.Inicio;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Checkin;
@@ -383,6 +387,41 @@ public class Utilities {
 
     public static String getURIIconWeather (String icon){
         return "http://openweathermap.org/img/w/"+icon+".png";
+    }
+
+    public static boolean isAnonymous (Context ctx){
+        if ((Utilities.getUserIdFacebook(ctx) == null) || (Utilities.getUserIdFacebook(ctx) == "")){
+            return true;
+        }
+        return false;
+    }
+
+    public static void goToLoginAsking (final Activity activity){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+        alertDialogBuilder
+                .setTitle(activity.getString(R.string.no_login))
+                .setMessage(activity.getString(R.string.need_login))
+                .setCancelable(true)
+                .setNegativeButton(activity.getString(R.string.cancel),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                                Crouton.cancelAllCroutons();
+                                Crouton.makeText(activity, activity.getString(R.string.need_login), Style.ALERT).show();
+                            }
+                        })
+                .setPositiveButton(activity.getString(R.string.login),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(activity, Inicio.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                activity.startActivity(intent);
+                                activity.finish();
+                            }
+                        });
+
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
 }

@@ -5,12 +5,12 @@
     <item android:id="@+id/menu_informar"
         android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/inform"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="never" />
 
     <item android:id="@+id/menu_editar"
         android:icon="@android:drawable/ic_menu_edit"
         android:title="@string/save"
-        android:showAsAction="ifRoom" />
+        android:showAsAction="never" />
 
     <item android:id="@+id/menu_logout"
         android:title="@string/logout"

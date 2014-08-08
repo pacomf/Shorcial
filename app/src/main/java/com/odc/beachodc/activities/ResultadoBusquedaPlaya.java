@@ -22,6 +22,9 @@ import com.odc.beachodc.utilities.ValidacionPlaya;
 
 import java.util.Locale;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 
 public class ResultadoBusquedaPlaya extends FragmentActivity implements ActionBar.TabListener {
 
@@ -100,8 +103,16 @@ public class ResultadoBusquedaPlaya extends FragmentActivity implements ActionBa
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                Intent intent = new Intent(this, Logout.class);
-                startActivity(intent);
+                if (Utilities.isAnonymous(this)) {
+                    Crouton.makeText(this, getString(R.string.need_login), Style.ALERT).show();
+                } else {
+                    if (Utilities.haveInternet(this)) {
+                        Intent intent = new Intent(this, Logout.class);
+                        startActivity(intent);
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
+                }
                 return true;
             case android.R.id.home:
                 Intent intentH = new Intent(this, Home.class);

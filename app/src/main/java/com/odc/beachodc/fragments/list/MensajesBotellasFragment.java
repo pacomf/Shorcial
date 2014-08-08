@@ -76,11 +76,15 @@ public class MensajesBotellasFragment extends Fragment {
             lanzarMensaje.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (Utilities.haveInternet(getActivity())) {
-                        Intent intentM = new Intent(getActivity(), NuevoMensajeBotellaPlaya.class);
-                        startActivity(intentM);
+                    if (Utilities.isAnonymous(getActivity())){
+                        Utilities.goToLoginAsking(getActivity());
                     } else {
-                        Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        if (Utilities.haveInternet(getActivity())) {
+                            Intent intentM = new Intent(getActivity(), NuevoMensajeBotellaPlaya.class);
+                            startActivity(intentM);
+                        } else {
+                            Crouton.makeText(getActivity(), getString(R.string.no_internet), Style.ALERT).show();
+                        }
                     }
                 }
             });

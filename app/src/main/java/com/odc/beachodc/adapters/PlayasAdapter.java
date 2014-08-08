@@ -171,16 +171,16 @@ public class PlayasAdapter extends BaseAdapter {
                 viewHolder.valoracionTV.setText(df.format(playa.valoracion).replace(".", ","));
                 if (playa.valoracion == 0){
                     viewHolder.valoracionTV.setText("-,-");
-                    viewHolder.valoracionTV.setTextColor(Color.rgb(238, 180, 0));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(155, 155, 155));
                 }else if (playa.valoracion < 3) {
                     viewHolder.valoracionTV.setTextColor(Color.rgb(189, 22, 13));
                 } else if (playa.valoracion < 4) {
-                    viewHolder.valoracionTV.setTextColor(Color.rgb(38, 130, 180));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(255, 149, 20));
                 } else if (playa.valoracion < 5) {
-                    viewHolder.valoracionTV.setTextColor(Color.rgb(0, 121, 0));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(238, 180, 0));
                 }
                 if (playa.valoracion == 5) {
-                    viewHolder.valoracionTV.setTextColor(Color.rgb(238, 180, 0));
+                    viewHolder.valoracionTV.setTextColor(Color.rgb(0, 121, 0));
                 }
 
             }

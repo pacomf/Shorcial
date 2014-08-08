@@ -197,4 +197,11 @@
     <string name="no_gps_title">GPS est désactivé dans votre appareil. Souhaitez-vous l\'activer?</string>
     <string name="go_to_gps">Aller \à activer le GPS</string>
 
+    <string name="access_no_login"><u>Connectez-vous en tant qu\'anonyme</u></string>
+    <string name="need_login">Vous devez vous connecter pour effectuer cette action</string>
+    <string name="anonymous">Anonyme</string>
+    <string name="no_login">Vous n\'êtes pas Identifié</string>
+    <string name="login">Allez vous identifier</string>
+    <string name="cancel">Annuler</string>
+
 </resources>

@@ -215,6 +215,13 @@ public class Request {
     }
 
     public static void getUltimosCheckins (final Context ctx, final ProgressDialog pd){
+        if (Utilities.isAnonymous(ctx)){
+            ValidacionPlaya.cargadosUltimosCheckins=true;
+            if ((ValidacionPlaya.cargadaPlayas) && (pd != null) && (pd.isShowing())) {
+                pd.dismiss();
+            }
+            return;
+        }
         final String URL = Config.getURLServer(ctx)+"/ultimoscheckins/"+ getUserIdFacebook(ctx);
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override

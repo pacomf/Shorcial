@@ -108,8 +108,16 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_logout:
-                Intent intent = new Intent(this, Logout.class);
-                startActivity(intent);
+                if (Utilities.isAnonymous(this)) {
+                    Crouton.makeText(this, getString(R.string.need_login), Style.ALERT).show();
+                } else {
+                    if (Utilities.haveInternet(this)) {
+                        Intent intent = new Intent(this, Logout.class);
+                        startActivity(intent);
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
+                }
                 return true;
             case R.id.menu_search:
                 if (Utilities.haveInternet(this)) {

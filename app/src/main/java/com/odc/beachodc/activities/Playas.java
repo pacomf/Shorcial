@@ -18,6 +18,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.odc.beachodc.Home;
+import com.odc.beachodc.Logout;
 import com.odc.beachodc.R;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
@@ -157,26 +158,34 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.menu_editar:
-                if (Utilities.haveInternet(this)) {
-                    Intent intent = new Intent(this, EdicionPlaya.class);
-                    intent.putExtra("nuevo", false);
-                    startActivity(intent);
+                if (Utilities.isAnonymous(this)){
+                    Utilities.goToLoginAsking(this);
                 } else {
-                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    if (Utilities.haveInternet(this)) {
+                        Intent intent = new Intent(this, EdicionPlaya.class);
+                        intent.putExtra("nuevo", false);
+                        startActivity(intent);
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
                 }
                 return true;
             case R.id.menu_checkin:
-                if (Utilities.haveInternet(this)) {
-                    if (isNear) {
-                        ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-                        pd.setIndeterminate(false);
-                        pd.setCancelable(true);
-                        Request.nuevoCheckinPlaya(this, new Checkin(ValidacionPlaya.playa.idserver, new Date(), Utilities.getUserIdFacebook(this)), pd);
-                    } else {
-                        Crouton.makeText(this, R.string.nocheckin, Style.ALERT).show();
-                    }
+                if (Utilities.isAnonymous(this)){
+                    Utilities.goToLoginAsking(this);
                 } else {
-                    Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    if (Utilities.haveInternet(this)) {
+                        if (isNear) {
+                            ProgressDialog pd = ProgressDialog.show(this, getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                            pd.setIndeterminate(false);
+                            pd.setCancelable(true);
+                            Request.nuevoCheckinPlaya(this, new Checkin(ValidacionPlaya.playa.idserver, new Date(), Utilities.getUserIdFacebook(this)), pd);
+                        } else {
+                            Crouton.makeText(this, R.string.nocheckin, Style.ALERT).show();
+                        }
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
                 }
                 return true;
             case android.R.id.home:
@@ -185,6 +194,19 @@ public class Playas extends FragmentActivity implements ActionBar.TabListener {
                 intentH.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentH);
                 finish();
+                return true;
+
+            case R.id.menu_logout:
+                if (Utilities.isAnonymous(this)) {
+                    Crouton.makeText(this, getString(R.string.need_login), Style.ALERT).show();
+                } else {
+                    if (Utilities.haveInternet(this)) {
+                        Intent intent = new Intent(this, Logout.class);
+                        startActivity(intent);
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
