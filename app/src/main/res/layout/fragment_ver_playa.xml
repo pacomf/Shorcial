@@ -42,15 +42,15 @@
 
                 <ImageView
                     android:id="@+id/v1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/tam_star"
+                    android:layout_height="@dimen/tam_star"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/star_off" />
 
                 <ImageView
                     android:id="@+id/v2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/tam_star"
+                    android:layout_height="@dimen/tam_star"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v1"
@@ -58,8 +58,8 @@
 
                 <ImageView
                     android:id="@+id/v3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/tam_star"
+                    android:layout_height="@dimen/tam_star"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v2"
@@ -67,8 +67,8 @@
 
                 <ImageView
                     android:id="@+id/v4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/tam_star"
+                    android:layout_height="@dimen/tam_star"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v3"
@@ -76,8 +76,8 @@
 
                 <ImageView
                     android:id="@+id/v5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/tam_star"
+                    android:layout_height="@dimen/tam_star"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/v4"
@@ -97,11 +97,11 @@
                 android:id="@+id/temp"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentRight="true"
-                android:textSize="40sp" />
+                android:textSize="@dimen/tam_temp" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/tam_icon"
+                android:layout_height="@dimen/tam_icon"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/nombreTV"
@@ -117,50 +117,50 @@
                 android:id="@+id/relativeLayout">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:layout_marginLeft="5dp"
                     android:id="@+id/banderaAzulImage"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/dificultadAccesoImage"
                     android:layout_toRightOf="@+id/banderaAzulImage"
                     android:layout_marginLeft="10dp"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/limpiezaImage"
                     android:layout_toRightOf="@+id/dificultadAccesoImage"
                     android:layout_marginLeft="10dp"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/tipoArenaImage"
                     android:layout_toRightOf="@+id/limpiezaImage"
                     android:layout_marginLeft="10dp"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/rompeolasImage"
                     android:layout_toRightOf="@+id/tipoArenaImage"
                     android:layout_marginLeft="10dp"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/hamacasImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="5dp"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/sombrillasImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -168,8 +168,8 @@
                     android:layout_toRightOf="@+id/hamacasImage"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/chiringuitosImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -177,8 +177,8 @@
                     android:layout_toRightOf="@+id/sombrillasImage"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/duchasImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
@@ -186,8 +186,8 @@
                     android:layout_toRightOf="@+id/chiringuitosImage"/>
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
                     android:id="@+id/socorristaImage"
                     android:layout_below="@+id/banderaAzulImage"
                     android:layout_marginTop="7dp"
