@@ -31,7 +31,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  */
 public class Response {
 
-    public static void responseGetPlaya(Context ctx, JSONArray response){
+    /*public static void responseGetPlaya(Context ctx, JSONArray response){
         Playa playa = null;
         boolean BBDDborrada = false;
         for (int i=0; i<response.length(); i++){
@@ -50,7 +50,7 @@ public class Response {
                 playa = null;
             }
         }
-    }
+    }*/
 
     public static void responseNuevaPlaya(Activity activity, JSONObject response){
         try {
@@ -61,11 +61,11 @@ public class Response {
                 Crouton.makeText(activity, R.string.existe_playa, Style.ALERT).show();
                 return;
             } else {
-                Playa playa = JSONToModel.toPlaya(response);
+                /*Playa playa = JSONToModel.toPlaya(response);
 
                 playa.setStatus(Entity.STATUS_NEW);
                 BBDD.getApplicationDataContext(activity).playasDao.add(playa);
-                BBDD.getApplicationDataContext(activity).playasDao.save();
+                BBDD.getApplicationDataContext(activity).playasDao.save();*/
 
                 Intent intent = new Intent(activity, Home.class);
                 intent.putExtra("creaplaya", true);

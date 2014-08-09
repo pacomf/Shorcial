@@ -24,6 +24,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.EdicionPlaya;
+import com.odc.beachodc.activities.LocationActivity;
 import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Playa;
@@ -45,7 +46,7 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class Home extends FragmentActivity implements ActionBar.TabListener {
+public class Home extends LocationActivity implements ActionBar.TabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -77,9 +78,6 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
         overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
 
         setContentView(R.layout.activity_home);
-
-        if (Geo.mLocationManager == null)
-            Geo.activeGPSLocation(this);
 
         activity = this;
 
@@ -307,7 +305,7 @@ public class Home extends FragmentActivity implements ActionBar.TabListener {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         //closing transition animations
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);

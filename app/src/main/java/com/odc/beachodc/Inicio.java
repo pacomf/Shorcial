@@ -23,10 +23,14 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.location.LocationClient;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.odc.beachodc.activities.LocationActivity;
 import com.odc.beachodc.db.BBDD;
 import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
@@ -39,7 +43,7 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class Inicio extends FragmentActivity {
+public class Inicio extends LocationActivity {
 
     Context context;
     Activity activity;
@@ -70,7 +74,7 @@ public class Inicio extends FragmentActivity {
         overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
         super.onCreate(savedInstanceState);
 
-        Geo.activeGPSLocation(this);
+        Utilities.checkGooglePlayServiceAvailability(this);
 
         Utilities.setImageLoader(this);
 
@@ -110,7 +114,6 @@ public class Inicio extends FragmentActivity {
             e.printStackTrace();
         }*/
 
-        BBDD.initBBDD(this);
     }
 
     @Override
@@ -128,6 +131,12 @@ public class Inicio extends FragmentActivity {
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
         System.gc();
         Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+
     }
 
     @Override
@@ -159,12 +168,17 @@ public class Inicio extends FragmentActivity {
 
             // Cada vez que la app se ponga en primer plano, comprobaremos si nuestra sesión de FB aun sigue vigente, para entrar directamente. Si ha caducado o hemos hecho logout, mostramos el fragment de Login.
             if (session != null && session.isOpened()) {
-                goToHome(session);
+                if (Utilities.checkGooglePlayServiceAvailability(this)) {
+                    goToHome(session);
+                }
             } else {
                 // otherwise present the splash screen and ask the user to login, unless the user explicitly skipped.
                 showFragment(LOGIN, false);
             }
         } else {
+            if (!Utilities.checkGooglePlayServiceAvailability(this)) {
+                return;
+            }
             if ((Utilities.getUserIdFacebook(this) != null) && (!Utilities.getUserIdFacebook(this).equals(""))) {
                 Intent intent = new Intent(activity, Home.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -187,7 +201,9 @@ public class Inicio extends FragmentActivity {
             // check for the OPENED state instead of session.isOpened() since for the
             // OPENED_TOKEN_UPDATED state, the selection fragment should already be showing.
             if (state.equals(SessionState.OPENED)) {
-                goToHome(session);
+                if (Utilities.checkGooglePlayServiceAvailability(this)) {
+                    goToHome(session);
+                }
             } else if (state.isClosed()) {
                 showFragment(LOGIN, false);
             }

@@ -27,7 +27,7 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
 
-public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListener {
+public class BuscarPlaya extends LocationActivity implements ActionBar.TabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -191,7 +191,7 @@ public class BuscarPlaya extends FragmentActivity implements ActionBar.TabListen
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         //closing transition animations
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);

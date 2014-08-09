@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.odc.beachodc.Home;
 import com.odc.beachodc.R;
+import com.odc.beachodc.utilities.Geo;
 import com.odc.beachodc.utilities.Utilities;
 
 
@@ -41,11 +42,15 @@ public class LoginFragment extends Fragment {
             login_anonymous.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utilities.storeRegistrationId(getActivity(), "", "");
-                    Intent intent = new Intent(getActivity(), Home.class);
-                    startActivity(intent);
+                    if (Utilities.checkGooglePlayServiceAvailability(getActivity())) {
+                        Utilities.storeRegistrationId(getActivity(), "", "");
+                        Intent intent = new Intent(getActivity(), Home.class);
+                        startActivity(intent);
+                    }
                 }
             });
+
+
 
             return rootView;
         }

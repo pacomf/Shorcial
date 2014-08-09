@@ -2,6 +2,7 @@ package com.odc.beachodc.utilities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -17,12 +18,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.model.LatLng;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -422,6 +426,22 @@ public class Utilities {
 
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+    }
+
+    public static boolean checkGooglePlayServiceAvailability(Activity activity) {
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(activity);
+
+        // Check Google Play Service Available
+        try {
+            if (status != ConnectionResult.SUCCESS) {
+                GooglePlayServicesUtil.getErrorDialog(status, activity, 1).show();
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            Log.e("Error: GooglePlayServiceUtil: ", "" + e);
+        }
+        return false;
     }
 
 }

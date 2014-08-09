@@ -42,7 +42,7 @@ import static com.odc.beachodc.utilities.Utilities.*;
  */
 public class Request {
 
-    public static void getPlayas (final Context ctx){
+    /*public static void getPlayas (final Context ctx){
         final String URL = Config.getURLServer(ctx)+"/playas";
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray> () {
             @Override
@@ -58,7 +58,7 @@ public class Request {
 
         // add the request object to the queue to be executed
         Config.addToRequestQueue(ctx, req);
-    }
+    }*/
 
     public static void editarPlaya (final Activity activity, Playa playa, final boolean isNew) {
         final String URL;

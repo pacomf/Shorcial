@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.BBDD;
@@ -45,8 +46,6 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class Geo {
 
     public static Location myLocation; // Ultima posicion conocida
-
-    public static LocationManager mLocationManager;
 
     //private static final int DEGREE_DISTANCE_AT_EQUATOR = 111329;
     /**
@@ -134,7 +133,7 @@ public class Geo {
     }
 
     //Radio en Metros
-    public static List<Playa> getPlayasCercanas(Context ctx, long latitud, long longitud, Double radio){
+    /*public static List<Playa> getPlayasCercanas(Context ctx, long latitud, long longitud, Double radio){
         ArrayList<Long> dimensiones = getXMeterAreaToPoint(latitud, longitud, radio);
         if (dimensiones.size()>0){
             List ret = new ArrayList<Playa>();
@@ -146,7 +145,7 @@ public class Geo {
             return ret;
         } else
             return new ArrayList<Playa>();
-    }
+    }*/
 
     private static final LocationListener mLocationListener = new LocationListener() {
         @Override
@@ -169,15 +168,6 @@ public class Geo {
 
         }
     };
-
-    public static void activeGPSLocation (Context ctx) {
-        Geo.mLocationManager = (LocationManager) ctx.getSystemService(ctx.LOCATION_SERVICE);
-
-        // Cada segundo renovamos la posicion, aunque no nos hayamos movido nada (0 metros)
-        Geo.mLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 1000, 0, mLocationListener);
-        Geo.mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, mLocationListener);
-        Geo.mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, mLocationListener);
-    }
 
     public static float getDistanceInMetersToMe (Double latitud, Double longitud){
         if (myLocation != null){

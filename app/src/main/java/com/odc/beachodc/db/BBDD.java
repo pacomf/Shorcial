@@ -20,7 +20,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
  */
 public class BBDD {
 
-    public static AppDataContext appDataContext;
+    /*public static AppDataContext appDataContext;
 
     public static void initBBDD (Context ctx){
         getApplicationDataContext(ctx);
@@ -35,7 +35,7 @@ public class BBDD {
             }
         }
         return BBDD.appDataContext;
-    }
+    }*/
 
     public static void guardarPlaya(Activity activity, Playa playa, boolean nuevo){
         // Enviamos al servidor la info y si responde bien, guardamos en local
