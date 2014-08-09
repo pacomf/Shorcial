@@ -32,12 +32,14 @@ import com.kbeanie.imagechooser.api.ImageChooserListener;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.odc.beachodc.R;
+import com.odc.beachodc.adapters.ComentariosAdapter;
 import com.odc.beachodc.db.models.Imagen;
 import com.odc.beachodc.utilities.AnimateFirstDisplayListener;
 import com.odc.beachodc.utilities.DescriptionAnimationSlider;
 import com.odc.beachodc.utilities.Image;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -275,7 +277,19 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
             }
 
         } else {
-            no_photos.setVisibility(View.VISIBLE);
+            ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+            pd.setIndeterminate(false);
+            pd.setCancelable(true);
+            pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    if ((ValidacionPlaya.imagenes != null) && (ValidacionPlaya.imagenes.size() > 0)) {
+                        no_photos.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+            Request.getImagenesPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, null);
+
         }
     }
 

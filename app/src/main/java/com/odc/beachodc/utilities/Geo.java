@@ -65,13 +65,13 @@ public class Geo {
      * This method extrapolates the endpoint of a movement with a given length from a given starting point using a given
      * course.
      *
-     * @param startPointLat the latitude of the starting point in degrees, must not be {@link Double#NaN}.
-     * @param startPointLon the longitude of the starting point in degrees, must not be {@link Double#NaN}.
-     * @param course        the course to be used for extrapolation in degrees, must not be {@link Double#NaN}.
-     * @param distance      the distance to be extrapolated in meters, must not be {@link Double#NaN}.
+     *  startPointLat the latitude of the starting point in degrees, must not be {@link Double#NaN}.
+     * startPointLon the longitude of the starting point in degrees, must not be {@link Double#NaN}.
+     * course        the course to be used for extrapolation in degrees, must not be {@link Double#NaN}.
+     * distance      the distance to be extrapolated in meters, must not be {@link Double#NaN}.
      *
      * @return the extrapolated point.
-     */
+
     public static ArrayList<Long> extrapolate(final double startPointLat, final double startPointLon, final double course,
                                               final double distance) {
         //
@@ -133,7 +133,7 @@ public class Geo {
     }
 
     //Radio en Metros
-    /*public static List<Playa> getPlayasCercanas(Context ctx, long latitud, long longitud, Double radio){
+    public static List<Playa> getPlayasCercanas(Context ctx, long latitud, long longitud, Double radio){
         ArrayList<Long> dimensiones = getXMeterAreaToPoint(latitud, longitud, radio);
         if (dimensiones.size()>0){
             List ret = new ArrayList<Playa>();
@@ -146,28 +146,6 @@ public class Geo {
         } else
             return new ArrayList<Playa>();
     }*/
-
-    private static final LocationListener mLocationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(final Location location) {
-            Geo.myLocation = location;
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
 
     public static float getDistanceInMetersToMe (Double latitud, Double longitud){
         if (myLocation != null){

@@ -101,7 +101,9 @@ public class Home extends LocationActivity implements ActionBar.TabListener {
                     misDatosFragment.setPlayas(ValidacionPlaya.playasCheckins);
                 }
                 if (Geo.myLocation == null){
-                    Geo.checkGPSandAlert(activity);
+                    try {
+                        Geo.checkGPSandAlert(activity);
+                    } catch (Exception e){}
                 }
             }
         });

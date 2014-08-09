@@ -1,6 +1,8 @@
 package com.odc.beachodc.fragments.list;
 
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import com.odc.beachodc.db.models.Comentario;
 import com.odc.beachodc.db.models.MensajeBotella;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
+import com.odc.beachodc.webservices.Request;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +39,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class ValoracionesFragment extends Fragment {
 
         ListView listView;
+        RelativeLayout novaloraciones;
 
         public ValoracionesFragment() {
             // Se ejecuta antes que el onCreateView
@@ -66,7 +70,7 @@ public class ValoracionesFragment extends Fragment {
                 }
             });
 
-            RelativeLayout novaloraciones = (RelativeLayout) rootView.findViewById(R.id.novaloraciones);
+            novaloraciones = (RelativeLayout) rootView.findViewById(R.id.novaloraciones);
 
             if ((ValidacionPlaya.comentariosPlaya == null) || (ValidacionPlaya.comentariosPlaya.size() == 0)){
                novaloraciones.setVisibility(View.VISIBLE);
@@ -75,6 +79,30 @@ public class ValoracionesFragment extends Fragment {
                 listView.setAdapter(comentariosAdapter);
                 novaloraciones.setVisibility(View.GONE);
             }
+
+            Button updateValoraciones = (Button) rootView.findViewById(R.id.updateBTN);
+
+            updateValoraciones.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                    pd.setIndeterminate(false);
+                    pd.setCancelable(true);
+                    pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialogInterface) {
+                            if ((ValidacionPlaya.comentariosPlaya == null) || (ValidacionPlaya.comentariosPlaya.size() == 0)){
+                                novaloraciones.setVisibility(View.VISIBLE);
+                            } else{
+                                ComentariosAdapter comentariosAdapter = new ComentariosAdapter(getActivity(), Utilities.orderByDateComentario(ValidacionPlaya.comentariosPlaya));
+                                listView.setAdapter(comentariosAdapter);
+                                novaloraciones.setVisibility(View.GONE);
+                            }
+                        }
+                    });
+                    Request.getComentariosPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, null);
+                }
+            });
 
             return rootView;
         }

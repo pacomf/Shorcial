@@ -50,7 +50,8 @@ public class LocationActivity extends FragmentActivity implements GooglePlayServ
     @Override
     public void onPause(){
         super.onPause();
-        mLocationClient.removeLocationUpdates(this);
+        if(mLocationClient.isConnected())
+            mLocationClient.removeLocationUpdates(this);
     }
 
     @Override

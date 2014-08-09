@@ -305,9 +305,13 @@ public class Response {
                 System.out.println("FALLO RESPONSEGETIMAGENES: "+e.getMessage());
             }
         }
-        ValidacionPlaya.cargadaImagenes=true;
-        if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
+        if (intent == null){
             pd.dismiss();
+        } else {
+            ValidacionPlaya.cargadaImagenes = true;
+            if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)) {
+                pd.dismiss();
+            }
         }
     }
 
@@ -321,9 +325,14 @@ public class Response {
                 System.out.println("FALLO RESPONSEGETCOMENTARIOSPLAYA: "+e.getMessage());
             }
         }
-        ValidacionPlaya.cargadosComentarios=true;
-        if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)){
+
+        if (intent == null){
             pd.dismiss();
+        } else {
+            ValidacionPlaya.cargadosComentarios=true;
+            if (ValidacionPlaya.comprobarCargaPlaya(ctx, intent)) {
+                pd.dismiss();
+            }
         }
     }
 
