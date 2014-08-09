@@ -204,4 +204,8 @@
     <string name="login">Allez vous identifier</string>
     <string name="cancel">Annuler</string>
 
+    <string name="title_perros">Chien de bord de mer?</string>
+    <string name="info_perros_si">Plage pour chien</string>
+    <string name="info_perros_no">Sur la plage NE ​​permet pas de Chiens</string>
+
 </resources>

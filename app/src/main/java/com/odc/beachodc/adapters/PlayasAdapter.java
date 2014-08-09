@@ -111,11 +111,17 @@ public class PlayasAdapter extends BaseAdapter {
             viewHolder.duchasIV = (ImageView) vi.findViewById(R.id.duchasImage);
             viewHolder.chiringuitosIV = (ImageView) vi.findViewById(R.id.chiringuitosImage);
             viewHolder.socorristaIV = (ImageView) vi.findViewById(R.id.socorristaImage);
+            viewHolder.perrosIV = (ImageView) vi.findViewById(R.id.perrosImage);
             viewHolder.distanciaTV = (TextView) vi.findViewById(R.id.distanciaTV);
             viewHolder.nombreTV = (TextView) vi.findViewById(R.id.nombreTV);
             viewHolder.valoracionTV = (TextView) vi.findViewById(R.id.valoracionTV);
             viewHolder.webcam = (ImageView) vi.findViewById(R.id.webcam_icon);
-            viewHolder.checkin = (ImageView) vi.findViewById(R.id.checkin_icon);
+            viewHolder.starsRL = (RelativeLayout) vi.findViewById(R.id.starsRL);
+            viewHolder.v1 = (ImageView) vi.findViewById(R.id.v1);
+            viewHolder.v2 = (ImageView) vi.findViewById(R.id.v2);
+            viewHolder.v3 = (ImageView) vi.findViewById(R.id.v3);
+            viewHolder.v4 = (ImageView) vi.findViewById(R.id.v4);
+            viewHolder.v5 = (ImageView) vi.findViewById(R.id.v5);
             vi.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) vi.getTag();
@@ -150,9 +156,7 @@ public class PlayasAdapter extends BaseAdapter {
         tf = Typeface.createFromAsset(activity.getAssets(), "fonts/aSongforJennifer.ttf");
 
         if (isCheckins) {
-            viewHolder.valoracionTV.setVisibility(View.GONE);
-            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.checkin), viewHolder.checkin, animateFirstListener);
-            viewHolder.checkin.setVisibility(View.VISIBLE);
+            viewHolder.starsRL.setVisibility(View.GONE);
             //TextView titleCheckinsTV = (TextView) vi.findViewById(R.id.title_checkins);
             //titleCheckinsTV.setVisibility(View.VISIBLE);
             //titleCheckinsTV.setTypeface(tf);
@@ -164,10 +168,10 @@ public class PlayasAdapter extends BaseAdapter {
             //checkinsTV.setText(String.valueOf(totalCheckins));
 
         } else {
-            viewHolder.checkin.setVisibility(View.GONE);
             viewHolder.valoracionTV.setTypeface(tf);
             if (playa.valoracion != null) {
-                DecimalFormat df = new DecimalFormat("#.#");
+                setValoracion(playa.valoracion.intValue());
+                DecimalFormat df = new DecimalFormat("#.0");
                 viewHolder.valoracionTV.setText(df.format(playa.valoracion).replace(".", ","));
                 if (playa.valoracion == 0){
                     viewHolder.valoracionTV.setText("-,-");
@@ -182,7 +186,6 @@ public class PlayasAdapter extends BaseAdapter {
                 if (playa.valoracion == 5) {
                     viewHolder.valoracionTV.setTextColor(Color.rgb(0, 121, 0));
                 }
-
             }
         }
 
@@ -285,6 +288,52 @@ public class PlayasAdapter extends BaseAdapter {
         } else {
             Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), viewHolder.socorristaIV, animateFirstListener);
         }
+
+        if ((playa.perros != null) && (playa.perros)) {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_si), viewHolder.perrosIV, animateFirstListener);
+        } else {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), viewHolder.perrosIV, animateFirstListener);
+        }
+    }
+
+    public void setValoracion(int valoracion){
+        if (valoracion == 1){
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v5, animateFirstListener);
+        } else if (valoracion == 2){
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v5, animateFirstListener);
+        } else if (valoracion == 3){
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v5, animateFirstListener);
+        } else if (valoracion == 4){
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v5, animateFirstListener);
+        } else if (valoracion == 5){
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_on), viewHolder.v5, animateFirstListener);
+        } else {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v1, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v2, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v3, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v4, animateFirstListener);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.star_off), viewHolder.v5, animateFirstListener);
+        }
     }
 
     static class ViewHolder {
@@ -297,11 +346,13 @@ public class PlayasAdapter extends BaseAdapter {
         ImageView sombrillasIV;
         ImageView duchasIV;
         ImageView chiringuitosIV;
+        ImageView perrosIV;
         ImageView socorristaIV;
         TextView nombreTV;
         TextView distanciaTV;
         TextView valoracionTV;
         ImageView webcam;
-        ImageView checkin;
+        ImageView v1, v2, v3, v4, v5;
+        RelativeLayout starsRL;
     }
 }

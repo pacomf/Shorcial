@@ -111,6 +111,16 @@
 
     </RelativeLayout>
 
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/checkin"
+        android:layout_toLeftOf="@+id/title_checkin_rl"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/title_checkin_rl"
+        android:layout_below="@+id/dataUser"
+        android:id="@+id/checkin_icon"/>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -118,6 +128,7 @@
         android:layout_marginTop="7dp"
         android:layout_centerHorizontal="true"
         android:padding="5dp"
+        android:id="@+id/title_checkin_rl"
         android:background="@drawable/background_title_checkins">
 
         <TextView

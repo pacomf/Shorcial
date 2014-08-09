@@ -82,6 +82,7 @@ public class Request {
         params.put("chiringuitos", playa.chiringuitos.toString());
         params.put("duchas", playa.duchas.toString());
         params.put("socorrista", playa.socorrista.toString());
+        params.put("perros", playa.perros.toString());
         // TODO: En un futuro que los usuarios puedan añadir CAMs
         params.put("webcamURL", "");
 

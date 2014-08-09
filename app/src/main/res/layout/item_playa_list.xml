@@ -54,16 +54,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/valoracionTV"
-        android:textSize="48sp"
-        android:layout_alignBottom="@+id/socorristaImage"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="30dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/title_checkins"
         android:id="@+id/title_checkins"
         android:visibility="gone"
@@ -83,16 +73,6 @@
         android:layout_above="@+id/title_checkins"
         android:layout_alignParentRight="true"
         android:layout_marginRight="35dp" />
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:visibility="gone"
-        android:layout_alignBottom="@+id/socorristaImage"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/checkin_icon"/>
 
     <ImageView
         android:layout_width="30dp"
@@ -181,6 +161,74 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/duchasImage"
         android:id="@+id/socorristaImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/banderaAzulImage"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/socorristaImage"
+        android:id="@+id/perrosImage"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hamacasImage"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/starsRL">
+
+        <ImageView
+            android:id="@+id/v1"
+            android:layout_width="@dimen/tam_star"
+            android:layout_height="@dimen/tam_star"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:id="@+id/v2"
+            android:layout_width="@dimen/tam_star"
+            android:layout_height="@dimen/tam_star"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/v1" />
+
+        <ImageView
+            android:id="@+id/v3"
+            android:layout_width="@dimen/tam_star"
+            android:layout_height="@dimen/tam_star"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/v2" />
+
+        <ImageView
+            android:id="@+id/v4"
+            android:layout_width="@dimen/tam_star"
+            android:layout_height="@dimen/tam_star"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/v3" />
+
+        <ImageView
+            android:id="@+id/v5"
+            android:layout_width="@dimen/tam_star"
+            android:layout_height="@dimen/tam_star"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/v4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/valoracionTV"
+            android:textSize="@dimen/tam_star"
+            android:layout_marginLeft="15dp"
+            android:layout_alignBottom="@+id/v5"
+            android:layout_marginBottom="-5dp"
+            android:layout_toRightOf="@+id/v5"/>
+
+    </RelativeLayout>
 
 
 

@@ -26,7 +26,7 @@
                 android:id="@+id/nombreTV"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_centerHorizontal="true"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/nombreTV"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="1dp"
                 android:id="@+id/starsRL">
 
                 <ImageView
@@ -88,21 +88,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="23ºC"
                 android:layout_below="@+id/nombreTV"
                 android:textColor="#eeb400"
                 android:maxLines="1"
                 android:maxLength="20"
                 android:ellipsize="end"
                 android:id="@+id/temp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/tam_temp" />
 
             <ImageView
                 android:layout_width="@dimen/tam_icon"
                 android:layout_height="@dimen/tam_icon"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="3dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/nombreTV"
                 android:layout_marginRight="15dp"
@@ -194,6 +193,15 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/duchasImage"/>
 
+                <ImageView
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
+                    android:id="@+id/perrosImage"
+                    android:layout_below="@+id/hamacasImage"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="5dp"/>
+
+
             </RelativeLayout>
 
 
@@ -203,11 +211,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dataRL"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:id="@+id/rlMap"
-            android:paddingBottom="15dp">
+            android:paddingBottom="5dp">
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/map"

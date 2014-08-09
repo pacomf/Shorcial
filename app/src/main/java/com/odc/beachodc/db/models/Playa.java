@@ -58,6 +58,9 @@ public class Playa extends Entity {
     @TableField(name = "socorrista", datatype = DATATYPE_BOOLEAN)
     public Boolean socorrista;
 
+    @TableField(name = "perros", datatype = DATATYPE_BOOLEAN)
+    public Boolean perros;
+
     @TableField(name = "checkin", datatype = DATATYPE_DATE_BINARY)
     public Date checkin;
 
@@ -81,6 +84,7 @@ public class Playa extends Entity {
             this.duchas = false;
             this.socorrista = false;
             this.webcamURL = "";
+            this.perros = false;
         } else { // TODO: Quitar esto, es solo para crear un MOCK
             this.nombre = "Playaza del Carajo";
             Random random = new Random();
@@ -97,12 +101,13 @@ public class Playa extends Entity {
             this.chiringuitos = true;
             this.duchas = true;
             this.socorrista = true;
+            this.perros = true;
         }
     }
 
     public Playa(String idserver, String nombre, Double latitud, Double longitud, Boolean banderaazul, String dificultadacceso,
                  String limpieza, String tipoarena, Double valoracion, Boolean rompeolas, Boolean hamacas, Boolean sombrillas,
-                 Boolean chiringuitos, Boolean duchas, Boolean socorrista, Date checkin, String webcamURL){
+                 Boolean chiringuitos, Boolean duchas, Boolean socorrista, Date checkin, String webcamURL, Boolean perros){
         this.idserver = idserver;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -120,6 +125,7 @@ public class Playa extends Entity {
         this.socorrista = socorrista;
         this.checkin = checkin;
         this.webcamURL = webcamURL;
+        this.perros = perros;
     }
 
     public void mostrar(){
@@ -137,6 +143,7 @@ public class Playa extends Entity {
         System.out.println("| Chiringuitos: "+this.chiringuitos);
         System.out.println("| Duchas: "+this.duchas);
         System.out.println("| Socorrista: "+this.socorrista);
+        System.out.println("| Perros: "+this.perros);
         System.out.println("| webcamURL: "+this.webcamURL);
         System.out.println("| *****************************************************");
     }

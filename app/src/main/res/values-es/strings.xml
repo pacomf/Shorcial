@@ -203,4 +203,8 @@
     <string name="login">Ir a Loguearse</string>
     <string name="cancel">Cancelar</string>
 
+    <string name="title_perros">¿Está permitido llevar Perros?</string>
+    <string name="info_perros_si">Se pueden llevar Perros</string>
+    <string name="info_perros_no">NO está permitido entrar con Perros</string>
+
 </resources>

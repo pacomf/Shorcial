@@ -87,7 +87,7 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
 
         mSlider = (SliderLayout) rootView.findViewById(R.id.slider);
 
-        updateImages();
+        updateImages(false);
 
         Button uploadBTN = (Button) rootView.findViewById(R.id.uploadBTN);
 
@@ -127,7 +127,7 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
         reloadBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateImages();
+                updateImages(true);
             }
         });
 
@@ -195,7 +195,7 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
                         pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
                             @Override
                             public void onDismiss(DialogInterface dialogInterface) {
-                                updateImages();
+                                updateImages(false);
                             }
                         });
 
@@ -239,7 +239,7 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
         }
     }
 
-    private void updateImages (){
+    private void updateImages (boolean isButton){
         mSlider.removeAllSliders();
         if ((ValidacionPlaya.imagenes != null) && (ValidacionPlaya.imagenes.size() > 0)){
             no_photos.setVisibility(View.GONE);
@@ -277,18 +277,22 @@ public class ImagenesPlayaFragment extends Fragment implements BaseSliderView.On
             }
 
         } else {
-            ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
-            pd.setIndeterminate(false);
-            pd.setCancelable(true);
-            pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialogInterface) {
-                    if ((ValidacionPlaya.imagenes != null) && (ValidacionPlaya.imagenes.size() > 0)) {
-                        no_photos.setVisibility(View.VISIBLE);
+            if (isButton) {
+                ProgressDialog pd = ProgressDialog.show(getActivity(), getResources().getText(R.string.esperar), getResources().getText(R.string.esperar));
+                pd.setIndeterminate(false);
+                pd.setCancelable(true);
+                pd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        if ((ValidacionPlaya.imagenes != null) && (ValidacionPlaya.imagenes.size() > 0)) {
+                            no_photos.setVisibility(View.VISIBLE);
+                        }
                     }
-                }
-            });
-            Request.getImagenesPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, null);
+                });
+                Request.getImagenesPlaya(getActivity(), ValidacionPlaya.playa.idserver, pd, null);
+            } else {
+                no_photos.setVisibility(View.VISIBLE);
+            }
 
         }
     }

@@ -203,4 +203,8 @@
     <string name="login">Zum einloggen</string>
     <string name="cancel">Stornieren</string>
 
+    <string name="title_perros">Hundefreundlich Strand?</string>
+    <string name="info_perros_si">Hundefreundlich Strand</string>
+    <string name="info_perros_no">Am Strand hat keine Hunde erlaubt</string>
+
 </resources>

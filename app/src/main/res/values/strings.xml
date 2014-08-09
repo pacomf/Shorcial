@@ -204,4 +204,8 @@
     <string name="login">Go to Log In</string>
     <string name="cancel">Cancel</string>
 
+    <string name="title_perros">Dog Friendly Beach?</string>
+    <string name="info_perros_si">Dog Friendly Beach</string>
+    <string name="info_perros_no">On the Beach does NOT allow Dogs</string>
+
 </resources>

@@ -37,6 +37,7 @@ public class InfoPlayaFragment extends Fragment {
         RadioGroup duchas;
         RadioGroup socorrista;
         RadioGroup chiringuitos;
+        RadioGroup perros;
 
         ImageView banderazulI;
         ImageView dificultadaccesoI;
@@ -48,6 +49,7 @@ public class InfoPlayaFragment extends Fragment {
         ImageView duchasI;
         ImageView socorristaI;
         ImageView chiringuitosI;
+        ImageView perrosI;
 
         private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
@@ -73,6 +75,7 @@ public class InfoPlayaFragment extends Fragment {
             chiringuitos = (RadioGroup) rootView.findViewById(R.id.chiringuitosRG);
             duchas = (RadioGroup) rootView.findViewById(R.id.duchasRG);
             socorrista = (RadioGroup) rootView.findViewById(R.id.socorristaRG);
+            perros = (RadioGroup) rootView.findViewById(R.id.perrosRG);
 
             banderazulI = (ImageView) rootView.findViewById(R.id.banderaAzulImage);
             dificultadaccesoI = (ImageView) rootView.findViewById(R.id.dificultadAccesoImage);
@@ -84,6 +87,7 @@ public class InfoPlayaFragment extends Fragment {
             chiringuitosI = (ImageView) rootView.findViewById(R.id.chiringuitosImage);
             duchasI = (ImageView) rootView.findViewById(R.id.duchasImage);
             socorristaI = (ImageView) rootView.findViewById(R.id.socorristaImage);
+            perrosI = (ImageView) rootView.findViewById(R.id.perrosImage);
 
             setExtras();
 
@@ -272,6 +276,23 @@ public class InfoPlayaFragment extends Fragment {
                 }
             });
 
+            perros.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if (checkedId == R.id.perros_si){
+                        ValidacionPlaya.playa.perros = true;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_si), perrosI, animateFirstListener);
+                    }else if (checkedId == R.id.perros_no){
+                        ValidacionPlaya.playa.perros = false;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), perrosI, animateFirstListener);
+                    }else if (checkedId == R.id.perros_nose){
+                        ValidacionPlaya.playa.perros = false;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), perrosI, animateFirstListener);
+                    }
+                }
+            });
+
             return rootView;
         }
 
@@ -379,6 +400,14 @@ public class InfoPlayaFragment extends Fragment {
         } else {
             socorrista.check(R.id.socorrista_no);
             Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), socorristaI, animateFirstListener);
+        }
+
+        if ((ValidacionPlaya.playa.perros != null) && (ValidacionPlaya.playa.perros)) {
+            perros.check(R.id.perros_si);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_si), perrosI, animateFirstListener);
+        } else {
+            perros.check(R.id.perros_no);
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), perrosI, animateFirstListener);
         }
 
     }

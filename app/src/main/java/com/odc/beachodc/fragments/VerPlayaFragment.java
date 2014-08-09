@@ -65,6 +65,7 @@ public class VerPlayaFragment extends Fragment {
         ImageView chiringuitosIV;
         ImageView socorristaIV;
         ImageView iconWeather;
+        ImageView perrosIV;
         TextView tempTV;
 
 
@@ -143,6 +144,7 @@ public class VerPlayaFragment extends Fragment {
             duchasIV = (ImageView) rootView.findViewById(R.id.duchasImage);
             chiringuitosIV = (ImageView) rootView.findViewById(R.id.chiringuitosImage);
             socorristaIV = (ImageView) rootView.findViewById(R.id.socorristaImage);
+            perrosIV = (ImageView) rootView.findViewById(R.id.perrosImage);
 
             v1 = (ImageView) rootView.findViewById(R.id.v1);
             v2 = (ImageView) rootView.findViewById(R.id.v2);
@@ -173,7 +175,7 @@ public class VerPlayaFragment extends Fragment {
                 }
             });
 
-            IconosVerPlayaEffect.setImages(banderaazulIV, dificultadaccesoIV, limpiezaIV, tipoarenaIV, rompeolasIV, hamacasIV, sombrillasIV, chiringuitosIV, duchasIV, socorristaIV);
+            IconosVerPlayaEffect.setImages(banderaazulIV, dificultadaccesoIV, limpiezaIV, tipoarenaIV, rompeolasIV, hamacasIV, sombrillasIV, chiringuitosIV, duchasIV, socorristaIV, perrosIV);
 
             banderaazulIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -409,6 +411,29 @@ public class VerPlayaFragment extends Fragment {
                 }
             });
 
+            perrosIV.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringP.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringP.setEndValue(0);
+                            break;
+                    }
+                    Crouton.cancelAllCroutons();
+                    if ((ValidacionPlaya.playa.perros != null) && (ValidacionPlaya.playa.perros)) {
+                        Crouton.makeText(getActivity(), getString(R.string.info_perros_si), Style.INFO).show();
+                    } else {
+                        Crouton.makeText(getActivity(), getString(R.string.info_perros_no), Style.INFO).show();
+                    }
+                    return true;
+                }
+            });
+
             return rootView;
         }
 
@@ -490,6 +515,12 @@ public class VerPlayaFragment extends Fragment {
             Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_si), socorristaIV, animateFirstListener);
         } else {
             Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.socorrista_no), socorristaIV, animateFirstListener);
+        }
+
+        if ((playa.perros != null) && (playa.perros)) {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_si), perrosIV, animateFirstListener);
+        } else {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), perrosIV, animateFirstListener);
         }
     }
 
