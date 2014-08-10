@@ -20,9 +20,19 @@
             android:layout_marginRight="15dp"
             android:id="@+id/dataRL">
 
+            <ImageView
+                android:id="@+id/cerradaImage"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cerrada"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/cerrada"
                 android:id="@+id/nombreTV"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -200,6 +210,15 @@
                     android:layout_below="@+id/hamacasImage"
                     android:layout_marginTop="7dp"
                     android:layout_marginLeft="5dp"/>
+
+                <ImageView
+                    android:layout_width="@dimen/tam_icon"
+                    android:layout_height="@dimen/tam_icon"
+                    android:id="@+id/nudistaImage"
+                    android:layout_below="@+id/hamacasImage"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/perrosImage"/>
 
 
             </RelativeLayout>

@@ -24,6 +24,8 @@ public class IconosVerPlayaEffect {
     public static Spring mScaleSpringD;
     public static Spring mScaleSpringSO;
     public static Spring mScaleSpringP;
+    public static Spring mScaleSpringN;
+    public static Spring mScaleSpringCe;
 
     public static BaseSpringSystem mSpringSystem;
 
@@ -38,6 +40,8 @@ public class IconosVerPlayaEffect {
     public static IconoSpringListener mSpringListenerD;
     public static IconoSpringListener mSpringListenerSO;
     public static IconoSpringListener mSpringListenerP;
+    public static IconoSpringListener mSpringListenerN;
+    public static IconoSpringListener mSpringListenerCe;
 
     public static void initConfig (){
         mSpringSystem = SpringSystem.create();
@@ -52,6 +56,8 @@ public class IconosVerPlayaEffect {
         mSpringListenerD = new IconoSpringListener();
         mSpringListenerSO = new IconoSpringListener();
         mSpringListenerP = new IconoSpringListener();
+        mSpringListenerN = new IconoSpringListener();
+        mSpringListenerCe = new IconoSpringListener();
 
         mScaleSpringBA = mSpringSystem.createSpring();
         mScaleSpringBA.getSpringConfig().tension = 200;
@@ -96,11 +102,19 @@ public class IconosVerPlayaEffect {
         mScaleSpringP = mSpringSystem.createSpring();
         mScaleSpringP.getSpringConfig().tension = 200;
         mScaleSpringP.getSpringConfig().friction = 5;
+
+        mScaleSpringN = mSpringSystem.createSpring();
+        mScaleSpringN.getSpringConfig().tension = 200;
+        mScaleSpringN.getSpringConfig().friction = 5;
+
+        mScaleSpringCe = mSpringSystem.createSpring();
+        mScaleSpringCe.getSpringConfig().tension = 200;
+        mScaleSpringCe.getSpringConfig().friction = 5;
     }
 
     public static void setImages(ImageView banderaazulIV, ImageView dificultadaccesoIV, ImageView limpiezaIV, ImageView tipoarenaIV,
                                  ImageView romepolasIV, ImageView hamacasIV, ImageView sombrillasIV, ImageView chiringuitosIV,
-                                 ImageView duchasIV, ImageView socorristaIV, ImageView perrosIV ){
+                                 ImageView duchasIV, ImageView socorristaIV, ImageView perrosIV, ImageView nudistaIV, ImageView cerradaIV ){
         mSpringListenerBA.setImagen(banderaazulIV);
         mSpringListenerDA.setImagen(dificultadaccesoIV);
         mSpringListenerL.setImagen(limpiezaIV);
@@ -112,6 +126,8 @@ public class IconosVerPlayaEffect {
         mSpringListenerD.setImagen(duchasIV);
         mSpringListenerSO.setImagen(socorristaIV);
         mSpringListenerP.setImagen(perrosIV);
+        mSpringListenerN.setImagen(nudistaIV);
+        mSpringListenerCe.setImagen(cerradaIV);
     }
 
     public static void addListeners(){
@@ -126,6 +142,8 @@ public class IconosVerPlayaEffect {
         mScaleSpringD.addListener(mSpringListenerD);
         mScaleSpringSO.addListener(mSpringListenerSO);
         mScaleSpringP.addListener(mSpringListenerP);
+        mScaleSpringN.addListener(mSpringListenerN);
+        mScaleSpringCe.addListener(mSpringListenerCe);
     }
 
     public static void removeListeners(){
@@ -140,6 +158,8 @@ public class IconosVerPlayaEffect {
         mScaleSpringD.removeListener(mSpringListenerD);
         mScaleSpringSO.removeListener(mSpringListenerSO);
         mScaleSpringP.removeListener(mSpringListenerP);
+        mScaleSpringN.removeListener(mSpringListenerN);
+        mScaleSpringCe.removeListener(mSpringListenerCe);
     }
 
     public static class IconoSpringListener extends SimpleSpringListener {

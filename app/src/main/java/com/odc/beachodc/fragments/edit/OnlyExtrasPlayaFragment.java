@@ -45,6 +45,8 @@ public class OnlyExtrasPlayaFragment extends Fragment {
         RadioGroup socorrista;
         RadioGroup chiringuitos;
         RadioGroup perros;
+        RadioGroup nudista;
+        RadioGroup cerrada;
         GoogleMap mapa;
 
         ImageView banderazulI;
@@ -58,6 +60,8 @@ public class OnlyExtrasPlayaFragment extends Fragment {
         ImageView socorristaI;
         ImageView chiringuitosI;
         ImageView perrosI;
+        ImageView nudistaI;
+        ImageView cerradaI;
 
         private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
@@ -83,6 +87,8 @@ public class OnlyExtrasPlayaFragment extends Fragment {
             duchas = (RadioGroup) rootView.findViewById(R.id.duchasRG);
             socorrista = (RadioGroup) rootView.findViewById(R.id.socorristaRG);
             perros = (RadioGroup) rootView.findViewById(R.id.perrosRG);
+            nudista = (RadioGroup) rootView.findViewById(R.id.nudistaRG);
+            cerrada = (RadioGroup) rootView.findViewById(R.id.cerradaRG);
 
             banderazulI = (ImageView) rootView.findViewById(R.id.banderaAzulImage);
             dificultadaccesoI = (ImageView) rootView.findViewById(R.id.dificultadAccesoImage);
@@ -95,6 +101,8 @@ public class OnlyExtrasPlayaFragment extends Fragment {
             duchasI = (ImageView) rootView.findViewById(R.id.duchasImage);
             socorristaI = (ImageView) rootView.findViewById(R.id.socorristaImage);
             perrosI = (ImageView) rootView.findViewById(R.id.perrosImage);
+            nudistaI = (ImageView) rootView.findViewById(R.id.nudistaImage);
+            cerradaI = (ImageView) rootView.findViewById(R.id.cerradaImage);
 
             setExtras();
 
@@ -295,6 +303,40 @@ public class OnlyExtrasPlayaFragment extends Fragment {
                 }
             });
 
+            nudista.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if (checkedId == R.id.nudista_si){
+                        ValidacionPlaya.playa.nudista = true;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_si), nudistaI, animateFirstListener);
+                    }else if (checkedId == R.id.nudista_no){
+                        ValidacionPlaya.playa.nudista = false;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_no), nudistaI, animateFirstListener);
+                    }else if (checkedId == R.id.nudista_nose){
+                        ValidacionPlaya.playa.nudista = false;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_no), nudistaI, animateFirstListener);
+                    }
+                }
+            });
+
+            cerrada.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if (checkedId == R.id.cerrada_si){
+                        ValidacionPlaya.playa.cerrada = true;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.cerrada), cerradaI, animateFirstListener);
+                    }else if (checkedId == R.id.cerrada_no){
+                        ValidacionPlaya.playa.cerrada = false;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.checkin), cerradaI, animateFirstListener);
+                    }else if (checkedId == R.id.cerrada_nose){
+                        ValidacionPlaya.playa.cerrada = false;
+                        Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.checkin), cerradaI, animateFirstListener);
+                    }
+                }
+            });
+
             return rootView;
         }
 
@@ -410,6 +452,22 @@ public class OnlyExtrasPlayaFragment extends Fragment {
             } else {
                 perros.check(R.id.perros_no);
                 Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), perrosI, animateFirstListener);
+            }
+
+            if ((ValidacionPlaya.playa.nudista != null) && (ValidacionPlaya.playa.nudista)) {
+                nudista.check(R.id.nudista_si);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_si), nudistaI, animateFirstListener);
+            } else {
+                nudista.check(R.id.nudista_no);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_no), nudistaI, animateFirstListener);
+            }
+
+            if ((ValidacionPlaya.playa.cerrada != null) && (ValidacionPlaya.playa.cerrada)) {
+                cerrada.check(R.id.cerrada_si);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.cerrada), cerradaI, animateFirstListener);
+            } else {
+                cerrada.check(R.id.cerrada_no);
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.checkin), cerradaI, animateFirstListener);
             }
 
         }

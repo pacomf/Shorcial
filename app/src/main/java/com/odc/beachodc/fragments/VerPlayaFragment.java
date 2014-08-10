@@ -66,6 +66,8 @@ public class VerPlayaFragment extends Fragment {
         ImageView socorristaIV;
         ImageView iconWeather;
         ImageView perrosIV;
+        ImageView nudistaIV;
+        ImageView cerradaIV;
         TextView tempTV;
 
 
@@ -145,6 +147,8 @@ public class VerPlayaFragment extends Fragment {
             chiringuitosIV = (ImageView) rootView.findViewById(R.id.chiringuitosImage);
             socorristaIV = (ImageView) rootView.findViewById(R.id.socorristaImage);
             perrosIV = (ImageView) rootView.findViewById(R.id.perrosImage);
+            nudistaIV = (ImageView) rootView.findViewById(R.id.nudistaImage);
+            cerradaIV = (ImageView) rootView.findViewById(R.id.cerradaImage);
 
             v1 = (ImageView) rootView.findViewById(R.id.v1);
             v2 = (ImageView) rootView.findViewById(R.id.v2);
@@ -175,7 +179,7 @@ public class VerPlayaFragment extends Fragment {
                 }
             });
 
-            IconosVerPlayaEffect.setImages(banderaazulIV, dificultadaccesoIV, limpiezaIV, tipoarenaIV, rompeolasIV, hamacasIV, sombrillasIV, chiringuitosIV, duchasIV, socorristaIV, perrosIV);
+            IconosVerPlayaEffect.setImages(banderaazulIV, dificultadaccesoIV, limpiezaIV, tipoarenaIV, rompeolasIV, hamacasIV, sombrillasIV, chiringuitosIV, duchasIV, socorristaIV, perrosIV, nudistaIV, cerradaIV);
 
             banderaazulIV.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -434,6 +438,50 @@ public class VerPlayaFragment extends Fragment {
                 }
             });
 
+            nudistaIV.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringN.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringN.setEndValue(0);
+                            break;
+                    }
+                    Crouton.cancelAllCroutons();
+                    if ((ValidacionPlaya.playa.nudista != null) && (ValidacionPlaya.playa.nudista)) {
+                        Crouton.makeText(getActivity(), getString(R.string.info_nudista_si), Style.INFO).show();
+                    } else {
+                        Crouton.makeText(getActivity(), getString(R.string.info_nudista_no), Style.INFO).show();
+                    }
+                    return true;
+                }
+            });
+
+            cerradaIV.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            IconosVerPlayaEffect.mScaleSpringCe.setEndValue(1);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            IconosVerPlayaEffect.mScaleSpringCe.setEndValue(0);
+                            break;
+                    }
+                    Crouton.cancelAllCroutons();
+                    if ((ValidacionPlaya.playa.cerrada != null) && (ValidacionPlaya.playa.cerrada)) {
+                        Crouton.makeText(getActivity(), getString(R.string.info_cerrada), Style.ALERT).show();
+                    }
+                    return true;
+                }
+            });
+
             return rootView;
         }
 
@@ -522,6 +570,19 @@ public class VerPlayaFragment extends Fragment {
         } else {
             Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), perrosIV, animateFirstListener);
         }
+
+        if ((playa.nudista != null) && (playa.nudista)) {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_si), nudistaIV, animateFirstListener);
+        } else {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_no), nudistaIV, animateFirstListener);
+        }
+
+        if ((playa.cerrada != null) && (playa.cerrada)) {
+            cerradaIV.setVisibility(View.VISIBLE);
+            Crouton.makeText(getActivity(), getString(R.string.info_cerrada), Style.ALERT).show();
+        } else {
+            cerradaIV.setVisibility(View.GONE);
+        }
     }
 
     public void setValoracion(int valoracion){
@@ -580,9 +641,5 @@ public class VerPlayaFragment extends Fragment {
             } catch(Exception e){}
         }
     }
-
-
-
-
 
 }

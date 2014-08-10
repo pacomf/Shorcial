@@ -61,6 +61,12 @@ public class Playa extends Entity {
     @TableField(name = "perros", datatype = DATATYPE_BOOLEAN)
     public Boolean perros;
 
+    @TableField(name = "nudista", datatype = DATATYPE_BOOLEAN)
+    public Boolean nudista;
+
+    @TableField(name = "cerrada", datatype = DATATYPE_BOOLEAN)
+    public Boolean cerrada;
+
     @TableField(name = "checkin", datatype = DATATYPE_DATE_BINARY)
     public Date checkin;
 
@@ -85,6 +91,8 @@ public class Playa extends Entity {
             this.socorrista = false;
             this.webcamURL = "";
             this.perros = false;
+            this.nudista = false;
+            this.cerrada = false;
         } else { // TODO: Quitar esto, es solo para crear un MOCK
             this.nombre = "Playaza del Carajo";
             Random random = new Random();
@@ -102,12 +110,14 @@ public class Playa extends Entity {
             this.duchas = true;
             this.socorrista = true;
             this.perros = true;
+            this.nudista = false;
+            this.cerrada = false;
         }
     }
 
     public Playa(String idserver, String nombre, Double latitud, Double longitud, Boolean banderaazul, String dificultadacceso,
                  String limpieza, String tipoarena, Double valoracion, Boolean rompeolas, Boolean hamacas, Boolean sombrillas,
-                 Boolean chiringuitos, Boolean duchas, Boolean socorrista, Date checkin, String webcamURL, Boolean perros){
+                 Boolean chiringuitos, Boolean duchas, Boolean socorrista, Date checkin, String webcamURL, Boolean perros, Boolean nudista, Boolean cerrada){
         this.idserver = idserver;
         this.nombre = nombre;
         this.latitud = latitud;
@@ -126,9 +136,11 @@ public class Playa extends Entity {
         this.checkin = checkin;
         this.webcamURL = webcamURL;
         this.perros = perros;
+        this.nudista = nudista;
+        this.cerrada = cerrada;
     }
 
-    public void mostrar(){
+    /*public void mostrar(){
         System.out.println("| *****************************************************");
         System.out.println("| IdServer: "+ this.idserver);
         System.out.println("| Nombre: "+this.nombre);
@@ -146,6 +158,6 @@ public class Playa extends Entity {
         System.out.println("| Perros: "+this.perros);
         System.out.println("| webcamURL: "+this.webcamURL);
         System.out.println("| *****************************************************");
-    }
+    }*/
 
 }

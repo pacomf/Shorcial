@@ -207,4 +207,10 @@
     <string name="info_perros_si">Hundefreundlich Strand</string>
     <string name="info_perros_no">Am Strand hat keine Hunde erlaubt</string>
 
+    <string name="title_cerrada">Ist der Strand ist jetzt offen?</string>
+    <string name="info_cerrada">Der Strand ist derzeit geschlossen</string>
+    <string name="title_nudista">Ist ein Strand für Nudisten?</string>
+    <string name="info_nudista_si">Der Strand ist für Nudisten</string>
+    <string name="info_nudista_no">Am Strand nicht erlaubt Nudisten</string>
+
 </resources>

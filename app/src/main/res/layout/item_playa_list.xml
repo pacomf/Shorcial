@@ -122,6 +122,15 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
+        android:layout_below="@+id/nombreTV"
+        android:layout_toRightOf="@+id/rompeolasImage"
+        android:layout_marginTop="10dp"
+        android:id="@+id/nudistaImage"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_below="@+id/banderaAzulImage"
         android:layout_marginTop="10dp"
         android:id="@+id/hamacasImage" />
@@ -170,6 +179,15 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/socorristaImage"
         android:id="@+id/perrosImage"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/hamacasImage"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/cerradaImage"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"

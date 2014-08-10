@@ -208,4 +208,11 @@
     <string name="info_perros_si">Dog Friendly Beach</string>
     <string name="info_perros_no">On the Beach does NOT allow Dogs</string>
 
+    <string name="title_cerrada">Is the Beach is now Open?</string>
+    <string name="info_cerrada">The Beach is currently Closed</string>
+    <string name="title_nudista">Is a Beach for Nudists?</string>
+    <string name="info_nudista_si">The Beach is for Nudists</string>
+    <string name="info_nudista_no">On the Beach does NOT allow Nudists</string>
+
+
 </resources>

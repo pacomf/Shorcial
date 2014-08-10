@@ -39,6 +39,8 @@ public class JSONToModel {
             Boolean duchas = json.optBoolean("duchas");
             Boolean socorrista = json.optBoolean("socorrista");
             Boolean perros = json.optBoolean("perros");
+            Boolean nudista = json.optBoolean("nudista");
+            Boolean cerrada = json.optBoolean("cerrada");
             String fechaStr = json.optString("checkin");
             Date fecha = null;
             String webcamURL = json.optString("webcamURL");
@@ -59,7 +61,7 @@ public class JSONToModel {
                 }
             } catch (Exception e){}
 
-            return new Playa(idserver, nombre, latitud, longitud, banderaazul, dificultadacceso, limpieza, tipoarena, valoracion, rompeolas, hamacas, sombrillas, chiringuitos, duchas, socorrista, fecha, webcamURL, perros);
+            return new Playa(idserver, nombre, latitud, longitud, banderaazul, dificultadacceso, limpieza, tipoarena, valoracion, rompeolas, hamacas, sombrillas, chiringuitos, duchas, socorrista, fecha, webcamURL, perros, nudista, cerrada);
         } catch (Exception e){
             return null;
         }

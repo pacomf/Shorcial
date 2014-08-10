@@ -207,4 +207,10 @@
     <string name="info_perros_si">Se pueden llevar Perros</string>
     <string name="info_perros_no">NO está permitido entrar con Perros</string>
 
+    <string name="title_cerrada">¿Se encuentra la Playa Abierta?</string>
+    <string name="info_cerrada">Esta Playa se encuentra Cerrada</string>
+    <string name="title_nudista">¿Es una playa válida para gente Nudista?</string>
+    <string name="info_nudista_si">La Playa es apta para Nudistas</string>
+    <string name="info_nudista_no">La Playa no permite la práctica Nudista</string>
+
 </resources>

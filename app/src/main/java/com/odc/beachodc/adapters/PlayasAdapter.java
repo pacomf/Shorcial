@@ -112,6 +112,8 @@ public class PlayasAdapter extends BaseAdapter {
             viewHolder.chiringuitosIV = (ImageView) vi.findViewById(R.id.chiringuitosImage);
             viewHolder.socorristaIV = (ImageView) vi.findViewById(R.id.socorristaImage);
             viewHolder.perrosIV = (ImageView) vi.findViewById(R.id.perrosImage);
+            viewHolder.nudistaIV = (ImageView) vi.findViewById(R.id.nudistaImage);
+            viewHolder.cerradaIV = (ImageView) vi.findViewById(R.id.cerradaImage);
             viewHolder.distanciaTV = (TextView) vi.findViewById(R.id.distanciaTV);
             viewHolder.nombreTV = (TextView) vi.findViewById(R.id.nombreTV);
             viewHolder.valoracionTV = (TextView) vi.findViewById(R.id.valoracionTV);
@@ -294,6 +296,23 @@ public class PlayasAdapter extends BaseAdapter {
         } else {
             Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.perros_no), viewHolder.perrosIV, animateFirstListener);
         }
+
+        if ((playa.nudista != null) && (playa.nudista)) {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_si), viewHolder.nudistaIV, animateFirstListener);
+        } else {
+            Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.nudista_no), viewHolder.nudistaIV, animateFirstListener);
+        }
+
+        if (!isCheckins) {
+            if ((playa.cerrada != null) && (playa.cerrada)) {
+                Utilities.imageLoader.displayImage(Utilities.getURIDrawable(R.drawable.cerrada), viewHolder.cerradaIV, animateFirstListener);
+                viewHolder.cerradaIV.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.cerradaIV.setVisibility(View.GONE);
+            }
+        } else {
+            viewHolder.cerradaIV.setVisibility(View.GONE);
+        }
     }
 
     public void setValoracion(int valoracion){
@@ -347,6 +366,8 @@ public class PlayasAdapter extends BaseAdapter {
         ImageView duchasIV;
         ImageView chiringuitosIV;
         ImageView perrosIV;
+        ImageView nudistaIV;
+        ImageView cerradaIV;
         ImageView socorristaIV;
         TextView nombreTV;
         TextView distanciaTV;
