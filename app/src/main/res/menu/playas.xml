@@ -7,6 +7,11 @@
         android:title="@string/refresh"
         android:showAsAction="ifRoom" />
 
+    <item android:id="@+id/menu_share"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="@string/share"
+        android:showAsAction="ifRoom" />
+
     <item android:id="@+id/menu_editar"
         android:icon="@android:drawable/ic_menu_edit"
         android:title="@string/title_activity_edicion"

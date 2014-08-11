@@ -1,76 +1,54 @@
 package com.odc.beachodc.db.models;
 
-import com.mobandme.ada.Entity;
-import com.mobandme.ada.annotations.Table;
-import com.mobandme.ada.annotations.TableField;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Random;
 
 /**
  * Created by Paco on 07/07/2014.
  */
-@Table(name = "Playas")
-public class Playa extends Entity {
 
-    @TableField(name = "idserver", datatype = DATATYPE_STRING)
+public class Playa implements Serializable{
+
+
     public String idserver;
 
-    @TableField(name = "nombre", datatype = DATATYPE_STRING)
     public String nombre;
 
-    @TableField(name = "latitud", datatype = DATATYPE_DOUBLE)
     public Double latitud;
 
-    @TableField(name = "longitud", datatype = DATATYPE_DOUBLE)
     public Double longitud;
 
-    @TableField(name = "banderaazul", datatype = DATATYPE_BOOLEAN)
     public Boolean banderaazul;
 
-    @TableField(name = "dificultadacceso", datatype = DATATYPE_STRING)
     public String dificultadacceso;
 
-    @TableField(name = "limpieza", datatype = DATATYPE_STRING)
     public String limpieza;
 
-    @TableField(name = "tipoarena", datatype = DATATYPE_STRING)
     public String tipoarena;
 
-    @TableField(name = "valoracion", datatype = DATATYPE_DOUBLE)
     public Double valoracion;
 
-    @TableField(name = "rompeolas", datatype = DATATYPE_BOOLEAN)
     public Boolean rompeolas;
 
-    @TableField(name = "hamacas", datatype = DATATYPE_BOOLEAN)
     public Boolean hamacas;
 
-    @TableField(name = "sombrillas", datatype = DATATYPE_BOOLEAN)
     public Boolean sombrillas;
 
-    @TableField(name = "chiringuitos", datatype = DATATYPE_BOOLEAN)
     public Boolean chiringuitos;
 
-    @TableField(name = "duchas", datatype = DATATYPE_BOOLEAN)
     public Boolean duchas;
 
-    @TableField(name = "socorrista", datatype = DATATYPE_BOOLEAN)
     public Boolean socorrista;
 
-    @TableField(name = "perros", datatype = DATATYPE_BOOLEAN)
     public Boolean perros;
 
-    @TableField(name = "nudista", datatype = DATATYPE_BOOLEAN)
     public Boolean nudista;
 
-    @TableField(name = "cerrada", datatype = DATATYPE_BOOLEAN)
     public Boolean cerrada;
 
-    @TableField(name = "checkin", datatype = DATATYPE_DATE_BINARY)
     public Date checkin;
 
-    @TableField(name = "webcamURL", datatype = DATATYPE_STRING)
     public String webcamURL;
 
     public Playa(){

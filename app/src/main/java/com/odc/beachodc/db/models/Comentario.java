@@ -5,12 +5,13 @@ import android.content.Context;
 
 import com.odc.beachodc.utilities.Utilities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Paco on 07/07/2014.
  */
-public class Comentario {
+public class Comentario implements Serializable{
 
     public String idfbautor;
 

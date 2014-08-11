@@ -213,4 +213,13 @@
     <string name="info_nudista_si">La Playa es apta para Nudistas</string>
     <string name="info_nudista_no">La Playa no permite la práctica Nudista</string>
 
+    <string name="share">Compartir en Facebook</string>
+    <string name="url_share">https://play.google.com/store/apps/details?id=com.odc.beachodc</string>
+    <string name="title_share">Estoy en La Playa</string>
+    <string name="subtitle_share">¡Descubriendo Playas con Shorcial!</string>
+    <string name="temp_fail">Día de Relax :)</string>
+    <string name="content_share_0">Hace una Temperatura de</string>
+    <string name="content_share_1">:)</string>
+    <string name="share_fb">Se ha compartido correctamente en Facebook</string>
+
 </resources>

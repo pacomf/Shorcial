@@ -214,4 +214,13 @@
     <string name="info_nudista_si">La Plage est pour les Nudistes</string>
     <string name="info_nudista_no">Sur la Plage NE ​​permet pas de Nudistes</string>
 
+    <string name="share">Partager sur Facebook</string>
+    <string name="url_share">https://play.google.com/store/apps/details?id=com.odc.beachodc</string>
+    <string name="title_share">Je suis à la Plage</string>
+    <string name="subtitle_share">Explorer les Plages avec Shorcial!</string>
+    <string name="temp_fail">Journée de Détente :)</string>
+    <string name="content_share_0">Nous sommes à</string>
+    <string name="content_share_1">:)</string>
+    <string name="share_fb">Il a Partagé avec SUCCÈS sur Facebook</string>
+
 </resources>

@@ -183,6 +183,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="30dp"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/hamacasImage"
         android:layout_alignParentLeft="true"

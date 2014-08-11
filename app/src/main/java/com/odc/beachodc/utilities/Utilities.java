@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
@@ -25,6 +26,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
+import com.facebook.Session;
+import com.facebook.widget.WebDialog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.model.LatLng;
@@ -79,6 +84,8 @@ public class Utilities {
         Utilities.setOptionsImageLoader();
         ImageLoader.getInstance().init(Utilities.getImageLoaderConfiguration(ctx));
         Utilities.imageLoader = ImageLoader.getInstance();
+        Utilities.imageLoader.clearDiskCache();
+        Utilities.imageLoader.clearMemoryCache();
     }
 
     public static void setOptionsImageLoader (){
@@ -443,5 +450,45 @@ public class Utilities {
         }
         return false;
     }
+
+    public static void publishFeedDialog(final Activity activity) {
+        Bundle params = new Bundle();
+        String description = activity.getString(R.string.temp_fail);
+        if ((ValidacionPlaya.temperatura != null) && (ValidacionPlaya.temperatura > 0))
+            description = activity.getString(R.string.content_share_0) + " " + Utilities.getTemperatureC(activity, ValidacionPlaya.temperatura) + " " + activity.getString(R.string.content_share_1);
+        params.putString("name", activity.getString(R.string.title_share)+ " " + ValidacionPlaya.playa.nombre);
+        params.putString("caption", activity.getString(R.string.subtitle_share));
+        params.putString("description", description);
+        params.putString("link", activity.getString(R.string.url_share));
+        if ((ValidacionPlaya.imagenes != null) && (ValidacionPlaya.imagenes.size()>0))
+            params.putString("picture", ValidacionPlaya.imagenes.get(0).link);
+
+        WebDialog feedDialog = (
+                new WebDialog.FeedDialogBuilder(activity, Session.getActiveSession(),params)).setOnCompleteListener(new WebDialog.OnCompleteListener() {
+
+            @Override
+            public void onComplete(Bundle values, FacebookException error) {
+                if (error == null) {
+                    // When the story is posted, echo the success
+                    // and the post Id.
+                    final String postId = values.getString("post_id");
+                    if (postId != null) {
+                        Crouton.makeText(activity, activity.getString(R.string.share_fb), Style.CONFIRM).show();
+                    } else {
+                        // User clicked the Cancel button
+                    }
+                } else if (error instanceof FacebookOperationCanceledException) {
+                    // User clicked the "x" button
+                } else {
+                    // Generic, ex: network error
+                }
+            }
+
+        })
+                .build();
+        feedDialog.show();
+    }
+
+
 
 }

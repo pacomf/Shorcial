@@ -215,15 +215,13 @@
     <string name="info_nudista_no">On the Beach does NOT allow Nudists</string>
 
 
-    <string-array name="donation_google_catalog_values">
-        <item>1 Euro</item>
-        <item>2 Euros</item>
-        <item>3 Euros</item>
-        <item>5 Euros</item>
-        <item>8 Euros</item>
-        <item>13 Euros</item>
-    </string-array>
-    <string name="donation_paypal_item">Donation</string>
-
+    <string name="share">Share On Facebook</string>
+    <string name="url_share">https://play.google.com/store/apps/details?id=com.odc.beachodc</string>
+    <string name="title_share">I\'m at the Beach</string>
+    <string name="subtitle_share">Exploring Beaches with Shorcial!</string>
+    <string name="temp_fail">Relaxing day :)</string>
+    <string name="content_share_0">We are at</string>
+    <string name="content_share_1">:)</string>
+    <string name="share_fb">It successfully shared on Facebook</string>
 
 </resources>

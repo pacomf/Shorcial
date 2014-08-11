@@ -97,6 +97,10 @@ public class PlayasAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
 
+        if (Utilities.imageLoader == null){
+            Utilities.setImageLoader(activity);
+        }
+
         if(convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

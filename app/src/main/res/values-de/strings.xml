@@ -213,4 +213,13 @@
     <string name="info_nudista_si">Der Strand ist für Nudisten</string>
     <string name="info_nudista_no">Am Strand nicht erlaubt Nudisten</string>
 
+    <string name="share">Share On Facebook</string>
+    <string name="url_share">https://play.google.com/store/apps/details?id=com.odc.beachodc</string>
+    <string name="title_share">Ich bin am Strand</string>
+    <string name="subtitle_share">Erkunden Strände mit Shorcial!</string>
+    <string name="temp_fail">Erholsamen Tag :)</string>
+    <string name="content_share_0">Wir sind bei</string>
+    <string name="content_share_1">:)</string>
+    <string name="share_fb">Erfolgreich auf Facebook geteilt</string>
+
 </resources>

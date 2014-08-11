@@ -1,12 +1,13 @@
 package com.odc.beachodc.db.models;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Paco on 07/07/2014.
  */
-public class Imagen {
+public class Imagen implements Serializable {
 
     public String idfbautor;
 

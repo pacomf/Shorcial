@@ -1,6 +1,7 @@
 package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,12 +11,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
 import com.kbeanie.imagechooser.api.ImageChooserManager;
 import com.odc.beachodc.Home;
 import com.odc.beachodc.Logout;
@@ -61,7 +65,7 @@ public class Playas extends LocationActivity implements ActionBar.TabListener {
      */
     ViewPager mViewPager;
     boolean hayWebCam, isNear;
-
+    private UiLifecycleHelper uiHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,9 @@ public class Playas extends LocationActivity implements ActionBar.TabListener {
         overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
 
         setContentView(R.layout.activity_home);
+
+        uiHelper = new UiLifecycleHelper(this, null);
+        uiHelper.onCreate(savedInstanceState);
 
         if ((ValidacionPlaya.playa.webcamURL != null) && (!ValidacionPlaya.playa.webcamURL.equals(""))) {
             hayWebCam = true;
@@ -138,8 +145,6 @@ public class Playas extends LocationActivity implements ActionBar.TabListener {
                 }
             }
         }
-
-
     }
 
 
@@ -208,6 +213,44 @@ public class Playas extends LocationActivity implements ActionBar.TabListener {
                     }
                 }
                 return true;
+            case R.id.menu_share:
+                if (Utilities.isAnonymous(this)) {
+                    Crouton.makeText(this, getString(R.string.need_login), Style.ALERT).show();
+                } else {
+                    if (Utilities.haveInternet(this)) {
+                        try {
+                            if (FacebookDialog.canPresentShareDialog(getApplicationContext(),FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
+                                String description = getString(R.string.temp_fail);
+                                if ((ValidacionPlaya.temperatura != null) && (ValidacionPlaya.temperatura > 0))
+                                    description = getString(R.string.content_share_0) + " " + Utilities.getTemperatureC(this, ValidacionPlaya.temperatura) + " " + getString(R.string.content_share_1);
+                                if ((ValidacionPlaya.imagenes != null) && (ValidacionPlaya.imagenes.size()>0)){
+                                    FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
+                                            .setName(getString(R.string.title_share) + " " + ValidacionPlaya.playa.nombre)
+                                            .setCaption(getString(R.string.subtitle_share))
+                                            .setDescription(description)
+                                            .setLink(getString(R.string.url_share))
+                                            .setPicture(ValidacionPlaya.imagenes.get(0).link)
+                                            .build();
+                                    uiHelper.trackPendingDialogCall(shareDialog.present());
+
+                                } else {
+                                    FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
+                                            .setName(getString(R.string.title_share) + " " + ValidacionPlaya.playa.nombre)
+                                            .setCaption(getString(R.string.subtitle_share))
+                                            .setDescription(getString(R.string.content_share_0) + " " + Utilities.getTemperatureC(this, ValidacionPlaya.temperatura) + " " + getString(R.string.content_share_1))
+                                            .setLink(getString(R.string.url_share))
+                                            .build();
+                                    uiHelper.trackPendingDialogCall(shareDialog.present());
+                                }
+                            } else {
+                                Utilities.publishFeedDialog(this);
+                            }
+                        } catch (Exception e){}
+                    } else {
+                        Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
+                    }
+                }
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -323,11 +366,11 @@ public class Playas extends LocationActivity implements ActionBar.TabListener {
                 switch (position) {
                     case 0:
                         return getString(R.string.title_section_see_beach).toUpperCase(l);
-                    case 2:
+                    case 1:
                         return getString(R.string.title_section_opinion_beach).toUpperCase(l);
-                    case 3:
+                    case 2:
                         return getString(R.string.title_section_images_beach).toUpperCase(l);
-                    case 4:
+                    case 3:
                         return getString(R.string.title_section_descubre_beach).toUpperCase(l);
                 }
             } else if (hayWebCam) {
@@ -356,19 +399,51 @@ public class Playas extends LocationActivity implements ActionBar.TabListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
+        uiHelper.onPause();
         //closing transition animations
         overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
-        System.gc();
-        Runtime.getRuntime().gc();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
-        System.gc();
-        Runtime.getRuntime().gc();
+        try {
+            super.onDestroy();
+            uiHelper.onDestroy();
+        } catch (Exception e){}
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        final Activity activity = this;
+
+        if (uiHelper == null)
+            return;
+        uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
+            @Override
+            public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
+            }
+
+            @Override
+            public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+                if (data.getString("com.facebook.platform.extra.COMPLETION_GESTURE").equals("post"))
+                    Crouton.makeText(activity, getString(R.string.share_fb), Style.CONFIRM).show();
+            }
+        });
     }
 
 
