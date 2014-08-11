@@ -7,8 +7,8 @@ android {
         applicationId 'com.odc.beachodc'
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 6
-        versionName '1.4'
+        versionCode 7
+        versionName '1.5'
     }
     buildTypes {
         release {
@@ -16,8 +16,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
+    // Para las donaciones...
+    /*productFlavors {
+        google {
+            buildConfigField "boolean", "DONATIONS_GOOGLE", "true"
+        }
+        fdroid {
+            buildConfigField "boolean", "DONATIONS_GOOGLE", "false"
+        }
+    } */
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'
@@ -42,6 +49,7 @@ dependencies {
     compile files ('libs/volley.jar')
     compile files ('libs/image-chooser-library-1.3.0.jar')
     compile project(':facebook')
+    //compile project(':libraries/donations')
     compile('de.keyboardsurfer.android.widget:crouton:1.8.4@aar') {
         // exclusion is not neccessary, but generally a good idea.
         exclude group: 'com.google.android', module: 'support-v4'

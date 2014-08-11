@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.odc.beachodc.activities.BuscarPlaya;
+import com.odc.beachodc.activities.DonationsActivity;
 import com.odc.beachodc.activities.EdicionPlaya;
 import com.odc.beachodc.activities.LocationActivity;
 import com.odc.beachodc.db.BBDD;
@@ -242,7 +243,6 @@ public class Home extends LocationActivity implements ActionBar.TabListener {
                 } else {
                     Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
                 }
-                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
