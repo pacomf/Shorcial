@@ -3,7 +3,11 @@ package com.odc.beachodc.utilities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Comentario;
 import com.odc.beachodc.db.models.Imagen;
@@ -39,6 +43,11 @@ public class ValidacionPlaya {
     public static boolean cargadaImagenes;
 
     public static boolean lanzadaVerPlaya;
+
+    public static RadioGroup busqueda;
+    public static EditText nombrePlaya;
+    public static AutoCompleteTextView direccion;
+    public static LatLng porCercania;
 
     public static boolean validarInfoPlaya(Activity activity){
         if ((ValidacionPlaya.playa.longitud == null) || (ValidacionPlaya.playa.latitud == null)){

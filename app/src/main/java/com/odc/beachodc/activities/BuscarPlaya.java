@@ -1,6 +1,7 @@
 package com.odc.beachodc.activities;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +13,15 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.odc.beachodc.Home;
 import com.odc.beachodc.Logout;
 import com.odc.beachodc.R;
+import com.odc.beachodc.db.models.Playa;
 import com.odc.beachodc.fragments.BuscarPlayaFragment;
+import com.odc.beachodc.fragments.BuscarPlayaFragmentExtras;
 import com.odc.beachodc.fragments.edit.ValoracionPlayaFragment;
 import com.odc.beachodc.utilities.Utilities;
 import com.odc.beachodc.utilities.ValidacionPlaya;
@@ -45,6 +50,7 @@ public class BuscarPlaya extends LocationActivity implements ActionBar.TabListen
     ViewPager mViewPager;
 
     BuscarPlayaFragment buscarPlayaFragment;
+    BuscarPlayaFragmentExtras buscarPlayaFragmentExtras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,9 @@ public class BuscarPlaya extends LocationActivity implements ActionBar.TabListen
         setContentView(R.layout.activity_home);
 
         buscarPlayaFragment = new BuscarPlayaFragment();
+        buscarPlayaFragmentExtras = new BuscarPlayaFragmentExtras();
+
+        ValidacionPlaya.playa = new Playa();
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -121,7 +130,7 @@ public class BuscarPlaya extends LocationActivity implements ActionBar.TabListen
                 return true;
             case R.id.menu_search:
                 if (Utilities.haveInternet(this)) {
-                    Utilities.buscarPlaya(buscarPlayaFragment.busqueda, buscarPlayaFragment.nombrePlaya, this, buscarPlayaFragment.porCercania, buscarPlayaFragment.direccion);
+                    Utilities.buscarPlaya(ValidacionPlaya.busqueda, ValidacionPlaya.nombrePlaya, this, ValidacionPlaya.porCercania, ValidacionPlaya.direccion, ValidacionPlaya.playa);
                 } else {
                     Crouton.makeText(this, getString(R.string.no_internet), Style.ALERT).show();
                 }
@@ -142,15 +151,27 @@ public class BuscarPlaya extends LocationActivity implements ActionBar.TabListen
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
+        View focus = getCurrentFocus();
+        if (focus != null) {
+            Utilities.hideSoftKeyboard(focus, this);
+        }
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        View focus = getCurrentFocus();
+        if (focus != null) {
+            Utilities.hideSoftKeyboard(focus, this);
+        }
     }
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        View focus = getCurrentFocus();
+        if (focus != null) {
+            Utilities.hideSoftKeyboard(focus, this);
+        }
     }
 
     /**
@@ -169,14 +190,16 @@ public class BuscarPlaya extends LocationActivity implements ActionBar.TabListen
             switch (position) {
                 case 0:
                     return buscarPlayaFragment;
+                case 1:
+                    return buscarPlayaFragmentExtras;
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            // Show 1 total pages.
-            return 1;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
@@ -185,6 +208,8 @@ public class BuscarPlaya extends LocationActivity implements ActionBar.TabListen
             switch (position) {
                 case 0:
                     return getString(R.string.title_section_search_beach).toUpperCase(l);
+                case 1:
+                    return getString(R.string.title_extras_beach).toUpperCase(l);
             }
             return null;
         }

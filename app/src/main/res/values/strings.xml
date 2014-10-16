@@ -74,6 +74,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="unknown">I don\'t know</string>
+    <string name="indiferente">I don\'t care</string>
 
     <string name="easy">Easy</string>
     <string name="medium">Moderate</string>

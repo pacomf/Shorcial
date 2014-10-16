@@ -118,6 +118,36 @@ public class Playa implements Serializable{
         this.cerrada = cerrada;
     }
 
+    public boolean isEmptyForSearch(){
+        if (this.banderaazul != null)
+            return false;
+        if (this.dificultadacceso != null)
+            return false;
+        if (this.limpieza != null)
+            return false;
+        if (this.tipoarena != null)
+            return false;
+        if (this.rompeolas != null)
+            return false;
+        if (this.hamacas != null)
+            return false;
+        if (this.sombrillas != null)
+            return false;
+        if (this.chiringuitos != null)
+            return false;
+        if (this.duchas != null)
+            return false;
+        if (this.socorrista != null)
+            return false;
+        if (this.perros != null)
+            return false;
+        if (this.nudista != null)
+            return false;
+        if (this.cerrada != null)
+            return false;
+        return true;
+    }
+
     /*public void mostrar(){
         System.out.println("| *****************************************************");
         System.out.println("| IdServer: "+ this.idserver);

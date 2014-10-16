@@ -26,6 +26,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.facebook.android.Util;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -42,6 +43,7 @@ import com.odc.beachodc.activities.BuscarPlaya;
 import com.odc.beachodc.activities.ResultadoBusquedaPlaya;
 import com.odc.beachodc.interfaces.IStandardTaskListener;
 import com.odc.beachodc.utilities.Utilities;
+import com.odc.beachodc.utilities.ValidacionPlaya;
 import com.odc.beachodc.utilities.placeAutocomplete.DetailsPlaceOne;
 import com.odc.beachodc.utilities.placeAutocomplete.FillPlace;
 import com.odc.beachodc.webservices.Request;
@@ -60,16 +62,12 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 public class BuscarPlayaFragment extends Fragment {
 
         View rootView;
-        public RadioGroup busqueda;
-        public EditText nombrePlaya;
-        public AutoCompleteTextView direccion;
         private DetailsPlaceOne geoLugar;
         private FillPlace buscarLugar;
         private Thread thread;
         private ProgressDialog pd;
         GoogleMap mapa;
         Location myLocation;
-        public LatLng porCercania;
         Button buscarBTN;
         RelativeLayout groupAddress;
 
@@ -93,8 +91,8 @@ public class BuscarPlayaFragment extends Fragment {
 
             // Empezar aqui a trabajar con la UI
 
-            busqueda = (RadioGroup) rootView.findViewById(R.id.searchRG);
-            nombrePlaya = (EditText) rootView.findViewById(R.id.nombreET);
+            ValidacionPlaya.busqueda = (RadioGroup) rootView.findViewById(R.id.searchRG);
+            ValidacionPlaya.nombrePlaya = (EditText) rootView.findViewById(R.id.nombreET);
 
             groupAddress = (RelativeLayout) rootView.findViewById(R.id.groupSearchByAddress);
 
@@ -103,9 +101,9 @@ public class BuscarPlayaFragment extends Fragment {
                 initMapa();
             } catch (GooglePlayServicesNotAvailableException e) {}
 
-            direccion = (AutoCompleteTextView) rootView.findViewById(R.id.addressET);
+            ValidacionPlaya.direccion = (AutoCompleteTextView) rootView.findViewById(R.id.addressET);
 
-            porCercania = null;
+            ValidacionPlaya.porCercania = null;
 
             initAutocompletadoDireccion();
 
@@ -114,11 +112,11 @@ public class BuscarPlayaFragment extends Fragment {
             buscarBTN.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Utilities.buscarPlaya (busqueda, nombrePlaya, getActivity(), porCercania, direccion);
+                    Utilities.buscarPlaya (ValidacionPlaya.busqueda, ValidacionPlaya.nombrePlaya, getActivity(), ValidacionPlaya.porCercania, ValidacionPlaya.direccion, ValidacionPlaya.playa);
                 }
             });
 
-            busqueda.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            ValidacionPlaya.busqueda.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -171,9 +169,9 @@ public class BuscarPlayaFragment extends Fragment {
 
                         mapa.clear();
 
-                        direccion.setText(add);
+                        ValidacionPlaya.direccion.setText(add);
 
-                        porCercania = new LatLng(lat, lng);
+                        ValidacionPlaya.porCercania = new LatLng(lat, lng);
 
                         mapa.addMarker(new MarkerOptions()
                                 .position(new LatLng(lat, lng))
@@ -201,9 +199,9 @@ public class BuscarPlayaFragment extends Fragment {
                         for (int i=0; i<addresses.get(0).getMaxAddressLineIndex();i++)
                             add += addresses.get(0).getAddressLine(i) + " ";
                     }
-                    direccion.setText(add);
+                    ValidacionPlaya.direccion.setText(add);
 
-                    porCercania = new LatLng(point.latitude, point.longitude);
+                    ValidacionPlaya.porCercania = new LatLng(point.latitude, point.longitude);
 
                     mapa.clear();
 
@@ -247,9 +245,9 @@ public class BuscarPlayaFragment extends Fragment {
                             .draggable(true)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.aqui)));
 
-                    direccion.setText(add);
+                    ValidacionPlaya.direccion.setText(add);
 
-                    porCercania = new LatLng(newPosition.latitude, newPosition.longitude);
+                    ValidacionPlaya.porCercania = new LatLng(newPosition.latitude, newPosition.longitude);
 
                 } catch (Exception e) {
                 }
@@ -263,9 +261,9 @@ public class BuscarPlayaFragment extends Fragment {
     public void initAutocompletadoDireccion(){
         final ArrayAdapter<String> adapterFrom = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
         adapterFrom.setNotifyOnChange(true);
-        direccion.setAdapter(adapterFrom);
+        ValidacionPlaya.direccion.setAdapter(adapterFrom);
 
-        direccion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ValidacionPlaya.direccion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
@@ -283,11 +281,11 @@ public class BuscarPlayaFragment extends Fragment {
                         }
                         pd.dismiss();
 
-                        if ((buscarLugar.referencesPlace.isEmpty()) || (buscarLugar.referencesPlace.get(direccion.getText().toString()) == null)){
+                        if ((buscarLugar.referencesPlace.isEmpty()) || (buscarLugar.referencesPlace.get(ValidacionPlaya.direccion.getText().toString()) == null)){
                             showToastError();
                         } else {
-                            geoLugar.setListener(new PlaceToPointMap_TaskListener(direccion.getText().toString()));
-                            geoLugar.execute(buscarLugar.referencesPlace.get(direccion.getText().toString()));
+                            geoLugar.setListener(new PlaceToPointMap_TaskListener(ValidacionPlaya.direccion.getText().toString()));
+                            geoLugar.execute(buscarLugar.referencesPlace.get(ValidacionPlaya.direccion.getText().toString()));
                         }
                     }
                 };
@@ -299,14 +297,14 @@ public class BuscarPlayaFragment extends Fragment {
         });
 
         // Monitorizamos el evento de cambio en el campo a autocompletar para buscar las propuestas de autocompletado
-        direccion.addTextChangedListener(new TextWatcher() {
+        ValidacionPlaya.direccion.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Calculamos el autocompletado
                 if (count%3 == 1){
                     adapterFrom.clear();
                     // Ejecutamos en segundo plano la busqueda de propuestas de autocompletado
-                    buscarLugar = new FillPlace(adapterFrom, direccion, getActivity());
-                    buscarLugar.execute(direccion.getText().toString());
+                    buscarLugar = new FillPlace(adapterFrom, ValidacionPlaya.direccion, getActivity());
+                    buscarLugar.execute(ValidacionPlaya.direccion.getText().toString());
                 }
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -337,11 +335,11 @@ public class BuscarPlayaFragment extends Fragment {
                 if ((lat == null) || (lng == null))
                     return;
                 else{
-                    porCercania = new LatLng(lat, lng);
+                    ValidacionPlaya.porCercania = new LatLng(lat, lng);
                 }
                 LatLng go = new LatLng(lat, lng);
 
-                direccion.setText(markerStr);
+                ValidacionPlaya.direccion.setText(markerStr);
 
                 // Creamos la animación de movimiento hacia el lugar que hemos introducido
                 CameraPosition camPos = new CameraPosition.Builder()
@@ -376,12 +374,13 @@ public class BuscarPlayaFragment extends Fragment {
     public void ocultarBusquedaNombre (boolean ocultar){
         try {
             if (ocultar) {
-                nombrePlaya.setVisibility(View.GONE);
+                ValidacionPlaya.nombrePlaya.setVisibility(View.GONE);
                 groupAddress.setVisibility(View.VISIBLE);
             } else {
                 groupAddress.setVisibility(View.GONE);
-                nombrePlaya.setVisibility(View.VISIBLE);
+                ValidacionPlaya.nombrePlaya.setVisibility(View.VISIBLE);
             }
         } catch (Exception e){}
     }
+
 }

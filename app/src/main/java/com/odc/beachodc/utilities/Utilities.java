@@ -22,6 +22,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -357,22 +358,35 @@ public class Utilities {
         return false;
     }
 
-    public static void buscarPlaya (RadioGroup busqueda, EditText nombrePlaya, Activity activity, LatLng porCercania, EditText direccion){
-        if (Utilities.validarBusqueda(busqueda, nombrePlaya, activity, porCercania)){
+    public static void buscarPlaya (RadioGroup busqueda, EditText nombrePlaya, Activity activity, LatLng porCercania, EditText direccion, Playa playa){
+        if (!playa.isEmptyForSearch()){
+            String nombre=null;
             if (busqueda.getCheckedRadioButtonId() == R.id.searchByName){
-                // Buscar por nombrePlaya
-                ProgressDialog pdI = ProgressDialog.show(activity, activity.getResources().getText(R.string.esperar), activity.getResources().getText(R.string.esperar));
-                pdI.setIndeterminate(false);
-                pdI.setCancelable(true);
-                Request.getPlayasByName(activity, nombrePlaya.getText().toString(), pdI);
-            } else if (busqueda.getCheckedRadioButtonId() == R.id.searchByAddress){
-                // Buscar porCercania
-                ProgressDialog pdI = ProgressDialog.show(activity, activity.getResources().getText(R.string.esperar), activity.getResources().getText(R.string.esperar));
-                pdI.setIndeterminate(false);
-                pdI.setCancelable(true);
-                Request.getPlayasCercanasTo(activity, direccion.getText().toString(), porCercania.latitude, porCercania.longitude, pdI);
-            } else {
-                Crouton.makeText(activity, R.string.error_unknown, Style.ALERT).show();
+                if (!nombrePlaya.getText().toString().equals("")) {
+                    nombre = nombrePlaya.getText().toString();
+                }
+            }
+            ProgressDialog pdI = ProgressDialog.show(activity, activity.getResources().getText(R.string.esperar), activity.getResources().getText(R.string.esperar));
+            pdI.setIndeterminate(false);
+            pdI.setCancelable(true);
+            Request.getPlayasByExtras(activity, nombre, porCercania, playa, pdI);
+        } else {
+            if (Utilities.validarBusqueda(busqueda, nombrePlaya, activity, porCercania)) {
+                if (busqueda.getCheckedRadioButtonId() == R.id.searchByName) {
+                    // Buscar por nombrePlaya
+                    ProgressDialog pdI = ProgressDialog.show(activity, activity.getResources().getText(R.string.esperar), activity.getResources().getText(R.string.esperar));
+                    pdI.setIndeterminate(false);
+                    pdI.setCancelable(true);
+                    Request.getPlayasByName(activity, nombrePlaya.getText().toString(), pdI);
+                } else if (busqueda.getCheckedRadioButtonId() == R.id.searchByAddress) {
+                    // Buscar porCercania
+                    ProgressDialog pdI = ProgressDialog.show(activity, activity.getResources().getText(R.string.esperar), activity.getResources().getText(R.string.esperar));
+                    pdI.setIndeterminate(false);
+                    pdI.setCancelable(true);
+                    Request.getPlayasCercanasTo(activity, direccion.getText().toString(), porCercania.latitude, porCercania.longitude, pdI);
+                } else {
+                    Crouton.makeText(activity, R.string.error_unknown, Style.ALERT).show();
+                }
             }
         }
     }
@@ -489,6 +503,12 @@ public class Utilities {
         feedDialog.show();
     }
 
+    public static void hideSoftKeyboard(View view, Activity activity) {
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 
 
 }

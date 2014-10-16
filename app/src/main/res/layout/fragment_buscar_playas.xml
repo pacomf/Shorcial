@@ -10,6 +10,13 @@
         android:layout_above="@+id/buscarBTN"
         android:background="@drawable/background_fragments">
 
+        <View
+            android:id="@+id/focus_thief"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"

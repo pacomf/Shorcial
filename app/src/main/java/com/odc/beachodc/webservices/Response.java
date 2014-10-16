@@ -279,6 +279,23 @@ public class Response {
         ctx.startActivity(intentS);
     }
 
+    public static void responseGetPlayasByExtra(Context ctx, JSONArray response, ProgressDialog pd){
+        Playa playa = null;
+        ValidacionPlaya.playas = new ArrayList<Playa>();
+        for (int i=0; i<response.length(); i++){
+            try {
+                playa = JSONToModel.toPlaya(response.getJSONObject(i));
+                ValidacionPlaya.playas.add(playa);
+            } catch (Exception e){
+                System.out.println("FALLO RESPONSEGETPLAYA: "+e.getMessage());
+            }
+        }
+        Intent intentS = new Intent(ctx, ResultadoBusquedaPlaya.class);
+        intentS.putExtra("search", ctx.getString(R.string.title_extras_beach));
+        pd.dismiss();
+        ctx.startActivity(intentS);
+    }
+
     public static void responseGetMensajesBotella(Context ctx, JSONArray response, ProgressDialog pd, Intent intent){
         MensajeBotella mensaje;
         for (int i=0; i<response.length(); i++){

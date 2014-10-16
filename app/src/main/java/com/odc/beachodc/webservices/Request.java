@@ -12,6 +12,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.facebook.android.Util;
+import com.google.android.gms.maps.model.LatLng;
 import com.odc.beachodc.R;
 import com.odc.beachodc.db.models.Checkin;
 import com.odc.beachodc.db.models.Comentario;
@@ -297,6 +298,118 @@ public class Request {
             @Override
             public void onResponse(JSONArray response) {
                 com.odc.beachodc.webservices.Response.responseGetPlayasByName(ctx, response, pd, name);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                pd.dismiss();
+            }
+        });
+
+        // add the request object to the queue to be executed
+        Config.addToRequestQueue(ctx, req);
+    }
+
+    public static void getPlayasByExtras (final Context ctx, final String name, final LatLng direccion, final Playa playa, final ProgressDialog pd){
+        HashMap<String, String> params = new HashMap<String, String>();
+        if (name != null)
+            params.put("nombre", name.replaceAll(" ", "%20"));
+        else
+            params.put("nombre", null);
+
+        if (direccion != null) {
+            params.put("lon", String.valueOf(direccion.longitude));
+            params.put("lat", String.valueOf(direccion.latitude));
+        } else {
+            if (name == null) {
+                if (Geo.myLocation != null) {
+                    params.put("lon", String.valueOf(Geo.myLocation.getLongitude()));
+                    params.put("lat", String.valueOf(Geo.myLocation.getLatitude()));
+                } else {
+                    params.put("lon", null);
+                    params.put("lat", null);
+                }
+            } else {
+                params.put("lon", null);
+                params.put("lat", null);
+            }
+        }
+        if (playa.banderaazul != null)
+            params.put("banderaazul", playa.banderaazul.toString());
+        else
+            params.put("banderaazul", null);
+
+        params.put("acceso", playa.dificultadacceso);
+        params.put("arena", playa.tipoarena);
+        params.put("limpieza", playa.limpieza);
+
+        if (playa.rompeolas != null)
+            params.put("rompeolas", playa.rompeolas.toString());
+        else
+            params.put("rompeolas", null);
+
+        if (playa.hamacas != null)
+            params.put("hamacas", playa.hamacas.toString());
+        else
+            params.put("hamacas", null);
+
+        if (playa.sombrillas != null)
+            params.put("sombrillas", playa.sombrillas.toString());
+        else
+            params.put("sombrillas", null);
+
+        if (playa.chiringuitos != null)
+            params.put("chiringuitos", playa.chiringuitos.toString());
+        else
+            params.put("chiringuitos", null);
+
+        if (playa.duchas != null)
+            params.put("duchas", playa.duchas.toString());
+        else
+            params.put("duchas", null);
+
+        if (playa.socorrista != null)
+            params.put("socorrista", playa.socorrista.toString());
+        else
+            params.put("socorrista", null);
+
+        if (playa.perros != null)
+            params.put("perros", playa.perros.toString());
+        else
+            params.put("perros", null);
+
+        if (playa.nudista != null)
+            params.put("nudista", playa.nudista.toString());
+        else
+            params.put("nudista", null);
+
+        if (playa.cerrada != null)
+            params.put("cerrada", playa.cerrada.toString());
+        else
+            params.put("cerrada", null);
+
+        final String URL = Config.getURLServer(ctx) + "/playasbyextras/" + params.get("nombre") +
+                                                                     "/" + params.get("lon") +
+                                                                     "/" + params.get("lat") +
+                                                                     "/" + params.get("banderaazul") +
+                                                                     "/" + params.get("acceso") +
+                                                                     "/" + params.get("arena") +
+                                                                     "/" + params.get("limpieza") +
+                                                                     "/" + params.get("rompeolas") +
+                                                                     "/" + params.get("hamacas") +
+                                                                     "/" + params.get("sombrillas") +
+                                                                     "/" + params.get("chiringuitos") +
+                                                                     "/" + params.get("duchas") +
+                                                                     "/" + params.get("socorrista") +
+                                                                     "/" + params.get("perros") +
+                                                                     "/" + params.get("nudista") +
+                                                                     "/" + params.get("cerrada") ;
+
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                com.odc.beachodc.webservices.Response.responseGetPlayasByExtra(ctx, response, pd);
             }
         }, new Response.ErrorListener() {
             @Override
