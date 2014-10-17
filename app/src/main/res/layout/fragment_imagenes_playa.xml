@@ -1,20 +1,29 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/uploadBTN"
+    <com.andexert.library.RippleView
+        android:id="@+id/uploadBTNR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_alignParentTop="true"
-        android:textColor="#ffed6a"
-        android:textStyle="bold"
-        android:background="@drawable/background_boton"
-        android:text="@string/upload_photo"/>
+        ripple:rv_centered="true">
+
+        <Button
+            android:id="@+id/uploadBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffed6a"
+            android:textStyle="bold"
+            android:background="@drawable/background_boton"
+            android:text="@string/upload_photo"/>
+
+    </com.andexert.library.RippleView>
 
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
@@ -23,7 +32,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@android:color/transparent"
-        android:layout_below="@+id/uploadBTN"
+        android:layout_below="@+id/uploadBTNR"
         android:layout_above="@+id/relativeLayout2"/>
 
     <RelativeLayout
@@ -32,7 +41,7 @@
         android:layout_margin="15dp"
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
-        android:layout_above="@+id/updateBTN"
+        android:layout_above="@+id/updateBTNR"
         android:background="@drawable/background_fragments"
         android:id="@+id/relativeLayout2">
 
@@ -62,8 +71,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
-        android:layout_above="@+id/updateBTN"
-        android:layout_below="@+id/uploadBTN"
+        android:layout_above="@+id/updateBTNR"
+        android:layout_below="@+id/uploadBTNR"
         android:background="@drawable/background_fragments"
         android:id="@+id/no_photos">
 
@@ -81,18 +90,26 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/updateBTN"
+    <com.andexert.library.RippleView
+        android:id="@+id/updateBTNR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:textColor="#ffed6a"
-        android:textStyle="bold"
-        android:background="@drawable/background_boton"
-        android:text="@string/update_pictures"/>
+        ripple:rv_centered="true">
+
+        <Button
+            android:id="@+id/updateBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffed6a"
+            android:textStyle="bold"
+            android:background="@drawable/background_boton"
+            android:text="@string/update_pictures"/>
+
+    </com.andexert.library.RippleView>
 
 </RelativeLayout>
 

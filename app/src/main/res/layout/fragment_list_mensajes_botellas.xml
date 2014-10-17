@@ -79,4 +79,5 @@
         android:background="@drawable/background_boton"
         android:text="@string/enviar_mensaje"/>
 
+
 </RelativeLayout>

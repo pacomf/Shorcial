@@ -722,7 +722,6 @@
                             android:id="@+id/cerrada_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"
                             android:text="@string/yes" />
 
                         <RadioButton
@@ -735,6 +734,7 @@
                             android:id="@+id/cerrada_nose"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:text="@string/indiferente" />
 
                     </RadioGroup>

@@ -7,6 +7,7 @@
         android:title="@string/search"
         android:showAsAction="ifRoom" />
 
+
     <item android:id="@+id/menu_logout"
         android:title="@string/logout"
         android:showAsAction="never" />

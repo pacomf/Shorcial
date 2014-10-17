@@ -1,13 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:layout_above="@+id/actualizarBTN"
+        android:layout_above="@+id/actualizarBTNR"
         android:background="@drawable/background_fragments">
 
         <TextView
@@ -46,19 +47,26 @@
 
     </RelativeLayout>
 
-
-    <Button
-        android:id="@+id/actualizarBTN"
+    <com.andexert.library.RippleView
+        android:id="@+id/actualizarBTNR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:textColor="#ffed6a"
-        android:textStyle="bold"
-        android:background="@drawable/background_boton"
-        android:text="@string/update_image"/>
+        ripple:rv_centered="true">
+
+        <Button
+            android:id="@+id/actualizarBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffed6a"
+            android:textStyle="bold"
+            android:background="@drawable/background_boton"
+            android:text="@string/update_image"/>
+
+    </com.andexert.library.RippleView>
 
 </RelativeLayout>
 
