@@ -4,33 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.andexert.library.RippleView
-        android:id="@+id/mapBTNR"
+    <Button
+        android:id="@+id/mapBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        ripple:rv_centered="true">
-
-        <Button
-            android:id="@+id/mapBTN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffed6a"
-            android:textStyle="bold"
-            android:background="@drawable/background_boton"
-            android:text="@string/ver_mapa"/>
-
-    </com.andexert.library.RippleView>
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/ver_mapa"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
-        android:layout_below="@+id/mapBTNR"
-        android:layout_above="@+id/recargarBTNR"
+        android:layout_below="@+id/mapBTN"
+        android:layout_above="@+id/recargarBTN"
         android:background="@drawable/background_title_checkins">
 
         <TextView
@@ -77,26 +69,19 @@
 
     </RelativeLayout>
 
-    <com.andexert.library.RippleView
-        android:id="@+id/recargarBTNR"
+    <Button
+        android:id="@+id/recargarBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        ripple:rv_centered="true">
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/touch_reload"/>
 
-        <Button
-            android:id="@+id/recargarBTN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffed6a"
-            android:textStyle="bold"
-            android:background="@drawable/background_boton"
-            android:text="@string/touch_reload"/>
-
-    </com.andexert.library.RippleView>
 
 
 </RelativeLayout>

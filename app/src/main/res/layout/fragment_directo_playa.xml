@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:layout_above="@+id/actualizarBTNR"
+        android:layout_above="@+id/actualizarBTN"
         android:background="@drawable/background_fragments">
 
         <TextView
@@ -47,26 +47,18 @@
 
     </RelativeLayout>
 
-    <com.andexert.library.RippleView
-        android:id="@+id/actualizarBTNR"
+    <Button
+        android:id="@+id/actualizarBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        ripple:rv_centered="true">
-
-        <Button
-            android:id="@+id/actualizarBTN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffed6a"
-            android:textStyle="bold"
-            android:background="@drawable/background_boton"
-            android:text="@string/update_image"/>
-
-    </com.andexert.library.RippleView>
+        android:textColor="#ffed6a"
+        android:textStyle="bold"
+        android:background="@drawable/background_boton"
+        android:text="@string/update_image"/>
 
 </RelativeLayout>
 
